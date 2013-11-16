@@ -1,0 +1,12 @@
+push ax
+sin
+out rg ax
+out ch 32
+out st
+out ch 10
+push ax
+sin
+push ax
+mul
+pop
+end

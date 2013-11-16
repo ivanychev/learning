@@ -1,0 +1,8 @@
+out ax
+push ax
+push ax
+mul
+out ch 9
+out st
+out ch 10
+end

@@ -1,0 +1,4 @@
+xmax = 45.552 ymax = 0.999999 xmin = -45.552 ymin = -0.999999
+
+
+End of log
