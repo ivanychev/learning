@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1394220909 source:c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\asm.cpp
+	"cpu.h"
+	"command_codes.h"
+
+1394220884 c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\cpu.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<stdarg.h>
+	<math.h>
+	<float.h>
+	"string.h"
+	<assert.h>
+
+1386978873 c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\command_codes.h
+
+1394221064 source:c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\asm_functions.cpp
+	"command_codes.h"
+	"cpu.h"
+
+1394221242 source:c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\asm_main.cpp
+	"cpu.h"
+	"command_codes.h"
+
+1394221378 source:c:\users\sergey ivanychev\google Диск\Работа\Программирование\visual studio\cpu v4\cpu v4\cpu.cpp
+	"cpu.h"
+	"command_codes.h"
+

@@ -1,0 +1,33 @@
+in ax
+jmp :begin
+
+func :fib
+pop dx
+push dx
+push 2
+jbe :below_3
+push dx
+push 2
+sub
+push dx
+push 1
+sub
+call :fib
+call :fib
+jmp :break_fib
+
+:below_3
+push bx
+push 1
+add
+pop bx
+
+:break_fib
+ret
+
+:begin
+
+push ax
+call :fib
+out bx
+end

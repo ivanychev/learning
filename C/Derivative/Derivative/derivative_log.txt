@@ -1,0 +1,459 @@
+DEBUG# >>>>>>>>>>>>>>>>>TOKENIZE START<<<<<<<<<<<<<<<<<<<<<<<
+DEBUG# Token constructing...
+
+DEBUG# done -> 00900540
+
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [arcsin]
+DEBUG# arcsin
+DEBUG# arcsin
+DEBUG# Writing to [00900540] token, type = 2003
+
+DEBUG# Got [arcsin]
+DEBUG# arcsin
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [00900540] token, type = 2005
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [x] character
+DEBUG# Found letter [x], looking for identificator...
+DEBUG# Scanned identificator is [x]
+DEBUG# x
+DEBUG# x
+DEBUG# Writing to [00900540] token, type = 2003
+
+DEBUG# Got [x]
+DEBUG# x
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [00900540] token, type = 2005
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [+] character
+DEBUG# It's operator, calling got_op()...
+DEBUG# Checking next symbol, it's [a]
+DEBUG# It's not assignition
+DEBUG# Writing to [00900540] token, type = 2001
+
+DEBUG# Got [+]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [arctg]
+DEBUG# arctg
+DEBUG# arctg
+DEBUG# Writing to [00900540] token, type = 2003
+
+DEBUG# Got [arctg]
+DEBUG# arctg
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [00900540] token, type = 2005
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [t] character
+DEBUG# Found letter [t], looking for identificator...
+DEBUG# Scanned identificator is [t]
+DEBUG# t
+DEBUG# t
+DEBUG# Writing to [00900540] token, type = 2003
+
+DEBUG# Got [t]
+DEBUG# t
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [00900540] token, type = 2005
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [ÿ] character
+DEBUG# Found end of file
+DEBUG# Writing to [00900540] token, type = 2008
+
+DEBUG# Got [0]
+DEBUG# Token written successfully
+DEBUG# Token [00900540] destructing...
+
+DEBUG# done
+
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [arcsin]
+DEBUG# arcsin
+DEBUG# arcsin
+DEBUG# Writing to [00908330] token, type = 2003
+
+DEBUG# Got [arcsin]
+DEBUG# arcsin
+DEBUG# Token written successfully
+type: [2003],value: [arcsin]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [00908338] token, type = 2005
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got [x] character
+DEBUG# Found letter [x], looking for identificator...
+DEBUG# Scanned identificator is [x]
+DEBUG# x
+DEBUG# x
+DEBUG# Writing to [00908340] token, type = 2003
+
+DEBUG# Got [x]
+DEBUG# x
+DEBUG# Token written successfully
+type: [2003],value: [x]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [00908348] token, type = 2005
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [+] character
+DEBUG# It's operator, calling got_op()...
+DEBUG# Checking next symbol, it's [a]
+DEBUG# It's not assignition
+DEBUG# Writing to [00908350] token, type = 2001
+
+DEBUG# Got [+]
+DEBUG# Token written successfully
+type: [2001],value: [+]
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [arctg]
+DEBUG# arctg
+DEBUG# arctg
+DEBUG# Writing to [00908358] token, type = 2003
+
+DEBUG# Got [arctg]
+DEBUG# arctg
+DEBUG# Token written successfully
+type: [2003],value: [arctg]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [00908360] token, type = 2005
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got [t] character
+DEBUG# Found letter [t], looking for identificator...
+DEBUG# Scanned identificator is [t]
+DEBUG# t
+DEBUG# t
+DEBUG# Writing to [00908368] token, type = 2003
+
+DEBUG# Got [t]
+DEBUG# t
+DEBUG# Token written successfully
+type: [2003],value: [t]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [00908370] token, type = 2005
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [ÿ] character
+DEBUG# Found end of file
+DEBUG# Writing to [00908378] token, type = 2008
+
+DEBUG# Got [0]
+DEBUG# Token written successfully
+type: [2008],value: [0]
+DEBUG# LIST OF SCANNED TOKENS BEGIN>>>>>>>>>>>>>>>>>>>>>>
+
+0type: [2003],value: [arcsin]
+1type: [2005],value: [(]
+2type: [2003],value: [x]
+3type: [2005],value: [)]
+4type: [2001],value: [+]
+5type: [2003],value: [arctg]
+6type: [2005],value: [(]
+7type: [2003],value: [t]
+8type: [2005],value: [)]
+9type: [2008],value: [0]
+DEBUG# LIST OF SCANNED TOKENS FINISH<<<<<<<<<<<<<<<<<<<<<<
+
+DEBUG# >>>>>>>>>>>>>>>>>TOKENIZE FINISHED, GOT 10 TOKENS<<<<<<<<<<<<<<<<<
+Size = 10
+Dump of tree - [0090fc80], size - 14
+I'm OK
+Counted size = 14
+Calling recursive in-order dump of tree root...
+
++[Program]{0090c3c0}
+|
+L---nil
+|
+R---+[Sign | +]{0090c060}
+    |
+    L---+[Sign | *]{0090c0a8}
+    |   |
+    |   L---+[Number | 1]{0090c570}
+    |   |   |
+    |   |   L---nil
+    |   |   |
+    |   |   R---nil
+    |   |
+    |   R---+[Function | arcsin]{0090c210}
+    |       |
+    |       L---nil
+    |       |
+    |       R---+[Sign | *]{0090c258}
+    |           |
+    |           L---+[Number | 1]{0090c0f0}
+    |           |   |
+    |           |   L---nil
+    |           |   |
+    |           |   R---nil
+    |           |
+    |           R---+[Variable | x]{0090bfd0}
+    |               |
+    |               L---nil
+    |               |
+    |               R---nil
+    |
+    R---+[Sign | *]{0090c2a0}
+        |
+        L---+[Number | 1]{0090c018}
+        |   |
+        |   L---nil
+        |   |
+        |   R---nil
+        |
+        R---+[Function | arctg]{0090c330}
+            |
+            L---nil
+            |
+            R---+[Sign | *]{0090c408}
+                |
+                L---+[Number | 1]{0090c5b8}
+                |   |
+                |   L---nil
+                |   |
+                |   R---nil
+                |
+                R---+[Variable | t]{0090bf40}
+                    |
+                    L---nil
+                    |
+                    R---nil
+End of tree dump
+
+
+>>>>>>>>>>>>>>>>>>Non-optimized input tree<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+>>>>>>>>>>>>>>>>>>>>Optimized input tree<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Dump of tree - [0090fc80], size - 6
+I'm OK
+Counted size = 6
+Calling recursive in-order dump of tree root...
+
++[Program]{0090c3c0}
+|
+L---nil
+|
+R---+[Sign | +]{0090c060}
+    |
+    L---+[Function | arcsin]{0090c210}
+    |   |
+    |   L---nil
+    |   |
+    |   R---+[Variable | x]{0090bfd0}
+    |       |
+    |       L---nil
+    |       |
+    |       R---nil
+    |
+    R---+[Function | arctg]{0090c330}
+        |
+        L---nil
+        |
+        R---+[Variable | t]{0090bf40}
+            |
+            L---nil
+            |
+            R---nil
+End of tree dump
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>Fresh derivative tree<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Dump of tree - [0090fdc0], size - 21
+I'm OK
+Counted size = 21
+Calling recursive in-order dump of tree root...
+
++[Program]{00910fc8}
+|
+L---nil
+|
+R---+[Sign | +]{00910cb0}
+    |
+    L---+[Sign | /]{00910ea8}
+    |   |
+    |   L---+[Sign | *]{00910b00}
+    |   |   |
+    |   |   L---+[Number | 1]{00910b48}
+    |   |   |   |
+    |   |   |   L---nil
+    |   |   |   |
+    |   |   |   R---nil
+    |   |   |
+    |   |   R---+[Number | 1]{00910cf8}
+    |   |       |
+    |   |       L---nil
+    |   |       |
+    |   |       R---nil
+    |   |
+    |   R---+[Function | sqrt]{00910d88}
+    |       |
+    |       L---nil
+    |       |
+    |       R---+[Sign | -]{00910a70}
+    |           |
+    |           L---+[Number | 1]{00910dd0}
+    |           |   |
+    |           |   L---nil
+    |           |   |
+    |           |   R---nil
+    |           |
+    |           R---+[Function | pow]{00910ab8}
+    |               |
+    |               L---nil
+    |               |
+    |               R---+[Empty]{009110a0}
+    |                   |
+    |                   L---+[Variable | x]{00910bd8}
+    |                   |   |
+    |                   |   L---nil
+    |                   |   |
+    |                   |   R---nil
+    |                   |
+    |                   R---+[Number | 2]{00910b90}
+    |                       |
+    |                       L---nil
+    |                       |
+    |                       R---nil
+    |
+    R---+[Sign | /]{00910ef0}
+        |
+        L---+[Number | 0]{00911010}
+        |   |
+        |   L---nil
+        |   |
+        |   R---nil
+        |
+        R---+[Sign | +]{00910f38}
+            |
+            L---+[Number | 1]{00911058}
+            |   |
+            |   L---nil
+            |   |
+            |   R---nil
+            |
+            R---+[Function | pow]{00910f80}
+                |
+                L---nil
+                |
+                R---+[Empty]{00910a28}
+                    |
+                    L---+[Variable | t]{00910c68}
+                    |   |
+                    |   L---nil
+                    |   |
+                    |   R---nil
+                    |
+                    R---+[Number | 2]{00910c20}
+                        |
+                        L---nil
+                        |
+                        R---nil
+End of tree dump
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>Optimized derivative tree<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+Dump of tree - [0090fdc0], size - 10
+I'm OK
+Counted size = 10
+Calling recursive in-order dump of tree root...
+
++[Program]{00910fc8}
+|
+L---nil
+|
+R---+[Sign | /]{00910ea8}
+    |
+    L---+[Number | 1]{00910b00}
+    |   |
+    |   L---nil
+    |   |
+    |   R---nil
+    |
+    R---+[Function | sqrt]{00910d88}
+        |
+        L---nil
+        |
+        R---+[Sign | -]{00910a70}
+            |
+            L---+[Number | 1]{00910dd0}
+            |   |
+            |   L---nil
+            |   |
+            |   R---nil
+            |
+            R---+[Function | pow]{00910ab8}
+                |
+                L---nil
+                |
+                R---+[Empty]{009110a0}
+                    |
+                    L---+[Variable | x]{00910bd8}
+                    |   |
+                    |   L---nil
+                    |   |
+                    |   R---nil
+                    |
+                    R---+[Number | 2]{00910b90}
+                        |
+                        L---nil
+                        |
+                        R---nil
+End of tree dump

@@ -1,0 +1,99 @@
+in ax
+in bx
+in cx
+
+jmp :begin
+
+func :no_roots
+out ch 78
+out ch 79
+jmp :break
+ret
+
+func :a_non_zero
+push bx
+push bx
+mul
+push 4
+push ax
+mul
+push cx
+mul
+sub
+pop dx
+
+push dx
+push 0
+jb :no_roots
+
+push dx
+sqrt
+pop dx
+
+push dx
+push 0
+je :d_is_zero
+
+push -1
+push bx
+mul
+push dx
+add
+push 2
+push ax
+mul
+div
+out st
+out ch 10
+
+:d_is_zero
+
+push -1
+push bx
+mul
+push dx
+sub
+push 2
+push ax
+mul
+div
+
+out st
+out ch 10
+
+jmp :break
+ret
+
+func :a_zero
+push bx
+push 0
+jne :b_not_zero
+
+push cx
+push 0
+jne :c_not_zero
+out ch 105
+out ch 110
+out ch 102
+jmp :break
+
+:c_not_zero
+call :no_roots
+:b_not_zero
+push -1
+push cx
+mul
+push bx
+div
+out st
+jmp :break
+ret
+
+:begin
+
+push ax
+push 0
+je :a_zero
+call :a_non_zero
+:break
+end

@@ -1,0 +1,250 @@
+jmp :__skiplibrary_begin
+
+func :__tg
+tan
+ret
+
+func :__ctg
+pop ax
+push 1
+push ax
+tan
+div
+ret
+
+func :__sin
+sin
+ret
+
+func :__cos
+cos
+ret
+
+func :__ln
+ln
+ret
+
+func :__log
+ln
+pop ax
+ln
+push ax
+div
+ret
+
+func :__sqrt
+sqrt
+ret
+
+func :__arcsin
+asin
+ret
+
+func :__arccos
+asin
+pop ax
+push 3.141592653589793
+push 2
+div
+push ax
+sub
+ret
+
+
+func :__arctg
+pop ax
+push ax
+push ax
+push ax
+mul
+push 1
+add
+sqrt
+div
+asin
+ret
+
+func :__exp
+push 2.71828182846
+pow
+ret
+
+func :__pow
+pow
+ret
+
+func :__fac
+fac
+ret
+
+:__skiplibrary_begin
+
+def a
+push 1
+pop var a
+
+def b
+push -2
+pop var b
+
+def c
+push 1
+pop var c
+
+def xf
+push 0
+pop var xf
+
+def xs
+push 0
+pop var xs
+
+push var a
+push 0
+jne :__cmp_e_0
+
+push var b
+push 0
+jne :__cmp_e_1
+
+push var c
+push 0
+jne :__cmp_e_2
+
+out ch 73
+out ch 110
+out ch 102
+out ch 105
+out ch 110
+out ch 105
+out ch 116
+out ch 101
+:__cmp_e_2
+push var c
+push 0
+je :__cmp_ne_3
+
+out ch 78
+out ch 111
+out ch 32
+out ch 114
+out ch 111
+out ch 111
+out ch 116
+out ch 115
+:__cmp_ne_3
+:__cmp_e_1
+push var b
+push 0
+je :__cmp_ne_4
+
+out ch 120
+out ch 32
+out ch 61
+out ch 32
+push var c
+push var b
+div 
+out st
+:__cmp_ne_4
+:__cmp_e_0
+push var a
+push 0
+je :__cmp_ne_5
+
+def d
+push var b
+push 2
+call :__pow
+push 4
+push var a
+push var c
+mul 
+mul 
+sub 
+pop var d
+
+push 0
+pop var d
+
+push var d
+push 0
+jne :__cmp_e_6
+
+out ch 120
+out ch 32
+out ch 61
+out ch 32
+push -1
+push var b
+mul 
+push 2
+push var a
+mul 
+div 
+out st
+:__cmp_e_6
+push var d
+push 0
+jae :__cmp_b_7
+
+out ch 78
+out ch 111
+out ch 32
+out ch 114
+out ch 111
+out ch 111
+out ch 116
+out ch 115
+:__cmp_b_7
+push var d
+push 0
+jbe :__cmp_a_8
+
+out ch 120
+out ch 49
+out ch 32
+out ch 61
+out ch 32
+def sqrtd
+push var b
+push var b
+mul 
+push 4
+push var a
+push var c
+mul 
+mul 
+sub 
+call :__sqrt
+pop var sqrtd
+
+push -1
+push var b
+mul 
+push var sqrtd
+add 
+push 2
+push var a
+mul 
+div 
+out st
+out ch 10
+out ch 120
+out ch 50
+out ch 32
+out ch 61
+out ch 32
+push -1
+push var b
+mul 
+push var sqrtd
+sub 
+push 2
+push var a
+mul 
+div 
+out st
+:__cmp_a_8
+:__cmp_ne_5
+end 

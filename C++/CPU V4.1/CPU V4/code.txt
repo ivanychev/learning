@@ -1,0 +1,4 @@
+push 5
+pop ax
+out ch 42
+end

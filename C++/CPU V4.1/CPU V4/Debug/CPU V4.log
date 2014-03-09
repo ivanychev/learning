@@ -1,0 +1,26 @@
+﻿Сборка начата 07.03.2014 23:46:05.
+     1>Проект "C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\CPU V4\CPU V4.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt asm.cpp asm_functions.cpp asm_main.cpp cpu.cpp main.cpp object_stack.cpp
+         main.cpp
+         cpu.cpp
+         asm_main.cpp
+         asm_functions.cpp
+         asm.cpp
+         Создание кода...
+         Компиляция...
+         object_stack.cpp
+         Создание кода...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\Debug\CPU V4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\Debug\CPU V4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\Debug\CPU V4.lib" /MACHINE:X86 Debug\asm.obj
+         Debug\asm_functions.obj
+         Debug\asm_main.obj
+         Debug\cpu.obj
+         Debug\main.obj
+         Debug\object_stack.obj
+         CPU V4.vcxproj -> C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\Debug\CPU V4.exe
+     1>Сборка проекта "C:\Users\Sergey Ivanychev\Google Диск\Работа\Программирование\Visual Studio\CPU V4\CPU V4\CPU V4.vcxproj" завершена (целевые объекты Build).
+
+Сборка успешно завершена.
+
+Затраченное время: 00:00:01.25

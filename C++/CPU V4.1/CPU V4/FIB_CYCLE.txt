@@ -1,0 +1,36 @@
+in ax
+
+mov bx 1
+mov cx 1
+mov dx 2
+
+push ax
+push 2
+ja :calc_fib
+push 1
+out st
+jmp :break
+:calc_fib
+
+push dx
+push 1
+add
+pop dx
+
+push bx
+push cx
+add
+
+push cx
+pop bx
+pop cx
+
+push ax
+push dx
+jne :calc_fib
+
+out cx
+
+:break
+dump
+end
