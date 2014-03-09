@@ -1,0 +1,135 @@
+Turbo Assembler	 Version 4.1	    03/08/14 21:17:32	    Page 1
+main.asm
+
+
+
+      1				     .286
+      2	0000			     .model			     tiny
+      3
+      4
+      5	0000			     .code
+      6
+      7								     org 100h
+      8	0100			     Start:
+      9	0100  B0 05						     mov al, 05d
+     10	0102  B4 05						     mov ah, 05d
+     11	0104  BB 014Cr						     mov bx, offset Msg
+     12	0107  E8 001B						     call prstr_video
+     13
+     14
+     15	010A			     Exit:
+     16	010A  B8 4C00						     mov ax, 4c00h
+     17	010D  CD 21						     int 21h
+     18
+     19				     ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     20				     ; set_cursor - saves in DI	the indent of requested	cursor coordinates
+     21				     ;
+     22				     ; Entry:	     AL	= X coordinate,	AH = Y coordinate
+     23				     ; Exit:	     DI	= indent in video memory
+     24				     ; Destroy:	     BX
+     25				     ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+     26
+     27	010F			     set_cursor			     proc
+     28
+     29	010F  8B D8						     mov bx, ax
+     30	0111  33 C0						     xor ax, ax
+     31	0113  8A C7						     mov al, bh
+     32
+     33	0115  BF 00A0						     mov di, 160d
+     34	0118  F7 E7						     mul di
+     35
+     36	011A  B7 00						     mov bh, 0h
+     37
+     38	011C  03 C3						     add ax, bx
+     39	011E  03 C3						     add ax, bx
+     40
+     41	0120  33 FF						     xor di, di
+     42	0122  8B F8						     mov di, ax
+     43
+     44	0124  C3						     ret
+     45	0125							     endp
+     46
+     47				     ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+     48				     ; prstr_video - prints string starting with input coordinates
+     49				     ; Entry:	     AL	= X coordinate,	AH = Y coordinate, BX -> string
+     50				     ; Destroy:	     ES, DI
+     51				     ;<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+     52
+     53	0125			     prstr_video	     proc
+     54
+     55	0125  83 FB 00						     cmp bx, 0d
+     56	0128  74 21						     je	prstr_v_exit
+     57
+Turbo Assembler	 Version 4.1	    03/08/14 21:17:32	    Page 2
+main.asm
+
+
+
+     58	012A  68 B800						     push 0b800h
+     59	012D  07						     pop es
+     60	012E  53						     push bx
+     61	012F  E8 FFDD						     call set_cursor
+     62	0132  5B						     pop bx
+     63	0133  B8 0000						     mov ax, 0h
+     64	0136  26: 39 05						     cmp es:[di], ax
+     65	0139  74 10						     je	prstr_v_exit
+     66
+     67	013B  33 C9						     xor cx, cx
+     68	013D			     prstr_v_char:
+     69	013D  8A 0F						     mov cl, byte ptr [bx]
+     70	013F  26: 88 0D						     mov es:[di], cl			     ; mov es:[di], byte ptr+
+     71				     [bx] - doesn't work!
+     72
+     73	0142  43						     inc bx
+     74	0143  47						     inc di
+     75	0144  47						     inc di
+     76
+     77	0145  8A 0F						     mov cl, byte ptr [bx]
+     78	0147  FE C1						     inc cl
+     79
+     80	0149  E2 F2						     loop prstr_v_char
+     81	014B			     prstr_v_exit:
+     82	014B  C3						     ret
+     83	014C							     endp
+     84
+     85	014C  48 65 6C 6C 6F 2C	20+  Msg:    db	'Hello,	GPU!', 0
+     86	      47 50 55 21 00
+     87								     end			     Start
+Turbo Assembler	 Version 4.1	    03/08/14 21:17:32	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "03/08/14"
+??FILENAME			  Text	 "main	  "
+??TIME				  Text	 "21:17:32"
+??VERSION			  Number 040A
+@32BIT				  Text	 0
+@CODE				  Text	 DGROUP
+@CODESIZE			  Text	 0
+@CPU				  Text	 0707H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 MAIN
+@INTERFACE			  Text	 000H
+@MODEL				  Text	 1
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+EXIT				  Near	 DGROUP:010A
+MSG				  Near	 DGROUP:014C
+PRSTR_VIDEO			  Near	 DGROUP:0125
+PRSTR_V_CHAR			  Near	 DGROUP:013D
+PRSTR_V_EXIT			  Near	 DGROUP:014B
+SET_CURSOR			  Near	 DGROUP:010F
+START				  Near	 DGROUP:0100
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  _DATA				  16  0000 Word	  Public  DATA
+  _TEXT				  16  0158 Word	  Public  CODE
+
