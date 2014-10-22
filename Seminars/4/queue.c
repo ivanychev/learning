@@ -4,10 +4,6 @@
 #undef QUEUE_EXISTS
 #endif
 
-int child_part (int queue_id, int proc_num, int proc_index);
-
-int parent_part(int queue_id, int proc_num);
-
 
 int main(int argc, char const *argv[])
 {
@@ -20,7 +16,7 @@ int main(int argc, char const *argv[])
 
 	int queue_key = ftok(QUEUE_FILE, 1);
 	
-	CHECK(queue_key != -1, "Failed to generate key");
+	CHECK(queue_key != -1, "Failed to generate the key");
 
 	int queue_id = 0;
 
@@ -43,12 +39,12 @@ int main(int argc, char const *argv[])
 
 	if (proc == 0)
 	{
-		// OUT2("Child begin: index = %d, proc_num = %ld\n", i, proc_num);
+		OUT2("Child begin: index = %d, proc_num = %ld\n", i, proc_num);
 		child_part (queue_id, proc_num, i);
 	}
 	else
 	{
-		// OUT2("Parent begin: index = %d, proc_num = %ld\n", i, proc_num);
+		OUT2("Parent begin: index = %d, proc_num = %ld\n", i, proc_num);
 		parent_part(queue_id, proc_num);
 	}
 	return 0;
@@ -58,28 +54,27 @@ int parent_part(int queue_id, int proc_num)
 {
 	Long_msg to_send = {1, MSG_VAL};
 	
-	// OUT2("queue_id = %d\nSend pointer = %08x\n", queue_id, &to_send);
-	// OUT2("Sizeof = %ld, msgflg = 0, Value = %ld\n\n", sizeof(Long_msg)- sizeof(long), MSG_VAL);
+	OUT2("queue_id = %d\nSend pointer = %08x\n", queue_id, &to_send);
+	OUT2("Sizeof = %ld, msgflg = 0, Value = %ld\n\n", sizeof(Long_msg)- sizeof(long), MSG_VAL);
 
-	CHECK(msgsnd(	queue_id, 
+	CHECK(	msgsnd(	queue_id, 
 			&to_send, 
 			sizeof(to_send) - sizeof(long), 
 			0
 			) != -1, "Failed to send in parent");
 	
 	Long_msg received = {};
-	int msg_size = msgrcv(	queue_id, 
+	int msg_size = 	msgrcv(	queue_id, 
 				&received, 
 				sizeof(Long_msg) - sizeof(long), 
 				proc_num + 1, 
 				0);
 	
-	// OUT2("[%d] Index = %d\n", index, index);
-	// OUT2("[%d] received.type = %ld\n", index, received.type);
-	// OUT2("[%d] received.val  = %ld\n", index, received.val);
+	OUT1("[Parent] ceived.type = %ld\n", received.type);
+	OUT1("[Parent] ceived.val  = %ld\n", received.val);
 
-	// OUT2("[%d] Msgg size = %d\n",   index, msg_size);
-	// OUT2("[%d] Received = %ld\n",  index, received.val);
+	OUT1("[Parent] Msg size = %d\n",   msg_size);
+	OUT1("[Parent] Received = %ld\n",  received.val);
 
 	CHECK(msg_size == (int)(sizeof(Long_msg) - sizeof(long)), "Failed to read in child");
 	CHECK(received.val == MSG_VAL, "Invalid received message");
@@ -94,7 +89,7 @@ int parent_part(int queue_id, int proc_num)
 int child_part(int queue_id, int proc_num, int index)
 {
 	Long_msg received = {};
-	// OUT1("Child [%d] entered\n", index);
+	OUT1("Child [%d] entered\n", index);
 
 	int msg_size = msgrcv(queue_id, 
 				&received, 
@@ -102,12 +97,12 @@ int child_part(int queue_id, int proc_num, int index)
 				index, 
 				0);
 	
-	// OUT2("[%d] Index = %d\n", index, index);
-	// OUT2("[%d] received.type = %ld\n", index, received.type);
-	// OUT2("[%d] received.val  = %ld\n", index, received.val);
+	OUT2("[%d] Index = %d\n", index, index);
+	OUT2("[%d] received.type = %ld\n", index, received.type);
+	OUT2("[%d] received.val  = %ld\n", index, received.val);
 
-	// OUT2("[%d] Msgg size = %d\n",   index, msg_size);
-	// OUT2("[%d] Received = %ld\n",  index, received.val);
+	OUT2("[%d] Msgg size = %d\n",   index, msg_size);
+	OUT2("[%d] Received = %ld\n",  index, received.val);
 
 	CHECK(msg_size == (int)(sizeof(Long_msg) - sizeof(long)), "Failed to read in child");
 	CHECK(received.val == MSG_VAL, "Invalid received message");
@@ -119,7 +114,7 @@ int child_part(int queue_id, int proc_num, int index)
 			&to_send, 
 			sizeof(to_send) - sizeof(long), 
 			0) != -1, "Failed to send in child");
-	// OUT2("[%d] Message type = %ld sent\n", index, to_send.type)
+	OUT2("[%d] Message type = %ld sent\n", index, to_send.type)
 
 	return 0;
 }
