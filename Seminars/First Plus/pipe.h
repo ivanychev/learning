@@ -1,5 +1,5 @@
-#ifndef __QUEUE_H
-#define __QUEUE_H
+#ifndef __PIPE_H
+#define __PIPE_H
 
 //===============================================================================================================
 //			Headers
@@ -24,7 +24,7 @@
 
 //#define DEBUG
 
-#ifdef DEBUG
+#ifdef 	DEBUG
 #define OUT(str) 		printf(str);
 #define OUT1(str, arg1)		printf(str, arg1);
 #define OUT2(str, arg1, arg2)	printf(str, arg1, arg2);
@@ -79,31 +79,20 @@
 enum ERR_CONST
 {
 	ERR_CONST_BEGIN = 1000,
-	GET_OK,
-	GET_FAILED,
 	ERR_CONST_END
 };
 
-long MSG_VAL = 42;
+const char*	SEND_NAME 	= "/tmp/IV_SEND";
+const char* 	RECEIVE_NAME	= "/tmp/IV_RECEIVE";
+const char* 	FIFO_NAME	= "IV_FIFO";
+#define		BUF_SIZE	  1024 * 1024
 
 //===============================================================================================================
 //				Descriptions and prototypes
 //===============================================================================================================
+int send(char const* filename);
 
-
-const char* QUEUE_FILE = "queue.file";
-
-typedef struct Long_msg_t
-{
-	long type;
-	long val;
-} Long_msg;
-
-int get_long(long* save, int argc, const char* str);
-
-int child_part (int queue_id, int proc_num, int proc_index);
-
-int parent_part(int queue_id, int proc_num);
+int receive();
 
 //===============================================================================================================
 //===============================================================================================================
