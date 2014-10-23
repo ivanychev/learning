@@ -80,7 +80,7 @@ int parent_part(int queue_id, int proc_num)
 	CHECK(msg_size == (int)(sizeof(Long_msg) - sizeof(long)), "Failed to read in child");
 	CHECK(received.val == MSG_VAL, "Invalid received message");
 
-	fprintf(stderr, "Print finished\n");
+	printf("Print finished\n");
 
 	msgctl(queue_id, IPC_RMID, NULL);
 	return 0;
@@ -108,9 +108,7 @@ int child_part(int queue_id, int proc_num, int index)
 	CHECK(msg_size == (int)(sizeof(Long_msg) - sizeof(long)), "Failed to read in child");
 	CHECK(received.val == MSG_VAL, "Invalid received message");
 
-	fprintf(stderr, "%d ", index);
-
-
+	printf("%d'th process\n", index);
 
 	Long_msg to_send = {(long)index + 1, MSG_VAL};
 	CHECK(msgsnd(	queue_id, 
@@ -137,7 +135,7 @@ int get_long(long* save, int argc, const char* str)
 	}
 
 	if (endptr == str) {
-	   fprintf(stderr,  "No digits were found\n");
+	   fprintf(stderr, "No digits were found\n");
 	   return GET_FAILED;
 	}
 

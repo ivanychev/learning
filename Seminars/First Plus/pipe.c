@@ -24,13 +24,11 @@ int main(int argc, char const *argv[])
 
 int send(char const *filename)
 {
-	int is_sender = open(SEND_NAME, O_CREAT|O_EXCL, O_RDONLY);
-	if (is_sender == -1 && errno == EEXIST)
-	{
-		printf("Sender is already working...");
+	
+	int is_cur_sender = is_sender();
+	if (is_cur_sender == 0)
 		return 0;
-	}
-	CHECK(is_sender != -1, "Failed to create SENDER flag in /tmp");
+	CHECK(is_cur_sender != -1, "Failed to create SENDER flag in /tmp");
 
 	int fifo_cond = mkfifo(FIFO_NAME, 0600);
 
@@ -61,13 +59,11 @@ int send(char const *filename)
 
 int receive()
 {
-	int is_receiver = open(RECEIVE_NAME, O_CREAT|O_EXCL, O_RDONLY);
-	if (is_receiver == -1 && errno == EEXIST)
-	{
-		printf("Receiver is already working...");
+	int is_cur_receiver = is_receiver();
+	if (is_cur_receiver == 0)
 		return 0;
-	}
-	CHECK(is_receiver != -1, "Failed to create RECEIVER in /tmp");
+
+	CHECK(is_cur_receiver != -1, "Failed to create RECEIVER in /tmp");
 
 	int fifo_cond = mkfifo(FIFO_NAME, 0600);
 
@@ -98,4 +94,34 @@ int receive()
 	CHECK(unlink_cond != -1, "Failed to unlink SEND flag");
 	
 	return 0;
+}
+
+#define TMP_FOLDER
+
+int is_sender()
+{
+#ifdef 	TMP_FOLDER
+
+	int is_sender = open(SEND_NAME, O_CREAT|O_EXCL, O_RDONLY);
+	if (is_sender == -1 && errno == EEXIST)
+		return 0;
+	return (is_sender == -1)? -1: 1;
+#else
+
+
+#endif
+}
+
+int is_receiver()
+{
+#ifdef	TMP_FOLDER
+
+	int is_receiver = open(RECEIVE_NAME, O_CREAT|O_EXCL, O_RDONLY);
+	if (is_receiver == -1 && errno == EEXIST)
+		return 0;
+	return (is_receiver == -1)? -1: 1;
+#else
+
+
+#endif
 }
