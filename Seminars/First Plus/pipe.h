@@ -4,6 +4,7 @@
 //===============================================================================================================
 //			Headers
 //===============================================================================================================
+#define _GNU_SOURCE
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -13,7 +14,8 @@
 #include <fcntl.h>
 #include "stdio.h"
 #include "stdlib.h"
-#include "unistd.h"
+#include <unistd.h>
+#include "fcntl.h"
 #include "assert.h"
 #include "errno.h"
 #include "limits.h"
@@ -22,7 +24,7 @@
 //			Macroses
 //===============================================================================================================
 
-//#define DEBUG
+#define DEBUG
 
 #define F_LOCATION(stream)			\
 	fprintf(stream, "File:     %s\n"	\
@@ -92,9 +94,14 @@ enum FORCED_OPEN_FIFO_COND
 	FOFC_OPEN_ERROR
 };
 
+
+
 const char*	SEND_NAME 	= "/tmp/IV_SEND";
 const char* 	RECEIVE_NAME	= "/tmp/IV_RECEIVE";
 const char* 	FIFO_NAME	= "IV_FIFO";
+const char*	SENDER_FLAG	= "sender.flag";
+const char*	RECEIVE_FLAG	= "receive.flag";
+
 #define		BUF_SIZE	  1024 * 1024
 
 //===============================================================================================================
