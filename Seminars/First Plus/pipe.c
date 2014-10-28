@@ -1,5 +1,17 @@
 #include "pipe.h"
 
+/**
+ * @brief 	Sending file via pipe
+ * @mainpage
+ * 
+ * @author	Sergey Ivanychev, DCAM MIPT 376 group
+ *
+ * @version	v0.2
+ * 
+ * @par		Changelog v0.2
+ * 		-- Added forced_fifo_open() function. Purifying code
+ */
+
 
 int main(int argc, char const *argv[])
 {
@@ -22,6 +34,8 @@ int main(int argc, char const *argv[])
 	return 0;
 }
 
+
+
 int send(char const *filename)
 {
 	
@@ -30,16 +44,10 @@ int send(char const *filename)
 		return 0;
 	CHECK(is_cur_sender != -1, "Failed to create SENDER flag in /tmp");
 
-	int fifo_cond = mkfifo(FIFO_NAME, 0600);
 
-	if (fifo_cond == -1 && errno == EEXIST)
-		OUT("[SENDER] FIFO file has been found...\n");
-
-	int fifo_id = open(FIFO_NAME, O_WRONLY);
-	CHECK(fifo_id != -1, "Failed to open fifo for writing");
-
-	int file_id = open(filename, O_RDONLY);
-	CHECK(file_id != -1, "Failed to open argumented file for reading");
+	int fifo_id = 0;
+	int fifo_cond = forced_open_fifo(FIFO_NAME, 0600, O_WRONLY, &fifo_id);
+	CHECK(fifo_cond != FOFC_OPEN_ERROR, "Failed to open FIFO for writing");
 
 	int  read_sz    = 0;
 	int  write_cond = 0;
@@ -65,13 +73,9 @@ int receive()
 
 	CHECK(is_cur_receiver != -1, "Failed to create RECEIVER in /tmp");
 
-	int fifo_cond = mkfifo(FIFO_NAME, 0600);
-
-	if (fifo_cond == -1 && errno == EEXIST)
-		OUT("[SENDER] FIFO file has been found...\n");
-
-	int fifo_id = open(FIFO_NAME, O_RDONLY);
-	CHECK(fifo_id != -1, "Failed to open fifo for writing");
+	int fifo_id = 0;
+	int fifo_cond = forced_open_fifo(FIFO_NAME, 0600, O_RDONLY, &fifo_id);
+	CHECK(fifo_cond != FOFC_OPEN_ERROR, "Failed to open FIFO for reading");
 
 	int read_sz    = 0;
 	int write_cond = 0;
@@ -96,32 +100,35 @@ int receive()
 	return 0;
 }
 
-#define TMP_FOLDER
 
 int is_sender()
 {
-#ifdef 	TMP_FOLDER
-
 	int is_sender = open(SEND_NAME, O_CREAT|O_EXCL, O_RDONLY);
 	if (is_sender == -1 && errno == EEXIST)
 		return 0;
 	return (is_sender == -1)? -1: 1;
-#else
-
-
-#endif
 }
 
 int is_receiver()
 {
-#ifdef	TMP_FOLDER
-
 	int is_receiver = open(RECEIVE_NAME, O_CREAT|O_EXCL, O_RDONLY);
 	if (is_receiver == -1 && errno == EEXIST)
 		return 0;
 	return (is_receiver == -1)? -1: 1;
-#else
-
-
-#endif
 }
+
+int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save)
+{
+	CHECK(to_save != NULL, "Argumented pointer is NULL");
+	int fifo_cond = mkfifo(name, mode);	
+	if (fifo_cond == -1 && errno == EEXIST)
+		OUT("FIFO file has been found...");
+
+	int fifo_id = open(FIFO_NAME, flags);
+	if (fifo_id == -1)
+		return FOFC_OPEN_ERROR;
+	*to_save = fifo_id;
+	return (fifo_cond == -1)? FOFC_FILE_EXIST: FOFC_FILE_CREATED;
+
+}
+

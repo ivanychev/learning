@@ -24,52 +24,55 @@
 
 //#define DEBUG
 
+#define F_LOCATION(stream)			\
+	fprintf(stream, "File:     %s\n"	\
+			"Line:     %d\n"	\
+			"Function: %s\n",	\
+			__FILE__,		\
+			__LINE__,		\
+			__PRETTY_FUNCTION__);	\
+	fflush(stream);			
+
+#define LOCATION F_LOCATION(stdout)
+							
 #ifdef 	DEBUG
-#define OUT(str) 		printf(str);
-#define OUT1(str, arg1)		printf(str, arg1);
-#define OUT2(str, arg1, arg2)	printf(str, arg1, arg2);
+#define OUT(str) 					printf(str);			fflush(stdout);		
+#define OUT1(str, arg1)					printf(str, arg1);		fflush(stdout);
+#define OUT2(str, arg1, arg2)				printf(str, arg1, arg2);	fflush(stdout);
+#define LOC_OUT(str) 			LOCATION;	printf(str);			fflush(stdout);		
+#define LOC_OUT1(str, arg1)		LOCATION;	printf(str, arg1);		fflush(stdout);
+#define LOC_OUT2(str, arg1, arg2)	LOCATION;	printf(str, arg1, arg2);	fflush(stdout);
+
+
+
 
 #else
 
-#define OUT(str) 		if (0)	printf(str);
-#define OUT1(str, arg1)		if (0)	printf(str, arg1);
-#define OUT2(str, arg1, arg2)	if (0)	printf(str, arg1, arg2);
+#define OUT(str) 			if (0)	printf(str);
+#define OUT1(str, arg1)			if (0)	printf(str, arg1);
+#define OUT2(str, arg1, arg2)		if (0)	printf(str, arg1, arg2);
+#define LOC_OUT(str) 			if (0)	printf(str);				
+#define LOC_OUT1(str, arg1)		if (0)	printf(str, arg1);	
+#define LOC_OUT2(str, arg1, arg2)	if (0)	printf(str, arg1, arg2);
+
 
 #endif
 
-#ifdef QUEUE_EXISTS
-#define CHECK(cond, msg)					\
+#define F_CHECK_EXIT_CODE
+#define F_CHECK(stream, cond, msg)				\
 	if (!(cond))						\
 	{							\
-		fprintf(stderr, "File:\t\t%s\n"			\
-				"Line: \t\t%d\n"		\
-					"Message:\t%s\n",	\
-				__FILE__,			\
-				__LINE__,			\
-				msg);				\
+		F_LOCATION(stream);				\
+		fprintf(stream, "Message:  %s\n", msg);		\
+		fflush(stream);					\
 		perror("ERRNO\t\t");				\
-		putchar('\n');					\
-		msgctl(queue_id, IPC_RMID, NULL);		\
+		fputc('\n', stream);				\
+		F_CHECK_EXIT_CODE				\
 								\
 		exit(EXIT_FAILURE);				\
 	}							\
 
-#else
-#define CHECK(cond, msg)					\
-	if (!(cond))						\
-	{							\
-		fprintf(stderr, "File:\t\t%s\n"			\
-				"Line: \t\t%d\n"		\
-				"Message:\t%s\n",		\
-				__FILE__,			\
-				__LINE__,			\
-				msg);				\
-		perror("ERRNO\t\t");				\
-		putchar('\n');					\
-								\
-		exit(EXIT_FAILURE);				\
-	}	
-#endif
+#define CHECK(cond, msg) F_CHECK(stdout, cond, msg)
 
 
 //===============================================================================================================
@@ -80,6 +83,13 @@ enum ERR_CONST
 {
 	ERR_CONST_BEGIN = 1000,
 	ERR_CONST_END
+};
+
+enum FORCED_OPEN_FIFO_COND
+{
+	FOFC_FILE_EXIST,
+	FOFC_FILE_CREATED,
+	FOFC_OPEN_ERROR
 };
 
 const char*	SEND_NAME 	= "/tmp/IV_SEND";
@@ -98,6 +108,7 @@ int is_sender();
 
 int is_receiver();
 
+int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save);
 //===============================================================================================================
 //===============================================================================================================
 
