@@ -1,0 +1,49 @@
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out try.txt
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out
+./pipe.out

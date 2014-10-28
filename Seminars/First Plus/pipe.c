@@ -1,18 +1,26 @@
 #include "pipe.h"
 
 /**
- * @brief 	Sending file via pipe
+ * @brief 	Tough sending file via pipe
  * @mainpage
  * 
  * @author	Sergey Ivanychev, DCAM MIPT 376 group
  *
- * @version	v0.2
+ * @version	v0.3
  * 
  * @par		Changelog v0.2
  * 		-- Added forced_fifo_open() function. Purifying code
+ *
+ *		Changelog v0.3
+ *		-- Added new verification method 
+ *		-- Some big and copy-paste function reimplemented
  */
 
+//================================================================================================
+//================================================================================================
+
 #define PAGESIZE getpagesize()
+#define BIGSIZE  PAGESIZE * 16
 
 int main(int argc, char const *argv[])
 {
@@ -36,6 +44,13 @@ int main(int argc, char const *argv[])
 }
 
 
+//================================================================================================
+//================================================================================================
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE			\
+	close(send_flag);			\
+	unlink(SENDER_FLAG);			\
 
 int send(char const *filename)
 {
@@ -76,10 +91,22 @@ int send(char const *filename)
 }
 
 
+//================================================================================================
+//================================================================================================
+
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE			\
+	close(receive_flag);			\
+	unlink(RECEIVE_FLAG);			\
+	
+
 int receive()
 {
 	int receive_flag = 0;
 	int is_cur_receiver = is_receiver(&receive_flag);
+
+
 	if (is_cur_receiver == 0)
 	{
 		OUT("Already working...\n");
@@ -108,65 +135,60 @@ int receive()
 	int unlink_cond = unlink(FIFO_NAME);
 	CHECK(unlink_cond != -1, "Failed to unlink fifo");
 
-	if (receive_flag)
-		close(receive_flag);
+	
+	close(receive_flag);
 	int unlink_flag = unlink(RECEIVE_FLAG);
 
 	
 	return 0;
 }
 
+//================================================================================================
+//================================================================================================
 
-int is_sender(int* flag_save)
-{
-	CHECK(flag_save != NULL, "Argumented pointer is NULL");
-	char* FLAG_PAINT = (char*)calloc(PAGESIZE - 1, sizeof(char));
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE
 
-
-	int flag_fifo = mkfifo (SENDER_FLAG, 0600);
-	int flag_fifo_id = open(SENDER_FLAG, O_RDWR);
-
-	CHECK(flag_fifo_id != -1, "Failed to open flag fifo");
-	if (flag_fifo != -1)
-	{
-		int check_ctl = fcntl(	flag_fifo_id,
-					F_SETPIPE_SZ, 
-					PAGESIZE);
-		CHECK(fcntl(flag_fifo_id, F_GETPIPE_SZ) == PAGESIZE, "Unsuccessfully tried to reduce pipe size to page size");
-	}
-	int is_flag_up = write(flag_fifo_id, FLAG_PAINT, PAGESIZE - 1);
-	LOC_OUT1("Written %d bytes to flag fifo", is_flag_up);
-	
-	close(flag_fifo_id);
-
-	free(FLAG_PAINT);
-	if (is_flag_up == -1)
-		return 0;
-
-	return 1;
-}
 
 int is_receiver(int* flag_save)
 {
+	return is_it(flag_save, RECEIVE_FLAG);
+}
+
+int is_sender(int* flag_save)
+{
+	return is_it(flag_save, SENDER_FLAG);
+}
+
+int is_it(int* flag_save, const char* name)
+{
 	CHECK(flag_save != NULL, "Argumented pointer is NULL");
-	char* FLAG_PAINT = (char*)calloc(PAGESIZE - 1, sizeof(char));
+	char* FLAG_PAINT = (char*)calloc(PAGESIZE + 1, sizeof(char));
 
 
-	int flag_fifo = mkfifo (RECEIVE_FLAG, 0600);
-	int flag_fifo_id = open(RECEIVE_FLAG, O_RDWR);
+	int flag_fifo 	 = mkfifo (name, 0600);
+	int flag_fifo_id = open   (name, O_RDWR|O_NONBLOCK);
 
+	OUT1("ORIGIN:  Pipe size = %d\n", fcntl(flag_fifo_id, F_GETPIPE_SZ));
 	CHECK(flag_fifo_id != -1, "Failed to open flag fifo");
-	if (flag_fifo != -1)
+	
+	if (fcntl(flag_fifo_id, F_GETPIPE_SZ) != PAGESIZE)
 	{
+		OUT1("BEFORE: Pipe size = %d\n", fcntl(flag_fifo_id, F_GETPIPE_SZ));
 		int check_ctl = fcntl(	flag_fifo_id,
 					F_SETPIPE_SZ, 
 					PAGESIZE);
+		OUT1("AFTER:  Pipe size = %d\n", fcntl(flag_fifo_id, F_GETPIPE_SZ));
 		CHECK(fcntl(flag_fifo_id, F_GETPIPE_SZ) == PAGESIZE, "Unsuccessfully tried to reduce pipe size to page size");
 	}
-	int is_flag_up = write(flag_fifo_id, FLAG_PAINT, PAGESIZE - 1);
-	LOC_OUT1("Written %d bytes to flag fifo", is_flag_up);
 
-	close(flag_fifo_id);
+	int is_flag_up = write(flag_fifo_id, FLAG_PAINT, PAGESIZE);
+	LOC_OUT2("Written %d bytes to flag fifo [%d]\n", is_flag_up, flag_fifo_id);
+	
+
+	OUT1("FINALLY: Pipe size = %d\n", fcntl(flag_fifo_id, F_GETPIPE_SZ));
+
+	*flag_save = flag_fifo_id;
 
 	free(FLAG_PAINT);
 	if (is_flag_up == -1)
@@ -175,24 +197,13 @@ int is_receiver(int* flag_save)
 	return 1;
 }
 
-/*
-int is_sender()
-{
-	int is_sender = open(SEND_NAME, O_CREAT|O_EXCL, O_RDONLY);
-	if (is_sender == -1 && errno == EEXIST)
-		return 0;
-	return (is_sender == -1)? -1: 1;
-}
 
-int is_receiver()
-{
-	int is_receiver = open(RECEIVE_NAME, O_CREAT|O_EXCL, O_RDONLY);
-	if (is_receiver == -1 && errno == EEXIST)
-		return 0;
-	return (is_receiver == -1)? -1: 1;
-}
+//================================================================================================
+//================================================================================================
 
-*/
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE
 
 int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save)
 {
@@ -209,3 +220,6 @@ int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save)
 
 }
 
+
+//================================================================================================
+//================================================================================================

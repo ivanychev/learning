@@ -24,7 +24,7 @@
 //			Macroses
 //===============================================================================================================
 
-#define DEBUG
+//#define DEBUG
 
 #define F_LOCATION(stream)			\
 	fprintf(stream, "File:     %s\n"	\
@@ -78,7 +78,7 @@
 
 
 //===============================================================================================================
-//				Constants
+//				Constants (Code dependant)
 //===============================================================================================================
 
 enum ERR_CONST
@@ -105,15 +105,17 @@ const char*	RECEIVE_FLAG	= "receive.flag";
 #define		BUF_SIZE	  1024 * 1024
 
 //===============================================================================================================
-//				Descriptions and prototypes
+//				Descriptions and prototypes (Code dependant)
 //===============================================================================================================
 int send(char const* filename);
 
 int receive();
 
-int is_sender();
+int is_sender(int* flag_save);
 
-int is_receiver();
+int is_receiver(int* flag_save);
+
+int is_it(int* flag_save, const char* name);
 
 int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save);
 //===============================================================================================================
