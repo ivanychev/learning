@@ -1,4 +1,5 @@
 #include "pipe.h"
+#include "onefile.c"
 
 /**
  * @brief 	Tough sending file via pipe

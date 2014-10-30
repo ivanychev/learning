@@ -24,7 +24,7 @@
 //			Macroses
 //===============================================================================================================
 
-//#define DEBUG
+#define DEBUG
 
 #define F_LOCATION(stream)			\
 	fprintf(stream, "File:     %s\n"	\
