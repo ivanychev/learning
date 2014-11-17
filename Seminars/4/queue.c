@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
 	long proc_num = 0;
 	CHECK(get_long(&proc_num, argc, argv[1]) == GET_OK, "Failed to interpret as number");
 	
-	int queue_file_id = creat(QUEUE_FILE, 0644);
+	int queue_file_id = creat(QUEUE_FILE, 0600);
 	CHECK(queue_file_id != -1, "Failed to open file to stick queue to");
 
 	int queue_key = ftok(QUEUE_FILE, 1);

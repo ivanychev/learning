@@ -217,7 +217,8 @@ int forced_open_fifo(const char* name, mode_t mode, int flags, int* to_save)
 	if (fifo_id == -1)
 		return FOFC_OPEN_ERROR;
 	*to_save = fifo_id;
-	return (fifo_cond == -1)? FOFC_FILE_EXIST: FOFC_FILE_CREATED;
+	return (fifo_cond == -1)? FOFC_FILE_EXIST: 
+				  FOFC_FILE_CREATED;
 
 }
 
