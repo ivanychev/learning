@@ -3,6 +3,9 @@
 #include "stdlib.h"
 
 
+
+
+
 // typedef  struct Cd{
 //     int x,y;
 // } Coord;
