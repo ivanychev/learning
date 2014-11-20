@@ -47,6 +47,7 @@
 #define OUT(str) 					printf(str);			fflush(stdout);		
 #define OUT1(str, arg1)					printf(str, arg1);		fflush(stdout);
 #define OUT2(str, arg1, arg2)				printf(str, arg1, arg2);	fflush(stdout);
+#define OUT3(str, arg1, arg2, arg3)			printf(str, arg1, arg2, arg3);	fflush(stdout);
 #define LOC_OUT(str) 			LOCATION;	printf(str);			fflush(stdout);		
 #define LOC_OUT1(str, arg1)		LOCATION;	printf(str, arg1);		fflush(stdout);
 #define LOC_OUT2(str, arg1, arg2)	LOCATION;	printf(str, arg1, arg2);	fflush(stdout);
@@ -57,6 +58,7 @@
 #define OUT(str)			if (0)		printf(str);
 #define OUT1(str, arg1)			if (0)		printf(str, arg1);
 #define OUT2(str, arg1, arg2)		if (0)		printf(str, arg1, arg2);
+#define OUT3(str, arg1, arg2, arg3)	if (0)		printf(str, arg1, arg2, arg3);
 #define LOC_OUT(str) 			if (0)		printf(str);				
 #define LOC_OUT1(str, arg1)		if (0)		printf(str, arg1);	
 #define LOC_OUT2(str, arg1, arg2)	if (0)		printf(str, arg1, arg2);
@@ -135,6 +137,15 @@ enum SENDING_SEMS
 //				Descriptions and prototypes (Code dependant)
 //===============================================================================================================
 
+ #define PFS(semid, num)						\
+ OUT1("[Line = %d] Printing flags...\n", __LINE__);			\
+ for (int k = 0; k < num; ++k)						\
+ {									\
+ 	OUT2("[%d] - %d\n", k, semctl(semid, k, GETVAL));		\
+ }									\
+ OUT("\n");								\
+
+
 struct Wait_for
 {
 	int semid;
@@ -162,7 +173,7 @@ int get_sems(const char* filename, int num);
 
 void* get_memptr(const char* filename, size_t size, int* id_to_save);
 
-int set_memory(const char* filename, size_t size);
+int set_memory(const char* filename, size_t size, int* need_to_init);
 
 
 

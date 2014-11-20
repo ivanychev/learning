@@ -9,8 +9,6 @@
  * @return [description]
  */
 
-
-
 //===================================================================================
 //===================================================================================
 int main(int argc, char const *argv[])
@@ -36,7 +34,7 @@ void last_cleaner()
 //===================================================================================
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE last_cleaner();		//! See header for description
+#define F_CHECK_EXIT_CODE last_cleaner();
 int receive()
 {
 	int flagid = 0;
@@ -55,23 +53,19 @@ int receive()
 				  BUF_SIZE + sizeof(long),
 				  &shmemid);
 	CHECK(smbuf != (void*)-1, "Failed to get shared memory pointer");
-
-
-	struct sembuf mutexes[5] = {
-		{SND_MUTEX,  -1, 0},
-		{RCV_MUTEX,   1, 0},
-		{SND_DIED,    0, IPC_NOWAIT},
-		{RCV_MUTEX,   0, 0},
-		{RCV_CONNECT,-1, 0},		
-	};
-	long* nbytes_to_save = smbuf + BUF_SIZE;
-	PFS(semid, 5);
-	cond = semop(semid, &mutexes[4], 1);
-	CHECK(cond != -1, "Failed to connect to sender");
+	struct sembuf activate = {RCV_CONNECT, -1, 0};
+	cond = semop(semid, &activate, 1);
 	OUT("# Activated\n");
 
-	PFS(semid, 5);
-	cond = semop(semid, &mutexes[2], 2);
+	struct sembuf mutexes[3] = {
+		{SND_MUTEX, -1, 0},
+		{RCV_MUTEX,  1, 0},
+		{RCV_MUTEX,  0, 0}
+	};
+	long* nbytes_to_save = smbuf + BUF_SIZE;
+
+	cond = semop(semid, &mutexes[2], 1);
+	CHECK(cond == 0, "Failed to set semaphors");
 
 	while (*nbytes_to_save != -1)
 	{
@@ -83,20 +77,18 @@ int receive()
 
 		CHECK(cond == *nbytes_to_save, "Printed ammount of bytes isn't valid");
 		OUT("# Getting...\n");
-		cond = semop(semid, &mutexes[0], 2);
-		cond = semop(semid, &mutexes[2], 2);
-		if (cond == -1)
-		{
-			printf("Sender dead\n");
-			goto RECEIVE_CLOSING;
-		}
+		cond = semop(semid, &mutexes[1], 1);
+		cond = semop(semid, &mutexes[0], 1);
+		OUT1("# Current SND_MUTEX is %d\n", semctl(semid, SND_MUTEX, GETVAL));
+		OUT1("# Current RCV_MUTEX is %d\n", semctl(semid, RCV_MUTEX, GETVAL));
+		
+		cond = semop(semid, &mutexes[2], 1);
 		OUT("# Got package\n");
 		CHECK(cond == 0, "Failed to set semaphors");
 	};
 
 	OUT("# Finishing receiving\n");
 	semop(semid, &mutexes[0], 1);
-RECEIVE_CLOSING:
 	unlink(RCV_FLAG);
 	semctl(flagid, 0, IPC_RMID);
 
@@ -117,9 +109,9 @@ int send(const char* filename)
 	void* smbuf = get_memptr( FILE_NAME_SHMEM_ATTACH,
 				  BUF_SIZE + sizeof(long),
 				  &shmemid);
-	
 	CHECK(smbuf != (void*)-1, "Failed to get shared memory pointer");
 	long* nbytes_to_save = smbuf + BUF_SIZE;
+	*nbytes_to_save = 0;
 
 	CHECK(smbuf != (void*)-1, "Failed to get memory pointer");
 
@@ -131,52 +123,38 @@ int send(const char* filename)
 
 	int fileid = open(filename, O_RDONLY);
 	CHECK(fileid != -1, "Failed to open file to send");
-	struct sembuf rcv_activate[3] = {
+
+	struct sembuf rcv_activate[2] = {
 		{RCV_MUTEX,   1, 0},
-		{RCV_CONNECT, 1, 0},
-		{RCV_CONNECT, 0, 0}
+		{RCV_CONNECT, 1, 0}
 		};
-	PFS(semid, 5);
-	cond = semop(semid,  rcv_activate,    2);
-	PFS(semid, 5);
-	cond = semop(semid, &rcv_activate[2], 1);
+	cond = semop(semid, rcv_activate, 2);
 	CHECK(cond != -1, "Failed to connect to receiver");
 
-	struct sembuf mutexes[4] = {
+	struct sembuf mutexes[3] = {
 		{SND_MUTEX,  1, 0},
 		{RCV_MUTEX, -1, 0},
-		{RCV_DIED,   0, IPC_NOWAIT},
 		{SND_MUTEX,  0, 0}
-		
 	};
 	int nbytes = 0;
 	while ((nbytes = read(fileid, smbuf, BUF_SIZE)) > 0)
 	{
 		*nbytes_to_save = nbytes;
-		OUT1("# Sending %ld bytes\n", *nbytes_to_save);
-		cond = semop(semid, &mutexes[0], 2);
-		cond = semop(semid, &mutexes[2], 2);
-		if (cond == -1)
-		{
-			printf("Receiver dead\n");
-			goto SENDER_CLOSING;
-		}
+		OUT("# Sending\n");
+		cond = semop(semid, &mutexes[0], 1);
+		cond = semop(semid, &mutexes[1], 1);
+		cond = semop(semid, &mutexes[2], 1);
 		CHECK(cond == 0, "# Failed to set semaphors");
 		OUT("# Package sent\n");
 	}
 
 	OUT("# Finishing...\n");
 	*nbytes_to_save = -1;
-	cond = semop(semid, &mutexes[0], 2);
-	cond = semop(semid, &mutexes[2], 2);
-	if (cond == -1)
-	{
-		printf("Receiver dead\n");
-		goto SENDER_CLOSING;
-	}
+	cond = semop(semid, &mutexes[0], 1);
+	cond = semop(semid, &mutexes[1], 1);
+	cond = semop(semid, &mutexes[2], 1);
 	OUT("# Finished!\n");
 
-SENDER_CLOSING:
 	cond = snd_clean(semid, fileid, shmemid, flagid);
 	exit(EXIT_SUCCESS);
 }
@@ -237,11 +215,6 @@ int is_receiver(int* semflag)
 //===================================================================================
 //===================================================================================
 
-/*
-*	@brief		This is a function of parallel thread for sender and receiver. The aim is to
-*			terminate current process if another side is dead.
-*
-*/
 void* kill_if_died(void* ptr)
 {
 	struct Wait_for* waiting_sem = (struct Wait_for*)ptr;
@@ -267,16 +240,34 @@ int snd_protect_connection(int semid)
 {
 	struct sembuf snd_ifdie     = {	SND_DIED,
 					1,
-					0};
-	struct sembuf snd_ifdie2    = {	SND_DIED,
-					-1,
 					SEM_UNDO};
-	int cond = semop(semid, &snd_ifdie,  1);
+	struct sembuf rcv_ifdie     = {	RCV_DIED,
+					1,
+					0};
+	struct sembuf rcv_connect   = {	RCV_CONNECT,
+					1,
+					0};
+	int cond = semop(semid, &snd_ifdie, 1);
 	CHECK(cond == 0, "Failed to set SND_IFDIE semaphor");
-	    cond = semop(semid, &snd_ifdie2, 1);
-	CHECK(cond == 0, "Failed to set SND_IFDIE semaphor");
-	// cond = semop(semid, &rcv_connect, 1);
-	// CHECK(cond == 0, "Failed to set connection semaphor");
+	    cond = semop(semid, &rcv_ifdie, 1);
+	CHECK(cond == 0, "Failed to set RCV_IFDIE semaphor");
+
+	pthread_t wait_for_rcv_death;
+	struct Wait_for* rcv = calloc(1, sizeof(struct Wait_for));
+	assert(rcv);
+	rcv -> semid 	= semid;
+	rcv -> num   	= RCV_DIED;
+	rcv -> msg	= "\n# Receiver died\n";
+
+	OUT1("Thrown %p\n", rcv);
+	cond = pthread_create(  &wait_for_rcv_death, 
+				NULL, 
+				kill_if_died, 
+				(void*)(rcv));
+	CHECK(cond == 0, "Failed to create waiting thread");
+
+	cond = semop(semid, &rcv_connect, 1);
+	CHECK(cond == 0, "Failed to set connection semaphor");
 
 	return 0;
 }
@@ -284,12 +275,23 @@ int snd_protect_connection(int semid)
 int rcv_protect_connection(int semid)
 {
 	struct sembuf sem_undo_zero[2] = {	
-		{RCV_DIED,   1, 0},
-		{RCV_DIED,  -1, SEM_UNDO}};
-	int cond = semop(semid, &sem_undo_zero[0], 1);
+		{RCV_DIED, -1, 0},
+		{RCV_DIED,  1, SEM_UNDO}};
+	int cond = semop(semid, sem_undo_zero, 2);
 	CHECK(cond == 0, "Failed to set RCV_DIED to undo mode");
-	    cond = semop(semid, &sem_undo_zero[1], 1);
-	CHECK(cond == 0, "Failed to set RCV_DIED to undo mode");
+
+	pthread_t wait_for_snd_death;
+	struct Wait_for* snd = calloc(1, sizeof(struct Wait_for));
+	assert(snd);
+	snd -> semid 	= semid;
+	snd -> num   	= SND_DIED;
+	snd -> msg	= "\n# Sender died\n";
+
+	cond = pthread_create(  &wait_for_snd_death, 
+				NULL, 
+				kill_if_died, 
+				(void*)(snd));
+	CHECK(cond == 0, "Failed to create waiting thread");
 
 	return 0;
 }
@@ -337,16 +339,8 @@ int get_sems(const char* filename, int num)
 	key_t file_key = ftok(filename, 1);
 	CHECK(file_key != -1, "Failed to get System V key");
 	OUT3("# File key: %d\n# Number: %d\n# Flag: %o\n", file_key, num, IPC_CREAT | 0660);
-	int sem_id = semget(file_key, num, IPC_CREAT | IPC_EXCL | 0660);
-	if (sem_id == -1)
-		return semget(file_key, num, IPC_CREAT | 0660);
-
-	int cond = 0;
-	for (int i = 0; i < num; ++i)
-	{
-		cond = semctl(sem_id, i, SETVAL, 0);
-		CHECK(cond != -1, "Failed to initialize semaphor array");
-	}
+	int sem_id = semget(file_key, num, IPC_CREAT | 0660);	
+	CHECK(sem_id != -1, "Failed to get semaphor id from System V key");
 	return sem_id;
 }
 
@@ -366,22 +360,14 @@ void* get_memptr(const char* filename, size_t size, int* id_to_save)
 		printf("Failed to create file [%s]\n", filename);
 	CHECK(cond != -1 || (cond == -1 && errno == EEXIST), "Unexpected error during sharing memory file creation");
 
-	int need_to_init = 0;
 	int shared_id = set_memory(filename, 
-		    		   size,
-		    		   &need_to_init);
+		    		   size);
 	CHECK(shared_id != -1, "Failed to get shared memory");
 	void* shm_ptr = shmat(shared_id, NULL, 0);
-	OUT1("NBytes = [%ld]\n", *(long*)(shm_ptr + BUF_SIZE));
-	OUT1("# Shared memory pointer [%p]\n", shm_ptr);
 	CHECK(shm_ptr != (void*) -1, "Failed to get pointer from share memory id");
-	*id_to_save = shared_id;
-
-	if (need_to_init == 0)
-		return shm_ptr;
 	memset(shm_ptr, size, 0);
 
-	
+	*id_to_save = shared_id;
 	return shm_ptr;
 }
 
@@ -390,19 +376,17 @@ void* get_memptr(const char* filename, size_t size, int* id_to_save)
 //===================================================================================
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE return -1;
-int set_memory(const char* filename, size_t size, int* need_to_init)
+int set_memory(const char* filename, size_t size)
 {
 	assert(filename);
 	assert(size);
 
 	key_t file_key = ftok(filename, 1);
 	CHECK(file_key != -1, "Failed to get System V key");
-	OUT2("# Shared memory creation key [%d], name [%s]\n", file_key, filename);
-	int memid = shmget(file_key, size, IPC_CREAT |IPC_EXCL| 0660);
-	if (memid == -1)
-		return shmget(file_key, size, IPC_CREAT | 0660);
-	*need_to_init = 1;
-	OUT1("# Shared memory ID [%d]\n", memid);
+
+	int memid = shmget(file_key, size, IPC_CREAT | 0660);
+	CHECK(memid != -1, "Failed to get memory id from System V key");
+
 	return memid;
 }	
 
