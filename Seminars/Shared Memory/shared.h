@@ -89,12 +89,14 @@
 #define F_WARN(stream, cond, msg)			\
 if (!(cond))						\
 {							\
-	fprintf(stream, "WARNING\n");			\
+	fprintf(stream, "WARNING>>>>\n");		\
 	F_LOCATION(stream);				\
 	fprintf(stream, "Message:  %s\n", msg);		\
 	fflush(stream);					\
 	perror("ERRNO\t\t");				\
 	fputc('\n', stream);				\
+	fprintf(stream, ">>>>>>>>>>>\n");		\
+	fflush(stream);					\
 }							\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
@@ -108,17 +110,25 @@ if (!(cond))						\
 const char* FILE_NAME_SHMEM_ATTACH = "SHARING.tmp";
 const char* SND_FLAG		   = "SENDING.tmp";
 const char* RCV_FLAG		   = "RECEIVING.tmp";
-#define		BUF_SIZE	  (4 * 1024 * 1024)
-#define		PAGESIZE	  getpagesize()
+const long  BUF_SIZE 		   = 4 * 1024 * 1024;
+const long  BUF_SIZE_W_NBYTES	   = 4 * 1024 * 1024 + sizeof(long);
+
+//#define		BUF_SIZE	  	(4 * 1024 * 1024)
+//#define 	BUF_SIZE_WITH_NBYTES	(4 * 1024 * 1024 + sizeof())
+#define		PAGESIZE	  	getpagesize()
 
 enum SHARING_SEMAPHORS
 {
-	SND_DIED = 0,
-	SND_FINISHED,
+	SND_FINISHED= 0,
+};
+
+enum SENDING_SEMS
+{
+	SND_MUTEX,
+	RCV_MUTEX,
+	SND_DIED,
 	RCV_DIED,
 	RCV_CONNECT,
-	SND_MUTEX,
-	RCV_MUTEX
 };
 
 //===============================================================================================================
@@ -136,9 +146,9 @@ int send(const char* filename);
 
 int receive();
 
-int is_sender();
+int is_sender(int*);
 
-int is_receiver();
+int is_receiver(int*);
 
 void* kill_if_died(void* ptr);
 
@@ -146,7 +156,7 @@ int snd_protect_connection(int semid);
 
 int rcv_protect_connection(int semid);
 
-int snd_clean(int semid, int fileid, int shmemid);
+int snd_clean(int semid, int fileid, int shmemid, int flagid);
 
 int get_sems(const char* filename, int num);
 
