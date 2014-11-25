@@ -30,7 +30,7 @@
 //			Macroses
 //===============================================================================================================
 
-#define DEBUG
+//#define DEBUG
 
 #define F_LOCATION(stream)			\
 	fprintf(stream, "File:     %s\n"	\
@@ -68,6 +68,21 @@
 
 #endif
 
+enum ERROR_MESSAGES
+{
+	IVPTRNULL,
+	IVFOPENFAIL,
+	IVINVALPID,
+	IVNEGSIZE,
+};
+
+char const* iv_msgs[] = {
+	"Argumented pointer is null",
+	"Failed to open the file",
+	"Invalid pid",
+	"Size is below zero"
+};
+
 #define F_CHECK_EXIT_CODE
 
 #define F_CHECK(stream, cond, msg)				\
@@ -88,7 +103,8 @@
 	CHECK(!((var)##cond), msg);				\
 
 
-#define CHECK(cond, msg) F_CHECK(stdout, cond, msg)
+#define CHECK( cond, msg) F_CHECK(stdout, cond, msg)
+#define CHECKN(cond, index) CHECK(cond, iv_msgs[index])
 
 #define F_WARN(stream, cond, msg)			\
 if (!(cond))						\
@@ -105,26 +121,12 @@ if (!(cond))						\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
 
-enum ERROR_MESSAGES
-{
-	IVPTRNULL,
-	IVFOPENFAIL,
-	IVINVALPID,
-	IVNEGSIZE,
-};
-
-char const* iv_msgs[] = {
-	"Argumented pointer is null",
-	"Failed to open the file",
-	"Invalid pid",
-	"Size is below zero"
-};
 
 //===============================================================================================================
 //				Constants (Code dependant)
 //===============================================================================================================
 
-const unsigned long BUFSIZE 	= 4 * 1024 * 1024;
+#define BUFSIZE 	(4 * 1024 * 1024)
 const unsigned      BITSPERBYTE = 8;
 
 
@@ -138,15 +140,29 @@ void go_parent(pid_t child);
 
 int getbit(void* ptr, unsigned offset, unsigned bit_index);
 
-int send(pid_t dad, void* buf, long len);
+int writebit(char* buf, unsigned long index);
+
+int sendbit(pid_t dad, int bit, const sigset_t* now);
+
+int send(pid_t dad, void* buf, long len, const sigset_t* ignored);
 
 int child_sigterm_set();
+
+int child_sigusr1_set();
+
+void child_sigusr1_handler(int sigid);
+
+void child_sigterm_handler(int sigid);
 
 void clear_child();
 
 int parent_set_handlers(sigset_t blocked);
 
 int print_buf(char* buf, unsigned long nbits);
+
+int set_block_mask(sigset_t* blocked);
+
+int set_wait_mask(sigset_t* wait);
 
 
 //===============================================================================================================
