@@ -1,5 +1,5 @@
-#ifndef __SHARED_H
-#define __SHARED_H
+#ifndef __IVSIGNAL_H
+#define __IVSIGNAL_H
 
 //===============================================================================================================
 //			Headers
@@ -24,7 +24,7 @@
 #include <pthread.h>
 #include <string.h>
 #include <signal.h>
-#include <prctl.h>
+#include <sys/prctl.h>
 
 //===============================================================================================================
 //			Macroses
@@ -132,47 +132,31 @@ const unsigned      BITSPERBYTE = 8;
 //				Descriptions and prototypes (Code dependant)
 //===============================================================================================================
 
- #define PFS(semid, num)						\
- OUT1("[Line = %d] Printing flags...\n", __LINE__);			\
- for (int k = 0; k < num; ++k)						\
- {									\
- 	OUT2("[%d] - %d\n", k, semctl(semid, k, GETVAL));		\
- }									\
- OUT("\n");								\
+void go_child(char const* filename);
+
+void go_parent(pid_t child);
+
+int getbit(void* ptr, unsigned offset, unsigned bit_index);
+
+int send(pid_t dad, void* buf, long len);
+
+int child_sigterm_set();
+
+void clear_child();
+
+int parent_set_handlers(sigset_t blocked);
+
+int print_buf(char* buf, unsigned long nbits);
 
 
-struct Wait_for
-{
-	int semid;
-	int num;
-	char* msg;
-};
-
-int send(const char* filename);
-
-int receive();
-
-int is_sender(int*);
-
-int is_receiver(int*);
-
-void* kill_if_died(void* ptr);
-
-int snd_protect_connection(int semid);
-
-int rcv_protect_connection(int semid);
-
-int snd_clean(int semid, int fileid, int shmemid, int flagid);
-
-int get_sems(const char* filename, int num);
-
-void* get_memptr(const char* filename, size_t size, int* id_to_save);
-
-int set_memory(const char* filename, size_t size, int* need_to_init);
+//===============================================================================================================
+//				Globals
+//===============================================================================================================
 
 
 
 //===============================================================================================================
 //===============================================================================================================
+
 
 #endif

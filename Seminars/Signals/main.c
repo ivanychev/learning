@@ -182,9 +182,13 @@ void clear_child()
 void go_parent(pid_t child)
 {
 	sigset_t chld_look;
+	sigset_t blocked;
 	int cond = sigfillset(&chld_look);
+	    cond = sigfillset(&blocked);
 	CHECK(cond != -1, "Failed to set mask");
 	    cond = sigdelset( &chld_look, SIGCHLD);
-	CHECK(cond != -1, "Failed to set mask");
+	    cond = sigdelset( &chld_look, SIGUSR1);
+	    cond = sigdelset( &chld_look, SIGUSR2);
 
+	
 }
