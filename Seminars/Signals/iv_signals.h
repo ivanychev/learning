@@ -85,6 +85,8 @@ char const* iv_msgs[] = {
 
 #define F_CHECK_EXIT_CODE
 
+#ifdef DEBUG
+
 #define F_CHECK(stream, cond, msg)				\
 	if (!(cond))						\
 	{							\
@@ -98,6 +100,13 @@ char const* iv_msgs[] = {
 		exit(EXIT_FAILURE);				\
 	}							\
 
+#else
+
+#define F_CHECK(stream, cond, msg)
+
+#endif
+
+
 #define CALL(func, var, cond, msg)				\
 	var = func;						\
 	CHECK(!((var)##cond), msg);				\
@@ -105,6 +114,8 @@ char const* iv_msgs[] = {
 
 #define CHECK( cond, msg) F_CHECK(stdout, cond, msg)
 #define CHECKN(cond, index) CHECK(cond, iv_msgs[index])
+
+#ifdef define
 
 #define F_WARN(stream, cond, msg)			\
 if (!(cond))						\
@@ -117,7 +128,11 @@ if (!(cond))						\
 	fputc('\n', stream);				\
 	fprintf(stream, ">>>>>>>>>>>\n");		\
 	fflush(stream);					\
-}							\
+}	
+
+#else
+#define F_WARN(stream, condm msg)
+#endif						\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
 

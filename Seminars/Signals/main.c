@@ -4,7 +4,7 @@
 *	@author			Sergey Ivanychev
 *				DCAM MIPT, 376 group
 *	
-*	@version		v 0.1
+*	@version		v 0.1.1
 *
 */
 
@@ -125,10 +125,8 @@ int send(pid_t dad, void* buf, long len, const sigset_t* ignored)
 		for (int j = 0; j < BITSPERBYTE; j++)
 		{
 			bit  = getbit(buf, i, j);
-//			OUT1("[CHILD]  Got bit %d\n", bit);
 			cond = sendbit(dad, bit, ignored);
 			CHECK(cond != -1, "Failed to send bit");
-//			OUT2("[CHILD]  Sent bit, i = %d, j = %d\n", i, j);     //!!!!!
 		}
 	}
 	return 0;
