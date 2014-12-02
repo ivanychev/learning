@@ -124,7 +124,7 @@ int receive()
 	int write_cond = 0;
 	char buf[BUF_SIZE] = {};
 
-	while ((read_sz = read(fifo_id, buf, BUF_SIZE)) != 0)
+	while ((read_sz = reading(fifo_id, buf, BUF_SIZE)) != 0)
 	{
 			write_cond = write(STDOUT_FILENO, buf, read_sz);
 			CHECK(write_cond == read_sz, "Printed ammound isn't equal to")
