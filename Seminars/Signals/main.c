@@ -34,15 +34,20 @@ int main(int argc, char const *argv[])
 		printf("Invalid number of arguments. Terminating...\n");
 		exit(EXIT_FAILURE);
 	}
+	int cond = 0;
+	
+	sigset_t origin;
+	cond = sigfillset(&origin);
+	CHECK(cond != -1, "");
+	cond = sigprocmask(SIG_BLOCK, &origin, NULL);
+	CHECK(cond != -1, "");
+
 
 	pid_t ret = fork();
 	CHECK(ret != -1, "Failed to fork");
 
-	sigset_t origin;
-	int cond = sigfillset(&origin);
-	CHECK(cond != -1, "");
-	cond = sigprocmask(SIG_BLOCK, &origin, NULL);
-	CHECK(cond != -1, "");
+	if (ret == 0)
+		sleep(1);
 
 	if (ret == 0)
 		go_child(argv[1]);
@@ -85,12 +90,7 @@ void go_child(char const* filename)
 	OUT("[CHILD]  Prepared\n");
 
 	cond = sigsuspend(&ignored);
-//	sigaddset( &ignored, SIGUSR1);
-//	CHECK(cond != -1, "Failed to get signal");
 	OUT("[CHILD]  Receieved\n");
-	
-//	cond = sigprocmask(SIG_BLOCK, &ignored, NULL);
-//	CHECK(cond != -1, "Failed to set mask");
 
 	while ((cond = read(fileid, buf, BUFSIZE)) != 0)
 	{

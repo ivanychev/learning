@@ -1,12 +1,15 @@
 #include "shared.h"
 /**
- * @brief [brief description]
- * @details [long description]
+ * @brief 		Safe sending file via shared memory and semaphors
+ *  
+ * @details		If the first argument is empty, program works as a receiver, otherwise it
+ * 				sends the argumented file
  * 
- * @param argc [description]
- * @param argv [description]
+ * @mainpage
  * 
- * @return [description]
+ * @author		Sergey Ivanychev, DCAM MIPT, 376 group
+ * 
+ * @version		v. 1.02
  */
 
 
@@ -15,6 +18,7 @@
 //===================================================================================
 int main(int argc, char const *argv[])
 {
+	
 	if (argc > 1)
 		send(argv[1]);
 	else
@@ -36,7 +40,8 @@ void last_cleaner()
 //===================================================================================
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE last_cleaner();		//! See header for description
+#define F_CHECK_EXIT_CODE last_cleaner();		//! See header for description of F_CHECK_EXIT_CODE
+
 int receive()
 {
 	int flagid = 0;
@@ -64,7 +69,7 @@ int receive()
 		{RCV_MUTEX,   0, 0},
 		{RCV_CONNECT,-1, 0},		
 	};
-	long* nbytes_to_save = smbuf + BUF_SIZE;
+	long* nbytes_to_save = smbuf + BUF_SIZE;	
 	PFS(semid, 5);
 	cond = semop(semid, &mutexes[4], 1);
 	CHECK(cond != -1, "Failed to connect to sender");
@@ -96,7 +101,7 @@ int receive()
 
 	OUT("# Finishing receiving\n");
 	semop(semid, &mutexes[0], 1);
-RECEIVE_CLOSING:
+	RECEIVE_CLOSING:
 	unlink(RCV_FLAG);
 	semctl(flagid, 0, IPC_RMID);
 
@@ -114,9 +119,10 @@ int send(const char* filename)
 		exit(EXIT_SUCCESS);
 
 	int shmemid = 0;
-	void* smbuf = get_memptr( FILE_NAME_SHMEM_ATTACH,
-				  BUF_SIZE + sizeof(long),
-				  &shmemid);
+	void* smbuf = get_memptr( 
+					FILE_NAME_SHMEM_ATTACH,
+				  	BUF_SIZE + sizeof(long),
+				  	&shmemid);
 	
 	CHECK(smbuf != (void*)-1, "Failed to get shared memory pointer");
 	long* nbytes_to_save = smbuf + BUF_SIZE;
@@ -265,16 +271,26 @@ void* kill_if_died(void* ptr)
 #define F_CHECK_EXIT_CODE return -1;
 int snd_protect_connection(int semid)
 {
-	struct sembuf snd_ifdie     = {	SND_DIED,
+	struct sembuf snd_ifdie     = {	
+					SND_DIED,
 					1,
 					0};
-	struct sembuf snd_ifdie2    = {	SND_DIED,
+	struct sembuf snd_ifdie2    = {	
+					SND_DIED,
 					-1,
 					SEM_UNDO};
 	int cond = semop(semid, &snd_ifdie,  1);
 	CHECK(cond == 0, "Failed to set SND_IFDIE semaphor");
 	    cond = semop(semid, &snd_ifdie2, 1);
 	CHECK(cond == 0, "Failed to set SND_IFDIE semaphor");
+
+	struct sembuf unlock_mutex_ifdead[2] = {
+		{RCV_MUTEX, 1, SEM_UNDO},
+		{RCV_MUTEX, -1, 0}
+	};
+
+	cond = semop(semid, unlock_mutex_ifdead, 2);
+	CHECK(cond == 0, "Failed to set RCV_MUTEX lock");
 	// cond = semop(semid, &rcv_connect, 1);
 	// CHECK(cond == 0, "Failed to set connection semaphor");
 
@@ -290,6 +306,14 @@ int rcv_protect_connection(int semid)
 	CHECK(cond == 0, "Failed to set RCV_DIED to undo mode");
 	    cond = semop(semid, &sem_undo_zero[1], 1);
 	CHECK(cond == 0, "Failed to set RCV_DIED to undo mode");
+
+	struct sembuf unlock_mutex_ifdead[2] = {
+		{SND_MUTEX, 1, SEM_UNDO},
+		{SND_MUTEX, -1, 0}
+	};
+
+	cond = semop(semid, unlock_mutex_ifdead, 2);
+	CHECK(cond == 0, "Failed to set SND_MUTEX lock");
 
 	return 0;
 }

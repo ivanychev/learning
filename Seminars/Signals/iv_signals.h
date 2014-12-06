@@ -30,15 +30,15 @@
 //			Macroses
 //===============================================================================================================
 
-//#define DEBUG
+#define DEBUG
 
-#define F_LOCATION(stream)			\
+#define F_LOCATION(stream)				\
 	fprintf(stream, "File:     %s\n"	\
-			"Line:     %d\n"	\
-			"Function: %s\n",	\
-			__FILE__,		\
-			__LINE__,		\
-			__PRETTY_FUNCTION__);	\
+			"Line:     %d\n"			\
+			"Function: %s\n",			\
+			__FILE__,					\
+			__LINE__,					\
+			__PRETTY_FUNCTION__);		\
 	fflush(stream);			
 
 #define LOCATION F_LOCATION(stdout)
@@ -46,23 +46,23 @@
 							
 #ifdef 	DEBUG
 
-#define OUT(str) 					printf(str);			fflush(stdout);		
-#define OUT1(str, arg1)					printf(str, arg1);		fflush(stdout);
-#define OUT2(str, arg1, arg2)				printf(str, arg1, arg2);	fflush(stdout);
-#define OUT3(str, arg1, arg2, arg3)			printf(str, arg1, arg2, arg3);	fflush(stdout);
-#define LOC_OUT(str) 			LOCATION;	printf(str);			fflush(stdout);		
-#define LOC_OUT1(str, arg1)		LOCATION;	printf(str, arg1);		fflush(stdout);
-#define LOC_OUT2(str, arg1, arg2)	LOCATION;	printf(str, arg1, arg2);	fflush(stdout);
+#define OUT(str) 								printf(str);					fflush(stdout);		
+#define OUT1(str, arg1)							printf(str, arg1);				fflush(stdout);
+#define OUT2(str, arg1, arg2)					printf(str, arg1, arg2);		fflush(stdout);
+#define OUT3(str, arg1, arg2, arg3)				printf(str, arg1, arg2, arg3);	fflush(stdout);
+#define LOC_OUT(str) 				LOCATION;	printf(str);					fflush(stdout);		
+#define LOC_OUT1(str, arg1)			LOCATION;	printf(str, arg1);				fflush(stdout);
+#define LOC_OUT2(str, arg1, arg2)	LOCATION;	printf(str, arg1, arg2);		fflush(stdout);
 
 
 #else
 
-#define OUT(str)			if (0)		printf(str);
-#define OUT1(str, arg1)			if (0)		printf(str, arg1);
+#define OUT(str)					if (0)		printf(str);
+#define OUT1(str, arg1)				if (0)		printf(str, arg1);
 #define OUT2(str, arg1, arg2)		if (0)		printf(str, arg1, arg2);
 #define OUT3(str, arg1, arg2, arg3)	if (0)		printf(str, arg1, arg2, arg3);
-#define LOC_OUT(str) 			if (0)		printf(str);				
-#define LOC_OUT1(str, arg1)		if (0)		printf(str, arg1);	
+#define LOC_OUT(str) 				if (0)		printf(str);				
+#define LOC_OUT1(str, arg1)			if (0)		printf(str, arg1);	
 #define LOC_OUT2(str, arg1, arg2)	if (0)		printf(str, arg1, arg2);
 
 
@@ -118,20 +118,20 @@ char const* iv_msgs[] = {
 #ifdef define
 
 #define F_WARN(stream, cond, msg)			\
-if (!(cond))						\
-{							\
+if (!(cond))								\
+{											\
 	fprintf(stream, "WARNING>>>>\n");		\
-	F_LOCATION(stream);				\
-	fprintf(stream, "Message:  %s\n", msg);		\
-	fflush(stream);					\
-	perror("ERRNO\t\t");				\
-	fputc('\n', stream);				\
+	F_LOCATION(stream);						\
+	fprintf(stream, "Message:  %s\n", msg);	\
+	fflush(stream);							\
+	perror("ERRNO\t\t");					\
+	fputc('\n', stream);					\
 	fprintf(stream, ">>>>>>>>>>>\n");		\
-	fflush(stream);					\
+	fflush(stream);							\
 }	
 
 #else
-#define F_WARN(stream, condm msg)
+#define F_WARN(stream, condm, msg)
 #endif						\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
