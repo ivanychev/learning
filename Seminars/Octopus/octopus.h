@@ -33,43 +33,77 @@
 //				Constants (Code dependant)
 //===============================================================================================================
 
-#define BUFSIZE 	(4 * 1024 * 1024)
-const unsigned      BITSPERBYTE = 8;
+const unsigned 	BUFBLOCK    	= 1111;
+const unsigned  WRITEBUFSIZE	= 64 * 1024;
+const unsigned  READBUFSIZE	= 64 * 1024;
+const unsigned  BUFSIZE 	= 64 * 1024;
+const unsigned  BITSPERBYTE 	= 8;
+
+const int READ  = 0;
+const int WRITE = 1;
 
 
 //===============================================================================================================
 //				Descriptions and prototypes (Code dependant)
 //===============================================================================================================
 
-void go_child(char const* filename);
+typedef struct
+{
+	pid_t 	procid;
+	int 	to_read;
+	int 	to_write;
+	char*	buf;
+	long 	begin;
+	long 	end;
+	long 	contain;
+	long    size;
+	int     index;
+} tentacle;
 
-void go_parent(pid_t child);
+typedef struct 
+{
+	int 	to_read;
+	int 	to_write;
+	int 	index;
+} tentacle_in;
 
-int getbit(void* ptr, unsigned offset, unsigned bit_index);
+typedef struct
+{
+	int rw[2];
+} pipe_io;
 
-int writebit(char* buf, unsigned long index);
 
-int sendbit(pid_t dad, int bit, const sigset_t* now);
+int nonblock_ids(int kids_num, tentacle* kids_info);
 
-int send(pid_t dad, void* buf, long len, const sigset_t* ignored);
+int proceed(int kids_num, tentacle* kids_info);
 
-int child_sigterm_set();
+int transfer_operations(tentacle* kids_info, int kids_num, fd_set sndset, fd_set rcvset);
 
-int child_sigusr1_set();
+int read_from_tentacle(tentacle* reading);
 
-void child_sigusr1_handler(int sigid);
+int write_to_tentacle(tentacle* from, int writeid);
 
-void child_sigterm_handler(int sigid);
+int getsnd(	int kids_num, 
+		tentacle* kids_info, 
+		fd_set* sndset,
+		int* maxsndid);
 
-void clear_child();
+int getrcv(	int kids_num, 
+		tentacle* kids_info, 
+		fd_set* rcvset,
+		int* maxrcvid);
 
-int parent_set_handlers(sigset_t blocked);
+int activate_kids(int num, tentacle* kids_info, const char* filename);
 
-int print_buf(char* buf, unsigned long nbits);
+int close_pipes(int index, tentacle* kids_info);
 
-int set_block_mask(sigset_t* blocked);
+int create_bufs(int num, tentacle* kids);
 
-int set_wait_mask(sigset_t* wait);
+int first_kid_deal(tentacle* info, const char* filename);
+
+void tentacle_proceed(tentacle_in info);
+
+int get_long(long* save, const char* str);
 
 
 
