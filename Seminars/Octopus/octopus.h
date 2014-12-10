@@ -53,13 +53,25 @@ typedef struct
 	int 	to_read;
 	int 	to_write;
 	char*	buf;
+	long 	contain;
+	long    size;
+	int     index;
+} tentacle;
+
+/*
+typedef struct
+{
+	pid_t 	procid;
+	int 	to_read;
+	int 	to_write;
+	char*	buf;
 	long 	begin;
 	long 	end;
 	long 	contain;
 	long    size;
 	int     index;
 } tentacle;
-	
+ */	
 
 typedef struct 
 {
