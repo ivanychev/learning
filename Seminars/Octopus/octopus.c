@@ -14,10 +14,10 @@
 
 //================================= GLOBALS ============================================================================
 
-unsigned long long* TRANSFER_INFO = 0;
-const int SCANNED  = 0;
-const int WRITTEN  = 1;
-const int FINISHED = 2;
+// unsigned long long* TRANSFER_INFO = 0;
+// const int SCANNED  = 0;
+// const int WRITTEN  = 1;
+// const int FINISHED = 2;
 
 //================================= CODE ============================================================================
 
@@ -35,10 +35,10 @@ int main(int argc, char const *argv[])
 	tentacle* kids_info 	= (tentacle   *) calloc(kids_num, sizeof(tentacle));
 
 	CHECKN(kids_info, IVALLOCFAIL);
-	CALL(cond, activate_kids(kids_num, kids_info, filename), cond == 0, "Failed to activate kids");
-	CALL(cond, create_bufs(  kids_num, kids_info), cond == 0, "Failed to set buffers");
-	CALL(cond, nonblock_ids( kids_num, kids_info), cond == 0, "Failed to set pipes to nonblocking mode");
-	CALL(cond, proceed(kids_num, kids_info),       cond == 0, "Failed to send file");
+	CALL(cond, activate_kids(kids_num, kids_info, filename), cond == 0, 	"Failed to activate kids");
+	CALL(cond, create_bufs(  kids_num, kids_info), cond == 0, 		"Failed to set buffers");
+	CALL(cond, nonblock_ids( kids_num, kids_info), cond == 0, 		"Failed to set pipes to nonblocking mode");
+	CALL(cond, proceed(kids_num, kids_info),       cond == 0, 		"Failed to send file");
 
 	return 0;
 }
@@ -70,7 +70,7 @@ int activate_kids(int num, tentacle* kids_info, const char* filename)
 		CALL(cond, fork(), 	       cond >= 0, "Failed to fork");
 		if (cond == 0)
 		{
-			CALL(cond, shmdt(TRANSFER_INFO),      cond == 0, "Failed to detach shared memory segment");
+//			CALL(cond, shmdt(TRANSFER_INFO),      cond == 0, "Failed to detach shared memory segment");
 			CALL(cond, close(kid_read.rw[WRITE]), cond == 0, "Failed to close pipe");
 			CALL(cond, close(kid_write.rw[READ]), cond == 0, "Failed to close pipe");
 			CALL(cond, close_pipes(i, kids_info), cond == 0, "Failed to close pipes of parent");
@@ -105,6 +105,8 @@ int create_bufs(int num, tentacle* kids)
 		kids[i].buf = (char*)calloc((i + 1) * BUFBLOCK, 1);
 		CHECKN(kids[i].buf, IVALLOCFAIL);
 		kids[i].size    = (i + 1) * BUFBLOCK;
+		kids[i].read    = 0;
+		kids[i].written = 0;
 		kids[i].contain    = 0;
 	}
 
@@ -151,22 +153,24 @@ int proceed(int kids_num, tentacle* kids_info)
 	int    rcvmax = 0;
 
 	struct timeval timeout_copy = {
-		.tv_sec  = 2,
+		.tv_sec  = 1,
 		.tv_usec = 0
 	};
 
-	while (!(TRANSFER_INFO[FINISHED] && TRANSFER_INFO[SCANNED] == TRANSFER_INFO[WRITTEN]))
+	while (1)
 	{
 		getrcv(kids_num, kids_info, &rcvset, &rcvmax);
 		getsnd(kids_num, kids_info, &sndset, &sndmax);
 		int max    = (sndmax > rcvmax)? sndmax: rcvmax;
 		struct timeval timeout = timeout_copy;
 		int cond   = select(max + 1, &rcvset, &sndset, NULL, &timeout);
-		OUT3("[PARENT] After select FINISHED = %llu, SCANNED = %llu, WRITTEN = %llu\n", TRANSFER_INFO[FINISHED], TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN]);
+		// OUT3("[PARENT] After select FINISHED = %llu, SCANNED = %llu, WRITTEN = %llu\n", TRANSFER_INFO[FINISHED], TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN]);
 		
 		CHECK(cond >= 0, "Error while select()");
+		if (cond == 0 && kids_info[0].read == kids_info[kids_num - 1].written)
+			break;
 
-		CHECK(! (cond == 0 && !(TRANSFER_INFO[FINISHED] && TRANSFER_INFO[SCANNED] == TRANSFER_INFO[WRITTEN])), "Timeout expired but file hasn't been transfered");
+		// CHECK(! (cond == 0 && !(TRANSFER_INFO[FINISHED] && TRANSFER_INFO[SCANNED] == TRANSFER_INFO[WRITTEN])), "Timeout expired but file hasn't been transfered");
 		CALL(	cond, 
 			transfer_operations(kids_info, kids_num, sndset, rcvset),
 			cond == 0,
@@ -203,7 +207,7 @@ int transfer_operations(tentacle* kids_info, int kids_num, fd_set sndset, fd_set
 				write_to_tentacle(&kids_info[kids_num - 1], STDOUT_FILENO),
 				cond > 0,
 				"Failed to write to tentacle");
-			TRANSFER_INFO[WRITTEN] += cond;
+//			TRANSFER_INFO[WRITTEN] += cond;
 	}
 
 	return 0;
@@ -224,6 +228,7 @@ int read_from_tentacle(tentacle* reading)
 	OUT1("[READER] nbytes after  = %d\n", nbytes);
 	CHECK(nbytes > 0, "Failed to read from tentacle");
 	reading -> contain += nbytes;
+	reading -> read    += nbytes;
 	return nbytes;
 }
 
@@ -241,6 +246,7 @@ int write_to_tentacle(tentacle* from, int writeid)
 	CHECK(nbytes > 0, "Failed to write to tentacle");
 	memmove(where, &where[nbytes], from -> size - nbytes);
 	from -> contain -= nbytes;
+	from -> written += nbytes;
 
 	return nbytes;
 }
@@ -359,19 +365,19 @@ int first_kid_deal(tentacle* info, const char* filename)
 		fork(),
 		cond >= 0, 	
 		"Failed to fork");
-	CALL(	key,
-		ftok(filename, 1), 		
-		key != -1,	
-		"Failed to get key of the process");
-	CALL(	shmid, 		
-		shmget(key, 3 * sizeof(unsigned long long), IPC_CREAT | 0660), 
-		shmid != -1, 
-		"Failed to get shared memory segment");
-	CALL(	TRANSFER_INFO, 	
-		shmat(shmid, NULL, 0), 
-		TRANSFER_INFO != (void*)-1, 
-		"Failed to mount shared memory");
-	memset(TRANSFER_INFO, 0, 3 * sizeof(unsigned long long));
+	// CALL(	key,
+	// 	ftok(filename, 1), 		
+	// 	key != -1,	
+	// 	"Failed to get key of the process");
+	// CALL(	shmid, 		
+	// 	shmget(key, 3 * sizeof(unsigned long long), IPC_CREAT | 0660), 
+	// 	shmid != -1, 
+	// 	"Failed to get shared memory segment");
+	// CALL(	TRANSFER_INFO, 	
+	// 	shmat(shmid, NULL, 0), 
+	// 	TRANSFER_INFO != (void*)-1, 
+	// 	"Failed to mount shared memory");
+	// memset(TRANSFER_INFO, 0, 3 * sizeof(unsigned long long));
 
 	if (cond == 0)
 	{
@@ -413,32 +419,36 @@ void tentacle_proceed(tentacle_in info)
 		{
 			
 			cond = read (info.to_read,  buf, BUFSIZE);
+			if (info.index == 2)
+				sleep(30);
 			OUT2("[KID %d]  READ    %d bytes\n", info.index, cond);
 			if (cond <= 0)
 				abort();
 			cond = write(info.to_write, buf, cond);
+			// if (info.index == 2)
+			// 	sleep(1);
 			if (cond <= 0)
 				pause();
-			OUT2("[KID %d]  WRITTEN %d bytes\n", info.index, cond);
+//			OUT2("[KID %d]  WRITTEN %d bytes\n", info.index, cond);
 		}
 	while(1)
 	{
-		OUT4("[KID %d]  SCANNED = %llu, WRITTEN = %llu, FINISHED = %llu\n", info.index, TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN], TRANSFER_INFO[FINISHED]);
+//		OUT4("[KID %d]  SCANNED = %llu, WRITTEN = %llu, FINISHED = %llu\n", info.index, TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN], TRANSFER_INFO[FINISHED]);
 		CALL(cond, read (info.to_read,  buf, BUFSIZE), cond >= 0, "Child failed to read");
 
 		OUT2("[KID %d]  READ    %d bytes\n", info.index, cond);
-		TRANSFER_INFO[SCANNED] += cond;
+//		TRANSFER_INFO[SCANNED] += cond;
 		if (cond == 0)
 		{
 			
-			TRANSFER_INFO[FINISHED] = 1;
-			OUT4("[KID %d]  SCANNED = %llu, WRITTEN = %llu, FINISHED = %llu\n", info.index, TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN], TRANSFER_INFO[FINISHED]);
+//			TRANSFER_INFO[FINISHED] = 1;
+//			OUT4("[KID %d]  SCANNED = %llu, WRITTEN = %llu, FINISHED = %llu\n", info.index, TRANSFER_INFO[SCANNED], TRANSFER_INFO[WRITTEN], TRANSFER_INFO[FINISHED]);
 			OUT1("[KID %d]  FINISHED READING\n", info.index);	
 			pause();
 		}
 
 		CALL(cond, write(info.to_write, buf, cond),    cond > 0, "Child failed to write");
-		OUT2("[KID %d]  TRANSFER_INFO[WRITTEN] %d bytes\n", info.index, cond);
+//		OUT2("[KID %d]  TRANSFER_INFO[WRITTEN] %d bytes\n", info.index, cond);
 		
 	}
 }

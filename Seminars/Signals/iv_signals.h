@@ -63,7 +63,7 @@
 #define OUT3(str, arg1, arg2, arg3)	if (0)		printf(str, arg1, arg2, arg3);
 #define LOC_OUT(str) 				if (0)		printf(str);				
 #define LOC_OUT1(str, arg1)			if (0)		printf(str, arg1);	
-#define LOC_OUT2(str, arg1, arg2)	if (0)		printf(str, arg1, arg2);
+#define LOC_OUT2(str, arg1, arg2)		if (0)		printf(str, arg1, arg2);
 
 
 #endif
@@ -115,24 +115,24 @@ char const* iv_msgs[] = {
 #define CHECK( cond, msg) F_CHECK(stdout, cond, msg)
 #define CHECKN(cond, index) CHECK(cond, iv_msgs[index])
 
-#ifdef define
+#ifdef DEBUG
 
-#define F_WARN(stream, cond, msg)			\
-if (!(cond))								\
-{											\
-	fprintf(stream, "WARNING>>>>\n");		\
-	F_LOCATION(stream);						\
-	fprintf(stream, "Message:  %s\n", msg);	\
-	fflush(stream);							\
+#define F_WARN(stream, cond, msg)				\
+if (!(cond))							\
+{								\
+	fprintf(stream, "WARNING>>>>\n");			\
+	F_LOCATION(stream);					\
+	fprintf(stream, "Message:  %s\n", msg);			\
+	fflush(stream);						\
 	perror("ERRNO\t\t");					\
 	fputc('\n', stream);					\
-	fprintf(stream, ">>>>>>>>>>>\n");		\
-	fflush(stream);							\
+	fprintf(stream, ">>>>>>>>>>>\n");			\
+	fflush(stream);						\
 }	
 
 #else
 #define F_WARN(stream, condm, msg)
-#endif						\
+#endif								\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
 

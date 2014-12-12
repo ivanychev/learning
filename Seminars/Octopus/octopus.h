@@ -56,6 +56,8 @@ typedef struct
 	long 	contain;
 	long    size;
 	int     index;
+	long long read;
+	long long written;
 } tentacle;
 
 /*

@@ -69,37 +69,37 @@
 #define F_CHECK_EXIT_CODE
 
 #define F_CHECK(stream, cond, msg)					\
-	if (!(cond))									\
-	{												\
-		F_LOCATION(stream);							\
-		fprintf(stream, "Message:  %s\n", msg);		\
-		fflush(stream);								\
-		perror("ERRNO\t\t");						\
-		fputc('\n', stream);						\
-		F_CHECK_EXIT_CODE							\
-													\
-		exit(EXIT_FAILURE);							\
-	}												\
+	if (!(cond))							\
+	{								\
+		F_LOCATION(stream);					\
+		fprintf(stream, "Message:  %s\n", msg);			\
+		fflush(stream);						\
+		perror("ERRNO\t\t");					\
+		fputc('\n', stream);					\
+		F_CHECK_EXIT_CODE					\
+									\
+		exit(EXIT_FAILURE);					\
+	}								\
 
-#define CALL(func, var, cond, msg)			\
-	var = func;								\
-	CHECK(!((var)##cond), msg);				\
+#define CALL(func, var, cond, msg)					\
+	var = func;							\
+	CHECK(!((var)##cond), msg);					\
 
 
 #define CHECK(cond, msg) F_CHECK(stdout, cond, msg)
 
-#define F_WARN(stream, cond, msg)			\
+#define F_WARN(stream, cond, msg)					\
 if (!(cond))								\
-{											\
-	fprintf(stream, "WARNING>>>>\n");		\
+{									\
+	fprintf(stream, "WARNING>>>>\n");				\
 	F_LOCATION(stream);						\
-	fprintf(stream, "Message:  %s\n", msg);	\
+	fprintf(stream, "Message:  %s\n", msg);				\
 	fflush(stream);							\
-	perror("ERRNO\t\t");					\
-	fputc('\n', stream);					\
-	fprintf(stream, ">>>>>>>>>>>\n");		\
+	perror("ERRNO\t\t");						\
+	fputc('\n', stream);						\
+	fprintf(stream, ">>>>>>>>>>>\n");				\
 	fflush(stream);							\
-}											\
+}									\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
 
