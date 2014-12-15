@@ -139,10 +139,11 @@ int getbit(void* ptr, unsigned offset, unsigned bit_index)
 {
 	assert(ptr);
 	unsigned char that_byte = *((char*)ptr + offset);
-	that_byte >>= bit_index;
-	that_byte  &= (0x01);		// 0b00000001
-	return (int)that_byte;
+	that_byte  =  that_byte >> bit_index;
+	that_byte  =  that_byte & (0x01);
+	return  (int) that_byte;
 }
+
 
 int sendbit(pid_t dad, int bit, const sigset_t* now)
 {
@@ -154,13 +155,11 @@ int sendbit(pid_t dad, int bit, const sigset_t* now)
 		cond = kill(dad, SIGUSR1);
 		CHECK(cond != -1, "");
 		cond = sigsuspend(now);
-//		CHECK(cond != -1, "Failed to send a signal");
 		break;
 	case 1:
 		cond = kill(dad, SIGUSR2);
 		CHECK(cond != -1, "");
 		cond = sigsuspend(now);
-//		CHECK(cond != -1, "Failed to send a signal");
 		break;
 	default:
 		OUT1("Argumented bit is %d\n", bit);
@@ -300,22 +299,18 @@ int writebit(char* buf, unsigned long index)
 	unsigned long byte_offset = index / 8;
 	unsigned      bit_index   = index % 8;
 	unsigned char new_byte 	  = buf[byte_offset];
-	// OUT1("[PARENT] Index = %lu\n", index);
-	// OUT1("[PARENT] Was %hhx\n", new_byte);
-	// OUT1("[PARENT] Last bit = %d\n", global_last_bit);
 
 	new_byte = cicular_shift_right(new_byte, bit_index);
-//	OUT1("[PARENT] Shifted right      = %hhx\n", new_byte);	
-	new_byte = new_byte &  0xfe; // 0b11111110
-//	OUT1("[PARENT] Removed last       = %hhx\n", new_byte);
+
+	new_byte = new_byte &  0xfe;
+
 	new_byte = new_byte | ((unsigned char)global_last_bit);
-//	OUT1("[PARENT] Attached last read = %hhx\n", new_byte);
+
 	new_byte = cicular_shift_left(new_byte, bit_index);
-//	OUT1("[PARENT] Shifted left       = %hhx\n", new_byte);
+
 
 	buf[byte_offset] = new_byte;
-//	OUT1("[PARENT] Become %hhx\n", new_byte);
-//	getchar();
+
 	return 0;
 }
 

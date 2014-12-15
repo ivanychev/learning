@@ -142,9 +142,7 @@ int send(const char* filename)
 		{RCV_CONNECT, 1, 0},
 		{RCV_CONNECT, 0, 0}
 		};
-	PFS(semid, 5);
 	cond = semop(semid,  rcv_activate,    2);
-	PFS(semid, 5);
 	cond = semop(semid, &rcv_activate[2], 1);
 	CHECK(cond != -1, "Failed to connect to receiver");
 
@@ -243,27 +241,6 @@ int is_receiver(int* semflag)
 //===================================================================================
 //===================================================================================
 
-/*
-*	@brief		This is a function of parallel thread for sender and receiver. The aim is to
-*			terminate current process if another side is dead.
-*
-*/
-void* kill_if_died(void* ptr)
-{
-	struct Wait_for* waiting_sem = (struct Wait_for*)ptr;
-	// printf("Caught %p\n", ptr);
-	assert(waiting_sem);
-	int semid =  waiting_sem -> semid;
-	// printf("Caught again%p\n", ptr);
-	struct sembuf s = {	waiting_sem -> num,
-				0,
-				0};
-	semop(semid, &s, 1);
-	OUT1("%s\n", waiting_sem -> msg);
-	last_cleaner();
-	exit(EXIT_FAILURE);
-}
-
 
 //===================================================================================
 //===================================================================================
@@ -291,8 +268,6 @@ int snd_protect_connection(int semid)
 
 	cond = semop(semid, unlock_mutex_ifdead, 2);
 	CHECK(cond == 0, "Failed to set RCV_MUTEX lock");
-	// cond = semop(semid, &rcv_connect, 1);
-	// CHECK(cond == 0, "Failed to set connection semaphor");
 
 	return 0;
 }
@@ -335,13 +310,6 @@ int snd_clean(int semid, int fileid, int shmemid, int flagid)
 	if (flagid >= 0)
 		semctl(flagid, 0, IPC_RMID);
 	unlink(SND_FLAG);
-/*
-	int key = ftok(SND_FLAG, 1);
-	int semflagid = semget(key, 1, IPC_CREAT | 0660);
-	
-	struct sembuf rm_flag = {0, -1, IPC_NOWAIT};
-	semop(semflagid, &rm_flag, 1);
-*/
 	return 0;
 }
 

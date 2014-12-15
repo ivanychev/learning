@@ -44,14 +44,25 @@
 							
 #ifdef 	DEBUG
 
-#define OUT(str) 								printf(str);					fflush(stdout);		
-#define OUT1(str, arg1)							printf(str, arg1);				fflush(stdout);
-#define OUT2(str, arg1, arg2)					printf(str, arg1, arg2);		fflush(stdout);
-#define OUT3(str, arg1, arg2, arg3)				printf(str, arg1, arg2, arg3);	fflush(stdout);
+#define OUT(str) 						printf(str);					fflush(stdout);		
+#define OUT1(str, arg1)						printf(str, arg1);				fflush(stdout);
+#define OUT2(str, arg1, arg2)					printf(str, arg1, arg2);			fflush(stdout);
+#define OUT3(str, arg1, arg2, arg3)				printf(str, arg1, arg2, arg3);			fflush(stdout);
 #define LOC_OUT(str) 				LOCATION;	printf(str);					fflush(stdout);		
 #define LOC_OUT1(str, arg1)			LOCATION;	printf(str, arg1);				fflush(stdout);
-#define LOC_OUT2(str, arg1, arg2)	LOCATION;	printf(str, arg1, arg2);		fflush(stdout);
+#define LOC_OUT2(str, arg1, arg2)		LOCATION;	printf(str, arg1, arg2);			fflush(stdout);
 
+/*
+CHECK(n != 1, "Error happened");
+
+if (n != 1)
+{
+	printf("Error happened");
+	perror("");
+	return -1;
+}
+*/
+ */
 
 #else
 
