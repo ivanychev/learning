@@ -1,24 +1,14 @@
--- Выбрать продавца, с максимальными комиссионными.
--- Выбрать зимний день, в который был продан товар на максимальную сумму в Нью Йорке
--- Выбрать самый эффективный отдел продаж - лучшее соотношение количество работников/сумма продаж
--- Выбрать среднюю зарплату сотрудника компании, учитывая комиссионные.
+declare @max_date int;
+declare @min_date int;
 
-declare @max_commission INT;
+select @max_date = max(employee.hire_date)
+from employee
 
- 
-set @max_commission = (select max(commission)
-from EMPLOYEE);
+select @min_date = min(employee.hire_date)
+from employee
 
-select first_name, last_name, commission
+select EMPLOYEE.last_name, EMPLOYEE.salary, EMPLOYEE.hire_date
 from EMPLOYEE
-where	commission is not null
-and		commission = @max_commission;
-
-
-
--- select first_name, last_name, commission
---    from employee
---    where	commission is not null
---    and		commission = 
--- 			(select max(commission)
--- 				from EMPLOYEE;);
+where EMPLOYEE.hire_date = @min_date
+or	  EMPLOYEE.hire_date = @max_date
+order by EMPLOYEE.hire_date desc

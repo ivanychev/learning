@@ -1,6 +1,6 @@
 -- Выбрать самый эффективный отдел продаж - лучшее соотношение количество работников/сумма продаж
 
-select top 1 DEPARTMENT.name, sum(SALES_ORDER.total)/count(distinct EMPLOYEE.employee_id)
+select top 1 DEPARTMENT.department_id, DEPARTMENT.name, sum(SALES_ORDER.total)/count(distinct EMPLOYEE.employee_id)
 from DEPARTMENT, EMPLOYEE, CUSTOMER, SALES_ORDER
 where	DEPARTMENT.department_id = EMPLOYEE.department_id
 and		EMPLOYEE.employee_id = CUSTOMER.salesperson_id

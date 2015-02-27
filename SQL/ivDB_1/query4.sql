@@ -1,4 +1,5 @@
--- Выбрать среднюю зарплату сотрудника компании, учитывая комиссионные.
+п»ї-- Р’С‹Р±СЂР°С‚СЊ СЃСЂРµРґРЅСЋСЋ Р·Р°СЂРїР»Р°С‚Сѓ СЃРѕС‚СЂСѓРґРЅРёРєР° РєРѕРјРїР°РЅРёРё, СѓС‡РёС‚С‹РІР°СЏ РєРѕРјРёСЃСЃРёРѕРЅРЅС‹Рµ.
+use King_Corp
 
 select	DEPARTMENT.department_id, 
 		(sum(distinct EMPLOYEE.salary) + sum(all EMPLOYEE.commission * SALES_ORDER.total))/count(distinct EMPLOYEE.employee_id) as average
