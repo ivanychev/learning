@@ -8,5 +8,6 @@ and		EMPLOYEE.employee_id = CUSTOMER.salesperson_id
 and		CUSTOMER.customer_id = SALES_ORDER.customer_id
 and		LOCATION.regional_group = 'NEW YORK'
 and		MONTH(SALES_ORDER.order_date) in (12, 1, 2)
+
 group by SALES_ORDER.order_date
 order by sum(SALES_ORDER.total) desc;

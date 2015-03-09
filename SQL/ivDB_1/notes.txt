@@ -78,3 +78,32 @@ SELECT COUNT(distinct owner)
 
 FROM tasks
 Здесь вычисляется кол-во человек(без дублей), участвующих в таблице заданий
+
+
+
+Функция SUBSTRING(s,n,l) выделяет из
+строки s подстроку длиной l , начиная с позиции n.
+
+
+
+
+ОКРУГЛЕНИЯ
+
+ROUND ( numeric_expression , length [ ,function ] )
+
+length - Точность, с которой должно быть округлено значение выражения numeric_expression. Когда аргумент length является положительным числом, numeric_expression округляется до числа десятичных разрядов, указанных в аргументе length. Когда length является отрицательным числом, numeric_expression округляется слева от точки, отделяющей десятичную дробь от целого числа, как указано в length.
+
+CEILING ( numeric_expression ) - округление вверх
+
+FLOOR ( numberic_expression) - округление вниз
+
+
+
+DATETIME
+
+DAY(date), MONTH(date), YEAR(date)
+
+DATEDIFF ( datepart , startdate , enddate ) - Возвращает количество пересеченных границ (целое число со знаком), указанных аргументом datepart, за период времени, указанный аргументами startdate и enddate.
+
+GETDATE() - возврат текущей даты
+

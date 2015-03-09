@@ -26,4 +26,4 @@ set @comission_sum =
 			group by EMPLOYEE.employee_id) saler_comm_table
 )
 
-print (isnull(@salary_sum, 0) + isnull(@comission_sum, 0))/@employees
+select (isnull(@salary_sum, 0) + isnull(@comission_sum, 0))/@employees
