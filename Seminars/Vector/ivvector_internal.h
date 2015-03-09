@@ -39,6 +39,7 @@ for (index = 0, cursor = vecptr->begin;							 \
 do{						\
 	if (!__vector_iter_check(iter_ptr))	\
 		return -1;			\
+	VECTOR_CHECK(iter_ptr->ptr);		\
 } while (0);	
 
 #define VECTOR_CHECK(vec_ptr)			\

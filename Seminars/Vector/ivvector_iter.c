@@ -30,6 +30,8 @@ int vector_iter_del(vector_iter* this)
 	this -> ptr   =        NULL;
 	this -> index =        IV_POISON;
 	iv_free(this);
+	this = NULL;
+
 	return 0;
 }
 
@@ -42,6 +44,7 @@ int vector_iter_del(vector_iter* this)
 int vector_iter_next(vector_iter* this, void* dest)
 {
 	ITER_CHECK(this);
+
 	if (this->ptr->size == 0)
 		return 0;
 
@@ -165,7 +168,9 @@ int vector_iter_isend(const vector_iter* this)
 
 void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))
 {
-	if (!__vector_iter_check(iter))
+	fprintf(stderr, "Hello!");
+	if (!__vector_iter_check(iter) || !__vector_check(iter->ptr) || !proceed)
 		return NULL;
+	__vector_dump(iter->ptr);
 	return proceed(__elem_ptr(iter->ptr, iter->index), args);
 }

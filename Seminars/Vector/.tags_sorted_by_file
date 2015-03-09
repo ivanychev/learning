@@ -17,7 +17,10 @@ __alloc_more	ivvector.c	/^static int __alloc_more(vector* this)$/;"	f	file:
 __optimize_alloc	ivvector.c	/^static int __optimize_alloc(vector* this)$/;"	f	file:
 __vector_eliminate_all_and_free	ivvector.c	/^static void __vector_eliminate_all_and_free(vector* this)$/;"	f	file:
 __vector_init	ivvector.c	/^vector* __vector_init(uint32 size, void (*destr)(void* obj))$/;"	f
-__vector_pushback	ivvector.c	/^int __vector_pushback (vector* this, const void* obj)$/;"	f
+__vector_popback	ivvector.c	/^int __vector_popback  (vector* this, void* dest)$/;"	f
+__vector_popfront	ivvector.c	/^int __vector_popfront (vector* this, void* dest)$/;"	f
+__vector_pushback	ivvector.c	/^inline int __vector_pushback (vector* this, const void* obj)$/;"	f
+__vector_pushfront	ivvector.c	/^inline int __vector_pushfront(vector* this, const void* obj)$/;"	f
 vector_alloc	ivvector.c	/^uint32 vector_alloc(const vector* this)$/;"	f
 vector_delete	ivvector.c	/^int vector_delete(vector* this)$/;"	f
 vector_empty	ivvector.c	/^int vector_empty(const vector* this)$/;"	f
@@ -31,18 +34,21 @@ vector_remove	ivvector.c	/^int vector_remove(vector* this, uint32 index)$/;"	f
 vector_set	ivvector.c	/^int vector_set(vector* this, uint32 index, void* what_to_send)$/;"	f
 vector_size	ivvector.c	/^uint32 vector_size(const vector* this)$/;"	f
 vector_sort	ivvector.c	/^int vector_sort(vector* this, int (*comp)(const void*, const void*))$/;"	f
-CHECK_SIZE	ivvector.h	51;"	d
-CHECK_SIZE	ivvector.h	53;"	d
+CHECK_SIZE	ivvector.h	54;"	d
+CHECK_SIZE	ivvector.h	56;"	d
 IV_VECTOR	ivvector.h	2;"	d
+int32	ivvector.h	/^typedef  int32_t  int32;$/;"	t
+int64	ivvector.h	/^typedef  int64_t  int64;$/;"	t
 uint32	ivvector.h	/^typedef uint32_t uint32;$/;"	t
 uint64	ivvector.h	/^typedef uint64_t uint64;$/;"	t
 vector	ivvector.h	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s
-vector_init	ivvector.h	22;"	d
+vector_init	ivvector.h	25;"	d
 vector_iter	ivvector.h	/^typedef struct vector_iter_s vector_iter;$/;"	t	typeref:struct:vector_iter_s
-vector_popback	ivvector.h	70;"	d
-vector_popfront	ivvector.h	73;"	d
-vector_pushback	ivvector.h	64;"	d
-vector_pushfront	ivvector.h	67;"	d
+vector_popback	ivvector.h	73;"	d
+vector_popfront	ivvector.h	76;"	d
+vector_pushback	ivvector.h	67;"	d
+vector_pushfront	ivvector.h	70;"	d
+BYTES_IN_ELEMS	ivvector_internal.h	57;"	d
 FOR_EACH	ivvector_internal.h	32;"	d
 IN_BOUNDS	ivvector_internal.h	55;"	d
 ITER_CHECK	ivvector_internal.h	38;"	d
@@ -76,6 +82,7 @@ vector_iter_isend	ivvector_iter.c	/^int vector_iter_isend(const vector_iter* thi
 vector_iter_next	ivvector_iter.c	/^int vector_iter_next(vector_iter* this, void* dest)$/;"	f
 vector_iter_prev	ivvector_iter.c	/^int vector_iter_prev(vector_iter* this, void* dest)$/;"	f
 vector_iter_setelem	ivvector_iter.c	/^int vector_iter_setelem(vector_iter* this, const void* src)$/;"	f
+CONDITION	ivvector_utils.c	5;"	d	file:
 __copy_elem	ivvector_utils.c	/^inline void __copy_elem(const vector* this, uint32 index, void* dest)$/;"	f
 __elem_ptr	ivvector_utils.c	/^inline void* __elem_ptr(const vector* this, uint32 index)$/;"	f
 __set_elem	ivvector_utils.c	/^inline void __set_elem(vector* this, uint32 index, const void* src)$/;"	f
@@ -304,4 +311,9 @@ kool_list	list_subject.c	/^struct kool_list{$/;"	s	file:
 list	list_subject.c	/^	struct list_head list;$/;"	m	struct:kool_list	typeref:struct:kool_list::list_head	file:
 main	list_subject.c	/^int main(int argc, char **argv){$/;"	f
 to	list_subject.c	/^	int to;$/;"	m	struct:kool_list	file:
+POINT	try.c	4;"	d	file:
+big_tester	try.c	/^void big_tester()$/;"	f
+int_destructor	try.c	/^void int_destructor(void* obj)$/;"	f
+int_do	try.c	/^void* int_do(void* obj, void* args)$/;"	f
+int_sort	try.c	/^int int_sort(const void* p1, const void* p2)$/;"	f
 main	try.c	/^int main(int argc, char const *argv[])$/;"	f

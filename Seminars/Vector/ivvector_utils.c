@@ -2,7 +2,7 @@
 #include "ivvector_internal.h"
 #include "stdio.h"
 
-#define CONDITION 0
+#define CONDITION (rand() % 3 != 0)
 
 
 
@@ -16,12 +16,16 @@ inline void* iv_calloc(size_t nmemb, size_t size)
 inline void iv_free(void* ptr)
 {
 	free(ptr);
+	ptr = NULL;
 }
 
 inline void* iv_realloc(void* ptr, size_t size)
 {
 	if (CONDITION)
 		return realloc(ptr, size);
+	free(ptr);
+	ptr = NULL;
+
 	return NULL;
 }
 
@@ -134,8 +138,9 @@ void __vector_dump(const vector* this)
 			this->begin,
 			this->destr);
 // DELETE THIS
-		for (uint32 i = 0; i < this -> size; ++i)
-			printf("%d ", ((int*)(this->begin))[i]);
+		if (this->begin != NULL)
+			for (uint32 i = 0; i < this -> size; ++i)
+				printf("%d ", ((int*)(this->begin))[i]);
 		putchar('\n');
 }
 
@@ -147,12 +152,17 @@ void __vector_dump(const vector* this)
  */
 inline void* __elem_ptr(const vector* this, uint32 index)
 {
+	// fprintf(stderr, "this->begin = [%p], index = %"PRIu32", this->esize = %"PRIu32"\n", 
+	// 	this->begin, index, this->esize);
 	return (void*)( (unsigned long)(this->begin) + 
-			(unsigned long)index * this->esize);
+			BYTES_IN_ELEMS(this, index));
 }
 
 inline void __copy_elem(const vector* this, uint32 index, void* dest)
 {
+	 fprintf(stderr, "this = [%lu], index = %"PRIu32", from = [%lu], dest = [%p]", 
+	 	(unsigned long)this, index, (unsigned long)__elem_ptr(this, index), dest);
+	
 	memmove(dest, __elem_ptr(this, index), this->esize);
 }
 
