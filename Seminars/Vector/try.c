@@ -37,7 +37,7 @@ void big_tester()
 {
 	vector_init(first, int, int_destructor);
 
-fprintf(stderr, ">>>>>>>0\n");
+//fprintf(stderr, ">>>>>>>0\n");
 //	Testing insert and erase
 
 	int a1 =  1;
@@ -54,7 +54,7 @@ fprintf(stderr, ">>>>>>>0\n");
 	vector_pushback (first, &a3);
 	POINT;
 	vector_pushback (first, &a4);
-fprintf(stderr, ">>>>>>>1\n");
+//fprintf(stderr, ">>>>>>>1\n");
 	__vector_dump(first);
 
 	vector_insert(first, &a32, 2);
@@ -62,18 +62,18 @@ fprintf(stderr, ">>>>>>>1\n");
 
 	vector_erase(first);
 	__vector_dump(first);
-fprintf(stderr, ">>>>>>>2\n");
+//fprintf(stderr, ">>>>>>>2\n");
 	vector_pushfront(first, &a2);
 	vector_pushfront(first, &a1);
 	vector_pushback (first, &a3);
 	vector_pushback (first, &a4);
 	__vector_dump(first);
-fprintf(stderr, ">>>>>>>3\n");
+//fprintf(stderr, ">>>>>>>3\n");
 	vector_insert(first, &a32, 2);
 	__vector_dump(first);
 	vector_remove(first, 1);
 	__vector_dump(first);
-fprintf(stderr, ">>>>>>>4\n");
+//fprintf(stderr, ">>>>>>>4\n");
 //	Testing sort
 	__vector_dump(first);
 	vector_sort(first, int_sort);
@@ -84,7 +84,7 @@ fprintf(stderr, ">>>>>>>4\n");
 	vector_get(first, 0, &temp);
 	printf("%d\n", temp);
 	temp = 0;
-fprintf(stderr, ">>>>>>>5\n");
+//fprintf(stderr, ">>>>>>>5\n");
 	vector_set(first, 0, &temp);
 	__vector_dump(first);
 
@@ -96,7 +96,7 @@ fprintf(stderr, ">>>>>>>5\n");
 		vector_esize(first),
 		vector_maxsize(first),
 		vector_alloc(first));
-fprintf(stderr, ">>>>>>>6\n");
+//fprintf(stderr, ">>>>>>>6\n");
 //	Testing fit
 	vector_pushback(first, &a1);
 	vector_pushback(first, &a1);
@@ -105,7 +105,7 @@ fprintf(stderr, ">>>>>>>6\n");
 
 	vector_fit(first);
 	__vector_dump(first);	
-fprintf(stderr, ">>>>>>>7\n");
+//fprintf(stderr, ">>>>>>>7\n");
 //	Testing is empty
 	int is_empty = 0;
 	is_empty = vector_empty(first);
@@ -115,7 +115,7 @@ fprintf(stderr, ">>>>>>>7\n");
 
 	is_empty = vector_empty(first);
 	printf("%d\n", is_empty);
-fprintf(stderr, ">>>>>>>8\n");
+//fprintf(stderr, ">>>>>>>8\n");
 // 	Testing iterators
 
 	vector_iter* first_iter = vector_iter_get(first);
@@ -124,18 +124,19 @@ fprintf(stderr, ">>>>>>>8\n");
 	POINT1;
 	vector_iter_next(first_iter, &temp);
 	vector_iter_next(first_iter, &temp);
-fprintf(stderr, ">>>>>>>9\n");
+//fprintf(stderr, ">>>>>>>9\n");
 	printf("cond = %d, temp = %d\n", cond, temp);
 	vector_iter_prev(first_iter, NULL);
 	vector_iter_prev(first_iter, &temp);
 	printf("%d\n", temp);
-fprintf(stderr, ">>>>>>>10\n");
+//fprintf(stderr, ">>>>>>>10\n");
 	vector_pushfront(first, &a2);
 	vector_pushfront(first, &a1);
 	vector_pushback (first, &a3);
 	vector_pushback (first, &a4);
 	__vector_dump(first);
-fprintf(stderr, ">>>>>>>11\n");
+	vector_popfront(first, &a1);
+//fprintf(stderr, ">>>>>>>11\n");
 	vector_iter_begin(first_iter);
 	vector_iter_next(first_iter, &temp);
 	vector_iter_next(first_iter, &temp);
@@ -143,7 +144,7 @@ fprintf(stderr, ">>>>>>>11\n");
 	vector_iter_prev(first_iter, NULL);
 	vector_iter_prev(first_iter, &temp);
 	printf("%d\n", temp);
-fprintf(stderr, ">>>>>>>12\n");
+//fprintf(stderr, ">>>>>>>12\n");
 	vector_iter_getelem(first_iter, &temp);
 	printf("%d\n", temp);
 	temp = 100;
@@ -151,13 +152,13 @@ fprintf(stderr, ">>>>>>>12\n");
 	vector_iter_end(first_iter);
 	vector_iter_getelem(first_iter, &temp);
 	printf("%d\n", temp);
-fprintf(stderr, ">>>>>>>13\n");
+//fprintf(stderr, ">>>>>>>13\n");
 	__vector_dump(first);
 	printf("%d %d\n", 	vector_iter_isend (first_iter),
 				vector_iter_isbegin(first_iter));
 
 
-fprintf(stderr, ">>>>>>>14\n");
+//fprintf(stderr, ">>>>>>>14\n");
 	vector_iter_do(first_iter, NULL, int_do);
 
 // Testing optimization
@@ -170,7 +171,7 @@ fprintf(stderr, ">>>>>>>14\n");
 	vector_pushback (first, &a4);
 	vector_pushback (first, &a4);
 	__vector_dump(first);
-fprintf(stderr, ">>>>>>>15\n");
+//fprintf(stderr, ">>>>>>>15\n");
 
 	__vector_dump(first);
 	vector_popback (first, &a4);
@@ -180,14 +181,15 @@ fprintf(stderr, ">>>>>>>15\n");
 	
 
 	vector_insert(first, &a4, 100);
-
 	vector_get   (first, 100, &a4);
-fprintf(stderr, ">>>>>>>16\n");
+	vector_set   (first, 100, &a4);
+	vector_remove(first, 100);
+//fprintf(stderr, ">>>>>>>16\n");
 
 
-
+	__vector_iter_dump(first_iter);
 	vector_iter_del(first_iter);
-fprintf(stderr, ">>>>>>>17\n");
+//fprintf(stderr, ">>>>>>>17\n");
 
 /**/
 	vector_delete(first);
