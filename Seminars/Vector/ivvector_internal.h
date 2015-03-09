@@ -48,11 +48,13 @@ do{						\
 } while(0);		
 
 #define OFFSET_PTR(ptr, vector, number)		\
-((void*)((unsigned long)(ptr) + (unsigned long)((vector)->esize) * (number)))
+((void*)((long)(ptr) + (long)((vector)->esize) * (number)))
 #define NEXT_PTR(ptr, vector)	OFFSET_PTR(ptr, vector,  1)
 #define PREV_PTR(ptr, vector)	OFFSET_PTR(ptr, vector, -1)
 
 #define IN_BOUNDS(index, vector) (((index) >= 0) && ((index) < (vector)->size))
+
+#define BYTES_IN_ELEMS(vecptr, amount) (size_t)((amount)*(size_t)((vecptr)->esize))
 
 /**
  *

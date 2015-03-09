@@ -2,12 +2,15 @@
 #include "ivvector_internal.h"
 #include "stdio.h"
 
+#define CONDITION 0
 
 
 
 inline void* iv_calloc(size_t nmemb, size_t size)
 {
-	return calloc(nmemb, size);
+	if (CONDITION) 
+		return calloc(nmemb, size);
+	return NULL;
 }
 
 inline void iv_free(void* ptr)
@@ -17,7 +20,9 @@ inline void iv_free(void* ptr)
 
 inline void* iv_realloc(void* ptr, size_t size)
 {
-	return realloc(ptr, size);
+	if (CONDITION)
+		return realloc(ptr, size);
+	return NULL;
 }
 
 int __vector_check(const vector* checked)
@@ -58,11 +63,19 @@ inline int __vector_iter_check(const vector_iter* checked)
 #ifndef DEBUG
 	return 		(checked != NULL      &&
 			 checked->ptr != NULL &&
-			 checked->index < checked->ptr->size);
+			 (checked->index < checked->ptr->size
+			 	||
+			  (checked->index == 0
+			  		&&
+			  checked->ptr->size == 0)));
 #else
 	int cond = 	(checked != NULL      &&
 			 checked->ptr != NULL &&
-			 checked->index < checked->ptr->size &&
+			 (checked->index < checked->ptr->size
+			 	||
+			  (checked->index == 0
+			  		&&
+			  checked->ptr->size == 0)) &&
 			 __vector_check(checked->ptr));
 	if (cond == 0)
 	{
@@ -79,6 +92,9 @@ inline int __vector_iter_check(const vector_iter* checked)
  */
 void __vector_iter_dump(const vector_iter* iter)
 {
+	if (iter == NULL)
+		return;
+
 	fprintf(stderr, "Vector iterator [%p] dump: Vector [%p], index[%"PRIu32"]\n",
 			iter, iter->ptr, iter->index);
 	
@@ -98,6 +114,8 @@ void __vector_iter_dump(const vector_iter* iter)
  */
 void __vector_dump(const vector* this)
 {
+	if (this == NULL)
+		return;
 	fprintf(stderr, "Vector [%p] dump:\n"
 			"Allocated:     %"PRIu32 "\n"
 			"Size:          %"PRIu32 "\n"
@@ -115,6 +133,10 @@ void __vector_dump(const vector* this)
 			this->emaxsize,
 			this->begin,
 			this->destr);
+// DELETE THIS
+		for (uint32 i = 0; i < this -> size; ++i)
+			printf("%d ", ((int*)(this->begin))[i]);
+		putchar('\n');
 }
 
 

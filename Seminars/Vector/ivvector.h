@@ -8,6 +8,9 @@
 
 typedef uint32_t uint32;
 typedef uint64_t uint64;
+typedef  int32_t  int32;
+typedef  int64_t  int64;
+
 
 struct vector_s; 
 typedef struct vector_s vector;
@@ -31,7 +34,7 @@ void 		__vector_dump 		(const vector* this);
 int vector_delete(vector*);
 int vector_erase (vector*);
 int vector_remove(vector*, uint32);
-int vector_insert(vector*, void*, uint32 index_will_be);
+int vector_insert(vector*, const void*, uint32 index_will_be);
 int vector_sort  (vector*, int (*comp)(const void*, const void*));
 
 int vector_get(const vector*, uint32, void* where_to_get);
@@ -54,6 +57,12 @@ int vector_fit	(vector*);
 	assert("Pointed object size don't match vector element size",	\
 	vector_esize(vec_ptr) == sizeof(*(obj_ptr)));
 #endif
+
+int __vector_pushback (vector* this, const void* obj);
+int __vector_pushfront(vector* this, const void* obj);
+int __vector_popback  (vector* this, void* dest);
+int __vector_popfront (vector* this, void* dest);
+
 
 #define vector_pushback(vec_ptr, obj_ptr)	\
 	CHECK_SIZE((vec_ptr), (obj_ptr))	\

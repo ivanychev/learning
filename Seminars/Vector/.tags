@@ -6,8 +6,8 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ALIGN	kernel.h	49;"	d
 ARRAY_SIZE	kernel.h	54;"	d
-CHECK_SIZE	ivvector2.h	35;"	d
-CHECK_SIZE	ivvector2.h	37;"	d
+CHECK_SIZE	ivvector.h	51;"	d
+CHECK_SIZE	ivvector.h	53;"	d
 DIV_ROUND_CLOSEST	kernel.h	96;"	d
 DIV_ROUND_UP	kernel.h	67;"	d
 DIV_ROUND_UP_SECTOR_T	kernel.h	72;"	d
@@ -17,6 +17,7 @@ DUMP_ALL	kernel.h	/^	DUMP_ALL,$/;"	e	enum:ftrace_dump_mode
 DUMP_NONE	kernel.h	/^	DUMP_NONE,$/;"	e	enum:ftrace_dump_mode
 DUMP_ORIG	kernel.h	/^	DUMP_ORIG,$/;"	e	enum:ftrace_dump_mode
 FIELD_SIZEOF	kernel.h	66;"	d
+FOR_EACH	ivvector_internal.h	32;"	d
 HLIST_HEAD	list.h	596;"	d
 HLIST_HEAD_INIT	list.h	595;"	d
 INIT_HLIST_HEAD	list.h	597;"	d
@@ -24,8 +25,11 @@ INIT_HLIST_NODE	list.h	/^static inline void INIT_HLIST_NODE(struct hlist_node *h
 INIT_LIST_HEAD	list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
 INT_MAX	kernel.h	21;"	d
 INT_MIN	kernel.h	22;"	d
+IN_BOUNDS	ivvector_internal.h	55;"	d
 IS_ALIGNED	kernel.h	52;"	d
-IV_VECTOR	ivvector2.h	2;"	d
+ITER_CHECK	ivvector_internal.h	38;"	d
+IV_POISON	ivvector_internal.h	/^const uint32_t IV_POISON = 0xDEADBEEF;$/;"	v
+IV_VECTOR	ivvector.h	2;"	d
 LIST_HEAD	list.h	22;"	d
 LIST_HEAD_INIT	list.h	20;"	d
 LLONG_MAX	kernel.h	27;"	d
@@ -34,9 +38,11 @@ LOCKDEP_NOW_UNRELIABLE	kernel.h	/^	LOCKDEP_NOW_UNRELIABLE$/;"	e	enum:lockdep_ok
 LOCKDEP_STILL_OK	kernel.h	/^	LOCKDEP_STILL_OK,$/;"	e	enum:lockdep_ok
 LONG_MAX	kernel.h	24;"	d
 LONG_MIN	kernel.h	25;"	d
-MAXSIZE	ivvector2.c	/^const uint32_t MAXSIZE = 4 * 1024 * 1024;$/;"	v
-MAXSIZE	ivvector2.c	/^const uint32_t MAXSIZE = VECTOR_COMPILE_MAXSIZE;$/;"	v
-POISON	ivvector2.c	/^const uint32_t POISON = 0xDEADBEEF;$/;"	v
+MAXESIZE_RATIO	ivvector.c	/^const uint32 MAXESIZE_RATIO = 100;$/;"	v
+MINALLOC_ELEMS	ivvector.c	/^const uint32 MINALLOC_ELEMS = 5; $/;"	v
+NEXT_PTR	ivvector_internal.h	52;"	d
+OFFSET_PTR	ivvector_internal.h	50;"	d
+PREV_PTR	ivvector_internal.h	53;"	d
 PTR_ALIGN	kernel.h	51;"	d
 REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD	kernel.h	805;"	d
 REPEAT_BYTE	kernel.h	47;"	d
@@ -81,18 +87,22 @@ UINT_MAX	kernel.h	23;"	d
 ULLONG_MAX	kernel.h	29;"	d
 ULONG_MAX	kernel.h	26;"	d
 USHRT_MAX	kernel.h	18;"	d
+VECTOR_CHECK	ivvector_internal.h	44;"	d
+VEC_MAXSIZE	ivvector_internal.h	/^const uint32_t VEC_MAXSIZE = 4 * 1024 * 1024;$/;"	v
+VEC_MAXSIZE	ivvector_internal.h	/^const uint32_t VEC_MAXSIZE = VECTOR_COMPILE_MAXSIZE;$/;"	v
 VERIFY_OCTAL_PERMISSIONS	kernel.h	809;"	d
-Vector_e	ivvector.h	/^typedef Vector_elem Vector_e;$/;"	t
-Vector_iter	ivvector.h	/^typedef struct Vector_iter_s Vector_iter;$/;"	t	typeref:struct:Vector_iter_s
-Vector_t	ivvector.h	/^typedef struct Vector Vector_t;$/;"	t	typeref:struct:Vector
 _LINUX_KERNEL_H	kernel.h	2;"	d
 _LINUX_LIST_H	list.h	2;"	d
 _RET_IP_	kernel.h	120;"	d
 _THIS_IP_	kernel.h	121;"	d
 __ALIGN_MASK	kernel.h	50;"	d
+__IVVECTOR_INTERNAL	ivvector_internal.h	2;"	d
 ____trace_printk_check_format	kernel.h	/^void ____trace_printk_check_format(const char *fmt, ...)$/;"	f
 ___might_sleep	kernel.h	/^  static inline void ___might_sleep(const char *file, int line,$/;"	f
+__alloc_more	ivvector.c	/^static int __alloc_more(vector* this)$/;"	f	file:
 __cold	kernel.h	/^	__noreturn __cold;$/;"	v
+__copy_elem	ivvector_utils.c	/^inline void __copy_elem(const vector* this, uint32 index, void* dest)$/;"	f
+__elem_ptr	ivvector_utils.c	/^inline void* __elem_ptr(const vector* this, uint32 index)$/;"	f
 __hlist_del	list.h	/^static inline void __hlist_del(struct hlist_node *n)$/;"	f
 __list_add	list.h	/^static inline void __list_add(struct list_head *new,$/;"	f
 __list_cut_position	list.h	/^static inline void __list_cut_position(struct list_head *list,$/;"	f
@@ -100,21 +110,32 @@ __list_del	list.h	/^static inline void __list_del(struct list_head * prev, struc
 __list_del_entry	list.h	/^static inline void __list_del_entry(struct list_head *entry)$/;"	f
 __list_splice	list.h	/^static inline void __list_splice(const struct list_head *list,$/;"	f
 __might_sleep	kernel.h	/^  static inline void __might_sleep(const char *file, int line,$/;"	f
+__optimize_alloc	ivvector.c	/^static int __optimize_alloc(vector* this)$/;"	f	file:
 __round_mask	kernel.h	62;"	d
+__set_elem	ivvector_utils.c	/^inline void __set_elem(vector* this, uint32 index, const void* src)$/;"	f
 __trace_printk_check_format	kernel.h	550;"	d
-__vector_init	ivvector2.c	/^vector* __vector_init(uint32 size, void* (*destr)(void* obj))$/;"	f
+__vector_check	ivvector_utils.c	/^int __vector_check(const vector* checked)$/;"	f
+__vector_dump	ivvector_utils.c	/^void __vector_dump(const vector* this)$/;"	f
+__vector_eliminate_all_and_free	ivvector.c	/^static void __vector_eliminate_all_and_free(vector* this)$/;"	f	file:
+__vector_init	ivvector.c	/^vector* __vector_init(uint32 size, void (*destr)(void* obj))$/;"	f
+__vector_iter_check	ivvector_utils.c	/^inline int __vector_iter_check(const vector_iter* checked)$/;"	f
+__vector_iter_dump	ivvector_utils.c	/^void __vector_iter_dump(const vector_iter* iter)$/;"	f
+__vector_pushback	ivvector.c	/^int __vector_pushback (vector* this, const void* obj)$/;"	f
 abs	kernel.h	197;"	d
 abs64	kernel.h	209;"	d
-alloc	ivvector2.c	/^	uint32_t alloc;$/;"	m	struct:vector_s	file:
-begin	ivvector2.c	/^	char* begin;$/;"	m	struct:vector_s	file:
+action	bit_5.c	/^struct action {$/;"	s	file:
+acts	bit_5.c	/^struct action* acts[] = {$/;"	v	typeref:struct:action
+add	bit_5.c	/^	int  add; 	\/\/ сколько добавляем$/;"	m	struct:action	file:
+alloc	ivvector_internal.h	/^	uint32_t alloc;$/;"	m	struct:vector_s
+begin	ivvector_internal.h	/^	char* begin;$/;"	m	struct:vector_s
 clamp	kernel.h	742;"	d
 clamp_t	kernel.h	770;"	d
 clamp_val	kernel.h	783;"	d
 container_of	kernel.h	799;"	d
-destr	ivvector2.c	/^	void* (*destr)(void* obj);$/;"	m	struct:vector_s	file:
+destr	ivvector_internal.h	/^	void (*destr)(void* obj);$/;"	m	struct:vector_s
 do_trace_printk	kernel.h	595;"	d
-emaxsize	ivvector2.c	/^	uint32_t emaxsize;$/;"	m	struct:vector_s	file:
-esize	ivvector2.c	/^	uint32_t esize;$/;"	m	struct:vector_s	file:
+emaxsize	ivvector_internal.h	/^	uint32_t emaxsize;$/;"	m	struct:vector_s
+esize	ivvector_internal.h	/^	uint32_t esize;$/;"	m	struct:vector_s
 from	list_subject.c	/^	int from;$/;"	m	struct:kool_list	file:
 ftrace_dump	kernel.h	/^static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }$/;"	f
 ftrace_dump_mode	kernel.h	/^enum ftrace_dump_mode {$/;"	g
@@ -143,7 +164,10 @@ hlist_for_each_entry_safe	list.h	739;"	d
 hlist_for_each_safe	list.h	693;"	d
 hlist_move_list	list.h	/^static inline void hlist_move_list(struct hlist_head *old,$/;"	f
 hlist_unhashed	list.h	/^static inline int hlist_unhashed(const struct hlist_node *h)$/;"	f
-iv_calloc	ivvector2.c	/^void* iv_calloc(size_t nmemb, size_t size)$/;"	f
+index	ivvector_internal.h	/^	uint32 index;$/;"	m	struct:vector_iter_s
+iv_calloc	ivvector_utils.c	/^inline void* iv_calloc(size_t nmemb, size_t size)$/;"	f
+iv_free	ivvector_utils.c	/^inline void iv_free(void* ptr)$/;"	f
+iv_realloc	ivvector_utils.c	/^inline void* iv_realloc(void* ptr, size_t size)$/;"	f
 kool_list	list_subject.c	/^struct kool_list{$/;"	s	file:
 kstrtol	kernel.h	/^static inline int __must_check kstrtol(const char *s, unsigned int base, long *res)$/;"	f
 kstrtos32	kernel.h	/^static inline int __must_check kstrtos32(const char *s, unsigned int base, s32 *res)$/;"	f
@@ -197,12 +221,14 @@ list_splice_tail	list.h	/^static inline void list_splice_tail(struct list_head *
 list_splice_tail_init	list.h	/^static inline void list_splice_tail_init(struct list_head *list,$/;"	f
 lockdep_ok	kernel.h	/^enum lockdep_ok {$/;"	g
 lower_32_bits	kernel.h	151;"	d
+main	bit_5.c	/^int main(int argc, char const *argv[])$/;"	f
 main	exp.c	/^int main(int argc, char const *argv[])$/;"	f
 main	list_subject.c	/^int main(int argc, char **argv){$/;"	f
+main	try.c	/^int main(int argc, char const *argv[])$/;"	f
 max	kernel.h	714;"	d
 max3	kernel.h	721;"	d
 max_t	kernel.h	755;"	d
-maxsize	ivvector2.c	/^	uint32_t maxsize;$/;"	m	struct:vector_s	file:
+maxsize	ivvector_internal.h	/^	uint32_t maxsize;$/;"	m	struct:vector_s
 might_fault	kernel.h	/^static inline void might_fault(void) { }$/;"	f
 might_resched	kernel.h	159;"	d
 might_resched	kernel.h	161;"	d
@@ -214,7 +240,8 @@ min3	kernel.h	720;"	d
 min_not_zero	kernel.h	728;"	d
 min_t	kernel.h	750;"	d
 mult_frac	kernel.h	111;"	d
-ptr	ivvector2.c	/^	vector* ptr,$/;"	m	struct:vector_iter_s	file:
+pref	bit_5.c	/^	char pref[3];$/;"	m	struct:action	file:
+ptr	ivvector_internal.h	/^	vector* ptr;$/;"	m	struct:vector_iter_s
 reciprocal_scale	kernel.h	/^static inline u32 reciprocal_scale(u32 val, u32 ep_ro)$/;"	f
 round_down	kernel.h	64;"	d
 round_up	kernel.h	63;"	d
@@ -225,7 +252,8 @@ sched_annotate_sleep	kernel.h	186;"	d
 sector_div	kernel.h	125;"	d
 sector_div	kernel.h	127;"	d
 set_arch_panic_timeout	kernel.h	/^static inline void set_arch_panic_timeout(int timeout, int arch_default_timeout)$/;"	f
-size	ivvector2.c	/^	uint32_t size;$/;"	m	struct:vector_s	file:
+shift	bit_5.c	/^	int  shift;	\/\/ на сколько сдвигаем$/;"	m	struct:action	file:
+size	ivvector_internal.h	/^	uint32_t size;$/;"	m	struct:vector_s
 swap	kernel.h	789;"	d
 system_states	kernel.h	/^extern enum system_states {$/;"	g
 to	list_subject.c	/^	int to;$/;"	m	struct:kool_list	file:
@@ -241,16 +269,39 @@ tracing_snapshot	kernel.h	/^static inline void tracing_snapshot(void) { }$/;"	f
 tracing_snapshot_alloc	kernel.h	/^static inline void tracing_snapshot_alloc(void) { }$/;"	f
 tracing_start	kernel.h	/^static inline void tracing_start(void) { }$/;"	f
 tracing_stop	kernel.h	/^static inline void tracing_stop(void) { }$/;"	f
+uint32	ivvector.h	/^typedef uint32_t uint32;$/;"	t
+uint64	ivvector.h	/^typedef uint64_t uint64;$/;"	t
 upper_32_bits	kernel.h	145;"	d
-vector	ivvector2.c	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s	file:
-vector	ivvector2.h	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s
-vector_init	ivvector2.h	11;"	d
-vector_iter	ivvector2.c	/^typedef vector_iter_s vector_iter;$/;"	t	file:
-vector_iter	ivvector2.h	/^typedef struct vector_iter_s vector_iter;$/;"	t	typeref:struct:vector_iter_s
-vector_iter_get	ivvector2.c	/^vector_iter* vector_iter_get(const vector* this)$/;"	f
-vector_iter_s	ivvector2.c	/^struct vector_iter_s$/;"	s	file:
-vector_popback	ivvector2.h	48;"	d
-vector_popfront	ivvector2.h	51;"	d
-vector_pushback	ivvector2.h	42;"	d
-vector_pushfront	ivvector2.h	45;"	d
-vector_s	ivvector2.c	/^struct vector_s$/;"	s	file:
+vector	ivvector.h	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s
+vector_alloc	ivvector.c	/^uint32 vector_alloc(const vector* this)$/;"	f
+vector_delete	ivvector.c	/^int vector_delete(vector* this)$/;"	f
+vector_empty	ivvector.c	/^int vector_empty(const vector* this)$/;"	f
+vector_erase	ivvector.c	/^int vector_erase(vector* this)$/;"	f
+vector_esize	ivvector.c	/^uint32 vector_esize(const vector* this)$/;"	f
+vector_fit	ivvector.c	/^int vector_fit(vector* this)$/;"	f
+vector_get	ivvector.c	/^int vector_get(const vector* this, uint32 index, void* where_to_get)$/;"	f
+vector_init	ivvector.h	22;"	d
+vector_insert	ivvector.c	/^int vector_insert(vector* this, const void* elem, uint32 index)$/;"	f
+vector_iter	ivvector.h	/^typedef struct vector_iter_s vector_iter;$/;"	t	typeref:struct:vector_iter_s
+vector_iter_begin	ivvector_iter.c	/^int vector_iter_begin(vector_iter* this)$/;"	f
+vector_iter_del	ivvector_iter.c	/^int vector_iter_del(vector_iter* this)$/;"	f
+vector_iter_do	ivvector_iter.c	/^void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))$/;"	f
+vector_iter_end	ivvector_iter.c	/^int vector_iter_end(vector_iter* this)$/;"	f
+vector_iter_get	ivvector_iter.c	/^vector_iter* vector_iter_get(vector* this)$/;"	f
+vector_iter_getelem	ivvector_iter.c	/^int vector_iter_getelem (const vector_iter* this, void* dest)$/;"	f
+vector_iter_isbegin	ivvector_iter.c	/^int vector_iter_isbegin(const vector_iter* this)$/;"	f
+vector_iter_isend	ivvector_iter.c	/^int vector_iter_isend(const vector_iter* this)$/;"	f
+vector_iter_next	ivvector_iter.c	/^int vector_iter_next(vector_iter* this, void* dest)$/;"	f
+vector_iter_prev	ivvector_iter.c	/^int vector_iter_prev(vector_iter* this, void* dest)$/;"	f
+vector_iter_s	ivvector_internal.h	/^struct vector_iter_s$/;"	s
+vector_iter_setelem	ivvector_iter.c	/^int vector_iter_setelem(vector_iter* this, const void* src)$/;"	f
+vector_maxsize	ivvector.c	/^uint32 vector_maxsize(const vector* this)$/;"	f
+vector_popback	ivvector.h	70;"	d
+vector_popfront	ivvector.h	73;"	d
+vector_pushback	ivvector.h	64;"	d
+vector_pushfront	ivvector.h	67;"	d
+vector_remove	ivvector.c	/^int vector_remove(vector* this, uint32 index)$/;"	f
+vector_s	ivvector_internal.h	/^struct vector_s$/;"	s
+vector_set	ivvector.c	/^int vector_set(vector* this, uint32 index, void* what_to_send)$/;"	f
+vector_size	ivvector.c	/^uint32 vector_size(const vector* this)$/;"	f
+vector_sort	ivvector.c	/^int vector_sort(vector* this, int (*comp)(const void*, const void*))$/;"	f

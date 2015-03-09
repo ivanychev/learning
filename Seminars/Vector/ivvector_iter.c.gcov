@@ -1,0 +1,176 @@
+        -:    0:Source:ivvector_iter.c
+        -:    0:Graph:ivvector.gcno
+        -:    0:Data:ivvector.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "ivvector.h"
+        -:    2:#include "ivvector_internal.h"
+        -:    3:
+        -:    4:// Iterators
+        -:    5:
+        -:    6:/*
+        -:    7:	PTR_ERR MODIFY AHEAD
+        -:    8: */
+        2:    9:vector_iter* vector_iter_get(vector* this)
+        -:   10:{
+        2:   11:	if (this == NULL)
+    #####:   12:		return NULL;
+        2:   13:	vector_iter* new = iv_calloc(1, sizeof(vector_iter));
+        2:   14:	if (new == NULL)
+        1:   15:		return NULL;
+        1:   16:	new->ptr = this;
+        -:   17:
+        1:   18:	return new;
+        -:   19:}
+        -:   20:
+        -:   21:/**
+        -:   22: * Deletes iterator
+        -:   23: * @param  this pointer to iterator
+        -:   24: * @return      0 if success, -1 if "this" is NULL
+        -:   25: */
+        2:   26:int vector_iter_del(vector_iter* this)
+        -:   27:{
+        2:   28:	if (this == NULL)
+        1:   29:		return -1;
+        1:   30:	this -> ptr   =        NULL;
+        1:   31:	this -> index =        IV_POISON;
+        1:   32:	iv_free(this);
+        1:   33:	return 0;
+        -:   34:}
+        -:   35:
+        -:   36:/**
+        -:   37: * Moves iterator to next element
+        -:   38: * @param  this current iterator
+        -:   39: * @param  dest if not NULL copies current object before moving iterator
+        -:   40: * @return      1 if moved, 0 if not, -1 if iterator is invalid
+        -:   41: */
+       10:   42:int vector_iter_next(vector_iter* this, void* dest)
+        -:   43:{
+       10:   44:	ITER_CHECK(this);
+        5:   45:	if (this->ptr->size == 0)
+        3:   46:		return 0;
+        -:   47:
+        2:   48:	if (dest != NULL)
+        2:   49:		__copy_elem(this->ptr, this->index, dest);
+        -:   50:
+        2:   51:	if (this->index < this->ptr->size - 1)
+        -:   52:	{
+        1:   53:		this->index += 1;
+        1:   54:		return 1;
+        -:   55:	}
+        1:   56:	return 0;
+        -:   57:}
+        -:   58:
+        -:   59:/**
+        -:   60: * Moves iterator to previous element
+        -:   61: * @param  this current iterator
+        -:   62: * @param  dest if not NULL copies current object before moving iterator
+        -:   63: * @return 1 if moved, 0 if not, -1 if iterator is invalid
+        -:   64: */
+        8:   65:int vector_iter_prev(vector_iter* this, void* dest)
+        -:   66:{
+        8:   67:	ITER_CHECK(this);
+        4:   68:	if (this->ptr->size == 0)
+        2:   69:		return 0;
+        2:   70:	if (dest != NULL)
+        1:   71:		__copy_elem(this->ptr, this->index, dest);
+        -:   72:
+        2:   73:	if (this->index > 0)
+        -:   74:	{
+        1:   75:		this->index -= 1;
+        1:   76:		return 1;
+        -:   77:	}
+        1:   78:	return 0;
+        -:   79:}
+        -:   80:
+        -:   81:/**
+        -:   82: * Copies object, pointed by iterator
+        -:   83: * @param  this current iterator
+        -:   84: * @param  dest destination
+        -:   85: * @return      0 if success, -1 if failure
+        -:   86: */
+        4:   87:int vector_iter_getelem (const vector_iter* this, void* dest)
+        -:   88:{
+        4:   89:	ITER_CHECK(this);
+        2:   90:	if (dest == NULL || this->ptr->size == 0)
+    #####:   91:		return -1;
+        2:   92:	__copy_elem(this->ptr, this->index, dest);
+        2:   93:	return 0;
+        -:   94:}
+        -:   95:
+        -:   96:/**
+        -:   97: * Replaces object, pointed by iterator, with argumented
+        -:   98: * @param  this current iterator
+        -:   99: * @param  src  
+        -:  100: * @return      0 if success, -1 if failure
+        -:  101: */
+        2:  102:int vector_iter_setelem(vector_iter* this, const void* src)
+        -:  103:{
+        2:  104:	ITER_CHECK(this);
+        1:  105:	if (src == NULL || this->ptr->size == 0)
+    #####:  106:		return -1;
+        1:  107:	__set_elem(this->ptr, this->index, src);
+        1:  108:	return 0;
+        -:  109:}
+        -:  110:
+        -:  111:/**
+        -:  112: * Sets iterator to begin of vector
+        -:  113: * @param  this current iterator
+        -:  114: * @return      0 if success, -1 if "this" is NULL or vector is invalid
+        -:  115: */
+        2:  116:int vector_iter_begin(vector_iter* this)
+        -:  117:{
+        2:  118:	if (this == NULL)
+        1:  119:		return -1;
+        1:  120:	VECTOR_CHECK(this->ptr);
+        1:  121:	this->index = 0;
+        1:  122:	return 0;
+        -:  123:}
+        -:  124:
+        -:  125:/**
+        -:  126: * Sets iterator to end of vector
+        -:  127: * @param  this current iterator
+        -:  128: * @return      0 if success, -1 if "this" is NULL or vector is invalid
+        -:  129: */
+        2:  130:int vector_iter_end(vector_iter* this)
+        -:  131:{
+        2:  132:	if (this == NULL)
+        1:  133:		return -1;
+        1:  134:	VECTOR_CHECK(this->ptr);
+        1:  135:	this->index = this->ptr->size - 1;
+        1:  136:	return 0;
+        -:  137:}
+        -:  138:
+        -:  139:/**
+        -:  140: * Is the pointed object first??
+        -:  141: * @param  this current iterator
+        -:  142: * @return      1 if true, 0 if false, -1 if iterator is invalid
+        -:  143: */
+        2:  144:int vector_iter_isbegin(const vector_iter* this)
+        -:  145:{
+        2:  146:	ITER_CHECK(this);
+        1:  147:	if (this -> index == 0 && this->ptr->size != 0)
+    #####:  148:		return 1;
+        1:  149:	return 0;
+        -:  150:}
+        -:  151:
+        -:  152:/**
+        -:  153: * Is the pointed object last??
+        -:  154: * @param  this current iterator
+        -:  155: * @return      1 if true, 0 if false, -1 if iterator is invalid
+        -:  156: */
+        2:  157:int vector_iter_isend(const vector_iter* this)
+        -:  158:{
+        2:  159:	ITER_CHECK(this);
+        1:  160:	if (this -> index == this -> ptr -> size - (int64)1)
+        1:  161:		return 1;
+    #####:  162:	return 0;
+        -:  163:}
+        -:  164:
+        -:  165:
+        2:  166:void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))
+        -:  167:{
+        2:  168:	if (!__vector_iter_check(iter))
+        1:  169:		return NULL;
+        1:  170:	return proceed(__elem_ptr(iter->ptr, iter->index), args);
+        -:  171:}

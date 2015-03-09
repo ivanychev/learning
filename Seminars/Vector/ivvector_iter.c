@@ -42,6 +42,8 @@ int vector_iter_del(vector_iter* this)
 int vector_iter_next(vector_iter* this, void* dest)
 {
 	ITER_CHECK(this);
+	if (this->ptr->size == 0)
+		return 0;
 
 	if (dest != NULL)
 		__copy_elem(this->ptr, this->index, dest);
@@ -63,7 +65,8 @@ int vector_iter_next(vector_iter* this, void* dest)
 int vector_iter_prev(vector_iter* this, void* dest)
 {
 	ITER_CHECK(this);
-
+	if (this->ptr->size == 0)
+		return 0;
 	if (dest != NULL)
 		__copy_elem(this->ptr, this->index, dest);
 
@@ -84,7 +87,7 @@ int vector_iter_prev(vector_iter* this, void* dest)
 int vector_iter_getelem (const vector_iter* this, void* dest)
 {
 	ITER_CHECK(this);
-	if (dest == NULL)
+	if (dest == NULL || this->ptr->size == 0)
 		return -1;
 	__copy_elem(this->ptr, this->index, dest);
 	return 0;
@@ -99,7 +102,7 @@ int vector_iter_getelem (const vector_iter* this, void* dest)
 int vector_iter_setelem(vector_iter* this, const void* src)
 {
 	ITER_CHECK(this);
-	if (src == NULL)
+	if (src == NULL || this->ptr->size == 0)
 		return -1;
 	__set_elem(this->ptr, this->index, src);
 	return 0;
@@ -141,7 +144,7 @@ int vector_iter_end(vector_iter* this)
 int vector_iter_isbegin(const vector_iter* this)
 {
 	ITER_CHECK(this);
-	if (this -> index == 0)
+	if (this -> index == 0 && this->ptr->size != 0)
 		return 1;
 	return 0;
 }
@@ -154,7 +157,7 @@ int vector_iter_isbegin(const vector_iter* this)
 int vector_iter_isend(const vector_iter* this)
 {
 	ITER_CHECK(this);
-	if (this -> index == this -> ptr -> size - 1)
+	if (this -> index == this -> ptr -> size - (int64)1)
 		return 1;
 	return 0;
 }
