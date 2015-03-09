@@ -1,65 +1,97 @@
+#ifndef IV_VECTOR
+#define IV_VECTOR
+
 #include "stdint.h"
+#include "assert.h"
+#include "inttypes.h"
 
-struct 	Vector_elem;
-typedef Vector_elem Vector_e;
-struct 	Vector;
-// {
-// 	uint32_t size;
-// 	uint32_t maxsize;
-// 	uint32_t iter;
-// 	uint32_t elem_size;
-// 	Vector_e* begin;
-// 	uint32_t alloc;
-// };
-typedef struct Vector Vector_t;
 
-struct Vector_iter_s;
-// {
-// 	Vector_t* ptr;
-// 	uint32_t num;
-// };
-typedef struct Vector_iter_s Vector_iter;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
 
-int Vector_new   (Vector_t* this);
-int Vector_new   (Vector_t* this, const Vector_t copied);
-int Vector_new 	 (Vector_t* this, Vector_iter begin, Vector_iter end);
-int Vector_delete(Vector_t* this);
+struct vector_s; 
+typedef struct vector_s vector;
 
-int Vector_copy (Vector_t* src,  Vector_t* dest);
-int Vector_equal(Vector_t* vec1, Vector_t* vec2);
-int Vector_at 	(Vector_t* this, uint32_t index, Vector_e* dest);
-int Vector_front(Vector_t* this, Vector_e* dest);
-int Vector_back (Vector_t* this, Vector_e* dest);
+struct vector_iter_s;
+typedef struct vector_iter_s vector_iter;
 
-int Vector_begin(Vector_t* this, Vector_i* dest);
-int Vector_end  (Vector_t* this, Vector_i* dest);
 
-int 	 Vector_empty 	(Vector_t* this);
-uint32_t Vector_size    (Vector_t* this);
-uint32_t Vector_maxsize (Vector_t* this);
-uint32_t Vector_capacity(Vector_t* this);
+// destructor added
 
-int Vector_clear (Vector_t* this);
-int Vector_insert(Vector_t* this, uint32_t index, Vector_e* elem);
-int Vector_insert(Vector_t* this, uint32_t index, Vector_t* src);
-int Vector_insert(Vector_t* this, uint32_t index, Vector_t* src, uint32_t from, uint32_t to);
+vector* __vector_init(uint32 size, void (*destr)(void* obj));
+#define   vector_init(name, type, destr)	\
+	  vector* name = __vector_init(sizeof(type), destr);
 
-int Vector_erase (Vector_t* this, uint32_t index);
-int Vector_erase (Vector_t* this, uint32_t from, uint32_t to);
+// To move 
+void 		__vector_iter_dump	(const vector_iter* iter);
+void 		__vector_dump 		(const vector* this);
+//
 
-int Vector_pushback (Vector_t* this, Vector_e* elem);
-int Vector_pushfront(Vector_t* this, Vector_e* elem);
-int Vector_popfront (Vector_t* this, Vector_e* dest);
-int Vector_popback  (Vector_t* this, Vector_e* dest);
 
-int Vector_next	   (Vector_iter* iter, Vector_e* dest);
-int Vector_prev	   (Vector_iter* iter, Vector_e* dest);
-int Vector_getelem (const Vector_iter* iter, Vector_e* dest);
-int Vector_setelem (Vector_iter* iter, const Vector_e* dest);
-int Vector_begin   (Vector_iter* iter, Vector_e* dest);
-int Vector_end     (Vector_iter* iter, Vector_e* dest);
-int Vector_get_iter(const Vector* this);
-int Vector_islast  (const Vector_iter* iter);
-int Vector_isfirst (const Vector_iter* iter);
+int vector_delete(vector*);
+int vector_erase (vector*);
+int vector_remove(vector*, uint32);
+int vector_insert(vector*, void*, uint32 index_will_be);
+int vector_sort  (vector*, int (*comp)(const void*, const void*));
 
-int Vector_do(Vector_iter* iter, void* args, void (do)(void* argv));
+int vector_get(const vector*, uint32, void* where_to_get);
+int vector_set(vector*, uint32, void* what_to_send);
+
+int    vector_empty   (const vector*);
+uint32 vector_size    (const vector*);
+uint32 vector_esize   (const vector*);
+uint32 vector_maxsize (const vector*);
+//uint32 vector_capacity(const vector*);
+uint32 vector_alloc   (const vector*);
+
+
+int vector_fit	(vector*);
+
+#ifndef DEBUG
+#define CHECK_SIZE(vec_ptr, obj_ptr)
+#else
+#define CHECK_SIZE(vec_ptr, obj_ptr) 					\
+	assert("Pointed object size don't match vector element size",	\
+	vector_esize(vec_ptr) == sizeof(*(obj_ptr)));
+#endif
+
+#define vector_pushback(vec_ptr, obj_ptr)	\
+	CHECK_SIZE((vec_ptr), (obj_ptr))	\
+	__vector_pushback((vec_ptr), (void*)obj_ptr)
+#define vector_pushfront(vec_ptr, obj_ptr)	\
+	CHECK_SIZE(vec_ptr, obj_ptr)		\
+	__vector_pushfront((vec_ptr), (void*)obj_ptr)
+#define vector_popback(vec_ptr, obj_ptr)	\
+	CHECK_SIZE(vec_ptr, obj_ptr)		\
+	__vector_popback((vec_ptr), (void*)obj_ptr)
+#define vector_popfront(vec_ptr, obj_ptr)	\
+	CHECK_SIZE(vec_ptr, obj_ptr)		\
+	__vector_popfront((vec_ptr), (void*)obj_ptr)
+
+// Если с итераторами
+
+
+/**
+ * if dest is NULL, nothing is copied
+ */
+
+// errptr
+
+int vector_iter_next	(vector_iter*, 	void* dest);
+int vector_iter_prev	(vector_iter*, 	void* dest);
+int vector_iter_getelem (const vector_iter*, void* dest);
+int vector_iter_setelem (vector_iter*, const void* src);
+int vector_iter_begin   (vector_iter*);
+int vector_iter_end     (vector_iter*);
+vector_iter* vector_iter_get(vector*);
+int vector_iter_del(vector_iter*);
+int vector_iter_isbegin  (const vector_iter*);
+int vector_iter_isend (const vector_iter*);
+//uint32 vector_iter_get_index(const* vector_iter*);
+
+// Как удалить по итератору? либо get_index, либо iter_del
+
+void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv));
+
+
+#endif

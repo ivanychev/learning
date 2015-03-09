@@ -1,0 +1,256 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+main	exp.c	/^int main(int argc, char const *argv[])$/;"	f
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+Vector_e	ivvector.h	/^typedef Vector_elem Vector_e;$/;"	t
+Vector_iter	ivvector.h	/^typedef struct Vector_iter_s Vector_iter;$/;"	t	typeref:struct:Vector_iter_s
+Vector_t	ivvector.h	/^typedef struct Vector Vector_t;$/;"	t	typeref:struct:Vector
+MAXSIZE	ivvector2.c	/^const uint32_t MAXSIZE = 4 * 1024 * 1024;$/;"	v
+MAXSIZE	ivvector2.c	/^const uint32_t MAXSIZE = VECTOR_COMPILE_MAXSIZE;$/;"	v
+POISON	ivvector2.c	/^const uint32_t POISON = 0xDEADBEEF;$/;"	v
+__vector_init	ivvector2.c	/^vector* __vector_init(uint32 size, void* (*destr)(void* obj))$/;"	f
+alloc	ivvector2.c	/^	uint32_t alloc;$/;"	m	struct:vector_s	file:
+begin	ivvector2.c	/^	char* begin;$/;"	m	struct:vector_s	file:
+destr	ivvector2.c	/^	void* (*destr)(void* obj);$/;"	m	struct:vector_s	file:
+emaxsize	ivvector2.c	/^	uint32_t emaxsize;$/;"	m	struct:vector_s	file:
+esize	ivvector2.c	/^	uint32_t esize;$/;"	m	struct:vector_s	file:
+iv_calloc	ivvector2.c	/^void* iv_calloc(size_t nmemb, size_t size)$/;"	f
+maxsize	ivvector2.c	/^	uint32_t maxsize;$/;"	m	struct:vector_s	file:
+ptr	ivvector2.c	/^	vector* ptr,$/;"	m	struct:vector_iter_s	file:
+size	ivvector2.c	/^	uint32_t size;$/;"	m	struct:vector_s	file:
+vector	ivvector2.c	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s	file:
+vector_iter	ivvector2.c	/^typedef vector_iter_s vector_iter;$/;"	t	file:
+vector_iter_get	ivvector2.c	/^vector_iter* vector_iter_get(const vector* this)$/;"	f
+vector_iter_s	ivvector2.c	/^struct vector_iter_s$/;"	s	file:
+vector_s	ivvector2.c	/^struct vector_s$/;"	s	file:
+CHECK_SIZE	ivvector2.h	35;"	d
+CHECK_SIZE	ivvector2.h	37;"	d
+IV_VECTOR	ivvector2.h	2;"	d
+vector	ivvector2.h	/^typedef struct vector_s vector;$/;"	t	typeref:struct:vector_s
+vector_init	ivvector2.h	11;"	d
+vector_iter	ivvector2.h	/^typedef struct vector_iter_s vector_iter;$/;"	t	typeref:struct:vector_iter_s
+vector_popback	ivvector2.h	48;"	d
+vector_popfront	ivvector2.h	51;"	d
+vector_pushback	ivvector2.h	42;"	d
+vector_pushfront	ivvector2.h	45;"	d
+ALIGN	kernel.h	49;"	d
+ARRAY_SIZE	kernel.h	54;"	d
+DIV_ROUND_CLOSEST	kernel.h	96;"	d
+DIV_ROUND_UP	kernel.h	67;"	d
+DIV_ROUND_UP_SECTOR_T	kernel.h	72;"	d
+DIV_ROUND_UP_SECTOR_T	kernel.h	74;"	d
+DIV_ROUND_UP_ULL	kernel.h	68;"	d
+DUMP_ALL	kernel.h	/^	DUMP_ALL,$/;"	e	enum:ftrace_dump_mode
+DUMP_NONE	kernel.h	/^	DUMP_NONE,$/;"	e	enum:ftrace_dump_mode
+DUMP_ORIG	kernel.h	/^	DUMP_ORIG,$/;"	e	enum:ftrace_dump_mode
+FIELD_SIZEOF	kernel.h	66;"	d
+INT_MAX	kernel.h	21;"	d
+INT_MIN	kernel.h	22;"	d
+IS_ALIGNED	kernel.h	52;"	d
+LLONG_MAX	kernel.h	27;"	d
+LLONG_MIN	kernel.h	28;"	d
+LOCKDEP_NOW_UNRELIABLE	kernel.h	/^	LOCKDEP_NOW_UNRELIABLE$/;"	e	enum:lockdep_ok
+LOCKDEP_STILL_OK	kernel.h	/^	LOCKDEP_STILL_OK,$/;"	e	enum:lockdep_ok
+LONG_MAX	kernel.h	24;"	d
+LONG_MIN	kernel.h	25;"	d
+PTR_ALIGN	kernel.h	51;"	d
+REBUILD_DUE_TO_FTRACE_MCOUNT_RECORD	kernel.h	805;"	d
+REPEAT_BYTE	kernel.h	47;"	d
+S16_MAX	kernel.h	36;"	d
+S16_MIN	kernel.h	37;"	d
+S32_MAX	kernel.h	39;"	d
+S32_MIN	kernel.h	40;"	d
+S64_MAX	kernel.h	42;"	d
+S64_MIN	kernel.h	43;"	d
+S8_MAX	kernel.h	33;"	d
+S8_MIN	kernel.h	34;"	d
+SHRT_MAX	kernel.h	19;"	d
+SHRT_MIN	kernel.h	20;"	d
+SIZE_MAX	kernel.h	30;"	d
+STACK_MAGIC	kernel.h	45;"	d
+SYSTEM_BOOTING	kernel.h	/^	SYSTEM_BOOTING,$/;"	e	enum:system_states
+SYSTEM_HALT	kernel.h	/^	SYSTEM_HALT,$/;"	e	enum:system_states
+SYSTEM_POWER_OFF	kernel.h	/^	SYSTEM_POWER_OFF,$/;"	e	enum:system_states
+SYSTEM_RESTART	kernel.h	/^	SYSTEM_RESTART,$/;"	e	enum:system_states
+SYSTEM_RUNNING	kernel.h	/^	SYSTEM_RUNNING,$/;"	e	enum:system_states
+TAINT_BAD_PAGE	kernel.h	464;"	d
+TAINT_CPU_OUT_OF_SPEC	kernel.h	461;"	d
+TAINT_CRAP	kernel.h	469;"	d
+TAINT_DIE	kernel.h	466;"	d
+TAINT_FIRMWARE_WORKAROUND	kernel.h	470;"	d
+TAINT_FORCED_MODULE	kernel.h	460;"	d
+TAINT_FORCED_RMMOD	kernel.h	462;"	d
+TAINT_LIVEPATCH	kernel.h	474;"	d
+TAINT_MACHINE_CHECK	kernel.h	463;"	d
+TAINT_OOT_MODULE	kernel.h	471;"	d
+TAINT_OVERRIDDEN_ACPI_TABLE	kernel.h	467;"	d
+TAINT_PROPRIETARY_MODULE	kernel.h	459;"	d
+TAINT_SOFTLOCKUP	kernel.h	473;"	d
+TAINT_UNSIGNED_MODULE	kernel.h	472;"	d
+TAINT_USER	kernel.h	465;"	d
+TAINT_WARN	kernel.h	468;"	d
+U16_MAX	kernel.h	35;"	d
+U32_MAX	kernel.h	38;"	d
+U64_MAX	kernel.h	41;"	d
+U8_MAX	kernel.h	32;"	d
+UINT_MAX	kernel.h	23;"	d
+ULLONG_MAX	kernel.h	29;"	d
+ULONG_MAX	kernel.h	26;"	d
+USHRT_MAX	kernel.h	18;"	d
+VERIFY_OCTAL_PERMISSIONS	kernel.h	809;"	d
+_LINUX_KERNEL_H	kernel.h	2;"	d
+_RET_IP_	kernel.h	120;"	d
+_THIS_IP_	kernel.h	121;"	d
+__ALIGN_MASK	kernel.h	50;"	d
+____trace_printk_check_format	kernel.h	/^void ____trace_printk_check_format(const char *fmt, ...)$/;"	f
+___might_sleep	kernel.h	/^  static inline void ___might_sleep(const char *file, int line,$/;"	f
+__cold	kernel.h	/^	__noreturn __cold;$/;"	v
+__might_sleep	kernel.h	/^  static inline void __might_sleep(const char *file, int line,$/;"	f
+__round_mask	kernel.h	62;"	d
+__trace_printk_check_format	kernel.h	550;"	d
+abs	kernel.h	197;"	d
+abs64	kernel.h	209;"	d
+clamp	kernel.h	742;"	d
+clamp_t	kernel.h	770;"	d
+clamp_val	kernel.h	783;"	d
+container_of	kernel.h	799;"	d
+do_trace_printk	kernel.h	595;"	d
+ftrace_dump	kernel.h	/^static inline void ftrace_dump(enum ftrace_dump_mode oops_dump_mode) { }$/;"	f
+ftrace_dump_mode	kernel.h	/^enum ftrace_dump_mode {$/;"	g
+ftrace_vprintk	kernel.h	/^ftrace_vprintk(const char *fmt, va_list ap)$/;"	f
+ftrace_vprintk	kernel.h	660;"	d
+hex_asc_hi	kernel.h	478;"	d
+hex_asc_lo	kernel.h	477;"	d
+hex_asc_upper_hi	kernel.h	489;"	d
+hex_asc_upper_lo	kernel.h	488;"	d
+hex_byte_pack	kernel.h	/^static inline char *hex_byte_pack(char *buf, u8 byte)$/;"	f
+hex_byte_pack_upper	kernel.h	/^static inline char *hex_byte_pack_upper(char *buf, u8 byte)$/;"	f
+kstrtol	kernel.h	/^static inline int __must_check kstrtol(const char *s, unsigned int base, long *res)$/;"	f
+kstrtos32	kernel.h	/^static inline int __must_check kstrtos32(const char *s, unsigned int base, s32 *res)$/;"	f
+kstrtos32_from_user	kernel.h	/^static inline int __must_check kstrtos32_from_user(const char __user *s, size_t count, unsigned int base, s32 *res)$/;"	f
+kstrtos64	kernel.h	/^static inline int __must_check kstrtos64(const char *s, unsigned int base, s64 *res)$/;"	f
+kstrtos64_from_user	kernel.h	/^static inline int __must_check kstrtos64_from_user(const char __user *s, size_t count, unsigned int base, s64 *res)$/;"	f
+kstrtou32	kernel.h	/^static inline int __must_check kstrtou32(const char *s, unsigned int base, u32 *res)$/;"	f
+kstrtou32_from_user	kernel.h	/^static inline int __must_check kstrtou32_from_user(const char __user *s, size_t count, unsigned int base, u32 *res)$/;"	f
+kstrtou64	kernel.h	/^static inline int __must_check kstrtou64(const char *s, unsigned int base, u64 *res)$/;"	f
+kstrtou64_from_user	kernel.h	/^static inline int __must_check kstrtou64_from_user(const char __user *s, size_t count, unsigned int base, u64 *res)$/;"	f
+kstrtoul	kernel.h	/^static inline int __must_check kstrtoul(const char *s, unsigned int base, unsigned long *res)$/;"	f
+lockdep_ok	kernel.h	/^enum lockdep_ok {$/;"	g
+lower_32_bits	kernel.h	151;"	d
+max	kernel.h	714;"	d
+max3	kernel.h	721;"	d
+max_t	kernel.h	755;"	d
+might_fault	kernel.h	/^static inline void might_fault(void) { }$/;"	f
+might_resched	kernel.h	159;"	d
+might_resched	kernel.h	161;"	d
+might_sleep	kernel.h	177;"	d
+might_sleep	kernel.h	185;"	d
+might_sleep_if	kernel.h	189;"	d
+min	kernel.h	708;"	d
+min3	kernel.h	720;"	d
+min_not_zero	kernel.h	728;"	d
+min_t	kernel.h	750;"	d
+mult_frac	kernel.h	111;"	d
+reciprocal_scale	kernel.h	/^static inline u32 reciprocal_scale(u32 val, u32 ep_ro)$/;"	f
+round_down	kernel.h	64;"	d
+round_up	kernel.h	63;"	d
+rounddown	kernel.h	84;"	d
+roundup	kernel.h	78;"	d
+sched_annotate_sleep	kernel.h	179;"	d
+sched_annotate_sleep	kernel.h	186;"	d
+sector_div	kernel.h	125;"	d
+sector_div	kernel.h	127;"	d
+set_arch_panic_timeout	kernel.h	/^static inline void set_arch_panic_timeout(int timeout, int arch_default_timeout)$/;"	f
+swap	kernel.h	789;"	d
+system_states	kernel.h	/^extern enum system_states {$/;"	g
+trace_dump_stack	kernel.h	/^static inline void trace_dump_stack(int skip) { }$/;"	f
+trace_printk	kernel.h	/^int trace_printk(const char *fmt, ...)$/;"	f
+trace_printk	kernel.h	586;"	d
+trace_puts	kernel.h	640;"	d
+tracing_is_on	kernel.h	/^static inline int tracing_is_on(void) { return 0; }$/;"	f
+tracing_off	kernel.h	/^static inline void tracing_off(void) { }$/;"	f
+tracing_off_permanent	kernel.h	/^static inline void tracing_off_permanent(void) { }$/;"	f
+tracing_on	kernel.h	/^static inline void tracing_on(void) { }$/;"	f
+tracing_snapshot	kernel.h	/^static inline void tracing_snapshot(void) { }$/;"	f
+tracing_snapshot_alloc	kernel.h	/^static inline void tracing_snapshot_alloc(void) { }$/;"	f
+tracing_start	kernel.h	/^static inline void tracing_start(void) { }$/;"	f
+tracing_stop	kernel.h	/^static inline void tracing_stop(void) { }$/;"	f
+upper_32_bits	kernel.h	145;"	d
+HLIST_HEAD	list.h	596;"	d
+HLIST_HEAD_INIT	list.h	595;"	d
+INIT_HLIST_HEAD	list.h	597;"	d
+INIT_HLIST_NODE	list.h	/^static inline void INIT_HLIST_NODE(struct hlist_node *h)$/;"	f
+INIT_LIST_HEAD	list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
+LIST_HEAD	list.h	22;"	d
+LIST_HEAD_INIT	list.h	20;"	d
+_LINUX_LIST_H	list.h	2;"	d
+__hlist_del	list.h	/^static inline void __hlist_del(struct hlist_node *n)$/;"	f
+__list_add	list.h	/^static inline void __list_add(struct list_head *new,$/;"	f
+__list_cut_position	list.h	/^static inline void __list_cut_position(struct list_head *list,$/;"	f
+__list_del	list.h	/^static inline void __list_del(struct list_head * prev, struct list_head * next)$/;"	f
+__list_del_entry	list.h	/^static inline void __list_del_entry(struct list_head *entry)$/;"	f
+__list_splice	list.h	/^static inline void __list_splice(const struct list_head *list,$/;"	f
+hlist_add_before	list.h	/^static inline void hlist_add_before(struct hlist_node *n,$/;"	f
+hlist_add_behind	list.h	/^static inline void hlist_add_behind(struct hlist_node *n,$/;"	f
+hlist_add_fake	list.h	/^static inline void hlist_add_fake(struct hlist_node *n)$/;"	f
+hlist_add_head	list.h	/^static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h)$/;"	f
+hlist_del	list.h	/^static inline void hlist_del(struct hlist_node *n)$/;"	f
+hlist_del_init	list.h	/^static inline void hlist_del_init(struct hlist_node *n)$/;"	f
+hlist_empty	list.h	/^static inline int hlist_empty(const struct hlist_head *h)$/;"	f
+hlist_entry	list.h	688;"	d
+hlist_entry_safe	list.h	697;"	d
+hlist_for_each	list.h	690;"	d
+hlist_for_each_entry	list.h	708;"	d
+hlist_for_each_entry_continue	list.h	718;"	d
+hlist_for_each_entry_from	list.h	728;"	d
+hlist_for_each_entry_safe	list.h	739;"	d
+hlist_for_each_safe	list.h	693;"	d
+hlist_move_list	list.h	/^static inline void hlist_move_list(struct hlist_head *old,$/;"	f
+hlist_unhashed	list.h	/^static inline int hlist_unhashed(const struct hlist_node *h)$/;"	f
+list_add	list.h	/^static inline void list_add(struct list_head *new, struct list_head *head)$/;"	f
+list_add_tail	list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	f
+list_cut_position	list.h	/^static inline void list_cut_position(struct list_head *list,$/;"	f
+list_del	list.h	/^static inline void list_del(struct list_head *entry)$/;"	f
+list_del_init	list.h	/^static inline void list_del_init(struct list_head *entry)$/;"	f
+list_empty	list.h	/^static inline int list_empty(const struct list_head *head)$/;"	f
+list_empty_careful	list.h	/^static inline int list_empty_careful(const struct list_head *head)$/;"	f
+list_entry	list.h	351;"	d
+list_first_entry	list.h	362;"	d
+list_first_entry_or_null	list.h	384;"	d
+list_for_each	list.h	408;"	d
+list_for_each_entry	list.h	446;"	d
+list_for_each_entry_continue	list.h	482;"	d
+list_for_each_entry_continue_reverse	list.h	496;"	d
+list_for_each_entry_from	list.h	509;"	d
+list_for_each_entry_reverse	list.h	457;"	d
+list_for_each_entry_safe	list.h	520;"	d
+list_for_each_entry_safe_continue	list.h	536;"	d
+list_for_each_entry_safe_from	list.h	552;"	d
+list_for_each_entry_safe_reverse	list.h	567;"	d
+list_for_each_prev	list.h	416;"	d
+list_for_each_prev_safe	list.h	435;"	d
+list_for_each_safe	list.h	425;"	d
+list_is_last	list.h	/^static inline int list_is_last(const struct list_head *list,$/;"	f
+list_is_singular	list.h	/^static inline int list_is_singular(const struct list_head *head)$/;"	f
+list_last_entry	list.h	373;"	d
+list_move	list.h	/^static inline void list_move(struct list_head *list, struct list_head *head)$/;"	f
+list_move_tail	list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	f
+list_next_entry	list.h	392;"	d
+list_prepare_entry	list.h	470;"	d
+list_prev_entry	list.h	400;"	d
+list_replace	list.h	/^static inline void list_replace(struct list_head *old,$/;"	f
+list_replace_init	list.h	/^static inline void list_replace_init(struct list_head *old,$/;"	f
+list_rotate_left	list.h	/^static inline void list_rotate_left(struct list_head *head)$/;"	f
+list_safe_reset_next	list.h	585;"	d
+list_splice	list.h	/^static inline void list_splice(const struct list_head *list,$/;"	f
+list_splice_init	list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	f
+list_splice_tail	list.h	/^static inline void list_splice_tail(struct list_head *list,$/;"	f
+list_splice_tail_init	list.h	/^static inline void list_splice_tail_init(struct list_head *list,$/;"	f
+from	list_subject.c	/^	int from;$/;"	m	struct:kool_list	file:
+kool_list	list_subject.c	/^struct kool_list{$/;"	s	file:
+list	list_subject.c	/^	struct list_head list;$/;"	m	struct:kool_list	typeref:struct:kool_list::list_head	file:
+main	list_subject.c	/^int main(int argc, char **argv){$/;"	f
+to	list_subject.c	/^	int to;$/;"	m	struct:kool_list	file:
