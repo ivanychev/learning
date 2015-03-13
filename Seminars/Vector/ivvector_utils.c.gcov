@@ -1,8 +1,8 @@
         -:    0:Source:ivvector_utils.c
         -:    0:Graph:ivvector.gcno
         -:    0:Data:ivvector.gcda
-        -:    0:Runs:5
-        -:    0:Programs:3
+        -:    0:Runs:1
+        -:    0:Programs:1
         -:    1:#include "ivvector.h"
         -:    2:#include "ivvector_internal.h"
         -:    3:#include "stdio.h"
@@ -10,171 +10,158 @@
         -:    5:#define CONDITION (rand() % 3 != 0)
         -:    6:
         -:    7:
-        -:    8:
-      514:    9:inline void* iv_calloc(size_t nmemb, size_t size)
-        -:   10:{
-      514:   11:	if (CONDITION) 
-      337:   12:		return calloc(nmemb, size);
-      177:   13:	return NULL;
-        -:   14:}
+      170:    8:inline void* iv_calloc(size_t nmemb, size_t size)
+        -:    9:{
+      170:   10:	if (CONDITION) 
+      111:   11:		return calloc(nmemb, size);
+       59:   12:	return NULL;
+        -:   13:}
+        -:   14:
         -:   15:
-      649:   16:inline void iv_free(void* ptr)
+      215:   16:inline void iv_free(void* ptr)
         -:   17:{
-      649:   18:	free(ptr);
-      649:   19:	ptr = NULL;
-      649:   20:}
+      215:   18:	free(ptr);
+      215:   19:	ptr = NULL;
+      215:   20:}
         -:   21:
-     1186:   22:inline void* iv_realloc(void* ptr, size_t size)
-        -:   23:{
-     1186:   24:	if (CONDITION)
-      797:   25:		return realloc(ptr, size);
-      389:   26:	free(ptr);
-      389:   27:	ptr = NULL;
-        -:   28:
-      389:   29:	return NULL;
-        -:   30:}
-        -:   31:
-    11842:   32:int __vector_check(const vector* checked)
-        -:   33:{
-        -:   34:#ifndef DEBUG
-    22424:   35:	return (checked != NULL &&
-    16756:   36:		checked->size <= checked->alloc &&
-     7259:   37:		(	(checked->alloc == 0 && checked->begin == NULL)
-     5089:   38:			||
-    16352:   39:			(checked->alloc != 0 && checked->begin != NULL)) &&
-    24190:   40:		checked->size  <= checked->maxsize &&
-     6174:   41:		checked->esize <= checked->emaxsize);
-        -:   42:#else	
-        -:   43:	int cond =     (checked != NULL &&
-        -:   44:			checked->size <= checked->alloc &&
-        -:   45:			(	(checked->alloc == 0 && checked->begin == NULL)
-        -:   46:			||
-        -:   47:				(checked->alloc != 0 && checked->begin != NULL)) &&
-        -:   48:			checked->size  <= checked->maxsize &&
-        -:   49:			checked->esize <= checked->emaxsize);
-        -:   50:	if (cond == 0)
-        -:   51:	{
-        -:   52:		fprintf(stderr, "Vector verification failed:\n");
-        -:   53:		__vector_dump(checked);
-        -:   54:	}
-        -:   55:	return cond;
-        -:   56:#endif
-        -:   57:}
-        -:   58:
-        -:   59:/**
-        -:   60: * Validates iterator
-        -:   61: * @param  checked validating iterator
-        -:   62: * @return         1 if OK, 0 if not
-        -:   63: */
-        -:   64:
-     4530:   65:inline int __vector_iter_check(const vector_iter* checked)
-        -:   66:{
-        -:   67:#ifndef DEBUG
-     6405:   68:	return 		(checked != NULL      &&
-     8244:   69:			 checked->ptr != NULL &&
-     1875:   70:			(checked->index < checked->ptr->size
-      420:   71:			 	||
-      420:   72:			 (checked->index == 0
-      384:   73:			  		&&
-      384:   74:			  checked->ptr->size == 0)));
-        -:   75:#else
-        -:   76:	int cond = 	(checked != NULL      &&
-        -:   77:			 checked->ptr != NULL &&
-        -:   78:			(checked->index < checked->ptr->size
-        -:   79:			 	||
-        -:   80:			(checked->index == 0
-        -:   81:			  		&&
-        -:   82:			 checked->ptr->size == 0)) &&
-        -:   83:			 __vector_check(checked->ptr));
-        -:   84:	if (cond == 0)
-        -:   85:	{
-        -:   86:		fprintf(stderr, "Vector iterator verification failed:\n");
-        -:   87:		__vector_iter_dump(checked);
-        -:   88:	}
-        -:   89:	return cond;
-        -:   90:#endif
-        -:   91:}
-        -:   92:
-        -:   93:/**
-        -:   94: * Prints detailed information about iterator copy
-        -:   95: * @param iter current iterator
-        -:   96: */
-      302:   97:void __vector_iter_dump(const vector_iter* iter)
-        -:   98:{
-      302:   99:	if (iter == NULL)
-      479:  100:		return;
-        -:  101:
-      125:  102:	fprintf(stderr, "Vector iterator [%p] dump: Vector [%p], index[%"PRIu32"]\n",
-        -:  103:			iter, iter->ptr, iter->index);
-        -:  104:	
-      125:  105:	if (iter->ptr != NULL)
-        -:  106:	{
-      125:  107:		fprintf(stderr, "Vector dump below\n");
-      125:  108:		__vector_dump(iter->ptr);
-        -:  109:	}
-        -:  110:	else
-    #####:  111:		fputc('\n', stderr);
-      125:  112:	fprintf(stderr, "Vector iterator dump end\n\n");	
-        -:  113:}
-        -:  114:
-        -:  115:/**
-        -:  116: * Prints detailed information about current vector object
-        -:  117: * @param this current object
-        -:  118: */
-      125:  119:void __vector_dump(const vector* this)
-        -:  120:{
-      125:  121:	if (this == NULL)
-      125:  122:		return;
-      125:  123:	fprintf(stderr, "Vector [%p] dump:\n"
-        -:  124:			"Allocated:     %"PRIu32 "\n"
-        -:  125:			"Size:          %"PRIu32 "\n"
-        -:  126:			"Max size:      %"PRIu32 "\n"
-        -:  127:			"Elem size:     %"PRIu32 "\n"
-        -:  128:			"Max elem size: %"PRIu32 "\n"
-        -:  129:			"Array begin:   [%p]"   "\n"
-        -:  130:			"Destructor ptr:[%p]"   "\n"
-        -:  131:			"Vector dump end"	"\n",
-        -:  132:			this,
-        -:  133:			this->alloc,
-        -:  134:			this->size,
-        -:  135:			this->maxsize,
-        -:  136:			this->esize,
-        -:  137:			this->emaxsize,
-        -:  138:			this->begin,
-        -:  139:			this->destr);
-        -:  140:// DELETE THIS (USED TO FIND BUGS)
-        -:  141:		// if (this->begin != NULL)
-        -:  142:		// 	for (uint32 i = 0; i < this -> size; ++i)
-        -:  143:		// 		printf("%d ", ((int*)(this->begin))[i]);
-        -:  144:		// 		
-        -:  145:		//
-      125:  146:		putchar('\n');
-        -:  147:}
-        -:  148:
+        -:   22:
+      394:   23:inline void* iv_realloc(void* ptr, size_t size)
+        -:   24:{
+      394:   25:	if (CONDITION)
+      265:   26:		return realloc(ptr, size);
+      129:   27:	free(ptr);
+      129:   28:	ptr = NULL;
+        -:   29:
+      129:   30:	return NULL;
+        -:   31:}
+        -:   32:
+        -:   33:
+     3910:   34:int __vector_check(const vector* checked)
+        -:   35:{
+        -:   36:#ifndef DEBUG
+     7400:   37:	return (checked != NULL &&
+     5544:   38:		checked->size <= checked->alloc &&
+     2415:   39:		(	(checked->alloc == 0 && checked->begin == NULL)
+     1693:   40:			||
+     5440:   41:			(checked->alloc != 0 && checked->begin != NULL)) &&
+     8018:   42:		checked->size  <= checked->maxsize &&
+     2054:   43:		checked->esize <= checked->emaxsize);
+        -:   44:#else	
+        -:   45:	int cond =     (checked != NULL &&
+        -:   46:			checked->size <= checked->alloc &&
+        -:   47:			(	(checked->alloc == 0 && checked->begin == NULL)
+        -:   48:			||
+        -:   49:				(checked->alloc != 0 && checked->begin != NULL)) &&
+        -:   50:			checked->size  <= checked->maxsize &&
+        -:   51:			checked->esize <= checked->emaxsize);
+        -:   52:	if (cond == 0)
+        -:   53:	{
+        -:   54:		fprintf(stderr, "Vector verification failed:\n");
+        -:   55:		__vector_dump(checked);
+        -:   56:	}
+        -:   57:	return cond;
+        -:   58:#endif
+        -:   59:}
+        -:   60:
+        -:   61:
+        -:   62:
+     1500:   63:inline int __vector_iter_check(const vector_iter* checked)
+        -:   64:{
+        -:   65:#ifndef DEBUG
+     2115:   66:	return 		(checked != NULL      &&
+     2718:   67:			 checked->ptr != NULL &&
+      615:   68:			(checked->index < checked->ptr->size
+      140:   69:			 	||
+      140:   70:			 (checked->index == 0
+      128:   71:			  		&&
+      128:   72:			  checked->ptr->size == 0)));
+        -:   73:#else
+        -:   74:	int cond = 	(checked != NULL      &&
+        -:   75:			 checked->ptr != NULL &&
+        -:   76:			(checked->index < checked->ptr->size
+        -:   77:			 	||
+        -:   78:			(checked->index == 0
+        -:   79:			  		&&
+        -:   80:			 checked->ptr->size == 0)) &&
+        -:   81:			 __vector_check(checked->ptr));
+        -:   82:	if (cond == 0)
+        -:   83:	{
+        -:   84:		fprintf(stderr, "Vector iterator verification failed:\n");
+        -:   85:		__vector_iter_dump(checked);
+        -:   86:	}
+        -:   87:	return cond;
+        -:   88:#endif
+        -:   89:}
+        -:   90:
+      100:   91:void __vector_iter_dump(const vector_iter* iter)
+        -:   92:{
+      100:   93:	if (iter == NULL)
+      159:   94:		return;
+        -:   95:
+       41:   96:	fprintf(stderr, "Vector iterator [%p] dump: Vector [%p], index[%"PRIu32"]\n",
+        -:   97:			iter, iter->ptr, iter->index);
+        -:   98:	
+       41:   99:	if (iter->ptr != NULL)
+        -:  100:	{
+       41:  101:		fprintf(stderr, "Vector dump below\n");
+       41:  102:		__vector_dump(iter->ptr);
+        -:  103:	}
+        -:  104:	else
+    #####:  105:		fputc('\n', stderr);
+       41:  106:	fprintf(stderr, "Vector iterator dump end\n\n");	
+        -:  107:}
+        -:  108:
+        -:  109:
+       41:  110:void __vector_dump(const vector* this)
+        -:  111:{
+       41:  112:	if (this == NULL)
+       41:  113:		return;
+       41:  114:	fprintf(stderr, "Vector [%p] dump:\n"
+        -:  115:			"Allocated:     %"PRIu32 "\n"
+        -:  116:			"Size:          %"PRIu32 "\n"
+        -:  117:			"Max size:      %"PRIu32 "\n"
+        -:  118:			"Elem size:     %"PRIu32 "\n"
+        -:  119:			"Max elem size: %"PRIu32 "\n"
+        -:  120:			"Array begin:   [%p]"   "\n"
+        -:  121:			"Destructor ptr:[%p]"   "\n"
+        -:  122:			"Vector dump end"	"\n",
+        -:  123:			this,
+        -:  124:			this->alloc,
+        -:  125:			this->size,
+        -:  126:			this->maxsize,
+        -:  127:			this->esize,
+        -:  128:			this->emaxsize,
+        -:  129:			this->begin,
+        -:  130:			this->destr);
+        -:  131:// DELETE THIS (USED TO FIND BUGS)
+        -:  132:		// if (this->begin != NULL)
+        -:  133:		// 	for (uint32 i = 0; i < this -> size; ++i)
+        -:  134:		// 		printf("%d ", ((int*)(this->begin))[i]);
+        -:  135:		// 		
+        -:  136:		//
+       41:  137:		putchar('\n');
+        -:  138:}
+        -:  139:
+        -:  140:
+        -:  141:
+     2447:  142:inline void* __elem_ptr(const vector* this, uint32 index)
+        -:  143:{
+        -:  144:	// fprintf(stderr, "this->begin = [%p], index = %"PRIu32", this->esize = %"PRIu32"\n", 
+        -:  145:	// 	this->begin, index, this->esize);
+     4894:  146:	return (void*)( (unsigned long)(this->begin) + 
+     2447:  147:			BYTES_IN_ELEMS(this, index));
+        -:  148:}
         -:  149:
-        -:  150:/**
-        -:  151: * Gets pointer of index'th element of vector
-        -:  152: * @param this  current vector
-        -:  153: * @param index 
-        -:  154: */
-     7361:  155:inline void* __elem_ptr(const vector* this, uint32 index)
-        -:  156:{
-        -:  157:	// fprintf(stderr, "this->begin = [%p], index = %"PRIu32", this->esize = %"PRIu32"\n", 
-        -:  158:	// 	this->begin, index, this->esize);
-    14722:  159:	return (void*)( (unsigned long)(this->begin) + 
-     7361:  160:			BYTES_IN_ELEMS(this, index));
-        -:  161:}
+      220:  150:inline void __copy_elem(const vector* this, uint32 index, void* dest)
+        -:  151:{
+        -:  152:	 // fprintf(stderr, "this = [%lu], index = %"PRIu32", from = [%lu], dest = [%p]", 
+        -:  153:	 // 	(unsigned long)this, index, (unsigned long)__elem_ptr(this, index), dest);
+        -:  154:	
+      220:  155:	memmove(dest, __elem_ptr(this, index), this->esize);
+      220:  156:}
+        -:  157:
+     1076:  158:inline void __set_elem(vector* this, uint32 index, const void* src)
+        -:  159:{
+     1076:  160:	memmove(__elem_ptr(this, index), src, this->esize);
+     1076:  161:}
         -:  162:
-      660:  163:inline void __copy_elem(const vector* this, uint32 index, void* dest)
-        -:  164:{
-        -:  165:	 // fprintf(stderr, "this = [%lu], index = %"PRIu32", from = [%lu], dest = [%p]", 
-        -:  166:	 // 	(unsigned long)this, index, (unsigned long)__elem_ptr(this, index), dest);
-        -:  167:	
-      660:  168:	memmove(dest, __elem_ptr(this, index), this->esize);
-      660:  169:}
-        -:  170:
-     3238:  171:inline void __set_elem(vector* this, uint32 index, const void* src)
-        -:  172:{
-     3238:  173:	memmove(__elem_ptr(this, index), src, this->esize);
-     3238:  174:}
-        -:  175:

@@ -9,8 +9,8 @@
 const uint32 MAXESIZE_RATIO = 100;
 const uint32 MINALLOC_ELEMS = 5; 
 
-
 //==========================================================================================
+
 /**
  * Deletes all objects and releases memory
  * @param this current vector
@@ -49,13 +49,14 @@ static int __optimize_alloc(vector* this)
 		(alloc / 2>= MINALLOC_ELEMS)) 
 	    )
 		return 0;
-	this->begin  = iv_realloc(this->begin, BYTES_IN_ELEMS(this, alloc / 2));
-	this->alloc = alloc / 2;
-
-	if (this->begin == NULL){
-		this->alloc = 0;
+	void* new_begin = iv_realloc(this->begin, BYTES_IN_ELEMS(this, alloc / 2), this->alloc);
+	
+	if (new_begin == NULL){
 		return -1;
 	}
+	this->begin  = new_begin;
+	this->alloc = alloc / 2;
+
 	return 0;
 }
 
@@ -75,24 +76,17 @@ static int __alloc_more(vector* this)
 					 MINALLOC_ELEMS;
 	if (new_alloc > maxsize)
 		new_alloc = maxsize;
-	this->begin = iv_realloc(this->begin, BYTES_IN_ELEMS(this, new_alloc));
-	if (this->begin == NULL){
-		this->alloc = 0;
+
+	void* new_begin = iv_realloc(this->begin, BYTES_IN_ELEMS(this, new_alloc), this->alloc);
+	
+	if (new_begin == NULL){
 		return -1;
 	}
-
+	this->begin = new_begin;
 	this->alloc = new_alloc;
 	return 1;
 }
 
-
-/**
- * Allocates memory and creates vector object
- *
- * @size 	Size of contained element
- * @destr 	Function pointer to object destructor, possible to be NULL
- * @maxsize 	Maximal size of vector
- */
 
 vector* __vector_init(uint32 size, void (*destr)(void* obj))
 {
@@ -113,11 +107,11 @@ vector* __vector_init(uint32 size, void (*destr)(void* obj))
  	return new;
 }
 
-/**
- * Deletes current vector
- * @param  this Deleting vector
- * @return      -1 if pointer is NULL, 0 if success
- */
+
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_delete(vector* this)
 {
 	if (this == NULL)
@@ -137,11 +131,10 @@ int vector_delete(vector* this)
 	return 0;
 }
 
-/**
- * Deletes all objects and releases memory
- * @param  this current vector
- * @return      -1 if vector is invalid, 0 if success
- */
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_erase(vector* this)
 {
 	VECTOR_CHECK(this);
@@ -153,12 +146,10 @@ int vector_erase(vector* this)
 	return 0;
 }
 
-/**
- * Removes index'th element of vector
- * @param  this  current vector
- * @param  index index of removing object
- * @return       -1 if not in bounds, 0 if OK
- */
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_remove(vector* this, uint32 index)
 {
 	VECTOR_CHECK(this);
@@ -176,15 +167,10 @@ int vector_remove(vector* this, uint32 index)
 	
 }
 
-/**
- * Inserts current element to be index'th element in vector
- * @param  this  current vector
- * @param  elem  element to insert
- * @param  index future index
- * @return       -1  if not in bounds or reallocation failed
- *                0  if maximum size reached
- *                1  if OK
- */
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_insert(vector* this, const void* elem, uint32 index)
 {
 	
@@ -211,12 +197,9 @@ int vector_insert(vector* this, const void* elem, uint32 index)
 	return 1;
 }
 
-/**
- * Sorts current vector
- * @param this	current vector
- * @param comp	comparison function
- * @return	-1 if vector is invalid, 0 if OK
- */
+
+//==========================================================================================
+//==========================================================================================
 
 int vector_sort(vector* this, int (*comp)(const void*, const void*))
 {
@@ -226,13 +209,10 @@ int vector_sort(vector* this, int (*comp)(const void*, const void*))
 	return 0;
 }
 
-/**
- * Copies vector element to the pointer
- * @param  this         current vector
- * @param  index        index of copying element
- * @param  where_to_get pointer to save
- * @return              -1 if not in bounds, 0 if OK
- */
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_get(const vector* this, uint32 index, void* where_to_get)
 {
 	VECTOR_CHECK(this);
@@ -244,6 +224,10 @@ int vector_get(const vector* this, uint32 index, void* where_to_get)
 
 }
 
+
+//==========================================================================================
+//==========================================================================================
+
 int vector_set(vector* this, uint32 index, void* what_to_send)
 {
 	VECTOR_CHECK(this);
@@ -253,12 +237,18 @@ int vector_set(vector* this, uint32 index, void* what_to_send)
 	return 0;
 }
 
+//==========================================================================================
+//==========================================================================================
+
 int vector_empty(const vector* this)
 {
 	if (this == NULL)
 		return -1;
 	return this->size == 0;
 }
+
+//==========================================================================================
+//==========================================================================================
 
 uint32 vector_size(const vector* this)
 {
@@ -288,24 +278,24 @@ uint32 vector_alloc(const vector* this)
 	return this->alloc;
 }
 
-/**
- * Changes allocated memory capacity to its size
- * @param  this current vector
- * @return      -1 if vector is invalid or failed to reallocate memory
- *               0 if OK
- */
+//==========================================================================================
+//==========================================================================================
+
 int vector_fit(vector* this)
 {
 	VECTOR_CHECK(this);
-	    this->begin = iv_realloc(this->begin, BYTES_IN_ELEMS(this, this->size));
-	if (this->begin == NULL){
-		this->alloc = 0;
+	    
+	void* new_begin = iv_realloc(this->begin, BYTES_IN_ELEMS(this, this->size), this->alloc);
+	if (new_begin == NULL){
 		return -1;
 	}
+	this->begin = new_begin;
 	this->alloc = this->size;
 	return 1;
 }
 
+//==========================================================================================
+//==========================================================================================
 
 inline int __vector_pushback (vector* this, const void* obj)
 {

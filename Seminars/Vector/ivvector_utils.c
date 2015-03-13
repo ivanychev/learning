@@ -5,7 +5,6 @@
 #define CONDITION (rand() % 3 != 0)
 
 
-
 inline void* iv_calloc(size_t nmemb, size_t size)
 {
 	if (CONDITION) 
@@ -13,21 +12,32 @@ inline void* iv_calloc(size_t nmemb, size_t size)
 	return NULL;
 }
 
+
 inline void iv_free(void* ptr)
 {
 	free(ptr);
 	ptr = NULL;
 }
 
-inline void* iv_realloc(void* ptr, size_t size)
-{
-	if (CONDITION)
-		return realloc(ptr, size);
-	free(ptr);
-	ptr = NULL;
 
+inline void* iv_realloc(void* ptr, size_t size, size_t oldsize)
+{
+	void* newptr = malloc(size);
+	if (newptr == NULL)
+		return NULL;
+
+	if (CONDITION)
+	{
+		memmove(newptr, ptr, oldsize);
+		free(ptr);
+		ptr = NULL;
+		return newptr;
+	}
+	free(newptr);
+	newptr = NULL;
 	return NULL;
 }
+
 
 int __vector_check(const vector* checked)
 {
@@ -56,11 +66,7 @@ int __vector_check(const vector* checked)
 #endif
 }
 
-/**
- * Validates iterator
- * @param  checked validating iterator
- * @return         1 if OK, 0 if not
- */
+
 
 inline int __vector_iter_check(const vector_iter* checked)
 {
@@ -90,10 +96,6 @@ inline int __vector_iter_check(const vector_iter* checked)
 #endif
 }
 
-/**
- * Prints detailed information about iterator copy
- * @param iter current iterator
- */
 void __vector_iter_dump(const vector_iter* iter)
 {
 	if (iter == NULL)
@@ -112,10 +114,7 @@ void __vector_iter_dump(const vector_iter* iter)
 	fprintf(stderr, "Vector iterator dump end\n\n");	
 }
 
-/**
- * Prints detailed information about current vector object
- * @param this current object
- */
+
 void __vector_dump(const vector* this)
 {
 	if (this == NULL)
@@ -147,11 +146,7 @@ void __vector_dump(const vector* this)
 }
 
 
-/**
- * Gets pointer of index'th element of vector
- * @param this  current vector
- * @param index 
- */
+
 inline void* __elem_ptr(const vector* this, uint32 index)
 {
 	// fprintf(stderr, "this->begin = [%p], index = %"PRIu32", this->esize = %"PRIu32"\n", 
