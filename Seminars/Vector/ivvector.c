@@ -22,7 +22,7 @@ static void __vector_eliminate_all_and_free(vector* this)
 	void*  cursor = NULL;
 	uint32 index  = 0;
 //	fprintf(stderr, "Hi\n");
-	__vector_dump(this);
+//	__vector_dump(this);
 	if (this->destr != NULL && this-> begin != NULL)
 		FOR_EACH(cursor, this, index)
 			this->destr(cursor);
@@ -200,9 +200,9 @@ int vector_insert(vector* this, const void* elem, uint32 index)
 			return cond;
 	}
 	void* current = __elem_ptr(this, index);
-	__vector_dump(this);
-	fprintf(stderr, "THIS[%p], NEXT_PTR[%p], CURRENT[%p], BYTES[%lu]\n", 
-		this, NEXT_PTR(current, this), current, BYTES_IN_ELEMS(this, this->size - index));
+//	__vector_dump(this);
+//	fprintf(stderr, "THIS[%p], NEXT_PTR[%p], CURRENT[%p], BYTES[%lu]\n", 
+//		this, NEXT_PTR(current, this), current, BYTES_IN_ELEMS(this, this->size - index));
 	memmove(NEXT_PTR(current, this), current, BYTES_IN_ELEMS(this, this->size - index));	
 	
 	__set_elem(this, index, elem);
@@ -221,7 +221,7 @@ int vector_insert(vector* this, const void* elem, uint32 index)
 int vector_sort(vector* this, int (*comp)(const void*, const void*))
 {
 	VECTOR_CHECK(this);
-	__vector_dump(this);
+//	__vector_dump(this);
 	qsort(this->begin, this->size, this->esize, comp);
 	return 0;
 }

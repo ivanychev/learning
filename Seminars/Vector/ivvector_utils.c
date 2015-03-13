@@ -67,19 +67,19 @@ inline int __vector_iter_check(const vector_iter* checked)
 #ifndef DEBUG
 	return 		(checked != NULL      &&
 			 checked->ptr != NULL &&
-			 (checked->index < checked->ptr->size
+			(checked->index < checked->ptr->size
 			 	||
-			  (checked->index == 0
+			 (checked->index == 0
 			  		&&
 			  checked->ptr->size == 0)));
 #else
 	int cond = 	(checked != NULL      &&
 			 checked->ptr != NULL &&
-			 (checked->index < checked->ptr->size
+			(checked->index < checked->ptr->size
 			 	||
-			  (checked->index == 0
+			(checked->index == 0
 			  		&&
-			  checked->ptr->size == 0)) &&
+			 checked->ptr->size == 0)) &&
 			 __vector_check(checked->ptr));
 	if (cond == 0)
 	{
@@ -137,10 +137,12 @@ void __vector_dump(const vector* this)
 			this->emaxsize,
 			this->begin,
 			this->destr);
-// DELETE THIS
-		if (this->begin != NULL)
-			for (uint32 i = 0; i < this -> size; ++i)
-				printf("%d ", ((int*)(this->begin))[i]);
+// DELETE THIS (USED TO FIND BUGS)
+		// if (this->begin != NULL)
+		// 	for (uint32 i = 0; i < this -> size; ++i)
+		// 		printf("%d ", ((int*)(this->begin))[i]);
+		// 		
+		//
 		putchar('\n');
 }
 
@@ -160,8 +162,8 @@ inline void* __elem_ptr(const vector* this, uint32 index)
 
 inline void __copy_elem(const vector* this, uint32 index, void* dest)
 {
-	 fprintf(stderr, "this = [%lu], index = %"PRIu32", from = [%lu], dest = [%p]", 
-	 	(unsigned long)this, index, (unsigned long)__elem_ptr(this, index), dest);
+	 // fprintf(stderr, "this = [%lu], index = %"PRIu32", from = [%lu], dest = [%p]", 
+	 // 	(unsigned long)this, index, (unsigned long)__elem_ptr(this, index), dest);
 	
 	memmove(dest, __elem_ptr(this, index), this->esize);
 }

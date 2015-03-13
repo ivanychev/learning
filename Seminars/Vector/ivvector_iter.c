@@ -168,9 +168,9 @@ int vector_iter_isend(const vector_iter* this)
 
 void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))
 {
-	fprintf(stderr, "Hello!");
+//	fprintf(stderr, "Hello!");
 	if (!__vector_iter_check(iter) || !__vector_check(iter->ptr) || !proceed)
 		return NULL;
-	__vector_dump(iter->ptr);
+//	__vector_dump(iter->ptr);
 	return proceed(__elem_ptr(iter->ptr, iter->index), args);
 }

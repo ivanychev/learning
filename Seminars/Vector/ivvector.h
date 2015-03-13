@@ -19,16 +19,14 @@ struct vector_iter_s;
 typedef struct vector_iter_s vector_iter;
 
 
-// destructor added
+
 
 vector* __vector_init(uint32 size, void (*destr)(void* obj));
 #define   vector_init(name, type, destr)	\
 	  vector* name = __vector_init(sizeof(type), destr);
 
-// To move 
 void 		__vector_iter_dump	(const vector_iter* iter);
 void 		__vector_dump 		(const vector* this);
-//
 
 
 int vector_delete(vector*);
@@ -38,17 +36,15 @@ int vector_insert(vector*, const void*, uint32 index_will_be);
 int vector_sort  (vector*, int (*comp)(const void*, const void*));
 
 int vector_get(const vector*, uint32, void* where_to_get);
-int vector_set(vector*, uint32, void* what_to_send);
+int vector_set(      vector*, uint32, void* what_to_send);
 
 int    vector_empty   (const vector*);
 uint32 vector_size    (const vector*);
 uint32 vector_esize   (const vector*);
 uint32 vector_maxsize (const vector*);
-//uint32 vector_capacity(const vector*);
 uint32 vector_alloc   (const vector*);
-
-
 int vector_fit	(vector*);
+
 
 #ifndef DEBUG
 #define CHECK_SIZE(vec_ptr, obj_ptr)
@@ -77,14 +73,9 @@ int __vector_popfront (vector* this, void* dest);
 	CHECK_SIZE(vec_ptr, obj_ptr)		\
 	__vector_popfront((vec_ptr), (void*)obj_ptr)
 
-// Если с итераторами
-
-
 /**
  * if dest is NULL, nothing is copied
  */
-
-// errptr
 
 int vector_iter_next	(vector_iter*, 	void* dest);
 int vector_iter_prev	(vector_iter*, 	void* dest);
@@ -97,8 +88,6 @@ int vector_iter_del(vector_iter*);
 int vector_iter_isbegin  (const vector_iter*);
 int vector_iter_isend (const vector_iter*);
 //uint32 vector_iter_get_index(const* vector_iter*);
-
-// Как удалить по итератору? либо get_index, либо iter_del
 
 void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv));
 

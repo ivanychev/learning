@@ -2,7 +2,7 @@
         -:    0:Graph:ivvector.gcno
         -:    0:Data:ivvector.gcda
         -:    0:Runs:5
-        -:    0:Programs:4
+        -:    0:Programs:3
         -:    1:#include "ivvector.h"
         -:    2:#include "ivvector_internal.h"
         -:    3:
@@ -11,16 +11,16 @@
         -:    6:/*
         -:    7:	PTR_ERR MODIFY AHEAD
         -:    8: */
-      500:    9:vector_iter* vector_iter_get(vector* this)
+      302:    9:vector_iter* vector_iter_get(vector* this)
         -:   10:{
-      500:   11:	if (this == NULL)
-      138:   12:		return NULL;
-      362:   13:	vector_iter* new = iv_calloc(1, sizeof(vector_iter));
-      362:   14:	if (new == NULL)
-      141:   15:		return NULL;
-      221:   16:	new->ptr = this;
+      302:   11:	if (this == NULL)
+       90:   12:		return NULL;
+      212:   13:	vector_iter* new = iv_calloc(1, sizeof(vector_iter));
+      212:   14:	if (new == NULL)
+       87:   15:		return NULL;
+      125:   16:	new->ptr = this;
         -:   17:
-      221:   18:	return new;
+      125:   18:	return new;
         -:   19:}
         -:   20:
         -:   21:/**
@@ -28,16 +28,16 @@
         -:   23: * @param  this pointer to iterator
         -:   24: * @return      0 if success, -1 if "this" is NULL
         -:   25: */
-      500:   26:int vector_iter_del(vector_iter* this)
+      302:   26:int vector_iter_del(vector_iter* this)
         -:   27:{
-      500:   28:	if (this == NULL)
-      279:   29:		return -1;
-      221:   30:	this -> ptr   =        NULL;
-      221:   31:	this -> index =        IV_POISON;
-      221:   32:	iv_free(this);
-      221:   33:	this = NULL;
+      302:   28:	if (this == NULL)
+      177:   29:		return -1;
+      125:   30:	this -> ptr   =        NULL;
+      125:   31:	this -> index =        IV_POISON;
+      125:   32:	iv_free(this);
+      125:   33:	this = NULL;
         -:   34:
-      221:   35:	return 0;
+      125:   35:	return 0;
         -:   36:}
         -:   37:
         -:   38:/**
@@ -46,22 +46,22 @@
         -:   41: * @param  dest if not NULL copies current object before moving iterator
         -:   42: * @return      1 if moved, 0 if not, -1 if iterator is invalid
         -:   43: */
-     2500:   44:int vector_iter_next(vector_iter* this, void* dest)
+     1510:   44:int vector_iter_next(vector_iter* this, void* dest)
         -:   45:{
-     2500:   46:	ITER_CHECK(this);
+     1510:   46:	ITER_CHECK(this);
         -:   47:
-      610:   48:	if (this->ptr->size == 0)
-      366:   49:		return 0;
+      330:   48:	if (this->ptr->size == 0)
+      216:   49:		return 0;
         -:   50:
-      244:   51:	if (dest != NULL)
-      244:   52:		__copy_elem(this->ptr, this->index, dest);
+      114:   51:	if (dest != NULL)
+      114:   52:		__copy_elem(this->ptr, this->index, dest);
         -:   53:
-      244:   54:	if (this->index < this->ptr->size - 1)
+      114:   54:	if (this->index < this->ptr->size - 1)
         -:   55:	{
-      190:   56:		this->index += 1;
-      190:   57:		return 1;
+       78:   56:		this->index += 1;
+       78:   57:		return 1;
         -:   58:	}
-       54:   59:	return 0;
+       36:   59:	return 0;
         -:   60:}
         -:   61:
         -:   62:/**
@@ -70,20 +70,20 @@
         -:   65: * @param  dest if not NULL copies current object before moving iterator
         -:   66: * @return 1 if moved, 0 if not, -1 if iterator is invalid
         -:   67: */
-     2000:   68:int vector_iter_prev(vector_iter* this, void* dest)
+     1208:   68:int vector_iter_prev(vector_iter* this, void* dest)
         -:   69:{
-     2000:   70:	ITER_CHECK(this);
-      488:   71:	if (this->ptr->size == 0)
-      244:   72:		return 0;
-      244:   73:	if (dest != NULL)
-      122:   74:		__copy_elem(this->ptr, this->index, dest);
+     1208:   70:	ITER_CHECK(this);
+      264:   71:	if (this->ptr->size == 0)
+      150:   72:		return 0;
+      114:   73:	if (dest != NULL)
+       57:   74:		__copy_elem(this->ptr, this->index, dest);
         -:   75:
-      244:   76:	if (this->index > 0)
+      114:   76:	if (this->index > 0)
         -:   77:	{
-      190:   78:		this->index -= 1;
-      190:   79:		return 1;
+       78:   78:		this->index -= 1;
+       78:   79:		return 1;
         -:   80:	}
-       54:   81:	return 0;
+       36:   81:	return 0;
         -:   82:}
         -:   83:
         -:   84:/**
@@ -92,13 +92,13 @@
         -:   87: * @param  dest destination
         -:   88: * @return      0 if success, -1 if failure
         -:   89: */
-     1000:   90:int vector_iter_getelem (const vector_iter* this, void* dest)
+      604:   90:int vector_iter_getelem (const vector_iter* this, void* dest)
         -:   91:{
-     1000:   92:	ITER_CHECK(this);
-      244:   93:	if (dest == NULL || this->ptr->size == 0)
-    #####:   94:		return -1;
-      244:   95:	__copy_elem(this->ptr, this->index, dest);
-      244:   96:	return 0;
+      604:   92:	ITER_CHECK(this);
+      123:   93:	if (dest == NULL || this->ptr->size == 0)
+        9:   94:		return -1;
+      114:   95:	__copy_elem(this->ptr, this->index, dest);
+      114:   96:	return 0;
         -:   97:}
         -:   98:
         -:   99:/**
@@ -107,13 +107,13 @@
         -:  102: * @param  src  
         -:  103: * @return      0 if success, -1 if failure
         -:  104: */
-      500:  105:int vector_iter_setelem(vector_iter* this, const void* src)
+      302:  105:int vector_iter_setelem(vector_iter* this, const void* src)
         -:  106:{
-      500:  107:	ITER_CHECK(this);
-      122:  108:	if (src == NULL || this->ptr->size == 0)
-    #####:  109:		return -1;
-      122:  110:	__set_elem(this->ptr, this->index, src);
-      122:  111:	return 0;
+      302:  107:	ITER_CHECK(this);
+       66:  108:	if (src == NULL || this->ptr->size == 0)
+        9:  109:		return -1;
+       57:  110:	__set_elem(this->ptr, this->index, src);
+       57:  111:	return 0;
         -:  112:}
         -:  113:
         -:  114:/**
@@ -121,13 +121,13 @@
         -:  116: * @param  this current iterator
         -:  117: * @return      0 if success, -1 if "this" is NULL or vector is invalid
         -:  118: */
-      500:  119:int vector_iter_begin(vector_iter* this)
+      302:  119:int vector_iter_begin(vector_iter* this)
         -:  120:{
-      500:  121:	if (this == NULL)
-      279:  122:		return -1;
-      221:  123:	VECTOR_CHECK(this->ptr);
-      122:  124:	this->index = 0;
-      122:  125:	return 0;
+      302:  121:	if (this == NULL)
+      177:  122:		return -1;
+      125:  123:	VECTOR_CHECK(this->ptr);
+       66:  124:	this->index = 0;
+       66:  125:	return 0;
         -:  126:}
         -:  127:
         -:  128:/**
@@ -135,13 +135,13 @@
         -:  130: * @param  this current iterator
         -:  131: * @return      0 if success, -1 if "this" is NULL or vector is invalid
         -:  132: */
-      500:  133:int vector_iter_end(vector_iter* this)
+      302:  133:int vector_iter_end(vector_iter* this)
         -:  134:{
-      500:  135:	if (this == NULL)
-      279:  136:		return -1;
-      221:  137:	VECTOR_CHECK(this->ptr);
-      122:  138:	this->index = this->ptr->size - 1;
-      122:  139:	return 0;
+      302:  135:	if (this == NULL)
+      177:  136:		return -1;
+      125:  137:	VECTOR_CHECK(this->ptr);
+       66:  138:	this->index = this->ptr->size - 1;
+       66:  139:	return 0;
         -:  140:}
         -:  141:
         -:  142:/**
@@ -149,12 +149,12 @@
         -:  144: * @param  this current iterator
         -:  145: * @return      1 if true, 0 if false, -1 if iterator is invalid
         -:  146: */
-      500:  147:int vector_iter_isbegin(const vector_iter* this)
+      302:  147:int vector_iter_isbegin(const vector_iter* this)
         -:  148:{
-      500:  149:	ITER_CHECK(this);
-      122:  150:	if (this -> index == 0 && this->ptr->size != 0)
-       11:  151:		return 1;
-      111:  152:	return 0;
+      302:  149:	ITER_CHECK(this);
+       57:  150:	if (this -> index == 0 && this->ptr->size != 0)
+        9:  151:		return 1;
+       48:  152:	return 0;
         -:  153:}
         -:  154:
         -:  155:/**
@@ -162,20 +162,20 @@
         -:  157: * @param  this current iterator
         -:  158: * @return      1 if true, 0 if false, -1 if iterator is invalid
         -:  159: */
-      500:  160:int vector_iter_isend(const vector_iter* this)
+      302:  160:int vector_iter_isend(const vector_iter* this)
         -:  161:{
-      500:  162:	ITER_CHECK(this);
-      122:  163:	if (this -> index == this -> ptr -> size - (int64)1)
-      122:  164:		return 1;
+      302:  162:	ITER_CHECK(this);
+       57:  163:	if (this -> index == this -> ptr -> size - (int64)1)
+       57:  164:		return 1;
     #####:  165:	return 0;
         -:  166:}
         -:  167:
         -:  168:
-      500:  169:void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))
+      302:  169:void* vector_iter_do(vector_iter* iter, void* args, void* (*proceed)(void* obj,void* argv))
         -:  170:{
-      500:  171:	fprintf(stderr, "Hello!");
-      500:  172:	if (!__vector_iter_check(iter) || !__vector_check(iter->ptr) || !proceed)
-      378:  173:		return NULL;
-      122:  174:	__vector_dump(iter->ptr);
-      122:  175:	return proceed(__elem_ptr(iter->ptr, iter->index), args);
+        -:  171://	fprintf(stderr, "Hello!");
+      302:  172:	if (!__vector_iter_check(iter) || !__vector_check(iter->ptr) || !proceed)
+      245:  173:		return NULL;
+        -:  174://	__vector_dump(iter->ptr);
+       57:  175:	return proceed(__elem_ptr(iter->ptr, iter->index), args);
         -:  176:}
