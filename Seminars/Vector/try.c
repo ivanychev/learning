@@ -1,11 +1,24 @@
 #include "ivvector.h"
 #include "stdio.h"
 
+//#define TRY_DEBUG
+
+#ifdef TRY_DEBUG
 #define POINT  POINT1
-#define POINT1 printf("POINT 1 !!!!!!!!!!!!!!11\n");
-#define POINT2 printf("POINT 2 !!!!!!!!!!!!!!11\n");
-#define POINT3 printf("POINT 3 !!!!!!!!!!!!!!11\n");
-#define POINT4 printf("POINT 4 !!!!!!!!!!!!!!11\n");
+#define POINT1 printf("POINT 1 !!!!!!!!!!!!!!!!\n");
+#define POINT2 printf("POINT 2 !!!!!!!!!!!!!!!!\n");
+#define POINT3 printf("POINT 3 !!!!!!!!!!!!!!!!\n");
+#define POINT4 printf("POINT 4 !!!!!!!!!!!!!!!!\n");
+#define VECTOR_DUMP(vecptr) __vector_dump(vecptr);
+#else
+#define POINT
+#define POINT1
+#define POINT2
+#define POINT3
+#define POINT4
+#define VECTOR_DUMP(vecptr)
+#endif
+
 
 int int_sort(const void* p1, const void* p2)
 {
@@ -55,29 +68,30 @@ void big_tester()
 	POINT;
 	vector_pushback (first, &a4);
 //fprintf(stderr, ">>>>>>>1\n");
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 
 	vector_insert(first, &a32, 2);
-	__vector_dump(first);
+	vector_insert(first, &a22, 2);	
+	VECTOR_DUMP(first);
 
 	vector_erase(first);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 //fprintf(stderr, ">>>>>>>2\n");
 	vector_pushfront(first, &a2);
 	vector_pushfront(first, &a1);
 	vector_pushback (first, &a3);
 	vector_pushback (first, &a4);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 //fprintf(stderr, ">>>>>>>3\n");
 	vector_insert(first, &a32, 2);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	vector_remove(first, 1);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 //fprintf(stderr, ">>>>>>>4\n");
 //	Testing sort
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	vector_sort(first, int_sort);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 
 //	Testing get-set
 	int temp = 0;
@@ -86,7 +100,7 @@ void big_tester()
 	temp = 0;
 //fprintf(stderr, ">>>>>>>5\n");
 	vector_set(first, 0, &temp);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 
 	printf( "Size    = %"PRIu32"\n"
 		"Esize   = %"PRIu32"\n"
@@ -101,10 +115,10 @@ void big_tester()
 	vector_pushback(first, &a1);
 	vector_pushback(first, &a1);
 	vector_pushback(first, &a1);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 
 	vector_fit(first);
-	__vector_dump(first);	
+	VECTOR_DUMP(first);	
 //fprintf(stderr, ">>>>>>>7\n");
 //	Testing is empty
 	int is_empty = 0;
@@ -134,7 +148,7 @@ void big_tester()
 	vector_pushfront(first, &a1);
 	vector_pushback (first, &a3);
 	vector_pushback (first, &a4);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	vector_popfront(first, &a1);
 //fprintf(stderr, ">>>>>>>11\n");
 	vector_iter_begin(first_iter);
@@ -153,7 +167,7 @@ void big_tester()
 	vector_iter_getelem(first_iter, &temp);
 	printf("%d\n", temp);
 //fprintf(stderr, ">>>>>>>13\n");
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	printf("%d %d\n", 	vector_iter_isend (first_iter),
 				vector_iter_isbegin(first_iter));
 
@@ -170,14 +184,14 @@ void big_tester()
 	vector_pushback (first, &a4);
 	vector_pushback (first, &a4);
 	vector_pushback (first, &a4);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 //fprintf(stderr, ">>>>>>>15\n");
 
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	vector_popback (first, &a4);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	vector_popback (first, &a4);
-	__vector_dump(first);
+	VECTOR_DUMP(first);
 	
 
 	vector_insert(first, &a4, 100);
@@ -193,6 +207,7 @@ void big_tester()
 
 /**/
 	vector_delete(first);
+	POINT4;
 
 
 }

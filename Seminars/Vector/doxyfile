@@ -1,0 +1,7 @@
+DOXYFILE_ENCODING 		=	UTF-8
+OUTPUT_LANGUAGE			= 	English
+PROJECT_NAME			= 	"ivVector"
+PROJECT_NUMBER			=	0.1
+PROJECT_BRIEF			=	"Dynamically scalable array of various objects"
+OUTPUT_DIRECTORY		=	
+INPUT				=	
