@@ -1,0 +1,22 @@
+# 1 "temp.c"
+# 1 "<command-line>"
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+# 1 "<command-line>" 2
+# 1 "temp.c"
+
+
+
+
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(51, 17, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(51, 17, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(52, 17, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(52, 17, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(53, 17, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(53, 17, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(54, 18, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(54, 18, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(55, 18, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(55, 18, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(56, 19, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(56, 19, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(57, 19, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(57, 19, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(58, 20, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(58, 20, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(59, 20, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(59, 20, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(60, 20, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(60, 20, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(61, 21, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(61, 21, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(62, 21, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(62, 21, 1, 2, 2);
+insert into roles(person_id, team_id, role_id, season_id, league_id) _values(63, 21, 1, 1, 2); $insert into roles(person_id, team_id, role_id, season_id, league_id) _values(63, 21, 1, 2, 2);
