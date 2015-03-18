@@ -1,0 +1,41 @@
+
+INSERT INTO Bonus
+SELECT snum, odate, amt
+FROM Orders a
+WHERE amt =
+( SELECT MAX (amt)
+FROM Orders b
+WHERE a.odate = b.odate ); -- кульный пример использования соотнесенного подзапроса
+
+DELETE FROM Salespeople
+WHERE EXISTS
+( SELECT *
+FROM Customers
+WHERE rating = 100
+AND Salespeople.snum = Customers.snum );
+
+То же самое что и 
+
+DELETE FROM Salespeople
+WHERE 100 IN
+( SELECT rating
+FROM Customers
+WHERE Salespeople.snum = Customers.snum);
+
+
+CREATE TABLE Customers
+(cnum integer NOT NULL PRIMARY KEY
+cname char(10),
+city char(10),
+snum integer,
+FOREIGN KEY (snum) REFERENCES Salespeople (snum));
+
+
+CREATE TABLE Customers
+(cnum integer NOT NULL PRIMARY KEY,
+cname char(10) NOT NULL,
+city char(10),
+rating integer,
+snum integer REFERENCES Salespeople,
+UPDATE OF Salespeople CASCADES,
+DELETE OF Salespeople RESTRICTED);

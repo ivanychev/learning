@@ -1,0 +1,9 @@
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('MARKS')) DROP TABLE MARKS
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('COMPETITION')) DROP TABLE COMPETITION
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('GAME')) DROP TABLE GAME
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('LEAGUE')) DROP TABLE LEAGUE
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('PLAYER')) DROP TABLE PLAYER
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('PEOPLE')) DROP TABLE PEOPLE
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('TEAM')) DROP TABLE TEAM
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('UNIVERSITY')) DROP TABLE UNIVERSITY
+if exists(select * from sys.objects where [object_id] = OBJECT_ID('CITY')) DROP TABLE [dbo].[CITY]
