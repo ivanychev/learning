@@ -1,3 +1,5 @@
+use ivÊÂÍ
+
 drop table record;
 drop table source;
 drop table record_type;

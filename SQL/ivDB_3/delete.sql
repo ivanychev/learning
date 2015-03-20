@@ -1,3 +1,5 @@
+use ivÊÂÍ
+
 delete from record;
 delete from source;
 delete from record_type;

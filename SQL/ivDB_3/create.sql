@@ -1,3 +1,4 @@
+use ivÊÂÍ
 SET DATEFORMAT dmy;
 
 create table city (
@@ -118,7 +119,7 @@ create table marks (
 	jury_id int not null references person(person_id)
 				on delete no action
 				on update no action,   -- cascade
-	score 	int not null check(score >= 0),
+	score 	decimal(1,0) not null check(score >= 0),
 	primary key (team_id, game_id, comp_id, jury_id)
 );
 
@@ -160,7 +161,7 @@ create table source (
 				on delete no action
 				on update cascade ,
 	description 	nvarchar(1000) not null
-)
+);
 
 create table record (
 	rec_id 		int not null primary key  identity(1, 1),
