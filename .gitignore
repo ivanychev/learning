@@ -38,3 +38,9 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 *.out
+*.tags
+*.gcno
+*.gcov
+*.gcda
+*.d
+*.o
