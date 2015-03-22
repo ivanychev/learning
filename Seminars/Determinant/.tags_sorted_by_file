@@ -1,0 +1,80 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CC	Makefile	/^CC 		=  clang-3.5$/;"	m
+CFLAGS	Makefile	/^CFLAGS 		= -g $(STANDARD) $(GCOV) $(WARNINGS) -MD $/;"	m
+GCOV	Makefile	/^GCOV 	 	= -fprofile-arcs -ftest-coverage$/;"	m
+STANDARD	Makefile	/^STANDARD 	= -std=c11$/;"	m
+TARGET	Makefile	/^TARGET 		= determ.out$/;"	m
+VALGRIND_KEYS	Makefile	/^VALGRIND_KEYS 	= $/;"	m
+WARNINGS	Makefile	/^WARNINGS 	= -Wall -Werror$/;"	m
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+CALL	iv_standard.h	114;"	d
+CALLN	iv_standard.h	122;"	d
+CHECK	iv_standard.h	123;"	d
+CHECKN	iv_standard.h	124;"	d
+ERROR_MESSAGES	iv_standard.h	/^enum ERROR_MESSAGES$/;"	g
+F_CHECK	iv_standard.h	101;"	d
+F_CHECK	iv_standard.h	83;"	d
+F_CHECK_EXIT_CODE	iv_standard.h	79;"	d
+F_LOCATION	iv_standard.h	22;"	d
+F_WARN	iv_standard.h	128;"	d
+F_WARN	iv_standard.h	144;"	d
+IVALLOCFAIL	iv_standard.h	/^	IVALLOCFAIL$/;"	e	enum:ERROR_MESSAGES
+IVFOPENFAIL	iv_standard.h	/^	IVFOPENFAIL,$/;"	e	enum:ERROR_MESSAGES
+IVINVALARGNUM	iv_standard.h	/^	IVINVALARGNUM,$/;"	e	enum:ERROR_MESSAGES
+IVINVALPID	iv_standard.h	/^	IVINVALPID,$/;"	e	enum:ERROR_MESSAGES
+IVNEGSIZE	iv_standard.h	/^	IVNEGSIZE,$/;"	e	enum:ERROR_MESSAGES
+IVPTRNULL	iv_standard.h	/^	IVPTRNULL,$/;"	e	enum:ERROR_MESSAGES
+LOCATION	iv_standard.h	31;"	d
+LOC_OUT	iv_standard.h	41;"	d
+LOC_OUT	iv_standard.h	53;"	d
+LOC_OUT1	iv_standard.h	42;"	d
+LOC_OUT1	iv_standard.h	54;"	d
+LOC_OUT2	iv_standard.h	43;"	d
+LOC_OUT2	iv_standard.h	55;"	d
+OUT	iv_standard.h	36;"	d
+OUT	iv_standard.h	48;"	d
+OUT1	iv_standard.h	37;"	d
+OUT1	iv_standard.h	49;"	d
+OUT2	iv_standard.h	38;"	d
+OUT2	iv_standard.h	50;"	d
+OUT3	iv_standard.h	39;"	d
+OUT3	iv_standard.h	51;"	d
+OUT4	iv_standard.h	40;"	d
+OUT4	iv_standard.h	52;"	d
+WARN	iv_standard.h	147;"	d
+__IV_STANDARD	iv_standard.h	2;"	d
+iv_msgs	iv_standard.h	/^char const* iv_msgs[] = {$/;"	v
+DEBUG	ivmatrix.c	1;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	155;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	156;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	168;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	169;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	16;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	17;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	190;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	35;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	36;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	45;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	46;"	d	file:
+add_string	ivmatrix.c	/^inline void add_string(matrix* this, uint32_t added, uint32_t to, double factor)$/;"	f
+annihilate_below	ivmatrix.c	/^inline void annihilate_below(matrix* this, uint32_t i)$/;"	f
+gauss	ivmatrix.c	/^void gauss(matrix* this)$/;"	f
+get_matrix	ivmatrix.c	/^int get_matrix(FILE* fd, matrix* this) $/;"	f
+get_matrix_determinant	ivmatrix.c	/^double get_matrix_determinant(const matrix* this)$/;"	f
+get_minor	ivmatrix.c	/^matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)$/;"	f
+main	ivmatrix.c	/^int main(int argc, char const *argv[]) $/;"	f
+matrix_kill	ivmatrix.c	/^void matrix_kill(matrix* this)$/;"	f
+print_matrix	ivmatrix.c	/^void   print_matrix(const matrix* this)$/;"	f
+search_below_nzero_swap	ivmatrix.c	/^void search_below_nzero_swap(matrix* this, uint32_t i)$/;"	f
+swap_strings	ivmatrix.c	/^inline void swap_strings(matrix* this, uint32_t first, uint32_t second)$/;"	f
+ELEM	ivmatrix.h	20;"	d
+ELEM_TYPE	ivmatrix.h	17;"	d
+IS_ZERO	ivmatrix.h	23;"	d
+data	ivmatrix.h	/^	void* data;$/;"	m	struct:matrix_s
+matrix	ivmatrix.h	/^typedef struct matrix_s matrix;/;"	t	typeref:struct:matrix_s
+matrix_s	ivmatrix.h	/^struct matrix_s {$/;"	s
+size	ivmatrix.h	/^	uint32_t size;$/;"	m	struct:matrix_s
