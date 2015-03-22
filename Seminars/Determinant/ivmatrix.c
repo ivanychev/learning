@@ -1,49 +1,73 @@
-#define DEBUG
+//#define DEBUG
 
 #include "ivmatrix.h"
 #include "iv_standard.h"
 
-int    	get_matrix(FILE* fd, matrix* this);
-double 	get_matrix_determinant(const matrix* this);
-void   	print_matrix(const matrix* this);
-void  	search_below_nzero_swap(matrix* this, uint32_t i);
-void  	annihilate_below 	    (matrix* this, uint32_t i);
-void  	swap_strings 	    (matrix* this, uint32_t first, uint32_t second);
-void  	add_string 	    (matrix* this, uint32_t added, uint32_t to, double factor);
-void  	gauss		    (matrix* this);
-void 	matrix_kill 	    (matrix* this);
-
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE return -1;
+#define TEMP_FILE ".temp"
 
+
+void print_diff(struct timeval begin, struct timeval end);
 
 //======================================================================================
 
+int proceed_arguments(int argc, char const* argv[], FILE** fd, long* nthreads)
+{
+	CHECK(argc == 3, "Invalid number of arguments. Need name of a file AND number of threads\n");
+	
+	const char* filename    = argv[1];
+
+	*nthreads = 0;
+	int cond = get_long(nthreads, argv[2]);
+	CHECK(cond == 0, "Failed to get number from second argument");
+	CHECK(*nthreads > 0, "Invalid number of expecting threads to be created");
+
+	*fd = fopen(filename, "r");
+	CHECK(*fd != NULL, "Failed to open matrix file");
+	return 0;
+}
+
+//======================================================================================
+
+
 int main(int argc, char const *argv[]) 
 {
-	printf("%d\n", argc);
-
-	CHECK(argc == 2, "Invalid number of arguments. Need only name of a file\n");
-
-	const char* filename = argv[1];
-	FILE* fd = fopen(filename, "r");
-	CHECK(fd != NULL, "Failed to open matrix file");
+	struct timeval begin;
+	struct timeval end;
 
 
+	FILE* fd = NULL;
+	long nthreads = 0;
+	int cond = proceed_arguments(argc, argv, &fd, &nthreads);
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE fclose(fd); return -1;
+
+	CHECK(cond == 0, "Failed to get arguments");
 	matrix current = {
 		.size = 0,
 		.data = NULL
 	};
-	int cond = get_matrix(fd, &current);
+	cond = get_matrix(fd, &current);
+
+	gettimeofday(&begin, NULL);
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE matrix_kill(&current); return -1;
+#define F_CHECK_EXIT_CODE fclose(fd); matrix_kill(&current); return -1;
 
 	CHECK(cond != -1, "Failed to read matrix from file\n");
-
-	print_matrix(&current);
-	double determinant = get_matrix_determinant(&current);
+//	print_matrix(&current);
+	double determinant = 0;
+	cond = get_matrix_determinant(&current, nthreads, &determinant);
+	CHECK(cond == 0, "Failed to calculate matrix determinant");
 	printf("Determinant is %lg\n", determinant);
+
+	fclose(fd);
+	matrix_kill(&current);
+	gettimeofday(&end, NULL);
+
+	print_diff(begin, end);
 	return 0;
 }
 
@@ -51,10 +75,33 @@ int main(int argc, char const *argv[])
 #define F_CHECK_EXIT_CODE return -1;
 
 
+int get_long(long* save, const char* str)
+{
+	assert(save);
+	int base = 10;
+	char* endptr = NULL;
+
+	long val = strtol(str, &endptr, base);
+
+	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN))
+	       || (errno != 0 && val == 0)) {
+	   	return -1;
+	}
+
+	if (endptr == str) 
+		return -1;
+
+	*save = val;
+	return 0; 
+}
+
+
 //======================================================================================
 
 void matrix_kill(matrix* this)
 {
+	if (this == NULL)
+		return;
 	if (this->data)
 	{
 		free(this->data);
@@ -62,6 +109,8 @@ void matrix_kill(matrix* this)
 	}
 	this->size = 0;
 }
+
+//======================================================================================
 
 int get_matrix(FILE* fd, matrix* this) 
 {
@@ -87,22 +136,153 @@ int get_matrix(FILE* fd, matrix* this)
 	return 0;
 }
 
-double get_matrix_determinant(const matrix* this)
+//======================================================================================
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE return NULL;
+
+pthread_t* get_threads(const matrix* this, long amount, int* semid, double* results)
+{
+	CHECK(amount > 0, "Invalid amount of expected threads");
+	pthread_t* array = (pthread_t*)calloc(amount, sizeof(pthread_t));
+	CHECKN(array, IVALLOCFAIL);
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE free(array); return NULL;
+
+	int cond = 0;
+
+	int fileid = creat(TEMP_FILE, 0600);
+	CHECK(fileid != -1, "Failed to create temporary file");
+	int key = ftok(TEMP_FILE, 1);
+	CHECK(key != -1, "Failed to get flag key");
+	*semid = semget(key, 1, IPC_CREAT | 0660);
+	CHECK(*semid != -1, "Failed to get flag semaphore id");
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE semctl(*semid, 0, IPC_RMID); free(array); return NULL;
+
+	struct sembuf act[2] = {
+		{0, 0, 0},
+		{0, 1, 0}
+	};
+	struct thread_meta info= {};
+
+	for (long i = 0; i < amount; ++i)
+	{
+		cond = semop(*semid, &(act[1]), 1);
+		CHECK(cond != -1, "Failed to set semaphore");
+		info.ptr   	 = this;
+		info.semid 	 = *semid;
+		info.minor_index = i;
+		info.threads_num = amount;
+		info.to_save 	 = &(results[i]);
+
+		cond = pthread_create(&(array[i]), 0, thread_routine, (void*)(&info));
+		CHECK(cond == 0, "Failed to create thread");
+		cond = semop(*semid, &(act[0]), 1);
+		CHECK(cond != -1, "Failed to set semaphore");
+	}
+	return array;
+}
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE return -1;
+
+//============================================================================================
+
+int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
+{
+	CHECKN(this != NULL, IVALLOCFAIL);
+	CHECK(this->data != NULL, "Invalid Matrix: no data");
+	int semid = 0;
+	double* results = (double*)calloc(nthreads, sizeof(double));
+	CHECKN(results, IVALLOCFAIL);
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE free(results); return -1;
+
+	pthread_t* threads = get_threads(this, nthreads, &semid, results);
+	CHECK(threads != NULL, "Failed to create threads");
+	for (long i = 0; i < nthreads; i++) 
+		pthread_join(threads[i], NULL);
+	double result = 0.0;
+	for (long i = 0; i < nthreads; i++)
+	{
+		result += results[i];
+	}
+
+	free(results);
+	free(threads);
+	semctl(semid, 0, IPC_RMID);
+	unlink(TEMP_FILE);
+	*ret = result;
+	return 0;
+
+}
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE return (void*)-1;
+
+//============================================================================================
+
+matrix matrix_copy(const matrix* copied)
+{
+	matrix copy;
+	copy.size = copied -> size;
+	copy.data = (double*)calloc(copy.size * copy.size, sizeof(double));
+	memmove(copy.data, copied->data, copy.size * copy.size * sizeof(double));
+	return copy;
+}
+
+//============================================================================================
+
+void* thread_routine(void* info_ptr)
+{
+	assert(info_ptr);
+	struct thread_meta info = *((struct thread_meta*)info_ptr);
+	struct sembuf act = {0, -1, 0};
+	int cond = semop(info.semid, &act, 1);
+	CHECK(cond == 0, "Failed to set semaphore");
+
+	uint32_t size   	= info.ptr->size;
+	uint32_t factor 	= info.threads_num;
+	double result 		= 0;
+	double temp_result 	= 0;
+	matrix* minor 		= NULL;
+	matrix copy 		= matrix_copy(info.ptr);
+
+	for (uint32_t i = info.minor_index; i < size; i += factor)
+	{
+		minor = get_minor(&copy, 0, i);
+		CHECK(minor != NULL, "Failed to get minor");
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE matrix_kill(minor); return (void*)-1;
+
+		cond = gauss(minor, &temp_result);
+		CHECK(cond == 0, "Failed to calculate determinant of minor");
+		result += ELEM(&copy, 0, i)*temp_result * ((i % 2 == 0)? 1.0 : -1.0);
+		matrix_kill(minor);
+		free(minor);
+	}
+
+	*(info.to_save) = result;
+	matrix_kill(&copy);
+	pthread_exit(NULL);
+}
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE return -1;
+
+//============================================================================================
+
+
+int gauss(matrix* this, double* result)
 {
 	CHECKN(this != NULL, IVALLOCFAIL);
 	CHECK(this->data != NULL, "Invalid Matrix: no data");
 
-	matrix this_copy = *this;
-	gauss(&this_copy);
-	double result = 1.0;
-	for (uint32_t i = 0; i < this_copy.size; ++i)
-		result *= ELEM(&this_copy, i, i);
-	return result;	
-}
-
-
-void gauss(matrix* this)
-{
 	for (uint32_t i = 0; i < this->size; ++i)
 	{
 		if (IS_ZERO(ELEM(this, i, i)))
@@ -111,7 +291,15 @@ void gauss(matrix* this)
 			continue;
 		annihilate_below(this, i);
 	}
+
+	double output = 1.0;
+	for (uint32_t i = 0; i < this->size; ++i)
+		output *= ELEM(this, i, i);
+	*result = output;
+	return 0;	
 }
+
+//======================================================================================
 
 void search_below_nzero_swap(matrix* this, uint32_t i)
 {
@@ -124,11 +312,7 @@ void search_below_nzero_swap(matrix* this, uint32_t i)
 	swap_strings(this, j, i);
 }
 
-//echo "Installing GetDeb" && sudo dpkg -i getdeb-repository_0.1-1~getdeb1_all.deb
-//echo "Installing PlayDeb" &&sudo dpkg -i playdeb_0.3-1~getdeb1_all.deb &&
-/*
-echo "Deleting Downloads" && rm -f getdeb-repository_0.1-1~getdeb1_all.deb && rm -f playdeb_0.3-1~getdeb1_all.deb
-*/
+//======================================================================================
 
 inline void swap_strings(matrix* this, uint32_t first, uint32_t second)
 {
@@ -155,6 +339,8 @@ inline void annihilate_below(matrix* this, uint32_t i)
 		add_string(this, i, j, (-1.0)*ELEM(this, j, i)/ELEM(this, i, i));
 }
 
+//============================================================================================
+
 inline void add_string(matrix* this, uint32_t added, uint32_t to, double factor)
 {
 	for (uint32_t i = 0; i < this->size; ++i)
@@ -169,7 +355,7 @@ matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)
 	CHECKN(this != NULL, IVPTRNULL);
 	uint32_t old_amount = this->size * this->size;
 
-	void* new_data = calloc(old_amount, sizeof(double));
+	void* new_data = calloc((this->size - 1) * (this->size - 1), sizeof(double));
 	CHECKN(new_data != NULL, IVALLOCFAIL);
 	
 	void* old_data = this->data;
@@ -197,6 +383,7 @@ matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)
 }
 
 #undef F_CHECK_EXIT_CODE
+//============================================================================================
 
 void   print_matrix(const matrix* this)
 {
@@ -207,4 +394,18 @@ void   print_matrix(const matrix* this)
 		putchar('\n');
 
 	}
+}
+
+//============================================================================================
+
+void print_diff(struct timeval begin, struct timeval end)
+{
+	long long seconds = (long long)end.tv_sec  - (long long)begin.tv_sec;
+	long long micros  = (long long)end.tv_usec - (long long)begin.tv_usec;
+	if (micros < 0)
+	{
+		micros += 1000000;
+		seconds -= 1;
+	}
+	printf("%lld.%6lld\n", seconds, micros);
 }

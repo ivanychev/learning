@@ -24,24 +24,24 @@ except IndexError as a:
 f = open(sys.argv[2], "w")
 wolfram = open("wolfram.txt", "w")
 
-wolfram.write("{")
+wolfram.write("[")
 f.write(str(size) + "\n")
 for i in range(size):
-	wolfram.write("{")
+	wolfram.write("")
 	for j in range(size):
-		rand_num = random.randint(-5, 5)
+		rand_num = random.randint(-2, 2)
 		wolfram.write(str(rand_num))
 		f.write(str(rand_num))
 		if j < size - 1:
-			wolfram.write(" ,")
+			wolfram.write(" ")
 			f.write(" ")
-	wolfram.write("}")
+	
 	if (i < size - 1):
-		wolfram.write(",\n")
+		wolfram.write("; ")
 	else:
-		wolfram.write("\n")
+		wolfram.write("")
 	f.write("\n")
-wolfram.write("}\n")
+wolfram.write("]\n")
 f.write("\n")
 
 f.close()

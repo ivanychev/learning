@@ -97,8 +97,7 @@ char const* iv_msgs[] = {
 	}while (0);						\
 
 #else
-
-#define F_CHECK(stream, cond, msg)				\
+#define F_CHECK(stream, cond, msg)	((void)(cond))	/*		\
 	do 							\
 	{							\
 		if (!(cond))					\
@@ -107,7 +106,7 @@ char const* iv_msgs[] = {
 			exit(EXIT_FAILURE);			\
 		}						\
 	}while (0);						\
-
+*/
 #endif
 
 
