@@ -231,6 +231,7 @@
 	insert into PLAYER values(340,413,'05/01/2001',NULL);
 	insert into PLAYER values(341,413,'07/03/2004','05/08/2008');
 	insert into PLAYER values(342,413,'05/03/2004','05/08/2007');
+
 	insert into PLAYER values(343,414,'05/01/2004','05/07/2007');
 	insert into PLAYER values(344,414,'07/02/2003','05/05/2005');
 	insert into PLAYER values(345,414,'04/04/2002','05/08/2005');
@@ -239,6 +240,7 @@
 	insert into PLAYER values(348,416,'08/02/2002','05/08/2008');
 	insert into PLAYER values(349,416,'09/01/2001','05/06/2009');
 	insert into PLAYER values(350,416,'08/04/2003',NULL);
+		
 	insert into PLAYER values(351,417,'08/02/2002','05/07/2008');
 	insert into PLAYER values(352,417,'09/05/2004','05/07/2009');
 	insert into PLAYER values(353,417,'05/04/2004',NULL);
