@@ -166,8 +166,8 @@ insert into competition(description) values('Video concurs');
 
 /*1*/ insert into person (first_name,last_name,sex, uni_id) values('Yuliy','Gusman', 'm', 8);
 /*2*/ insert into person (first_name,last_name,sex, uni_id) values('Igor','Vernik', 'm', 3);
-/*3*/ insert into person (first_name,last_name,sex, uni_id) values('KONstantin','Ernst', 'm', 6);
-/*4*/ insert into person (first_name,last_name,sex, uni_id) values('LeONid','Yarmolnik', 'm', 1);
+/*3*/ insert into person (first_name,last_name,sex, uni_id) values('Konstantin','Ernst', 'm', 6);
+/*4*/ insert into person (first_name,last_name,sex, uni_id) values('Leonid','Yarmolnik', 'm', 1);
 /*5*/ insert into person (first_name,last_name,sex, uni_id) values('Michail','Efremov', 'm', 2);
 /*6*/ insert into person (first_name,last_name,sex, uni_id) values('Leonid','Yakubovich', 'm', 5);
 /*7*/ insert into person (first_name,last_name,sex, uni_id) values('Dmitriy','Kojoma', 'm', 11);
@@ -243,6 +243,8 @@ insert into roles_description(description) values('operator');
 insert into season(begin_date, end_date, season_index) values ('10/2/2004', '20/2/2004', 29);
 insert into season(begin_date, end_date, season_index) values ('11/2/2005', '15/2/2005', 30);
 insert into season(begin_date, end_date, season_index) values ('11/2/2012', '23/2/2012', 37);
+insert into season(begin_date, end_date, season_index) values ('10/2/2015', '21/2/2015', 40);
+
 
 
 insert into league(name, upper_id) values('Vysshaya liga', NULL);

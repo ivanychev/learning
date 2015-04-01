@@ -1,5 +1,7 @@
 -- Определить, какие команды играют в этом сезоне хуже, чем в прошлом. 
 
+use ivKVN
+
 declare @current_year datetime2 = cast('2005' as datetime2)
 
 declare @previous_year datetime2 = cast(cast((year(@current_year) - 1) as nvarchar(5)) as datetime2);

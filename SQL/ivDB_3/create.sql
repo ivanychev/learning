@@ -66,7 +66,9 @@ create table league (
 
 
 create table roles (
-	person_id 	int not null references person(person_id),
+	person_id 	int not null references person(person_id)
+--				on update cascade
+				,
 	role_id  	int references roles_description(role_id) 
 				on delete no action
 				on update cascade 
@@ -80,7 +82,7 @@ create table roles (
 				on update cascade 
 				not null,
 	team_id 	int references team(team_id)     
-				on delete no action
+				on delete cascade
 				on update cascade 
 				null,
 	primary key(person_id, season_id, league_id)
@@ -108,7 +110,7 @@ create table game (
 
 create table marks (
 	team_id	int not null references team(team_id)
-				on delete no action
+				on delete cascade
 				on update cascade ,
 	game_id int not null references game(game_id)
 				on delete no action
