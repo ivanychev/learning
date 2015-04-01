@@ -1,4 +1,4 @@
-use ivÊÂÍ
+use ivKVN
 SET DATEFORMAT dmy;
 
 create table city (

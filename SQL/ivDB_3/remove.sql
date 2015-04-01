@@ -1,4 +1,4 @@
-use ivÊÂÍ
+use ivKVN
 
 drop table record;
 drop table source;
