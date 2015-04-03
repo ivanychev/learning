@@ -6,11 +6,14 @@
 *		
 *		@author 			Sergey Ivanychev, DCAM MIPT
 *		
-*		@version 			1.01
+*		@version 			1.02
 *              	
 *              	@par				Changelog v.1.01
 *              	        			--  Added "do while" constructions
-*		
+*              	        			
+*              	        			Chengelog v.1.02
+*              	        			--  Added *OUT macroses for fast variable printing
+*						--  F_CHECK is verbose by default
 */
 
 //===============================================================================================================
@@ -78,7 +81,12 @@ char const* iv_msgs[] = {
 
 #define F_CHECK_EXIT_CODE
 
-#ifdef DEBUG
+// #ifdef DEBUG
+
+#ifndef DEBUG
+#undef  F_LOCATION
+#define F_LOCATION(str)
+#endif
 
 #define F_CHECK(stream, cond, msg)				\
 	do 							\
@@ -86,9 +94,9 @@ char const* iv_msgs[] = {
 		if (!(cond))					\
 		{						\
 			F_LOCATION(stream);			\
-			fprintf(stream, "Message:  %s\n", msg);	\
+			fprintf(stream, "Message : %s\n", msg);	\
 			fflush(stream);				\
-			perror("ERRNO\t\t");			\
+			perror("ERRNO\t");			\
 			fputc('\n', stream);			\
 			F_CHECK_EXIT_CODE			\
 								\
@@ -96,19 +104,20 @@ char const* iv_msgs[] = {
 		}						\
 	}while (0);						\
 
-#else
-#define F_CHECK(stream, cond, msg)	((void)(cond))	/*		\
-	do 							\
-	{							\
-		if (!(cond))					\
-		{						\
-			F_CHECK_EXIT_CODE			\
-			exit(EXIT_FAILURE);			\
-		}						\
-	}while (0);						\
-*/
-#endif
 
+/* #else
+ #define F_CHECK(stream, cond, msg)	((void)(cond))		\
+ 	do 							\
+ 	{							\
+ 		if (!(cond))					\
+ 		{						\
+ 			F_CHECK_EXIT_CODE			\
+ 			exit(EXIT_FAILURE);			\
+ 		}						\
+ 	}while (0);						\
+
+#endif
+*/
 
 #define CALL(var, func, cond, msg)			\
 do{							\
@@ -145,6 +154,30 @@ if (!(cond))						\
 
 #define WARN(cond, msg) F_WARN(stdout, cond, msg)
 
+
+#define TEMPLATE_OUT(arg, spec) 					\
+do {									\
+	printf("## Line %d:\n## " #arg " = %"spec "\n", __LINE__, arg);	\
+	fflush(stdout);							\
+} while (0);								\
+
+#define IOUT(num) 	TEMPLATE_OUT(num, "d")
+#define LOUT(num) 	TEMPLATE_OUT(num, "ld")
+#define LUOUT(num) 	TEMPLATE_OUT(num, "uld")
+#define DOUT(num) 	TEMPLATE_OUT(num, "lg")
+#define UOUT(num) 	TEMPLATE_OUT(num, "u")
+#define POUT(num) 	TEMPLATE_OUT(num, "p")
+#define SOUT(num) 	TEMPLATE_OUT(num, "s")
+
+#ifdef _STDINT_H
+#define U32OUT(num) 	TEMPLATE_OUT(num, PRIu32)
+#define U64OUT(num) 	TEMPLATE_OUT(num, PRIu64)
+#define I32OUT(num) 	TEMPLATE_OUT(num, PRIu32)
+#define I64OUT(num) 	TEMPLATE_OUT(num, PRIu64)
+#endif
+
+
+ 
 
 //===============================================================================================================
 //===============================================================================================================

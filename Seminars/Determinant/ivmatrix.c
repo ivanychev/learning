@@ -1,4 +1,6 @@
-//#define DEBUG
+#define DEBUG
+#define PAGESIZE (4096)
+#define MB (1024*1024)
 
 #include "ivmatrix.h"
 #include "iv_standard.h"
@@ -7,6 +9,7 @@
 #define F_CHECK_EXIT_CODE return -1;
 #define TEMP_FILE ".temp"
 
+uint64_t GLOBAL_COUNTER = 0;
 
 void print_diff(struct timeval begin, struct timeval end);
 
@@ -20,7 +23,9 @@ int proceed_arguments(int argc, char const* argv[], FILE** fd, long* nthreads)
 
 	*nthreads = 0;
 	int cond = get_long(nthreads, argv[2]);
+
 	CHECK(cond == 0, "Failed to get number from second argument");
+	
 	CHECK(*nthreads > 0, "Invalid number of expecting threads to be created");
 
 	*fd = fopen(filename, "r");
@@ -83,13 +88,14 @@ int get_long(long* save, const char* str)
 
 	long val = strtol(str, &endptr, base);
 
+
 	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN))
-	       || (errno != 0 && val == 0)) {
+	       || (errno != 0 && val == 0)
+	       || (void*)endptr == (void*)str) {
 	   	return -1;
 	}
 
-	if (endptr == str) 
-		return -1;
+
 
 	*save = val;
 	return 0; 
@@ -141,48 +147,64 @@ int get_matrix(FILE* fd, matrix* this)
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE return NULL;
 
-pthread_t* get_threads(const matrix* this, long amount, int* semid, double* results)
+pthread_t* get_threads(const matrix* this, long amount, double* results, struct thread_meta** info_save)
 {
 	CHECK(amount > 0, "Invalid amount of expected threads");
 	pthread_t* array = (pthread_t*)calloc(amount, sizeof(pthread_t));
 	CHECKN(array, IVALLOCFAIL);
+	CHECKN(info_save, IVPTRNULL);
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(array); return NULL;
 
 	int cond = 0;
 
-	int fileid = creat(TEMP_FILE, 0600);
-	CHECK(fileid != -1, "Failed to create temporary file");
-	int key = ftok(TEMP_FILE, 1);
-	CHECK(key != -1, "Failed to get flag key");
-	*semid = semget(key, 1, IPC_CREAT | 0660);
-	CHECK(*semid != -1, "Failed to get flag semaphore id");
+	// int fileid = creat(TEMP_FILE, 0600);
+	// CHECK(fileid != -1, "Failed to create temporary file");
+	// int key = ftok(TEMP_FILE, 1);
+	// CHECK(key != -1, "Failed to get flag key");
+	// *semid = semget(key, 1, IPC_CREAT | 0660);
+	// CHECK(*semid != -1, "Failed to get flag semaphore id");
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE semctl(*semid, 0, IPC_RMID); free(array); return NULL;
+#define F_CHECK_EXIT_CODE /*semctl(*semid, 0, IPC_RMID);*/ free(array); return NULL;
 
-	struct sembuf act[2] = {
-		{0, 0, 0},
-		{0, 1, 0}
-	};
-	struct thread_meta info= {};
+	// struct sembuf act[2] = {
+	// 	{0, 0, 0},
+	// 	{0, 1, 0}
+	// };
+	struct thread_meta* info= (struct thread_meta*)calloc(amount, 
+							      sizeof(struct thread_meta));
+	CHECKN(info, IVALLOCFAIL);
+
+#undef F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE free(info); /*semctl(*semid, 0, IPC_RMID);*/ free(array); return NULL;
+
+// experimenting with stack size
+		pthread_attr_t default_attr;
+		cond = pthread_attr_init(&default_attr);
+		CHECK(cond == 0, "Failed to set thread attribute");
+		cond = pthread_attr_setstacksize(&default_attr, MB);
+		CHECK(cond == 0, "Failed to set stack size of pthread");
+		
+
 
 	for (long i = 0; i < amount; ++i)
 	{
-		cond = semop(*semid, &(act[1]), 1);
-		CHECK(cond != -1, "Failed to set semaphore");
-		info.ptr   	 = this;
-		info.semid 	 = *semid;
-		info.minor_index = i;
-		info.threads_num = amount;
-		info.to_save 	 = &(results[i]);
+//		cond = semop(*semid, &(act[1]), 1);
+//		CHECK(cond != -1, "Failed to set semaphore");
+		info[i].ptr   	 	= this;
+//		info[i].semid 	 	= *semid;
+		info[i].minor_index 	= i;
+		info[i].threads_num 	= amount;
+		info[i].to_save 	= results + i;
 
-		cond = pthread_create(&(array[i]), 0, thread_routine, (void*)(&info));
+		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
-		cond = semop(*semid, &(act[0]), 1);
-		CHECK(cond != -1, "Failed to set semaphore");
+		// cond = semop(*semid, &(act[0]), 1);
+		// CHECK(cond != -1, "Failed to set semaphore");
 	}
+	*info_save = info;
 	return array;
 }
 
@@ -193,19 +215,27 @@ pthread_t* get_threads(const matrix* this, long amount, int* semid, double* resu
 
 int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 {
-	CHECKN(this != NULL, IVALLOCFAIL);
+	CHECKN(this != NULL, IVPTRNULL);
 	CHECK(this->data != NULL, "Invalid Matrix: no data");
-	int semid = 0;
+//	int semid = 0;
 	double* results = (double*)calloc(nthreads, sizeof(double));
 	CHECKN(results, IVALLOCFAIL);
+
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(results); return -1;
 
-	pthread_t* threads = get_threads(this, nthreads, &semid, results);
+	struct thread_meta* info = NULL;
+	pthread_t* threads = get_threads(this, nthreads, results, &info);
 	CHECK(threads != NULL, "Failed to create threads");
-	for (long i = 0; i < nthreads; i++) 
+	printf("Waiting...\n");
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE free(results); free(info); return -1;
+
+	for (long i = 0; i < nthreads; i++) {
 		pthread_join(threads[i], NULL);
+//		printf("Got %ld\n", i);
+	}
 	double result = 0.0;
 	for (long i = 0; i < nthreads; i++)
 	{
@@ -214,8 +244,9 @@ int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 
 	free(results);
 	free(threads);
-	semctl(semid, 0, IPC_RMID);
-	unlink(TEMP_FILE);
+	free(info);
+	// semctl(semid, 0, IPC_RMID);
+	// unlink(TEMP_FILE);
 	*ret = result;
 	return 0;
 
@@ -237,13 +268,34 @@ matrix matrix_copy(const matrix* copied)
 
 //============================================================================================
 
+void* thread_routine_debug(void* info_ptr)
+{
+	assert(info_ptr);
+	struct thread_meta info = *((struct thread_meta*)info_ptr);
+//	uint32_t index = info.minor_index;
+	long   num   = info.threads_num;
+	uint32_t size  = info.ptr->size;
+
+	uint64_t cycles = size * 1024 / num;
+//	printf("%"PRIu64"\n", cycles);
+
+	printf("%p\n", &cycles);
+	for (;cycles > 0; cycles--);
+//		if (index == 0 && cycles % 100000000 == 0)
+//			fprintf(stderr, "%"PRIu64"\n", cycles);
+//	printf("Out\n");
+	pthread_exit(NULL);
+}
+
+
 void* thread_routine(void* info_ptr)
 {
 	assert(info_ptr);
 	struct thread_meta info = *((struct thread_meta*)info_ptr);
-	struct sembuf act = {0, -1, 0};
-	int cond = semop(info.semid, &act, 1);
-	CHECK(cond == 0, "Failed to set semaphore");
+//	struct sembuf act = {0, -1, 0};
+	
+//	    cond = semop(info.semid, &act, 1);
+//	CHECK(cond == 0, "Failed to set semaphore");
 
 	uint32_t size   	= info.ptr->size;
 	uint32_t factor 	= info.threads_num;
@@ -252,23 +304,30 @@ void* thread_routine(void* info_ptr)
 	matrix* minor 		= NULL;
 	matrix copy 		= matrix_copy(info.ptr);
 
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE matrix_kill(&copy); return (void*)-1;
+	int cond = 0;
 	for (uint32_t i = info.minor_index; i < size; i += factor)
 	{
 		minor = get_minor(&copy, 0, i);
+//		printf("%"PRIu32"'th: %"PRIi64"\n",info.minor_index, GLOBAL_COUNTER++);
+		//print_matrix(minor);
 		CHECK(minor != NULL, "Failed to get minor");
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE matrix_kill(minor); return (void*)-1;
+#define F_CHECK_EXIT_CODE matrix_kill(minor); matrix_kill(&copy); return (void*)-1;
 
 		cond = gauss(minor, &temp_result);
-		CHECK(cond == 0, "Failed to calculate determinant of minor");
-		result += ELEM(&copy, 0, i)*temp_result * ((i % 2 == 0)? 1.0 : -1.0);
+		CHECK(cond == 0, "Failed to convert matrix");
+		double delta_result = ELEM(&copy, 0, i)*temp_result * ((i % 2 == 0)? 1.0 : -1.0);
+		result += delta_result;
 		matrix_kill(minor);
 		free(minor);
 	}
-
+//	printf("%"PRIu32"'th thread result = %lg\n", info.minor_index, result);
 	*(info.to_save) = result;
 	matrix_kill(&copy);
+
 	pthread_exit(NULL);
 }
 
@@ -310,6 +369,8 @@ void search_below_nzero_swap(matrix* this, uint32_t i)
 	if (IS_ZERO(ELEM(this, j, i)))
 		return;
 	swap_strings(this, j, i);
+	for (long i = 0; i < this->size; ++i)
+		ELEM(this, j, i) *= -1.0;
 }
 
 //======================================================================================

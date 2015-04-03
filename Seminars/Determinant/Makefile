@@ -2,7 +2,8 @@ CC 		=  gcc #clang-3.5
 WARNINGS 	= -Wall -Werror
 STANDARD 	= -std=c11
 GCOV 	 	= -fprofile-arcs -ftest-coverage -pg
-CFLAGS 		= -g $(STANDARD) $(GCOV) $(WARNINGS) -MD -pthread
+OPTIMIZE 	= 
+CFLAGS 		= -g $(STANDARD) $(GCOV) $(WARNINGS) $(OPTIMIZE) -MD -pthread
 TARGET 		= determ.out
 VALGRIND_KEYS 	= 
 .PHONY: all clean testing valgrind

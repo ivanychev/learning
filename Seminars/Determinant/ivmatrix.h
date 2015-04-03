@@ -33,7 +33,7 @@ typedef struct matrix_s matrix;
 
 struct thread_meta {
 	const matrix*  	ptr;
-	int      	semid;
+//	int      	semid;
 	long 	 	threads_num;
 	uint32_t 	minor_index;
 	double*  	to_save;
@@ -132,6 +132,8 @@ int get_long(long* save, const char* str);
 matrix* get_minor(const matrix* this, uint32_t string, uint32_t column);
 
 void* thread_routine(void* info_ptr);
+
+void* thread_routine_debug(void* info_ptr);
 
 
 
