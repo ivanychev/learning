@@ -159,20 +159,10 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 
 	int cond = 0;
 
-	// int fileid = creat(TEMP_FILE, 0600);
-	// CHECK(fileid != -1, "Failed to create temporary file");
-	// int key = ftok(TEMP_FILE, 1);
-	// CHECK(key != -1, "Failed to get flag key");
-	// *semid = semget(key, 1, IPC_CREAT | 0660);
-	// CHECK(*semid != -1, "Failed to get flag semaphore id");
-
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE /*semctl(*semid, 0, IPC_RMID);*/ free(array); return NULL;
 
-	// struct sembuf act[2] = {
-	// 	{0, 0, 0},
-	// 	{0, 1, 0}
-	// };
+
 	struct thread_meta* info= (struct thread_meta*)calloc(amount, 
 							      sizeof(struct thread_meta));
 	CHECKN(info, IVALLOCFAIL);
@@ -186,23 +176,16 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		CHECK(cond == 0, "Failed to set thread attribute");
 		cond = pthread_attr_setstacksize(&default_attr, MB);
 		CHECK(cond == 0, "Failed to set stack size of pthread");
-		
-
 
 	for (long i = 0; i < amount; ++i)
 	{
-//		cond = semop(*semid, &(act[1]), 1);
-//		CHECK(cond != -1, "Failed to set semaphore");
 		info[i].ptr   	 	= this;
-//		info[i].semid 	 	= *semid;
 		info[i].minor_index 	= i;
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
 
 		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
-		// cond = semop(*semid, &(act[0]), 1);
-		// CHECK(cond != -1, "Failed to set semaphore");
 	}
 	*info_save = info;
 	return array;
@@ -270,20 +253,16 @@ matrix matrix_copy(const matrix* copied)
 
 void* thread_routine_debug(void* info_ptr)
 {
-	assert(info_ptr);
+
 	struct thread_meta info = *((struct thread_meta*)info_ptr);
-//	uint32_t index = info.minor_index;
 	long   num   = info.threads_num;
 	uint32_t size  = info.ptr->size;
 
-	uint64_t cycles = size * 1024 / num;
-//	printf("%"PRIu64"\n", cycles);
+	uint64_t cycles = size * 1000000 / num;
 
 	printf("%p\n", &cycles);
 	for (;cycles > 0; cycles--);
-//		if (index == 0 && cycles % 100000000 == 0)
-//			fprintf(stderr, "%"PRIu64"\n", cycles);
-//	printf("Out\n");
+
 	pthread_exit(NULL);
 }
 
@@ -292,10 +271,6 @@ void* thread_routine(void* info_ptr)
 {
 	assert(info_ptr);
 	struct thread_meta info = *((struct thread_meta*)info_ptr);
-//	struct sembuf act = {0, -1, 0};
-	
-//	    cond = semop(info.semid, &act, 1);
-//	CHECK(cond == 0, "Failed to set semaphore");
 
 	uint32_t size   	= info.ptr->size;
 	uint32_t factor 	= info.threads_num;
@@ -310,8 +285,6 @@ void* thread_routine(void* info_ptr)
 	for (uint32_t i = info.minor_index; i < size; i += factor)
 	{
 		minor = get_minor(&copy, 0, i);
-//		printf("%"PRIu32"'th: %"PRIi64"\n",info.minor_index, GLOBAL_COUNTER++);
-		//print_matrix(minor);
 		CHECK(minor != NULL, "Failed to get minor");
 
 #undef  F_CHECK_EXIT_CODE
@@ -324,7 +297,6 @@ void* thread_routine(void* info_ptr)
 		matrix_kill(minor);
 		free(minor);
 	}
-//	printf("%"PRIu32"'th thread result = %lg\n", info.minor_index, result);
 	*(info.to_save) = result;
 	matrix_kill(&copy);
 

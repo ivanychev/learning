@@ -1,181 +1,382 @@
-==30720== drd, a thread error detector
-==30720== Copyright (C) 2006-2013, and GNU GPL'd, by Bart Van Assche.
-==30720== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
-==30720== Command: ./determ.out example.txt 2
-==30720== Parent PID: 9198
-==30720== 
-==30720== Thread 3:
-==30720== Conflicting load by thread 3 at 0x00609b88 size 8
-==30720==    at 0x403A4C: thread_routine_debug (ivmatrix.c:273)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x515088D: ??? (syscall-template.S:81)
-==30720==    by 0x50DE002: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1261)
-==30720==    by 0x50DF4DB: _IO_do_write@@GLIBC_2.2.5 (fileops.c:538)
-==30720==    by 0x50DE6A0: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1332)
-==30720==    by 0x50AF4E9: vfprintf (vfprintf.c:1692)
-==30720==    by 0x50B9498: printf (printf.c:33)
-==30720==    by 0x403AB9: thread_routine_debug (ivmatrix.c:282)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== 
-==30720== Conflicting store by thread 3 at 0x00609b88 size 8
-==30720==    at 0x403A57: thread_routine_debug (ivmatrix.c:273)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x515088D: ??? (syscall-template.S:81)
-==30720==    by 0x50DE002: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1261)
-==30720==    by 0x50DF4DB: _IO_do_write@@GLIBC_2.2.5 (fileops.c:538)
-==30720==    by 0x50DE6A0: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1332)
-==30720==    by 0x50AF4E9: vfprintf (vfprintf.c:1692)
-==30720==    by 0x50B9498: printf (printf.c:33)
-==30720==    by 0x403AB9: thread_routine_debug (ivmatrix.c:282)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== 
-==30720== Conflicting load by thread 3 at 0x00609b90 size 8
-==30720==    at 0x403ABC: thread_routine_debug (ivmatrix.c:283)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x401434D: _dl_open (dl-open.c:613)
-==30720==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
-==30720==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
-==30720==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
-==30720==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
-==30720==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
-==30720==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
-==30720==    by 0x4E50534: pthread_exit (pthreadP.h:280)
-==30720==    by 0x403AFE: thread_routine_debug (ivmatrix.c:287)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720== 
-==30720== Conflicting store by thread 3 at 0x00609b90 size 8
-==30720==    at 0x403AC7: thread_routine_debug (ivmatrix.c:283)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x401434D: _dl_open (dl-open.c:613)
-==30720==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
-==30720==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
-==30720==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
-==30720==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
-==30720==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
-==30720==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
-==30720==    by 0x4E50534: pthread_exit (pthreadP.h:280)
-==30720==    by 0x403AFE: thread_routine_debug (ivmatrix.c:287)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720== 
-==30720== Conflicting load by thread 3 at 0x00609b90 size 8
-==30720==    at 0x403AE1: thread_routine_debug (ivmatrix.c:283)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x401434D: _dl_open (dl-open.c:613)
-==30720==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
-==30720==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
-==30720==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
-==30720==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
-==30720==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
-==30720==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
-==30720==    by 0x4E50534: pthread_exit (pthreadP.h:280)
-==30720==    by 0x403AFE: thread_routine_debug (ivmatrix.c:287)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720== 
-==30720== Conflicting load by thread 3 at 0x00609b98 size 8
-==30720==    at 0x403AE3: thread_routine_debug (ivmatrix.c:283)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x401434D: _dl_open (dl-open.c:613)
-==30720==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
-==30720==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
-==30720==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
-==30720==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
-==30720==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
-==30720==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
-==30720==    by 0x4E50534: pthread_exit (pthreadP.h:280)
-==30720==    by 0x403AFE: thread_routine_debug (ivmatrix.c:287)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720== 
-==30720== Conflicting store by thread 3 at 0x00609b98 size 8
-==30720==    at 0x403AEE: thread_routine_debug (ivmatrix.c:283)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Allocation context: BSS section of /home/bu99y/code/repos/learning/Seminars/Determinant/determ.out
-==30720== Other segment start (thread 2)
-==30720==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720==    by 0x515F47C: clone (clone.S:111)
-==30720== Other segment end (thread 2)
-==30720==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x401434D: _dl_open (dl-open.c:613)
-==30720==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
-==30720==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
-==30720==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
-==30720==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
-==30720==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
-==30720==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
-==30720==    by 0x4E50534: pthread_exit (pthreadP.h:280)
-==30720==    by 0x403AFE: thread_routine_debug (ivmatrix.c:287)
-==30720==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
-==30720==    by 0x4E4F181: start_thread (pthread_create.c:312)
-==30720== 
-==30720== 
-==30720== For counts of detected and suppressed errors, rerun with: -v
-==30720== ERROR SUMMARY: 2052 errors from 7 contexts (suppressed: 192 from 157)
+==16676== drd, a thread error detector
+==16676== Copyright (C) 2006-2013, and GNU GPL'd, by Bart Van Assche.
+==16676== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==16676== Command: ./determ.out example.txt 2
+==16676== Parent PID: 11467
+==16676== 
+--16676-- 
+--16676-- Valgrind options:
+--16676--    -v
+--16676--    --tool=drd
+--16676--    --log-file=log
+--16676-- Contents of /proc/version:
+--16676--   Linux version 3.16.0-33-generic (buildd@comet) (gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) ) #44~14.04.1-Ubuntu SMP Fri Mar 13 10:33:29 UTC 2015
+--16676-- Arch and hwcaps: AMD64, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--16676-- Page sizes: currently 4096, max supported 4096
+--16676-- Valgrind library directory: /usr/lib/valgrind
+--16676-- Reading syms from /home/bu99y/code/learning/Seminars/Determinant/determ.out
+--16676-- Reading syms from /lib/x86_64-linux-gnu/ld-2.19.so
+--16676--   Considering /lib/x86_64-linux-gnu/ld-2.19.so ..
+--16676--   .. CRC mismatch (computed 4cbae35e wanted 8d683c31)
+--16676--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so ..
+--16676--   .. CRC is valid
+--16676-- Reading syms from /usr/lib/valgrind/drd-amd64-linux
+--16676--   Considering /usr/lib/valgrind/drd-amd64-linux ..
+--16676--   .. CRC mismatch (computed cc00ec2e wanted 72487465)
+--16676--    object doesn't have a symbol table
+--16676--    object doesn't have a dynamic symbol table
+--16676-- Scheduler: using generic scheduler lock implementation.
+--16676-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==16676== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-16676-by-bu99y-on-???
+==16676== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-16676-by-bu99y-on-???
+==16676== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-16676-by-bu99y-on-???
+==16676== 
+==16676== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==16676== don't want to do, unless you know exactly what you're doing,
+==16676== or are doing some strange experiment):
+==16676==   /usr/lib/valgrind/../../bin/vgdb --pid=16676 ...command...
+==16676== 
+==16676== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==16676==   /path/to/gdb ./determ.out
+==16676== and then give GDB the following command
+==16676==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=16676
+==16676== --pid is optional if only one valgrind process is running
+==16676== 
+--16676-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--16676--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--16676--   .. CRC mismatch (computed 329d6860 wanted c0186920)
+--16676--    object doesn't have a symbol table
+--16676-- Reading syms from /usr/lib/valgrind/vgpreload_drd-amd64-linux.so
+--16676--   Considering /usr/lib/valgrind/vgpreload_drd-amd64-linux.so ..
+--16676--   .. CRC mismatch (computed 4b9b0c9c wanted 31cd678e)
+--16676--    object doesn't have a symbol table
+--16676-- REDIR: 0x4019a50 (index) redirected to 0x4c3d9b0 (index)
+--16676-- REDIR: 0x4019c70 (strcmp) redirected to 0x4c3e850 (strcmp)
+--16676-- REDIR: 0x4019ca0 (strlen) redirected to 0x4c3dbe0 (strlen)
+--16676-- REDIR: 0x401a9c0 (mempcpy) redirected to 0x4c40890 (mempcpy)
+--16676-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.19.so
+--16676--   Considering /lib/x86_64-linux-gnu/libpthread-2.19.so ..
+--16676--   .. CRC mismatch (computed d568bf33 wanted fb00d679)
+--16676--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libpthread-2.19.so ..
+--16676--   .. CRC is valid
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e4f430 (pthread_create@@GLIB) W-> (0000.0) 0x04c31160 pthread_create@*
+--16676--     new: 0x04e4f430 (pthread_create@@GLIB) W-> (0000.0) 0x04c30e90 pthread_create
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53170 (pthread_cond_init@@G) W-> (0000.0) 0x04c34a40 pthread_cond_init@*
+--16676--     new: 0x04e53170 (pthread_cond_init@@G) W-> (0000.0) 0x04c348e0 pthread_cond_init
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e531f0 (pthread_cond_destroy) W-> (0000.0) 0x04c34e60 pthread_cond_destroy@*
+--16676--     new: 0x04e531f0 (pthread_cond_destroy) W-> (0000.0) 0x04c34d00 pthread_cond_destroy
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53350 (pthread_cond_wait@@G) W-> (0000.0) 0x04c352a0 pthread_cond_wait@*
+--16676--     new: 0x04e53350 (pthread_cond_wait@@G) W-> (0000.0) 0x04c35120 pthread_cond_wait
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53690 (pthread_cond_timedwa) W-> (0000.0) 0x04c35730 pthread_cond_timedwait@*
+--16676--     new: 0x04e53690 (pthread_cond_timedwa) W-> (0000.0) 0x04c355a0 pthread_cond_timedwait
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53c10 (pthread_cond_signal@) W-> (0000.0) 0x04c35bb0 pthread_cond_signal@*
+--16676--     new: 0x04e53c10 (pthread_cond_signal@) W-> (0000.0) 0x04c35a50 pthread_cond_signal
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53cf0 (pthread_cond_broadca) W-> (0000.0) 0x04c35fd0 pthread_cond_broadcast@*
+--16676--     new: 0x04e53cf0 (pthread_cond_broadca) W-> (0000.0) 0x04c35e70 pthread_cond_broadcast
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53e30 (pthread_cond_init@GL) W-> (0000.0) 0x04c34a40 pthread_cond_init@*
+--16676--     new: 0x04e53e30 (pthread_cond_init@GL) W-> (0000.0) 0x04c348e0 pthread_cond_init
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53e60 (pthread_cond_destroy) W-> (0000.0) 0x04c34e60 pthread_cond_destroy@*
+--16676--     new: 0x04e53e60 (pthread_cond_destroy) W-> (0000.0) 0x04c34d00 pthread_cond_destroy
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53e80 (pthread_cond_wait@GL) W-> (0000.0) 0x04c352a0 pthread_cond_wait@*
+--16676--     new: 0x04e53e80 (pthread_cond_wait@GL) W-> (0000.0) 0x04c35120 pthread_cond_wait
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53ef0 (pthread_cond_timedwa) W-> (0000.0) 0x04c35730 pthread_cond_timedwait@*
+--16676--     new: 0x04e53ef0 (pthread_cond_timedwa) W-> (0000.0) 0x04c355a0 pthread_cond_timedwait
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53f80 (pthread_cond_signal@) W-> (0000.0) 0x04c35bb0 pthread_cond_signal@*
+--16676--     new: 0x04e53f80 (pthread_cond_signal@) W-> (0000.0) 0x04c35a50 pthread_cond_signal
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e53ff0 (pthread_cond_broadca) W-> (0000.0) 0x04c35fd0 pthread_cond_broadcast@*
+--16676--     new: 0x04e53ff0 (pthread_cond_broadca) W-> (0000.0) 0x04c35e70 pthread_cond_broadcast
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e54130 (pthread_spin_init   ) W-> (0000.0) 0x04c36290 pthread_spin_init
+--16676--     new: 0x04e54130 (pthread_spin_init   ) W-> (0000.0) 0x04c37310 pthread_spin_unlock
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e54c30 (sem_init@@GLIBC_2.2.) W-> (0000.0) 0x04c38530 sem_init@*
+--16676--     new: 0x04e54c30 (sem_init@@GLIBC_2.2.) W-> (0000.0) 0x04c383c0 sem_init
+==16676== WARNING: new redirection conflicts with existing -- ignoring it
+--16676--     old: 0x04e54c60 (sem_destroy@@GLIBC_2) W-> (0000.0) 0x04c38970 sem_destroy@*
+--16676--     new: 0x04e54c60 (sem_destroy@@GLIBC_2) W-> (0000.0) 0x04c38810 sem_destroy
+--16676-- Reading syms from /lib/x86_64-linux-gnu/libc-2.19.so
+--16676--   Considering /lib/x86_64-linux-gnu/libc-2.19.so ..
+--16676--   .. CRC mismatch (computed dc620abc wanted 148cbd6e)
+--16676--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so ..
+--16676--   .. CRC is valid
+--16676-- REDIR: 0x50f1d60 (strcasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--16676-- REDIR: 0x50f4050 (strncasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--16676-- REDIR: 0x50f1530 (memcpy@GLIBC_2.2.5) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--16676-- REDIR: 0x50ef7c0 (rindex) redirected to 0x4c3d690 (rindex)
+--16676-- REDIR: 0x50f6780 (__GI_memcpy) redirected to 0x4c3f0d0 (__GI_memcpy)
+--16676-- REDIR: 0x50e8220 (calloc) redirected to 0x4c2fee0 (calloc)
+--16676-- REDIR: 0x50edac0 (strlen) redirected to 0x4c3db20 (strlen)
+--16676-- REDIR: 0x50e7750 (malloc) redirected to 0x4c2de00 (malloc)
+--16676-- REDIR: 0x50f0410 (__GI_strstr) redirected to 0x4c40a10 (__strstr_sse2)
+--16676-- REDIR: 0xffffffffff600000 (???) redirected to 0x38051703 (???)
+--16676-- REDIR: 0x4e4f430 (pthread_create@@GLIBC_2.2.5) redirected to 0x4c31160 (pthread_create@*)
+--16676-- REDIR: 0x4e512c0 (pthread_mutex_init) redirected to 0x4c32e70 (pthread_mutex_init)
+--16676-- REDIR: 0x4e51410 (pthread_mutex_lock) redirected to 0x4c337a0 (pthread_mutex_lock)
+--16676-- REDIR: 0x4e527c0 (pthread_mutex_unlock) redirected to 0x4c344c0 (pthread_mutex_unlock)
+--16676-- REDIR: 0x50f8ac0 (strchrnul) redirected to 0x4c40620 (strchrnul)
+--16676-- REDIR: 0x4e513e0 (pthread_mutex_destroy) redirected to 0x4c33350 (pthread_mutex_destroy)
+==16676== Thread 3:
+==16676== Conflicting load by thread 3 at 0x00609b70 size 8
+==16676==    at 0x403A2F: thread_routine_debug (ivmatrix.c:257)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x515088D: ??? (syscall-template.S:81)
+==16676==    by 0x50DE002: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1261)
+==16676==    by 0x50DF4DB: _IO_do_write@@GLIBC_2.2.5 (fileops.c:538)
+==16676==    by 0x50DE6A0: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1332)
+==16676==    by 0x50AF4E9: vfprintf (vfprintf.c:1692)
+==16676==    by 0x50B9498: printf (printf.c:33)
+==16676==    by 0x403AED: thread_routine_debug (ivmatrix.c:267)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== 
+==16676== Conflicting store by thread 3 at 0x00609b70 size 8
+==16676==    at 0x403A3A: thread_routine_debug (ivmatrix.c:257)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x515088D: ??? (syscall-template.S:81)
+==16676==    by 0x50DE002: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1261)
+==16676==    by 0x50DF4DB: _IO_do_write@@GLIBC_2.2.5 (fileops.c:538)
+==16676==    by 0x50DE6A0: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1332)
+==16676==    by 0x50AF4E9: vfprintf (vfprintf.c:1692)
+==16676==    by 0x50B9498: printf (printf.c:33)
+==16676==    by 0x403AED: thread_routine_debug (ivmatrix.c:267)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== 
+==16676== Conflicting load by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403AF0: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x401434D: _dl_open (dl-open.c:613)
+==16676==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
+==16676==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
+==16676==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
+==16676==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
+==16676==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
+==16676==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
+==16676==    by 0x4E50534: pthread_exit (pthreadP.h:280)
+==16676==    by 0x403B3B: thread_routine_debug (ivmatrix.c:270)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676== 
+==16676== Conflicting store by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403AFB: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x401434D: _dl_open (dl-open.c:613)
+==16676==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
+==16676==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
+==16676==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
+==16676==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
+==16676==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
+==16676==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
+==16676==    by 0x4E50534: pthread_exit (pthreadP.h:280)
+==16676==    by 0x403B3B: thread_routine_debug (ivmatrix.c:270)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676== 
+==16676== Conflicting load by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403B1E: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x401434D: _dl_open (dl-open.c:613)
+==16676==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
+==16676==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
+==16676==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
+==16676==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
+==16676==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
+==16676==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
+==16676==    by 0x4E50534: pthread_exit (pthreadP.h:280)
+==16676==    by 0x403B3B: thread_routine_debug (ivmatrix.c:270)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676== 
+==16676== Conflicting load by thread 3 at 0x00609b80 size 8
+==16676==    at 0x403B20: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x401434D: _dl_open (dl-open.c:613)
+==16676==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
+==16676==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
+==16676==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
+==16676==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
+==16676==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
+==16676==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
+==16676==    by 0x4E50534: pthread_exit (pthreadP.h:280)
+==16676==    by 0x403B3B: thread_routine_debug (ivmatrix.c:270)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676== 
+==16676== Conflicting store by thread 3 at 0x00609b80 size 8
+==16676==    at 0x403B2B: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== Other segment start (thread 2)
+==16676==    at 0x4C34544: pthread_mutex_unlock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4C30E75: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Other segment end (thread 2)
+==16676==    at 0x4C338E3: pthread_mutex_lock (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x401434D: _dl_open (dl-open.c:613)
+==16676==    by 0x519B0F1: do_dlopen (dl-libc.c:87)
+==16676==    by 0x400FFF3: _dl_catch_error (dl-error.c:187)
+==16676==    by 0x519B1B1: __libc_dlopen_mode (dl-libc.c:46)
+==16676==    by 0x4E57A42: pthread_cancel_init (unwind-forcedunwind.c:52)
+==16676==    by 0x4E57C0B: _Unwind_ForcedUnwind (unwind-forcedunwind.c:129)
+==16676==    by 0x4E55D3F: __pthread_unwind (unwind.c:129)
+==16676==    by 0x4E50534: pthread_exit (pthreadP.h:280)
+==16676==    by 0x403B3B: thread_routine_debug (ivmatrix.c:270)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676== 
+--16676-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--16676--   Considering /lib/x86_64-linux-gnu/libgcc_s.so.1 ..
+--16676--   .. CRC mismatch (computed ea519b66 wanted 0c00ddb3)
+--16676--    object doesn't have a symbol table
+--16676-- REDIR: 0x4e54a40 (pthread_once) redirected to 0x4c32510 (pthread_once)
+--16676-- REDIR: 0x50e7df0 (free) redirected to 0x4c2f070 (free)
+--16676-- REDIR: 0x4e505c0 (pthread_join) redirected to 0x4c31700 (pthread_join)
+--16676-- REDIR: 0x50ed500 (strcpy) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--16676-- REDIR: 0x5101b90 (__strcpy_sse2_unaligned) redirected to 0x4c3dc00 (strcpy)
+==16676== 
+==16676== ERROR SUMMARY: 2000004 errors from 7 contexts (suppressed: 201 from 160)
+==16676== 
+==16676== 1 errors in context 1 of 7:
+==16676== Conflicting store by thread 3 at 0x00609b80 size 8
+==16676==    at 0x403B2B: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 1 errors in context 2 of 7:
+==16676== Conflicting load by thread 3 at 0x00609b80 size 8
+==16676==    at 0x403B20: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 1 errors in context 3 of 7:
+==16676== Conflicting store by thread 3 at 0x00609b70 size 8
+==16676==    at 0x403A3A: thread_routine_debug (ivmatrix.c:257)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 1 errors in context 4 of 7:
+==16676== Conflicting load by thread 3 at 0x00609b70 size 8
+==16676==    at 0x403A2F: thread_routine_debug (ivmatrix.c:257)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 500000 errors in context 5 of 7:
+==16676== Conflicting load by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403B1E: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 500000 errors in context 6 of 7:
+==16676== Conflicting load by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403AF0: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+==16676== 
+==16676== 1000000 errors in context 7 of 7:
+==16676== Conflicting store by thread 3 at 0x00609b78 size 8
+==16676==    at 0x403AFB: thread_routine_debug (ivmatrix.c:268)
+==16676==    by 0x4C30E7B: ??? (in /usr/lib/valgrind/vgpreload_drd-amd64-linux.so)
+==16676==    by 0x4E4F181: start_thread (pthread_create.c:312)
+==16676==    by 0x515F47C: clone (clone.S:111)
+==16676== Allocation context: BSS section of /home/bu99y/code/learning/Seminars/Determinant/determ.out
+==16676== 
+--16676-- 
+--16676-- used_suppression:     68 drd-ld /usr/lib/valgrind/default.supp:584
+--16676-- used_suppression:    130 drd-libc-stdio /usr/lib/valgrind/default.supp:600
+--16676-- used_suppression:      3 drd-libpthread-pthread_create /usr/lib/valgrind/default.supp:645
+==16676== 
+==16676== ERROR SUMMARY: 2000004 errors from 7 contexts (suppressed: 201 from 160)
