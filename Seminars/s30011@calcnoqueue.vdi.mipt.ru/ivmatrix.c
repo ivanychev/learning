@@ -1,16 +1,3 @@
-/**
- * @brief 	Parallel matrix determinant calculating
- * @details 	Testing results:
- * 		1  core -	49.59
- * 		2  cores - 	24.65
- * 		4  cores - 	12.92
- * 		8  cores - 	 7.13
- * 		16 cores - 	 3.97
- * 		32 cores - 	 2.81
- * 		64 cores - 	 2.78
- */
-
-
 #define DEBUG
 #define PAGESIZE (4096)
 #define MB (1024*1024)
@@ -195,7 +182,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
 
-		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
+		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
 	}
 	*info_save = info;
@@ -239,6 +226,8 @@ int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 	free(results);
 	free(threads);
 	free(info);
+	// semctl(semid, 0, IPC_RMID);
+	// unlink(TEMP_FILE);
 	*ret = result;
 	return 0;
 
@@ -260,19 +249,6 @@ matrix matrix_copy(const matrix* copied)
 
 //============================================================================================
 
-void* thread_routine_debug(void* info_ptr)
-{
-	uint32_t size   = ((struct thread_meta*)info_ptr)->ptr->size;
-	uint32_t factor = ((struct thread_meta*)info_ptr)->threads_num;
-
-	uint64_t big_number = 1;
-	for (; size > 0; --size)
-		big_number *= 10;
-
-	for (; big_number > 0; big_number -= factor);
-
-	pthread_exit(NULL);
-}
 
 void* thread_routine(void* info_ptr)
 {

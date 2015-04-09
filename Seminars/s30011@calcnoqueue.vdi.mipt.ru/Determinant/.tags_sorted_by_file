@@ -1,0 +1,163 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CC	Makefile	/^CC 		=  gcc #clang-3.5$/;"	m
+CFLAGS	Makefile	/^CFLAGS 		= -g $(STANDARD) $(GCOV) $(WARNINGS) $(OPTIMIZE) -MD -pthread$/;"	m
+GCOV	Makefile	/^GCOV 	 	= -fprofile-arcs -ftest-coverage -pg$/;"	m
+OPTIMIZE	Makefile	/^OPTIMIZE 	= $/;"	m
+STANDARD	Makefile	/^STANDARD 	= -std=c11$/;"	m
+TARGET	Makefile	/^TARGET 		= determ.out$/;"	m
+VALGRIND_KEYS	Makefile	/^VALGRIND_KEYS 	= $/;"	m
+WARNINGS	Makefile	/^WARNINGS 	= -Wall -Werror$/;"	m
+f	generate_matrix.py	/^f = open(sys.argv[2], "w")$/;"	v
+rand_num	generate_matrix.py	/^		rand_num = random.randint(-2, 2)$/;"	v
+size	generate_matrix.py	/^	size = int(size)$/;"	v
+size	generate_matrix.py	/^	size = sys.argv[1]$/;"	v
+wolfram	generate_matrix.py	/^wolfram = open("wolfram.txt", "w")$/;"	v
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+CALL	iv_standard.h	122;"	d
+CALLN	iv_standard.h	130;"	d
+CHECK	iv_standard.h	131;"	d
+CHECKN	iv_standard.h	132;"	d
+DOUT	iv_standard.h	167;"	d
+ERROR_MESSAGES	iv_standard.h	/^enum ERROR_MESSAGES$/;"	g
+F_CHECK	iv_standard.h	91;"	d
+F_CHECK_EXIT_CODE	iv_standard.h	82;"	d
+F_LOCATION	iv_standard.h	25;"	d
+F_LOCATION	iv_standard.h	87;"	d
+F_LOCATION	iv_standard.h	88;"	d
+F_WARN	iv_standard.h	136;"	d
+F_WARN	iv_standard.h	152;"	d
+I32OUT	iv_standard.h	175;"	d
+I64OUT	iv_standard.h	176;"	d
+IOUT	iv_standard.h	164;"	d
+IVALLOCFAIL	iv_standard.h	/^	IVALLOCFAIL$/;"	e	enum:ERROR_MESSAGES
+IVFOPENFAIL	iv_standard.h	/^	IVFOPENFAIL,$/;"	e	enum:ERROR_MESSAGES
+IVINVALARGNUM	iv_standard.h	/^	IVINVALARGNUM,$/;"	e	enum:ERROR_MESSAGES
+IVINVALPID	iv_standard.h	/^	IVINVALPID,$/;"	e	enum:ERROR_MESSAGES
+IVNEGSIZE	iv_standard.h	/^	IVNEGSIZE,$/;"	e	enum:ERROR_MESSAGES
+IVPTRNULL	iv_standard.h	/^	IVPTRNULL,$/;"	e	enum:ERROR_MESSAGES
+LOCATION	iv_standard.h	34;"	d
+LOC_OUT	iv_standard.h	44;"	d
+LOC_OUT	iv_standard.h	56;"	d
+LOC_OUT1	iv_standard.h	45;"	d
+LOC_OUT1	iv_standard.h	57;"	d
+LOC_OUT2	iv_standard.h	46;"	d
+LOC_OUT2	iv_standard.h	58;"	d
+LOUT	iv_standard.h	165;"	d
+LUOUT	iv_standard.h	166;"	d
+OUT	iv_standard.h	39;"	d
+OUT	iv_standard.h	51;"	d
+OUT1	iv_standard.h	40;"	d
+OUT1	iv_standard.h	52;"	d
+OUT2	iv_standard.h	41;"	d
+OUT2	iv_standard.h	53;"	d
+OUT3	iv_standard.h	42;"	d
+OUT3	iv_standard.h	54;"	d
+OUT4	iv_standard.h	43;"	d
+OUT4	iv_standard.h	55;"	d
+POUT	iv_standard.h	169;"	d
+SOUT	iv_standard.h	170;"	d
+TEMPLATE_OUT	iv_standard.h	158;"	d
+U32OUT	iv_standard.h	173;"	d
+U64OUT	iv_standard.h	174;"	d
+UOUT	iv_standard.h	168;"	d
+WARN	iv_standard.h	155;"	d
+__IV_STANDARD	iv_standard.h	2;"	d
+iv_msgs	iv_standard.h	/^char const* iv_msgs[] = {$/;"	v
+GLOBAL_COUNTER	ivmatrix.asm	/^GLOBAL_COUNTER:$/;"	l
+_GLOBAL__sub_I_65535_0_iv_msgs	ivmatrix.asm	/^_GLOBAL__sub_I_65535_0_iv_msgs:$/;"	l
+add_string	ivmatrix.asm	/^add_string:$/;"	l
+annihilate_below	ivmatrix.asm	/^annihilate_below:$/;"	l
+gauss	ivmatrix.asm	/^gauss:$/;"	l
+get_long	ivmatrix.asm	/^get_long:$/;"	l
+get_matrix	ivmatrix.asm	/^get_matrix:$/;"	l
+get_matrix_determinant	ivmatrix.asm	/^get_matrix_determinant:$/;"	l
+get_minor	ivmatrix.asm	/^get_minor:$/;"	l
+get_threads	ivmatrix.asm	/^get_threads:$/;"	l
+iv_msgs	ivmatrix.asm	/^iv_msgs:$/;"	l
+main	ivmatrix.asm	/^main:$/;"	l
+matrix_copy	ivmatrix.asm	/^matrix_copy:$/;"	l
+matrix_kill	ivmatrix.asm	/^matrix_kill:$/;"	l
+print_diff	ivmatrix.asm	/^print_diff:$/;"	l
+print_matrix	ivmatrix.asm	/^print_matrix:$/;"	l
+proceed_arguments	ivmatrix.asm	/^proceed_arguments:$/;"	l
+search_below_nzero_swap	ivmatrix.asm	/^search_below_nzero_swap:$/;"	l
+swap_strings	ivmatrix.asm	/^swap_strings:$/;"	l
+thread_routine	ivmatrix.asm	/^thread_routine:$/;"	l
+thread_routine_debug	ivmatrix.asm	/^thread_routine_debug:$/;"	l
+DEBUG	ivmatrix.c	1;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	147;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	148;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	157;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	158;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	169;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	170;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	180;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	181;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	211;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	212;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	225;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	226;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	232;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	233;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	255;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	256;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	307;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	308;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	317;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	318;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	334;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	335;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	411;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	412;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	424;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	425;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	446;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	49;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	50;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	61;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	62;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	79;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	80;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	8;"	d	file:
+F_CHECK_EXIT_CODE	ivmatrix.c	9;"	d	file:
+GLOBAL_COUNTER	ivmatrix.c	/^uint64_t GLOBAL_COUNTER = 0;$/;"	v
+MB	ivmatrix.c	3;"	d	file:
+PAGESIZE	ivmatrix.c	2;"	d	file:
+TEMP_FILE	ivmatrix.c	10;"	d	file:
+add_string	ivmatrix.c	/^inline void add_string(matrix* this, uint32_t added, uint32_t to, double factor)$/;"	f
+annihilate_below	ivmatrix.c	/^inline void annihilate_below(matrix* this, uint32_t i)$/;"	f
+gauss	ivmatrix.c	/^int gauss(matrix* this, double* result)$/;"	f
+get_long	ivmatrix.c	/^int get_long(long* save, const char* str)$/;"	f
+get_matrix	ivmatrix.c	/^int get_matrix(FILE* fd, matrix* this) $/;"	f
+get_matrix_determinant	ivmatrix.c	/^int get_matrix_determinant(const matrix* this, long nthreads, double* ret)$/;"	f
+get_minor	ivmatrix.c	/^matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)$/;"	f
+get_threads	ivmatrix.c	/^pthread_t* get_threads(const matrix* this, long amount, double* results, struct thread_meta** info_save)$/;"	f
+main	ivmatrix.c	/^int main(int argc, char const *argv[]) $/;"	f
+matrix_copy	ivmatrix.c	/^matrix matrix_copy(const matrix* copied)$/;"	f
+matrix_kill	ivmatrix.c	/^void matrix_kill(matrix* this)$/;"	f
+print_diff	ivmatrix.c	/^void print_diff(struct timeval begin, struct timeval end)$/;"	f
+print_matrix	ivmatrix.c	/^void   print_matrix(const matrix* this)$/;"	f
+proceed_arguments	ivmatrix.c	/^int proceed_arguments(int argc, char const* argv[], FILE** fd, long* nthreads)$/;"	f
+search_below_nzero_swap	ivmatrix.c	/^void search_below_nzero_swap(matrix* this, uint32_t i)$/;"	f
+swap_strings	ivmatrix.c	/^inline void swap_strings(matrix* this, uint32_t first, uint32_t second)$/;"	f
+thread_routine	ivmatrix.c	/^void* thread_routine(void* info_ptr)$/;"	f
+thread_routine_debug	ivmatrix.c	/^void* thread_routine_debug(void* info_ptr)$/;"	f
+ELEM	ivmatrix.h	144;"	d
+ELEM_TYPE	ivmatrix.h	141;"	d
+IS_ZERO	ivmatrix.h	147;"	d
+_XOPEN_SOURCE	ivmatrix.h	1;"	d
+data	ivmatrix.h	/^	void* data;$/;"	m	struct:matrix_s
+matrix	ivmatrix.h	/^typedef struct matrix_s matrix;$/;"	t	typeref:struct:matrix_s
+matrix_s	ivmatrix.h	/^struct matrix_s {$/;"	s
+minor_index	ivmatrix.h	/^	uint32_t 	minor_index;$/;"	m	struct:thread_meta
+ptr	ivmatrix.h	/^	const matrix*  	ptr;$/;"	m	struct:thread_meta
+size	ivmatrix.h	/^	uint32_t size;$/;"	m	struct:matrix_s
+thread_meta	ivmatrix.h	/^struct thread_meta {$/;"	s
+threads_num	ivmatrix.h	/^	long 	 	threads_num;$/;"	m	struct:thread_meta
+to_save	ivmatrix.h	/^	double*  	to_save;$/;"	m	struct:thread_meta
+BILLION	try.c	11;"	d	file:
+main	try.c	/^int main( int argc, char **argv )$/;"	f
