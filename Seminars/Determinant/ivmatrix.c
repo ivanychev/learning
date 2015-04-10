@@ -11,7 +11,7 @@
  */
 
 
-#define DEBUG
+//#define DEBUG
 #define PAGESIZE (4096)
 #define MB (1024*1024)
 
@@ -195,7 +195,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
 
-		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
+		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
 	}
 	*info_save = info;
