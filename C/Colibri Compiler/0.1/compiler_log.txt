@@ -1,0 +1,792 @@
+DEBUG# >>>>>>>>>>>>>>>>>TOKENIZE START<<<<<<<<<<<<<<<<<<<<<<<
+DEBUG# Token constructing...
+
+DEBUG# done -> 0098cf70
+
+DEBUG# Getting token...
+DEBUG# Got [{] character
+DEBUG# It's [{], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [{]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [d] character
+DEBUG# Found letter [d], looking for identificator...
+DEBUG# Scanned identificator is [do]
+DEBUG# do
+DEBUG# do
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20093] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [{] character
+DEBUG# It's [{], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [{]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [l] character
+DEBUG# Found letter [l], looking for identificator...
+DEBUG# Scanned identificator is [learn]
+DEBUG# learn
+DEBUG# learn
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [learn]
+DEBUG# learn
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [+] character
+DEBUG# It's operator, calling got_op()...
+DEBUG# Checking next symbol, it's [=]
+DEBUG# It's assignition
+DEBUG# Writing to [000007d6] token, type = 7600260
+
+DEBUG# Got [20061] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [;], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [}] character
+DEBUG# It's [}], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [}]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [pro]
+DEBUG# pro
+DEBUG# pro
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [pro]
+DEBUG# pro
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found '==', saving token...
+DEBUG# Writing to [000007d2] token, type = 7600264
+
+DEBUG# Got [20024] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [)], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [i] character
+DEBUG# Found letter [i], looking for identificator...
+DEBUG# Scanned identificator is [if]
+DEBUG# if
+DEBUG# if
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20090] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [l] character
+DEBUG# Found letter [l], looking for identificator...
+DEBUG# Scanned identificator is [lang_is_good]
+DEBUG# lang_is_good
+DEBUG# lang_is_good
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [lang_is_good]
+DEBUG# lang_is_good
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found '==', saving token...
+DEBUG# Writing to [000007d2] token, type = 7600264
+
+DEBUG# Got [20024] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [)], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [m] character
+DEBUG# Found letter [m], looking for identificator...
+DEBUG# Scanned identificator is [mark]
+DEBUG# mark
+DEBUG# mark
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [mark]
+DEBUG# mark
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found [1], it's assignition
+DEBUG# Writing to [000007d6] token, type = 7600264
+
+DEBUG# Got [20060] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [0], result = 1
+DEBUG# Got [;], result = 10
+DEBUG# Done, result is 10
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [10]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [print]
+DEBUG# print
+DEBUG# print
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20095] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got ["] character
+DEBUG# Found ", string in front...
+DEBUG# Scanned string [Hello, World!]
+DEBUG# Writing to [000007d7] token, type = 7600800
+
+DEBUG# Got [Hello, World!]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [answer]
+DEBUG# answer
+DEBUG# answer
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [answer]
+DEBUG# answer
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found [4], it's assignition
+DEBUG# Writing to [000007d6] token, type = 7600264
+
+DEBUG# Got [20060] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [4] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [4], result = 0
+DEBUG# Got [2], result = 4
+DEBUG# Got [;], result = 42
+DEBUG# Done, result is 42
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [42]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [print_val]
+DEBUG# print_val
+DEBUG# print_val
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20096] code
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [answer]
+DEBUG# answer
+DEBUG# answer
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [answer]
+DEBUG# answer
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [}] character
+DEBUG# It's [}], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [}]
+DEBUG# Token written successfully
+DEBUG# Getting token...
+DEBUG# Got [ÿ] character
+DEBUG# Found end of file
+DEBUG# Writing to [000007d8] token, type = 7600800
+
+DEBUG# Got [0]
+DEBUG# Token written successfully
+DEBUG# Token [0098cf70] destructing...
+
+DEBUG# done
+
+DEBUG# Getting token...
+DEBUG# Got [{] character
+DEBUG# It's [{], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [{]
+DEBUG# Token written successfully
+type: [2005],value: [{]
+DEBUG# Getting token...
+DEBUG# Got [d] character
+DEBUG# Found letter [d], looking for identificator...
+DEBUG# Scanned identificator is [do]
+DEBUG# do
+DEBUG# do
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20093] code
+DEBUG# Token written successfully
+type: [2009],value: [}N]
+DEBUG# Getting token...
+DEBUG# Got [{] character
+DEBUG# It's [{], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [{]
+DEBUG# Token written successfully
+type: [2005],value: [{]
+DEBUG# Getting token...
+DEBUG# Got [l] character
+DEBUG# Found letter [l], looking for identificator...
+DEBUG# Scanned identificator is [learn]
+DEBUG# learn
+DEBUG# learn
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [learn]
+DEBUG# learn
+DEBUG# Token written successfully
+type: [2003],value: [learn]
+DEBUG# Getting token...
+DEBUG# Got [+] character
+DEBUG# It's operator, calling got_op()...
+DEBUG# Checking next symbol, it's [=]
+DEBUG# It's assignition
+DEBUG# Writing to [000007d6] token, type = 7600260
+
+DEBUG# Got [20061] code
+DEBUG# Token written successfully
+type: [2006],value: [20061]
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [;], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+type: [2004],value: [1]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [}] character
+DEBUG# It's [}], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [}]
+DEBUG# Token written successfully
+type: [2005],value: [}]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [pro]
+DEBUG# pro
+DEBUG# pro
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [pro]
+DEBUG# pro
+DEBUG# Token written successfully
+type: [2003],value: [pro]
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found '==', saving token...
+DEBUG# Writing to [000007d2] token, type = 7600264
+
+DEBUG# Got [20024] code
+DEBUG# Token written successfully
+type: [2002],value: [20024]
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [)], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+type: [2004],value: [1]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [i] character
+DEBUG# Found letter [i], looking for identificator...
+DEBUG# Scanned identificator is [if]
+DEBUG# if
+DEBUG# if
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20090] code
+DEBUG# Token written successfully
+type: [2009],value: [zN]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got [l] character
+DEBUG# Found letter [l], looking for identificator...
+DEBUG# Scanned identificator is [lang_is_good]
+DEBUG# lang_is_good
+DEBUG# lang_is_good
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [lang_is_good]
+DEBUG# lang_is_good
+DEBUG# Token written successfully
+type: [2003],value: [lang_is_good]
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found '==', saving token...
+DEBUG# Writing to [000007d2] token, type = 7600264
+
+DEBUG# Got [20024] code
+DEBUG# Token written successfully
+type: [2002],value: [20024]
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [)], result = 1
+DEBUG# Done, result is 1
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [1]
+DEBUG# Token written successfully
+type: [2004],value: [1]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [m] character
+DEBUG# Found letter [m], looking for identificator...
+DEBUG# Scanned identificator is [mark]
+DEBUG# mark
+DEBUG# mark
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [mark]
+DEBUG# mark
+DEBUG# Token written successfully
+type: [2003],value: [mark]
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found [1], it's assignition
+DEBUG# Writing to [000007d6] token, type = 7600264
+
+DEBUG# Got [20060] code
+DEBUG# Token written successfully
+type: [2006],value: [20060]
+DEBUG# Getting token...
+DEBUG# Got [1] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [1], result = 0
+DEBUG# Got [0], result = 1
+DEBUG# Got [;], result = 10
+DEBUG# Done, result is 10
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [10]
+DEBUG# Token written successfully
+type: [2004],value: [10]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [print]
+DEBUG# print
+DEBUG# print
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20095] code
+DEBUG# Token written successfully
+type: [2009],value: [N]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got ["] character
+DEBUG# Found ", string in front...
+DEBUG# Scanned string [Hello, World!]
+DEBUG# Writing to [000007d7] token, type = 7600800
+
+DEBUG# Got [Hello, World!]
+DEBUG# Token written successfully
+type: [2007],value: [Hello, World!]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [answer]
+DEBUG# answer
+DEBUG# answer
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [answer]
+DEBUG# answer
+DEBUG# Token written successfully
+type: [2003],value: [answer]
+DEBUG# Getting token...
+DEBUG# Got [=] character
+DEBUG# It's [=], calling got_equal()...
+DEBUG# Got '=', checking next symbol...
+DEBUG# Found [4], it's assignition
+DEBUG# Writing to [000007d6] token, type = 7600264
+
+DEBUG# Got [20060] code
+DEBUG# Token written successfully
+type: [2006],value: [20060]
+DEBUG# Getting token...
+DEBUG# Got [4] character
+DEBUG# Number recognized
+DEBUG# Scanning for number...
+DEBUG# Got [4], result = 0
+DEBUG# Got [2], result = 4
+DEBUG# Got [;], result = 42
+DEBUG# Done, result is 42
+DEBUG# Writing to [000007d4] token, type = 7600264
+
+DEBUG# Got [42]
+DEBUG# Token written successfully
+type: [2004],value: [42]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [p] character
+DEBUG# Found letter [p], looking for identificator...
+DEBUG# Scanned identificator is [print_val]
+DEBUG# print_val
+DEBUG# print_val
+DEBUG# Writing to [000007d9] token, type = 7600800
+
+DEBUG# Got [20096] code
+DEBUG# Token written successfully
+type: [2009],value: [€N]
+DEBUG# Getting token...
+DEBUG# Got [(] character
+DEBUG# It's [(], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [(]
+DEBUG# Token written successfully
+type: [2005],value: [(]
+DEBUG# Getting token...
+DEBUG# Got [a] character
+DEBUG# Found letter [a], looking for identificator...
+DEBUG# Scanned identificator is [answer]
+DEBUG# answer
+DEBUG# answer
+DEBUG# Writing to [000007d3] token, type = 7600800
+
+DEBUG# Got [answer]
+DEBUG# answer
+DEBUG# Token written successfully
+type: [2003],value: [answer]
+DEBUG# Getting token...
+DEBUG# Got [)] character
+DEBUG# It's [)], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [)]
+DEBUG# Token written successfully
+type: [2005],value: [)]
+DEBUG# Getting token...
+DEBUG# Got [;] character
+DEBUG# It's [;], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [;]
+DEBUG# Token written successfully
+type: [2005],value: [;]
+DEBUG# Getting token...
+DEBUG# Got [}] character
+DEBUG# It's [}], separator
+DEBUG# Writing to [000007d5] token, type = 7600800
+
+DEBUG# Got [}]
+DEBUG# Token written successfully
+type: [2005],value: [}]
+DEBUG# Getting token...
+DEBUG# Got [ÿ] character
+DEBUG# Found end of file
+DEBUG# Writing to [000007d8] token, type = 7600800
+
+DEBUG# Got [0]
+DEBUG# Token written successfully
+type: [2008],value: [0]
+DEBUG# LIST OF SCANNED TOKENS BEGIN>>>>>>>>>>>>>>>>>>>>>>
+
+0type: [2005],value: [{]
+1type: [2009],value: [}N]
+2type: [2005],value: [{]
+3type: [2003],value: [learn]
+4type: [2006],value: [20061]
+5type: [2004],value: [1]
+6type: [2005],value: [;]
+7type: [2005],value: [}]
+8type: [2005],value: [(]
+9type: [2003],value: [pro]
+10type: [2002],value: [20024]
+11type: [2004],value: [1]
+12type: [2005],value: [)]
+13type: [2005],value: [;]
+14type: [2009],value: [zN]
+15type: [2005],value: [(]
+16type: [2003],value: [lang_is_good]
+17type: [2002],value: [20024]
+18type: [2004],value: [1]
+19type: [2005],value: [)]
+20type: [2003],value: [mark]
+21type: [2006],value: [20060]
+22type: [2004],value: [10]
+23type: [2005],value: [;]
+24type: [2009],value: [N]
+25type: [2005],value: [(]
+26type: [2007],value: [Hello, World!]
+27type: [2005],value: [)]
+28type: [2005],value: [;]
+29type: [2003],value: [answer]
+30type: [2006],value: [20060]
+31type: [2004],value: [42]
+32type: [2005],value: [;]
+33type: [2009],value: [€N]
+34type: [2005],value: [(]
+35type: [2003],value: [answer]
+36type: [2005],value: [)]
+37type: [2005],value: [;]
+38type: [2005],value: [}]
+39type: [2008],value: [0]
+DEBUG# LIST OF SCANNED TOKENS FINISH<<<<<<<<<<<<<<<<<<<<<<
+
+DEBUG# >>>>>>>>>>>>>>>>>TOKENIZE FINISHED, GOT 40 TOKENS<<<<<<<<<<<<<<<<<

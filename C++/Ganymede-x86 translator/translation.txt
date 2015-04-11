@@ -1,0 +1,308 @@
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+This file contain translation or description from Ganymede processor instructions into MASM32
+
+V 0.1
+
+CPU V4 called Ganymede now
+
+As it wa used in virtual processor, there will be two stacks available for user to use. 
+Arithmetic stack is currenly the co-processor floating point stack, which is limited and
+the user must be aware of it. The second stack, which was used to contain jumping pointers
+for using procedures will be actual stack of executable.
+
+In the first version of translator all the function, which are responsible for input and
+output will be C functions from standard library.
+
+Values indentificators are working, which are 64-bit floating point numbers. Procedures are working.
+
+Mathematic process is located in math co-processor.
+
+Virtual processor registers will be represented by 64-bit fields, containing double values
+
+We use pre-built "nop-template" to locate translated code, because building out own Windows executable
+is not our goal in the first version.
+
+WARNING: x86 way of dividing and subtraction differs from the way of Ganymede.
+WARNING: x86 way -> FSUB x, y = x - y, Ganymede way -> SUB x, y = y - x. Used fsubr instead
+
+----------------------------------------------
+TEMPLATE HEADER
+
+AX, BX, CX, DX - Virtual registers
+DI, SI		   - Temporary values container
+
+_TAB:		byte 9, 0
+_ENTER:		byte 13, 10, 0
+_SPACE:		byte 32, 0
+
+JMP _BEGINCODE
+USER-ALLOCATED VARIABLES
+_BEGINCODE:
+CODE
+----------------------------------------------
+
+Copyright (c) Ivanychev Sergey, 2014
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//								Command codes
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	CMD_NONE  =	1000,
+	CMD_DUMP  =	1013,	\\ dropped
+	CMD_OUT   =	1017,	\\ dropped due to lack of usage
+	CMD_MOV   =	1018,
+	CMD_JMP   =	1021,
+	CMD_JBE   =	1022,
+	CMD_JB    =	1023,
+	CMD_JAE   =	1024,
+	CMD_JA    =	1025,
+	CMD_JE    =	1026,
+	CMD_JNE   =	1027,
+	CMD_ERROR = 1028,
+	CMD_FUNC  =	1029,
+	CMD_CALL  =	1030,
+	CMD_RET   =	1031,
+	CMD_DEF	  = 1035,
+	CMD_IN    =	1036,
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//							Assembler schematic code
+// >>>>  CPU V4 ASSEMBLER COMMAND
+//
+// >
+// interpretation
+// >
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+>>> PUSH [REGISTER, VARIABLE]
+
+>
+	fld real8 ptr [REGISTER, VARIABLE] 
+>
+
+>>> PUSH [VALUE]
+
+>
+	invoke memcpy, addr DI, {CURRENT DOUBLE}, 8
+	fld real8 ptr [DI]
+>
+
+>>> POP [REGISTER, VARIABLE]
+
+>
+	fst real8 ptr [REGISTER, VARIABLE]
+>
+
+>>> ADD, SUB, MUL, DIV, SIN, COS, TAN, SQRT
+
+>
+	fadd, fsubr, fmul, fdivr
+>
+
+>>>	POW
+
+>
+	fld real8 ptr [DI]
+	fld real8 ptr [SI]
+	invoke pow, real8 si, real8 di
+>
+
+>>>	SQRT
+
+>
+	fsqrt
+>
+
+>>> END
+
+>
+	invoke ExitProcess, 0
+>
+
+>>> TAB, SPACE, ENTER
+
+>
+	invoke putchar, 9
+	{or 13, 10 (\n), or 32 (space)}
+>
+
+>>> ASIN		//arctg(sqrt(1-x^2)/x)
+>
+				fst real8 ptr __DI
+				
+				fld real8 ptr __DI
+				fld real8 ptr __DI	
+				fmul				;creating x^2
+				fld1
+				fsubr				; 1 - x^2
+				fsqrt				; sqrt(1-x^2)
+				fld real8 ptr __DI
+				fdivr				; x / sqrt(1-x^2)
+				fld1
+				fpatan				; atan (st(1) / st(0))
+>
+	
+>>> FAC
+
+>
+	fld1
+	fadd
+	fst real8 ptr [DI]
+	invoke tgamma, real8 ptr [DI]
+
+>>>	LN
+>
+				fld1
+				fxch		;swapping
+				fyl2x		;y*log_2(x)
+	
+				fldl2e		;log_2(e)
+				fdiv		; atan (st(1) / st(0))
+>
+
+>>>	SWAP
+>
+	fxch
+>
+
+>>>> DUB
+
+>
+	fst real8 ptr [DI]
+	fld real8 ptr [DI]
+>
+
+>>> JUMPS
+>
+	assession
+	invoke memcpy, addr DI, {CURRENT DOUBLE}, 8
+	fld real8 ptr [DI]
+	frndint					// rounding
+	fist					// loading integer
+
+Each jumping label in Ganymede code is changing while converting in x86
+(Watch the structure above).Resulted adress is calculated as
+
+Beginning of code adress + 
+size of all variables    + 
+sum of sizes of each command until jumping in Ganymede code
+
+JAE machine code. Remember, that translated commands are to be invertedd due to
+difference of JAE command between Ganymede and x86. Talking to Ganymede, the
+devolpment team decided that firstly pushed argument exactly is the first argument,
+which isn't connected with Intel's point of view.
+
+0xDD 0x05 0x00 0x00 0x00 0x00				//fld real8 ptr __SI
+0xDD 0x05 0x00 0x00 0x00 0x00				//fld real8 ptr __DI
+0xDE 0xD9									//fcompp	-	comparing and popping both of numbers out
+0x9B										//waiting for co-processor
+											
+0xDF 0xE0									//loading CX to AX register to deal with results
+0x66 0x8B 0xD8								//copying AX to BX to save loaded flag register
+0x66 0x23 0x05 0x00 0x00 0x00 0x00			//_FERROR!! first debug comparesment. If some of bites that aren't
+											//responsible for comparison information are oned, than co-proc
+											//got a mistake and we should quit
+											
+0x0F 0x85 0x00 0x00 0x00 0x00				//JNZ __COPROC_ERROR
+
+0x66 0x8B 0xC3 
+0x66 0x33 0x05 0x00 0x00 0x00 0x00			//XOR to __UNEQU if it's impossible to compare - error
+0x0F 0x84 0x00 0x00 0x00 0x00				//JE __COPROC_ERROR
+
+//--------------------------COMMON PART ENDED-------------------------------------------------------------
+
+0x66 0x8B 0xC3			
+0x66 0x33 0x05 0x00 0x00 0x00 0x00 
+0x0F 0x84 0x00 0x00 0x00 0x00				// JZ - compatible to __ABOVE, __BELOW, __EQUAL 
+ 
+0x66 0x8B 0xC3 
+0x66 0x33 0x1D 0x00 0x00 0x00 0x00 
+0x0F 0x85 0x00 0x00 0x00 0x00				// JNZ - needed for JNZ catering (with __EQUAL)
+
+
+OR.....
+				fld real8 ptr __SI			; jae for example
+				fld real8 ptr __DI
+				fcompp
+				fstsw ax
+				mov bx, ax
+				
+				and ax, word ptr __FERROR
+				jnz __COPROC_ERROR 
+				
+				mov ax, bx
+				xor ax, word ptr __UNEQU
+				jz __COPROC_ERROR
+				
+				mov ax, bx
+				xor ax, __ABOVE
+				jz __BEGIN_CODE
+				
+				mov ax, bx
+				xor bx, __EQUAL
+				jz __BEGIN_CODE 
+				
+				jmp __COPROC_ERROR
+
+>
+
+>>>	DEF
+
+>
+Defining variables is managed by preprocessor of translator. All of them are 
+located before the code as it is seen in the header of current document.
+When preprocessor sees DEF command, it allocates 64-bits memory before the segment
+of code, which hasn't been built yet.
+<
+
+
+>>> IN
+
+>
+	Scanf and pointer
+
+
+<
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+Ok. We have read the code and created Code object with Command structures in it. What we need to do?
+
+1.. Count the ammount of defined variables in Ganymede code
+2.. Patch the offsets of standard function calls
+3.. Replace the calls to variables with the pointers of created 64-bit fields
+4.. Replace translation template of OUT CH
+5.. Replace the very first jump with the length of head plus ammount of variables * 8 bytes
+6.. Calculate the addresses of each Command x86 templates begins
+7.. Patch jumps and calls (using 7 point)
+8.. Patch conversions to standard Ganymede registers
+
+Solution:
+1) Creating function REVIVE_CODE that will go through the Command structures and patch address-independent
+things that hasn't been done with the code since the templates was used.
+	V- Changing OUT if it is OUT CH, changing the size of x86-translation and it's translation string
+	V- Count the number of user-defined variables
+	V- Calculate the very first jump
+	V- Calculate each Command x86 address
+	- Anything else, that will be added due to the updates
+
+2) For each command there will be function, that will translate template
+	- calculating jumping offset (there will be a function) count_jmp_offset
+	- inserting the pointers of Ganymede registers
+	- calculating calling of standard function or my ERROR function offsets 
+
+End of x86 machine code preparation. Next steps....>
+
+1. Creating the copy of template.exe
+2. Starting write, patching first jump, begginning with the calculated begin adress
+3. Freeing memory, exiting
+4. Debugging...............................................................................................
+5. Feel good

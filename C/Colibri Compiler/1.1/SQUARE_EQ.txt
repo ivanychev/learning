@@ -1,0 +1,43 @@
+{
+	a = 0;
+	b = 0;
+	c = 0;
+
+	xf = 0;
+	xs = 0;
+
+	if (a == 0)
+	{
+		if (b == 0)
+		{
+			if (c == 0) print("Infinite");
+			if (c != 0) print("No roots");
+		}
+		if (b != 0)
+		{
+			print("x = ");
+			print_val(c / b);		
+		}
+	}
+
+	
+	if (a != 0)
+	{
+		d = b * b - 4 * a * c;
+		
+		if (d == 0)
+		{
+			print("x = ");
+			print_val(-b/(2*a));
+		}
+		if (d < 0) print("No roots");
+		if (d > 0)
+		{
+			print("x1 = ");
+			sqrtd = sqrt(b * b - 4 * a * c);
+			print_val((-b + sqrtd)/(2 * a));
+			print("\nx2 = ");
+			print_val((-b - sqrtd)/(2 * a));
+		}
+	}
+}

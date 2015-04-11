@@ -1,0 +1,10 @@
+{
+
+do {learn += 1;} (pro == 1);
+
+if (lang_is_good == 1) mark = 10;
+
+print("Hello, World!");
+answer = 42;
+print_val(answer);
+}
