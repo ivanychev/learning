@@ -2,7 +2,7 @@
 	@file				main.cpp
 	@author				Sergey Ivanychev, group 376, DCAM MIPT
 	@mainpage
-	@version			1.2 Beta 1
+	@version			1.3
 
 	@par				Available commands (1.2 Beta 1) :
 						- push {float number} or {ax, bx, cx, dx}	- pushes number to stack

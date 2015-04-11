@@ -1,19 +1,18 @@
 /**
  * @brief 	Parallel matrix determinant calculating
- * @details 	Testing results:
- * 		1  core -	49.59
- * 		2  cores - 	24.65
- * 		4  cores - 	12.92
- * 		8  cores - 	 7.13
- * 		16 cores - 	 3.97
- * 		32 cores - 	 2.81
- * 		64 cores - 	 2.78
+ * @details 	Testing results (300x300):
+ * 		1  core -	49.55
+ * 		2  cores - 	25.85
+ * 		4  cores - 	13.29
+ * 		8  cores - 	 7.42
+ * 		16 cores - 	 4.29
  */
 
 
 //#define DEBUG
 #define PAGESIZE (4096)
 #define MB (1024*1024)
+#define MAX_FILENAME 100
 
 #include "ivmatrix.h"
 #include "iv_standard.h"
@@ -28,7 +27,7 @@ void print_diff(struct timeval begin, struct timeval end);
 
 //======================================================================================
 
-int proceed_arguments(int argc, char const* argv[], FILE** fd, long* nthreads)
+int proceed_arguments(int argc, char const* argv[], char* name, long* nthreads)
 {
 	CHECK(argc == 3, "Invalid number of arguments. Need name of a file AND number of threads\n");
 	
@@ -40,8 +39,9 @@ int proceed_arguments(int argc, char const* argv[], FILE** fd, long* nthreads)
 	CHECK(cond == 0, "Failed to get number from second argument");
 	CHECK(*nthreads > 0, "Invalid number of expecting threads to be created");
 
-	*fd = fopen(filename, "r");
-	CHECK(*fd != NULL, "Failed to open matrix file");
+	int filelen = strlen(argv[1]);
+	CHECK(filelen <= MAX_FILENAME, "Too long filename");
+	strcpy(name, argv[1]);
 	return 0;
 }
 
@@ -54,9 +54,9 @@ int main(int argc, char const *argv[])
 	struct timeval end;
 
 
-	FILE* fd = NULL;
+	char* filename[MAX_FILENAME + 1] = {};
 	long nthreads = 0;
-	int cond = proceed_arguments(argc, argv, &fd, &nthreads);
+	int cond = proceed_arguments(argc, argv, filename, &nthreads);
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE fclose(fd); return -1;
@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
 		.size = 0,
 		.data = NULL
 	};
-	cond = get_matrix(fd, &current);
+	cond = get_matrix(filename, &current);
 
 	gettimeofday(&begin, NULL);
 
@@ -129,13 +129,24 @@ void matrix_kill(matrix* this)
 
 //======================================================================================
 
-int get_matrix(FILE* fd, matrix* this) 
+int readfile(const char* filename, char** buf)
 {
-	CHECKN(fd   != NULL, IVPTRNULL);
-	CHECKN(this != NULL, IVPTRNULL);
+	assert(filename);
+	assert(buf);
+
+	
+}
+
+int get_matrix(const char* filename, matrix* this) 
+{
+	CHECKN(filename != NULL, IVPTRNULL);
+	CHECKN(this 	!= NULL, IVPTRNULL);
+
+	char* buf = NULL;
+	int cond = readfile(filename, &buf)
 
 	uint32_t size = 0;
-	int cond = fscanf(fd, "%"SCNu32, &size);
+	cond = fscanf(fd, "%"SCNu32, &size);
 	CHECK(cond == 1, "Failed to get matrix size number, that must first in matrix definition");
 	CHECK((uint64_t)size * (uint64_t)size < (uint64_t)UINT32_MAX,
 		"Too big size of matrix");
@@ -195,7 +206,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
 
-		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
+		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
 	}
 	*info_save = info;
