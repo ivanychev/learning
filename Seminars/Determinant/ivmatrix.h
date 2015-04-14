@@ -1,3 +1,6 @@
+#ifndef __IV_MATRIX
+#define __IV_MATRIX
+
 #define _XOPEN_SOURCE
 
 #include <unistd.h>
@@ -44,12 +47,12 @@ struct thread_meta {
  * @brief Reads matrix from argumented file
  * @details File structure: SIZE and SIZE*SIZE double numbers
  * 
- * @param fd reading file description
- * @param this matrix to save results in
+ * @param filename 	reading file
+ * @param this 		matrix to save results in
  * 
  * @return -1 if error occured, 0 if OK
  */
-int    	get_matrix(FILE* fd, matrix* this);
+int    	get_matrix(const char* filename, matrix* this);
 
 /**
  * @brief Calculates determinant of input matrix
@@ -146,3 +149,5 @@ void* thread_routine_debug(void* info_ptr);
 
 #define IS_ZERO(num)				\
 	(fabs(num)<DBL_EPSILON)
+
+#endif

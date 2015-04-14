@@ -23,7 +23,7 @@
 
 uint64_t GLOBAL_COUNTER = 0;
 
-void print_diff(struct timeval begin, struct timeval end);
+void print_diff(struct timeval begin, struct timeval end, char*);
 
 //======================================================================================
 
@@ -34,13 +34,13 @@ int proceed_arguments(int argc, char const* argv[], char* name, long* nthreads)
 	const char* filename    = argv[1];
 
 	*nthreads = 0;
-	int cond = get_long(nthreads, argv[2]);
+	int cond = iv_getlong(nthreads, argv[2]);
 
 	CHECK(cond == 0, "Failed to get number from second argument");
 	CHECK(*nthreads > 0, "Invalid number of expecting threads to be created");
 
-	int filelen = strlen(argv[1]);
-	CHECK(filelen <= MAX_FILENAME, "Too long filename");
+	int   filenamelen = strlen(filename);
+	CHECK(filenamelen <= MAX_FILENAME, "Too long filename");
 	strcpy(name, argv[1]);
 	return 0;
 }
@@ -54,12 +54,12 @@ int main(int argc, char const *argv[])
 	struct timeval end;
 
 
-	char* filename[MAX_FILENAME + 1] = {};
+	char filename[MAX_FILENAME + 1] = {};
 	long nthreads = 0;
 	int cond = proceed_arguments(argc, argv, filename, &nthreads);
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE fclose(fd); return -1;
+#define F_CHECK_EXIT_CODE return -1;
 
 	CHECK(cond == 0, "Failed to get arguments");
 	matrix current = {
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
 	gettimeofday(&begin, NULL);
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE fclose(fd); matrix_kill(&current); return -1;
+#define F_CHECK_EXIT_CODE matrix_kill(&current); return -1;
 
 	CHECK(cond != -1, "Failed to read matrix from file\n");
 	double determinant = 0;
@@ -79,11 +79,11 @@ int main(int argc, char const *argv[])
 	CHECK(cond == 0, "Failed to calculate matrix determinant");
 	printf("Determinant is %lg\n", determinant);
 
-	fclose(fd);
+	
 	matrix_kill(&current);
 	gettimeofday(&end, NULL);
 
-	print_diff(begin, end);
+	print_diff(begin, end, "Program execution time: ");
 	return 0;
 }
 
@@ -91,26 +91,26 @@ int main(int argc, char const *argv[])
 #define F_CHECK_EXIT_CODE return -1;
 
 
-int get_long(long* save, const char* str)
-{
-	assert(save);
-	int base = 10;
-	char* endptr = NULL;
+// int get_long(long* save, const char* str)
+// {
+// 	assert(save);
+// 	int base = 10;
+// 	char* endptr = NULL;
 
-	long val = strtol(str, &endptr, base);
-
-
-	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN))
-	       || (errno != 0 && val == 0)
-	       || (void*)endptr == (void*)str) {
-	   	return -1;
-	}
+// 	long val = strtol(str, &endptr, base);
 
 
+// 	if ((errno == ERANGE && (val == LONG_MAX || val == LONG_MIN))
+// 	       || (errno != 0 && val == 0)
+// 	       || (void*)endptr == (void*)str) {
+// 	   	return -1;
+// 	}
 
-	*save = val;
-	return 0; 
-}
+
+
+// 	*save = val;
+// 	return 0; 
+// }
 
 
 //======================================================================================
@@ -129,38 +129,56 @@ void matrix_kill(matrix* this)
 
 //======================================================================================
 
-int readfile(const char* filename, char** buf)
-{
-	assert(filename);
-	assert(buf);
+// int readfile(const char* filename, char** buf)
+// {
+// 	assert(filename);
+// 	assert(buf);
 
+// 	struct stat st;
+// 	int cond = stat(filename, &st);	
+// 	CHECK(cond == 0, "Failed to get file info");
+// 	size_t bufsize = (size_t)st.st_size;
+// 	*buf = malloc(bufsize);
+// 	CHECKN(buf, IV_ALLOCFAIL);
+// 	int fd = open(filename, O_RDONLY);
 	
-}
+
+// }
 
 int get_matrix(const char* filename, matrix* this) 
 {
-	CHECKN(filename != NULL, IVPTRNULL);
-	CHECKN(this 	!= NULL, IVPTRNULL);
+	CHECKN(filename != NULL, IV_PTRNULL);
+	CHECKN(this 	!= NULL, IV_PTRNULL);
 
 	char* buf = NULL;
-	int cond = readfile(filename, &buf)
+	size_t filesize = 0;
+	int cond = iv_allocbuffer_copy(filename, &buf, &filesize);
+	printf("filesize = %ld\n", filesize);
 
-	uint32_t size = 0;
-	cond = fscanf(fd, "%"SCNu32, &size);
+	CHECK(cond == 0, "Failed to copy file to buffer");
+
+	uint32_t size  = 0;
+	uint32_t shift = 0;
+	uint32_t arrow = 0;
+
+	cond = sscanf(buf, "%"SCNu32"%n", &size, &arrow);
+	printf("size expected = %"PRIu32"\n", size);
 	CHECK(cond == 1, "Failed to get matrix size number, that must first in matrix definition");
 	CHECK((uint64_t)size * (uint64_t)size < (uint64_t)UINT32_MAX,
 		"Too big size of matrix");
 	this->data = calloc(size * size, sizeof(double));
-	CHECKN(this->data, IVALLOCFAIL);
+	CHECKN(this->data, IV_ALLOCFAIL);
 
 	uint32_t nelems = size * size;
 	for (uint32_t i = 0; i < nelems; ++i){
 		double temp = 0;
-		cond = fscanf(fd, "%lg", &temp);
+		cond = sscanf(buf + arrow, "%lg%n", &temp, &shift);
+		arrow += shift;
 		CHECK(cond == 1, "Failed to read element");
 		((double*)(this->data))[i] = temp;
 	}
 	this->size = size;
+	free(buf);
 	return 0;
 }
 
@@ -173,8 +191,8 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 {
 	CHECK(amount > 0, "Invalid amount of expected threads");
 	pthread_t* array = (pthread_t*)calloc(amount, sizeof(pthread_t));
-	CHECKN(array, IVALLOCFAIL);
-	CHECKN(info_save, IVPTRNULL);
+	CHECKN(array, IV_ALLOCFAIL);
+	CHECKN(info_save, IV_PTRNULL);
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(array); return NULL;
@@ -187,7 +205,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 
 	struct thread_meta* info= (struct thread_meta*)calloc(amount, 
 							      sizeof(struct thread_meta));
-	CHECKN(info, IVALLOCFAIL);
+	CHECKN(info, IV_ALLOCFAIL);
 
 #undef F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(info); /*semctl(*semid, 0, IPC_RMID);*/ free(array); return NULL;
@@ -206,7 +224,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
 
-		cond = pthread_create(&(array[i]), &default_attr, thread_routine_debug, (void*)(info + i));
+		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
 	}
 	*info_save = info;
@@ -220,11 +238,11 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 
 int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 {
-	CHECKN(this != NULL, IVPTRNULL);
+	CHECKN(this != NULL, IV_PTRNULL);
 	CHECK(this->data != NULL, "Invalid Matrix: no data");
 //	int semid = 0;
 	double* results = (double*)calloc(nthreads, sizeof(double));
-	CHECKN(results, IVALLOCFAIL);
+	CHECKN(results, IV_ALLOCFAIL);
 
 
 #undef  F_CHECK_EXIT_CODE
@@ -287,6 +305,11 @@ void* thread_routine_debug(void* info_ptr)
 
 void* thread_routine(void* info_ptr)
 {
+	struct timeval begin;
+	struct timeval end;
+
+	gettimeofday(&begin, NULL);
+
 	assert(info_ptr);
 	struct thread_meta info = *((struct thread_meta*)info_ptr);
 
@@ -317,7 +340,11 @@ void* thread_routine(void* info_ptr)
 	}
 	*(info.to_save) = result;
 	matrix_kill(&copy);
+	gettimeofday(&end, NULL);
 
+	char thread_name[50];
+	sprintf(thread_name, "%"PRIu32"'th thread time: ", info.minor_index);
+	print_diff(begin, end, thread_name);	
 	pthread_exit(NULL);
 }
 
@@ -329,7 +356,7 @@ void* thread_routine(void* info_ptr)
 
 int gauss(matrix* this, double* result)
 {
-	CHECKN(this != NULL, IVALLOCFAIL);
+	CHECKN(this != NULL, IV_ALLOCFAIL);
 	CHECK(this->data != NULL, "Invalid Matrix: no data");
 
 	for (uint32_t i = 0; i < this->size; ++i)
@@ -403,11 +430,11 @@ inline void add_string(matrix* this, uint32_t added, uint32_t to, double factor)
 
 matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)
 {
-	CHECKN(this != NULL, IVPTRNULL);
+	CHECKN(this != NULL, IV_PTRNULL);
 	uint32_t old_amount = this->size * this->size;
 
 	void* new_data = calloc((this->size - 1) * (this->size - 1), sizeof(double));
-	CHECKN(new_data != NULL, IVALLOCFAIL);
+	CHECKN(new_data != NULL, IV_ALLOCFAIL);
 	
 	void* old_data = this->data;
 
@@ -425,7 +452,7 @@ matrix* get_minor(const matrix* this, uint32_t string, uint32_t column)
 
 	CHECK(j == (this->size - 1) * (this->size - 1), "Failed to copy numbers to minor");
 	matrix* new_matrix = (matrix*)calloc(1, sizeof(matrix));
-	CHECKN(new_matrix, IVALLOCFAIL);
+	CHECKN(new_matrix, IV_ALLOCFAIL);
 
 	new_matrix->size = this->size - 1;
 	new_matrix->data = new_data;
@@ -449,7 +476,7 @@ void   print_matrix(const matrix* this)
 
 //============================================================================================
 
-void print_diff(struct timeval begin, struct timeval end)
+void print_diff(struct timeval begin, struct timeval end, char* begin_str)
 {
 	long long seconds = (long long)end.tv_sec  - (long long)begin.tv_sec;
 	long long micros  = (long long)end.tv_usec - (long long)begin.tv_usec;
@@ -458,5 +485,5 @@ void print_diff(struct timeval begin, struct timeval end)
 		micros += 1000000;
 		seconds -= 1;
 	}
-	printf("%lld.%6lld\n", seconds, micros);
+	fprintf(stderr, "%s %lld.%6lld\n", begin_str, seconds, micros);
 }

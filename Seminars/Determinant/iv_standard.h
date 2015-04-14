@@ -48,35 +48,42 @@
 
 #else
 
-#define OUT(str)				if (0)			printf(str);
-#define OUT1(str, arg1)				if (0)			printf(str, arg1);
-#define OUT2(str, arg1, arg2)			if (0)			printf(str, arg1, arg2);
-#define OUT3(str, arg1, arg2, arg3)		if (0)			printf(str, arg1, arg2, arg3);
-#define OUT4(str, arg1, arg2, arg3, arg4)	if (0)			printf(str, arg1, arg2, arg3, arg4);
-#define LOC_OUT(str) 				if (0)			printf(str);				
-#define LOC_OUT1(str, arg1)			if (0)			printf(str, arg1);	
-#define LOC_OUT2(str, arg1, arg2)		if (0)			printf(str, arg1, arg2);
+#define OUT(str)			
+#define OUT1(str, arg1)			
+#define OUT2(str, arg1, arg2)		
+#define OUT3(str, arg1, arg2, arg3)	
+#define OUT4(str, arg1, arg2, arg3, arg4)
+#define LOC_OUT(str) 			
+#define LOC_OUT1(str, arg1)		
+#define LOC_OUT2(str, arg1, arg2)	
 
 
 #endif
 
+
+
+extern char const* iv_msgs[];
+
 enum ERROR_MESSAGES
 {
-	IVPTRNULL,
-	IVFOPENFAIL,
-	IVINVALPID,
-	IVNEGSIZE,
-	IVINVALARGNUM,
-	IVALLOCFAIL
+	IV_PTRNULL,
+	IV_FOPENFAIL,
+	IV_INVALPID,
+	IV_NEGSIZE,
+	IV_INVALARGNUM,
+	IV_ALLOCFAIL
 };
 
-char const* iv_msgs[] = {
-	"Argumented pointer is null",
-	"Failed to open the file",
-	"Invalid pid",
-	"Size is below zero",
-	"Invalid number of arguments",
-	"Memory allocation failed"
+enum IV_ERRORCODES
+{
+	IV_INVALARGS 		= -1,
+	IV_STATFAIL  		= -2,
+	IV_OPENFAIL  		= -3,
+	IV_COPYALLOCFAIL 	= -4,
+	IV_BUFALLOCFAIL		= -5,
+	IV_READFAIL 		= -6,
+	IV_COPYSIZEFAIL 	= -7,
+	IV_NONUMBER 		= -8
 };
 
 #define F_CHECK_EXIT_CODE
@@ -176,11 +183,53 @@ do {									\
 #define I64OUT(num) 	TEMPLATE_OUT(num, PRIu64)
 #endif
 
-
  
 
 //===============================================================================================================
 //===============================================================================================================
 
+/**
+ * @brief 	Gets argumented file's size
+ * 
+ * 
+ * @param 	path
+ * @param 	to_save variable to save size
+ * 
+ * @return 	IV_INVALARGS 	if corrupted arguments
+ * 		IV_STATFAIL	if stat() failed
+ * 		0 		if success
+ */
+int iv_getfilesize(const char* path, size_t* to_save);
+
+/**
+ * @brief Allocates buffer for file and copies file in that buffer
+ * @details Buffer is allocated via malloc. Don't forget to free 
+ * 
+ * @param path 
+ * @param copy 		where to save pointer
+ * @param file_size  	where to save size
+ * @return  		IV_INVALARGS 		if arguments are corrupted
+ * 			IV_OPENFAIL 		if open() failed
+ * 			iv_getfilesize error codes if it has failed
+ * 			IV_ALLOCFAIL		if malloc() failed
+ * 			IV_READFAIL 		if read() failed
+ * 			IV_COPYSIZEFAILED 	if number of read bytes != file size
+ * 			0 			if success
+ * 			
+ */
+int iv_allocbuffer_copy(const char* path, char** copy, size_t* file_size);
+
+/**
+ * @brief Gets first long number from the string
+ * 
+ * 
+ * @param save 	where to save	
+ * @param str  	
+ * 
+ * @return 	IV_INVALARGS 	if arguments are corrupted
+ * 		IV_NONUMBER 	if there's no number in string
+ * 		0 		if success
+ */
+int iv_getlong(long* save, const char* str);
 
 #endif
