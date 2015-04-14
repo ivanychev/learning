@@ -25,6 +25,10 @@
 #include <signal.h>
 #include <time.h>
 #include <string.h>
+#include <sys/types.h>
+       #include <sys/ipc.h>
+       #include <sys/sem.h>
+
 
 
 struct matrix_s {
@@ -40,6 +44,7 @@ struct thread_meta {
 	long 	 	threads_num;
 	uint32_t 	minor_index;
 	double*  	to_save;
+	int 		semid;
 };
 
 

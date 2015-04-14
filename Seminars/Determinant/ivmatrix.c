@@ -21,6 +21,13 @@
 #define F_CHECK_EXIT_CODE return -1;
 #define TEMP_FILE ".temp"
 
+union semun {
+    int val;                         // value  for SETVAL
+    struct semid_ds *buf;            // buffer for IPC_STAT, IPC_SET
+    unsigned short int *array;       // array  for GETALL, SETALL
+    struct seminfo *__buf;           // buffer for IPC_INFO
+};
+
 uint64_t GLOBAL_COUNTER = 0;
 
 void print_diff(struct timeval begin, struct timeval end, char*);
@@ -37,7 +44,9 @@ int proceed_arguments(int argc, char const* argv[], char* name, long* nthreads)
 	int cond = iv_getlong(nthreads, argv[2]);
 
 	CHECK(cond == 0, "Failed to get number from second argument");
-	CHECK(*nthreads > 0, "Invalid number of expecting threads to be created");
+	CHECK(*nthreads > 0 
+		&& 
+	      *nthreads < SHRT_MAX, "Invalid number of expecting threads to be created");	
 
 	int   filenamelen = strlen(filename);
 	CHECK(filenamelen <= MAX_FILENAME, "Too long filename");
@@ -153,7 +162,7 @@ int get_matrix(const char* filename, matrix* this)
 	char* buf = NULL;
 	size_t filesize = 0;
 	int cond = iv_allocbuffer_copy(filename, &buf, &filesize);
-//	printf("filesize = %ld\n", filesize);
+
 
 	CHECK(cond == 0, "Failed to copy file to buffer");
 
@@ -162,7 +171,7 @@ int get_matrix(const char* filename, matrix* this)
 	uint32_t arrow = 0;
 
 	cond = sscanf(buf, "%"SCNu32"%n", &size, &arrow);
-//	printf("size expected = %"PRIu32"\n", size);
+
 	CHECK(cond == 1, "Failed to get matrix size number, that must first in matrix definition");
 	CHECK((uint64_t)size * (uint64_t)size < (uint64_t)UINT32_MAX,
 		"Too big size of matrix");
@@ -187,12 +196,18 @@ int get_matrix(const char* filename, matrix* this)
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE return NULL;
 
-pthread_t* get_threads(const matrix* this, long amount, double* results, struct thread_meta** info_save)
+pthread_t* get_threads( const matrix* this, 
+			long amount, 
+			double* results, 
+			struct thread_meta** info_save, 
+			int semid)
 {
 	CHECK(amount > 0, "Invalid amount of expected threads");
 	pthread_t* array = (pthread_t*)calloc(amount, sizeof(pthread_t));
 	CHECKN(array, IV_ALLOCFAIL);
 	CHECKN(info_save, IV_PTRNULL);
+
+
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(array); return NULL;
@@ -223,6 +238,7 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 		info[i].minor_index 	= i;
 		info[i].threads_num 	= amount;
 		info[i].to_save 	= results + i;
+		info[i].semid 		= semid;
 
 		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
@@ -239,26 +255,46 @@ pthread_t* get_threads(const matrix* this, long amount, double* results, struct 
 int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 {
 	CHECKN(this != NULL, IV_PTRNULL);
-	CHECK(this->data != NULL, "Invalid Matrix: no data");
+	CHECK(this->data != NULL, "Invalid matrix: no data");
 //	int semid = 0;
 	double* results = (double*)calloc(nthreads, sizeof(double));
 	CHECKN(results, IV_ALLOCFAIL);
-
-
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(results); return -1;
 
+	int fileid = creat(TEMP_FILE, 0600);
+	CHECK(fileid != -1, "Failed to create temporary file");
+	int key = ftok(TEMP_FILE, 1);
+	CHECK(key != -1, "Failed to get flag key");
+	int semid = semget(key, 1, IPC_CREAT | 0660);
+ 	CHECK(semid != -1, "Failed to get flag semaphore id");
+
+ 	union semun set;
+ 	set.val = 0;
+ 	semctl(semid, 0, SETVAL, set);
+
+ 	struct sembuf act = {0, (short)nthreads ,0};
+ 	int cond = semop(semid, &act, 1);
+
+#undef  F_CHECK_EXIT_CODE
+#define F_CHECK_EXIT_CODE semctl(semid, 0, IPC_RMID); free(results); return -1;
+
+ 	CHECK(cond == 0, "Failed to set semaphore");
+
 	struct thread_meta* info = NULL;
-	pthread_t* threads = get_threads(this, nthreads, results, &info);
+	pthread_t* threads = get_threads(this, nthreads, results, &info, semid);
 	CHECK(threads != NULL, "Failed to create threads");
 
 #undef  F_CHECK_EXIT_CODE
-#define F_CHECK_EXIT_CODE free(results); free(info); return -1;
+#define F_CHECK_EXIT_CODE semctl(semid, 0, IPC_RMID);   \
+			  free(results); 		\
+			  free(info); 			\
+			  return -1;
 
-	for (long i = 0; i < nthreads; i++) {
-		pthread_join(threads[i], NULL);
-		fprintf(stderr, "caught\n");
-	}
+	struct sembuf wait = {0, 0, 0};
+	cond = semop(semid, &wait, 1);
+	CHECK(cond == 0, "Failed to wait for threads");
+
 	double result = 0.0;
 	for (long i = 0; i < nthreads; i++)
 	{
@@ -268,6 +304,7 @@ int get_matrix_determinant(const matrix* this, long nthreads, double* ret)
 	free(results);
 	free(threads);
 	free(info);
+	semctl(semid, 0, IPC_RMID);
 	*ret = result;
 	return 0;
 
@@ -319,6 +356,7 @@ void* thread_routine(void* info_ptr)
 	double temp_result 	= 0;
 	matrix* minor 		= NULL;
 	matrix copy 		= matrix_copy(info.ptr);
+	int semid 		= info.semid;
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE matrix_kill(&copy); return (void*)-1;
@@ -344,7 +382,11 @@ void* thread_routine(void* info_ptr)
 
 	char thread_name[50];
 	sprintf(thread_name, "%"PRIu32"'th thread time: ", info.minor_index);
-	print_diff(begin, end, thread_name);	
+	print_diff(begin, end, thread_name);
+
+	struct sembuf on_exit= {0, -1, 0};
+	semop(semid, &on_exit, 1);
+	printf("Finished\n");	
 	pthread_exit(NULL);
 }
 
@@ -485,5 +527,5 @@ void print_diff(struct timeval begin, struct timeval end, char* begin_str)
 		micros += 1000000;
 		seconds -= 1;
 	}
-	fprintf(stderr, "%s %lld.%6lld\n", begin_str, seconds, micros);
+	fprintf(stderr, "%s %lld.%06lld\n", begin_str, seconds, micros);
 }
