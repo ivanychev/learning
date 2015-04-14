@@ -153,7 +153,7 @@ int get_matrix(const char* filename, matrix* this)
 	char* buf = NULL;
 	size_t filesize = 0;
 	int cond = iv_allocbuffer_copy(filename, &buf, &filesize);
-	printf("filesize = %ld\n", filesize);
+//	printf("filesize = %ld\n", filesize);
 
 	CHECK(cond == 0, "Failed to copy file to buffer");
 
@@ -162,7 +162,7 @@ int get_matrix(const char* filename, matrix* this)
 	uint32_t arrow = 0;
 
 	cond = sscanf(buf, "%"SCNu32"%n", &size, &arrow);
-	printf("size expected = %"PRIu32"\n", size);
+//	printf("size expected = %"PRIu32"\n", size);
 	CHECK(cond == 1, "Failed to get matrix size number, that must first in matrix definition");
 	CHECK((uint64_t)size * (uint64_t)size < (uint64_t)UINT32_MAX,
 		"Too big size of matrix");

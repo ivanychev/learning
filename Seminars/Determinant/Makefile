@@ -18,7 +18,7 @@ iv_standard.o: iv_standard.c
 	$(CC) $(CFLAGS) $< -c -o $@
 
 clean:
-	rm -rf *.o *.gcna *gcno *.gcda $(TARGET) 
+	rm -rf *.o *.gcna *.d *gcno *.gcda $(TARGET) 
 testing: $(TARGET)
 	./$(TARGET)
 

@@ -108,7 +108,7 @@ int iv_allocbuffer_copy(const char* path, char** copy, size_t* file_size)
 	*file_size = size;
 	
 	close(fd);
-	// free(buf);
+
 	return 0;
 }
 #undef  ONEXIT
