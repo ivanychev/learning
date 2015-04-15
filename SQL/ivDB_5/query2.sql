@@ -25,6 +25,10 @@ go
 select * 
 from games
 
+update games
+set league = 'FINAL'
+where league like '%final%'
+
 select sum(games_amount)
 from games
 where league like '%liga%'

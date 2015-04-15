@@ -151,7 +151,7 @@ create table sponsor (
 
 create table record_type (
 	type_id 	int not null primary key  identity(1, 1),
-	description 	nvarchar(1000) not null,
+	description 	nvarchar(1000),
 	bitrate_kbps 	int check(bitrate_kbps is null
 					or
 				  bitrate_kbps > 0) null
@@ -180,6 +180,7 @@ create table record (
 			check(url like 'http%'
 				or
 			      url like 'ftp%')
+				  default('http://yandex.com')
 );
 
 

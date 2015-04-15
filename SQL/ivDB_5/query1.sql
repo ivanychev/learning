@@ -4,6 +4,7 @@
 -- get_stage() function need to be defined
 
 -- VIEW
+
 use ivKVN
 
 drop function dbo.get_stage
@@ -47,8 +48,11 @@ go
 drop view finalists
 go
 
-create view finalists(city, amount, wins)
-	as select c.name, a.amount, isnull(b.wins, 0)
+create view finalists(city, amount/*, wins*/)
+as
+select city.name, tmp.amount
+from city join (
+	select c.name as  name, a.amount as amount, isnull(b.wins, 0) as wins
 	from   (
 		select city.city_id as city_id, isnull(count(team.team_id), 0) as amount
 		from  city, university, team
@@ -56,6 +60,7 @@ create view finalists(city, amount, wins)
 		and   university.uni_id = team.uni_id
 		group by city.city_id
 		) as a
+
 	left outer join (
 		select city.city_id as city2_id, isnull(count(distinct game.game_id), 0) as wins
 		from  city, university, team, marks, game
@@ -68,12 +73,21 @@ create view finalists(city, amount, wins)
 		group by city.city_id
 		) as b
 	on a.city_id = b.city2_id
+
 	inner join (
 		select city.name as name, city.city_id as city3_id
 		from   city
 		) as c
-	on a.city_id = c.city3_id;
+	on a.city_id = c.city3_id ) as tmp on tmp.name =city.name
+where tmp.amount > 2
 go
+
+select * from finalists
+
+
+update finalists
+set city = 'London'
+where city = 'Moscow'
 
 -- query
 
