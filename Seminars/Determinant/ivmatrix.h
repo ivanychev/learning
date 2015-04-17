@@ -2,7 +2,9 @@
 #define __IV_MATRIX
 
 #define _XOPEN_SOURCE
+#define _GNU_SOURCE
 
+#include <sched.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>

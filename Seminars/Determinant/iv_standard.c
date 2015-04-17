@@ -5,6 +5,7 @@
  * 			iv_getfilesize
  * 			iv_allocbuffer_copy
  * 			iv_getlong
+ * 			iv_printbinary
  * 			
  * 	@version 	0.1
  * 	
@@ -28,6 +29,8 @@
 #include "stdio.h"
 
 #define BUFSIZE 4096
+#define IV_PRINTBIN_BUFSIZE 127
+#define BITSPERBYTE 8
 #define ONEXIT
 #define RETURN(val) do {ONEXIT return val;} while (0);
 
@@ -134,6 +137,40 @@ int iv_getlong(long* save, const char* str)
 
 	*save = val;
 	return 0; 
+}
+
+int iv_printbinary(void* ptr, unsigned int bits)
+{
+	if (ptr == NULL || bits > IV_PRINTBIN_BUFSIZE)
+		RETURN(IV_INVALARGS);
+	if (bits == 0)
+		return 0;
+	char output[IV_PRINTBIN_BUFSIZE + 2] = {};
+	output[IV_PRINTBIN_BUFSIZE + 1] = 0;
+
+	int bytes = (bits - 1) / 8 + 1;  //! Number of affected bytes
+	char temp = 0;
+	char printed = 0;
+	int index = 0;
+	for (int i = 0; i < bytes; i++)
+	{
+		temp = *(char*)ptr;
+		ptr += 1;
+		for (int j = 0; j < BITSPERBYTE; j++)
+		{
+			if (index == bits)
+				goto iv_printbinary_EXIT;
+			printed = temp & (char)1;
+			output[IV_PRINTBIN_BUFSIZE - index] = printed + '0';
+			index++;
+			temp >>= 1;
+		}
+	}
+
+iv_printbinary_EXIT:
+	printf("%s", &output[IV_PRINTBIN_BUFSIZE - index + 1]);
+	fflush(stdout);
+	return 0;
 }
 
 

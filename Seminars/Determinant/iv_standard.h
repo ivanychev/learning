@@ -6,14 +6,18 @@
 *		
 *		@author 			Sergey Ivanychev, DCAM MIPT
 *		
-*		@version 			1.02
+*		@version 			1.03
 *              	
 *              	@par				Changelog v.1.01
 *              	        			--  Added "do while" constructions
 *              	        			
-*              	        			Chengelog v.1.02
+*              	        			Changelog v.1.02
 *              	        			--  Added *OUT macroses for fast variable printing
 *						--  F_CHECK is verbose by default
+*						
+*						Changelog v1.03
+*						--  Added iv_standard.o library declarations
+*						
 */
 
 //===============================================================================================================
@@ -231,5 +235,17 @@ int iv_allocbuffer_copy(const char* path, char** copy, size_t* file_size);
  * 		0 		if success
  */
 int iv_getlong(long* save, const char* str);
+
+/**
+ * @brief prints binary output starting from argumented pointer
+ * @details maximal length of one call output is limited by IV_PRINTBIN_BUFSIZE
+ * 
+ * @param ptr
+ * @param int how many bits to print
+ * 
+ * @return 	IV_INVALARGS	if arguments are corrupted
+ * 		0 		if OK
+ */
+int iv_printbinary(void* ptr, unsigned int bits);
 
 #endif

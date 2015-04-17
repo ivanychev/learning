@@ -226,12 +226,20 @@ pthread_t* get_threads( const matrix* this,
 #define F_CHECK_EXIT_CODE free(info); /*semctl(*semid, 0, IPC_RMID);*/ free(array); return NULL;
 
 // experimenting with stack size
-		pthread_attr_t default_attr;
-		cond = pthread_attr_init(&default_attr);
-		CHECK(cond == 0, "Failed to set thread attribute");
-		cond = pthread_attr_setstacksize(&default_attr, MB);
-		CHECK(cond == 0, "Failed to set stack size of pthread");
+		// pthread_attr_t default_attr;
+		// cond = pthread_attr_init(&default_attr);
+		// CHECK(cond == 0, "Failed to set thread attribute");
+		// cond = pthread_attr_setstacksize(&default_attr, MB);
+		// CHECK(cond == 0, "Failed to set stack size of pthread");
 
+// experimenting with CPU affinity
+	cpu_set_t mask;
+	cpu_set_t all_cores;
+	CPU_ZERO(&mask);
+	cond = sched_getaffinity(0, sizeof(cpu_set_t), &all_cores);
+	CHECK(cond == 0, "Failed to get CPU mask");	
+	int cores = CPU_COUNT(&all_cores);
+	int cur_core = 0;
 	for (long i = 0; i < amount; ++i)
 	{
 		info[i].ptr   	 	= this;
@@ -240,8 +248,15 @@ pthread_t* get_threads( const matrix* this,
 		info[i].to_save 	= results + i;
 		info[i].semid 		= semid;
 
-		cond = pthread_create(&(array[i]), &default_attr, thread_routine, (void*)(info + i));
+		cur_core = i % cores;
+		CHECK(CPU_ISSET(cur_core, &all_cores), "Core is not in the set");
+		CPU_ZERO(&mask);
+		CPU_SET(cur_core, &mask);
+
+		cond = pthread_create(&(array[i]), NULL/*&default_attr*/, thread_routine, (void*)(info + i));
 		CHECK(cond == 0, "Failed to create thread");
+		cond = pthread_setaffinity_np(array[i], sizeof(mask), &mask);
+		CHECK(cond == 0, "Failed to set affinity");
 	}
 	*info_save = info;
 	return array;
