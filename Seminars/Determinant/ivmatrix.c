@@ -357,10 +357,10 @@ void* thread_routine_debug(void* info_ptr)
 
 void* thread_routine(void* info_ptr)
 {
-	struct timeval begin;
-	struct timeval end;
+	// struct timeval begin;
+	// struct timeval end;
 
-	gettimeofday(&begin, NULL);
+//	gettimeofday(&begin, NULL);
 
 	assert(info_ptr);
 	struct thread_meta info = *((struct thread_meta*)info_ptr);
@@ -393,15 +393,15 @@ void* thread_routine(void* info_ptr)
 	}
 	*(info.to_save) = result;
 	matrix_kill(&copy);
-	gettimeofday(&end, NULL);
+//	gettimeofday(&end, NULL);
 
-	char thread_name[50];
-	sprintf(thread_name, "%"PRIu32"'th thread time: ", info.minor_index);
-	print_diff(begin, end, thread_name);
+//	char thread_name[50];
+//	sprintf(thread_name, "%"PRIu32"'th thread time: ", info.minor_index);
+//	print_diff(begin, end, thread_name);
 
 	struct sembuf on_exit= {0, -1, 0};
 	semop(semid, &on_exit, 1);
-	printf("Finished\n");	
+//	printf("Finished\n");	
 	pthread_exit(NULL);
 }
 
