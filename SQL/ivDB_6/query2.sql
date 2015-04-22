@@ -4,11 +4,14 @@
 -- LOST CHANGES
 
 
-SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
-BEGIN TRANSACTION
-SELECT city.name FROM city WHERE city_id = 10
-UPDATE city SET city.name = 'Kaliningrad' WHERE city_id = 10
-COMMIT
+-- SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+-- BEGIN TRANSACTION
+-- SELECT city.name FROM city WHERE city_id = 10
+-- UPDATE city SET city.name = 'Kaliningrad' WHERE city_id = 10;
+-- COMMIT
+
+
+SELECT * FROM city
 
 -- DIRTY READ
 
@@ -69,3 +72,15 @@ BEGIN TRANSACTION
 UPDATE city SET city.name = 'First' where city_id = 1
 SELECT * FROM city
 COMMIT
+
+-- EXTRA DEAD LOCK
+
+SELECT * FROM city
+
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+BEGIN TRANSACTION
+UPDATE city SET city.name = 'Third' where city_id = 3;
+UPDATE city SET city.name = 'Third' where city_id = 4;
+SELECT * FROM CITY
+COMMIT
+

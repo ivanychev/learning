@@ -1,0 +1,14 @@
+https://msdn.microsoft.com/ru-ru/library/ms189121.aspx
+Роли уровня базы данных
+
+https://msdn.microsoft.com/en-us/library/ms188659.aspx
+Server-level roles
+
+https://msdn.microsoft.com/en-us/library/ms189121.aspx
+database-level roles
+
+https://msdn.microsoft.com/en-us/library/ms181127(v=sql.120).aspx
+Principals
+
+http://sqlity.net/en/2003/deny-vs-revoke-2/
+Deny vs. Revoke

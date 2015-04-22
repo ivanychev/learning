@@ -85,20 +85,10 @@ go
 select * from finalists
 
 
-update finalists
-set city = 'London'
-where city = 'Moscow'
+
 
 -- query
-
-declare @looser_cities table(name nvarchar(50))
-insert into @looser_cities
-select city
-from finalists
-where wins = 0;
-
-select *
-from @looser_cities
+select * from university
 
 
 
