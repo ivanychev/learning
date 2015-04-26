@@ -1,0 +1,12 @@
+DML - SELECT, UPDATE, DELETE, INSER INTO
+DDL - CREATE TABLE | DATABASE, ALTER TABLE, DROP TABLE
+
+ALTER TABLE 
+	RENAME TO  — переименовать таблицу.
+	CHANGE COLUMN — изменить имя и тип данных столбца.
+	MODIFY COLUMN — изменить тип данных или позицию 
+	 столбца.
+	ADD COLUMN 
+	— добавить столбец в таблицу.
+	DROP COLUMN 
+	— удалить столбец из таблицы.

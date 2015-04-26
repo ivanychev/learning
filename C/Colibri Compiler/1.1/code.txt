@@ -1,0 +1,82 @@
+jmp :__skiplibrary_begin
+
+func :__tg
+tan
+ret
+
+func :__ctg
+pop ax
+push 1
+push ax
+tan
+div
+ret
+
+func :__sin
+sin
+ret
+
+func :__cos
+cos
+ret
+
+func :__ln
+ln
+ret
+
+func :__log
+ln
+pop ax
+ln
+push ax
+div
+ret
+
+func :__sqrt
+sqrt
+ret
+
+func :__arcsin
+asin
+ret
+
+func :__arccos
+asin
+pop ax
+push 3.141592653589793
+push 2
+div
+push ax
+sub
+ret
+
+
+func :__arctg
+pop ax
+push ax
+push ax
+push ax
+mul
+push 1
+add
+sqrt
+div
+asin
+ret
+
+func :__exp
+push 2.71828182846
+pow
+ret
+
+func :__pow
+pow
+ret
+
+func :__fac
+fac
+ret
+
+:__skiplibrary_begin
+
+end 

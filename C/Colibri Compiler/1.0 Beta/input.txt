@@ -1,0 +1,20 @@
+{
+	searched_fac = 7;
+	fac_f = fac(7);
+	fac_s = 1;
+	while (searched_fac > 1)
+	{
+		fac_s *= searched_fac;
+		print_val(fac_s);
+		print("\n");
+		searched_fac = searched_fac - 1;
+	}
+
+	print_val(fac_f);
+	print(" ");
+	print_val(fac_s);
+	print(" ");
+	print_val(searched_fac);
+	print("\n");
+	print("\nHello, it's my first compiler.");
+}

@@ -175,20 +175,20 @@ insert into TEAM values('Uralskie pelmeni 1',104);
 
 WITH T (Per_ID)
 (SELECT A.Per_ID	FROM
-									(SELECT DISTINCT TOP 50 PERCENT player.person_id AS Per_ID, last_name
-										FROM PEOPLE, PLAYER, TEAM, GAME, MARKS
-										WHERE PEOPLE.person_id=PLAYER.person_id
-										AND PLAYER.team_id=TEAM.team_id
-										AND YEAR(GAME.[date])=2004
-										AND GAME.game_id=MARKS.game_id
-										AND MARKS.team_id=TEAM.team_id
-										AND team_name=(SELECT TOP 1 team_name
-																FROM TEAM, MARKS
-																WHERE MARKS.team_id=TEAM.team_id
-																GROUP BY team_name
-																ORDER BY SUM(marks) DESC) 
-										ORDER BY last_name) AS A);
-										
+(SELECT DISTINCT TOP 50 PERCENT player.person_id AS Per_ID, last_name
+	FROM PEOPLE, PLAYER, TEAM, GAME, MARKS
+	WHERE PEOPLE.person_id=PLAYER.person_id
+	AND PLAYER.team_id=TEAM.team_id
+	AND YEAR(GAME.[date])=2004
+	AND GAME.game_id=MARKS.game_id
+	AND MARKS.team_id=TEAM.team_id
+	AND team_name=( SELECT TOP 1 team_name
+			FROM TEAM, MARKS
+			WHERE MARKS.team_id=TEAM.team_id
+			GROUP BY team_name
+			ORDER BY SUM(marks) DESC) 
+	ORDER BY last_name) AS A);
+	
 
 UPDATE PLAYER
 	SET team_id=422
