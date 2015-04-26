@@ -1,0 +1,146 @@
+==3525== drd, a thread error detector
+==3525== Copyright (C) 2006-2013, and GNU GPL'd, by Bart Van Assche.
+==3525== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==3525== Command: ./determ.out example.txt 2
+==3525== Parent PID: 2998
+==3525== 
+--3525-- 
+--3525-- Valgrind options:
+--3525--    --tool=drd
+--3525--    --log-file=log
+--3525--    -v
+--3525-- Contents of /proc/version:
+--3525--   Linux version 3.16.0-34-generic (buildd@brownie) (gcc version 4.8.2 (Ubuntu 4.8.2-19ubuntu1) ) #45~14.04.1-Ubuntu SMP Tue Mar 24 11:14:29 UTC 2015
+--3525-- Arch and hwcaps: AMD64, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--3525-- Page sizes: currently 4096, max supported 4096
+--3525-- Valgrind library directory: /usr/lib/valgrind
+--3525-- Reading syms from /home/bu99y/code/learning/Seminars/Determinant/determ.out
+--3525-- Reading syms from /lib/x86_64-linux-gnu/ld-2.19.so
+--3525--   Considering /lib/x86_64-linux-gnu/ld-2.19.so ..
+--3525--   .. CRC mismatch (computed 4cbae35e wanted 8d683c31)
+--3525--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.19.so ..
+--3525--   .. CRC is valid
+--3525-- Reading syms from /usr/lib/valgrind/drd-amd64-linux
+--3525--   Considering /usr/lib/valgrind/drd-amd64-linux ..
+--3525--   .. CRC mismatch (computed cc00ec2e wanted 72487465)
+--3525--    object doesn't have a symbol table
+--3525--    object doesn't have a dynamic symbol table
+--3525-- Scheduler: using generic scheduler lock implementation.
+--3525-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==3525== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3525-by-bu99y-on-???
+==3525== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3525-by-bu99y-on-???
+==3525== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3525-by-bu99y-on-???
+==3525== 
+==3525== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==3525== don't want to do, unless you know exactly what you're doing,
+==3525== or are doing some strange experiment):
+==3525==   /usr/lib/valgrind/../../bin/vgdb --pid=3525 ...command...
+==3525== 
+==3525== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==3525==   /path/to/gdb ./determ.out
+==3525== and then give GDB the following command
+==3525==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=3525
+==3525== --pid is optional if only one valgrind process is running
+==3525== 
+--3525-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--3525--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--3525--   .. CRC mismatch (computed 329d6860 wanted c0186920)
+--3525--    object doesn't have a symbol table
+--3525-- Reading syms from /usr/lib/valgrind/vgpreload_drd-amd64-linux.so
+--3525--   Considering /usr/lib/valgrind/vgpreload_drd-amd64-linux.so ..
+--3525--   .. CRC mismatch (computed 4b9b0c9c wanted 31cd678e)
+--3525--    object doesn't have a symbol table
+--3525-- REDIR: 0x4019a50 (index) redirected to 0x4c3d9b0 (index)
+--3525-- REDIR: 0x4019c70 (strcmp) redirected to 0x4c3e850 (strcmp)
+--3525-- REDIR: 0x4019ca0 (strlen) redirected to 0x4c3dbe0 (strlen)
+--3525-- REDIR: 0x401a9c0 (mempcpy) redirected to 0x4c40890 (mempcpy)
+--3525-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.19.so
+--3525--   Considering /lib/x86_64-linux-gnu/libpthread-2.19.so ..
+--3525--   .. CRC mismatch (computed d568bf33 wanted fb00d679)
+--3525--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libpthread-2.19.so ..
+--3525--   .. CRC is valid
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e4f430 (pthread_create@@GLIB) W-> (0000.0) 0x04c31160 pthread_create@*
+--3525--     new: 0x04e4f430 (pthread_create@@GLIB) W-> (0000.0) 0x04c30e90 pthread_create
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53170 (pthread_cond_init@@G) W-> (0000.0) 0x04c34a40 pthread_cond_init@*
+--3525--     new: 0x04e53170 (pthread_cond_init@@G) W-> (0000.0) 0x04c348e0 pthread_cond_init
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e531f0 (pthread_cond_destroy) W-> (0000.0) 0x04c34e60 pthread_cond_destroy@*
+--3525--     new: 0x04e531f0 (pthread_cond_destroy) W-> (0000.0) 0x04c34d00 pthread_cond_destroy
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53350 (pthread_cond_wait@@G) W-> (0000.0) 0x04c352a0 pthread_cond_wait@*
+--3525--     new: 0x04e53350 (pthread_cond_wait@@G) W-> (0000.0) 0x04c35120 pthread_cond_wait
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53690 (pthread_cond_timedwa) W-> (0000.0) 0x04c35730 pthread_cond_timedwait@*
+--3525--     new: 0x04e53690 (pthread_cond_timedwa) W-> (0000.0) 0x04c355a0 pthread_cond_timedwait
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53c10 (pthread_cond_signal@) W-> (0000.0) 0x04c35bb0 pthread_cond_signal@*
+--3525--     new: 0x04e53c10 (pthread_cond_signal@) W-> (0000.0) 0x04c35a50 pthread_cond_signal
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53cf0 (pthread_cond_broadca) W-> (0000.0) 0x04c35fd0 pthread_cond_broadcast@*
+--3525--     new: 0x04e53cf0 (pthread_cond_broadca) W-> (0000.0) 0x04c35e70 pthread_cond_broadcast
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53e30 (pthread_cond_init@GL) W-> (0000.0) 0x04c34a40 pthread_cond_init@*
+--3525--     new: 0x04e53e30 (pthread_cond_init@GL) W-> (0000.0) 0x04c348e0 pthread_cond_init
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53e60 (pthread_cond_destroy) W-> (0000.0) 0x04c34e60 pthread_cond_destroy@*
+--3525--     new: 0x04e53e60 (pthread_cond_destroy) W-> (0000.0) 0x04c34d00 pthread_cond_destroy
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53e80 (pthread_cond_wait@GL) W-> (0000.0) 0x04c352a0 pthread_cond_wait@*
+--3525--     new: 0x04e53e80 (pthread_cond_wait@GL) W-> (0000.0) 0x04c35120 pthread_cond_wait
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53ef0 (pthread_cond_timedwa) W-> (0000.0) 0x04c35730 pthread_cond_timedwait@*
+--3525--     new: 0x04e53ef0 (pthread_cond_timedwa) W-> (0000.0) 0x04c355a0 pthread_cond_timedwait
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53f80 (pthread_cond_signal@) W-> (0000.0) 0x04c35bb0 pthread_cond_signal@*
+--3525--     new: 0x04e53f80 (pthread_cond_signal@) W-> (0000.0) 0x04c35a50 pthread_cond_signal
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e53ff0 (pthread_cond_broadca) W-> (0000.0) 0x04c35fd0 pthread_cond_broadcast@*
+--3525--     new: 0x04e53ff0 (pthread_cond_broadca) W-> (0000.0) 0x04c35e70 pthread_cond_broadcast
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e54130 (pthread_spin_init   ) W-> (0000.0) 0x04c36290 pthread_spin_init
+--3525--     new: 0x04e54130 (pthread_spin_init   ) W-> (0000.0) 0x04c37310 pthread_spin_unlock
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e54c30 (sem_init@@GLIBC_2.2.) W-> (0000.0) 0x04c38530 sem_init@*
+--3525--     new: 0x04e54c30 (sem_init@@GLIBC_2.2.) W-> (0000.0) 0x04c383c0 sem_init
+==3525== WARNING: new redirection conflicts with existing -- ignoring it
+--3525--     old: 0x04e54c60 (sem_destroy@@GLIBC_2) W-> (0000.0) 0x04c38970 sem_destroy@*
+--3525--     new: 0x04e54c60 (sem_destroy@@GLIBC_2) W-> (0000.0) 0x04c38810 sem_destroy
+--3525-- Reading syms from /lib/x86_64-linux-gnu/libc-2.19.so
+--3525--   Considering /lib/x86_64-linux-gnu/libc-2.19.so ..
+--3525--   .. CRC mismatch (computed dc620abc wanted 148cbd6e)
+--3525--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.19.so ..
+--3525--   .. CRC is valid
+--3525-- REDIR: 0x50f1d60 (strcasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--3525-- REDIR: 0x50f4050 (strncasecmp) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--3525-- REDIR: 0x50f1530 (memcpy@GLIBC_2.2.5) redirected to 0x4a25720 (_vgnU_ifunc_wrapper)
+--3525-- REDIR: 0x50ef7c0 (rindex) redirected to 0x4c3d690 (rindex)
+--3525-- REDIR: 0x50f6780 (__GI_memcpy) redirected to 0x4c3f0d0 (__GI_memcpy)
+--3525-- REDIR: 0x50e7750 (malloc) redirected to 0x4c2de00 (malloc)
+--3525-- REDIR: 0x50f0410 (__GI_strstr) redirected to 0x4c40a10 (__strstr_sse2)
+--3525-- REDIR: 0x50e8220 (calloc) redirected to 0x4c2fee0 (calloc)
+--3525-- REDIR: 0x50edac0 (strlen) redirected to 0x4c3db20 (strlen)
+--3525-- REDIR: 0xffffffffff600000 (???) redirected to 0x38051703 (???)
+--3525-- REDIR: 0x4e4f430 (pthread_create@@GLIBC_2.2.5) redirected to 0x4c31160 (pthread_create@*)
+--3525-- REDIR: 0x4e512c0 (pthread_mutex_init) redirected to 0x4c32e70 (pthread_mutex_init)
+--3525-- REDIR: 0x4e51410 (pthread_mutex_lock) redirected to 0x4c337a0 (pthread_mutex_lock)
+--3525-- REDIR: 0x4e527c0 (pthread_mutex_unlock) redirected to 0x4c344c0 (pthread_mutex_unlock)
+--3525-- REDIR: 0x51b5090 (__memmove_ssse3_back) redirected to 0x4c3e9b0 (memcpy@GLIBC_2.2.5)
+--3525-- REDIR: 0x50e7df0 (free) redirected to 0x4c2f070 (free)
+--3525-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--3525--   Considering /lib/x86_64-linux-gnu/libgcc_s.so.1 ..
+--3525--   .. CRC mismatch (computed ea519b66 wanted 0c00ddb3)
+--3525--    object doesn't have a symbol table
+--3525-- REDIR: 0x4e54a40 (pthread_once) redirected to 0x4c32510 (pthread_once)
+--3525-- REDIR: 0x4e513e0 (pthread_mutex_destroy) redirected to 0x4c33350 (pthread_mutex_destroy)
+--3525-- REDIR: 0x4e505c0 (pthread_join) redirected to 0x4c31700 (pthread_join)
+--3525-- REDIR: 0x50f8ac0 (strchrnul) redirected to 0x4c40620 (strchrnul)
+--3525-- REDIR: 0x50f15c0 (memset) redirected to 0x4c3ffc0 (memset)
+==3525== 
+==3525== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 69 from 49)
+--3525-- 
+--3525-- used_suppression:     68 drd-ld /usr/lib/valgrind/default.supp:584
+--3525-- used_suppression:      1 drd-libpthread-_Unwind_ForcedUnwind /usr/lib/valgrind/default.supp:695
+==3525== 
+==3525== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 69 from 49)

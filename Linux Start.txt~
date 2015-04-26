@@ -1,0 +1,29 @@
+echo "Downloading GetDeb and PlayDeb" && wget http://archive.getdeb.net/install_deb/getdeb-repository_0.1-1~getdeb1_all.deb http://archive.getdeb.net/install_deb/playdeb_0.3-1~getdeb1_all.deb && echo "Installing GetDeb" && sudo dpkg -i getdeb-repository_0.1-1~getdeb1_all.deb && echo "Installing PlayDeb" && sudo dpkg -i playdeb_0.3-1~getdeb1_all.deb && echo "Deleting Downloads" && rm -f getdeb-repository_0.1-1~getdeb1_all.deb && rm -f playdeb_0.3-1~getdeb1_all.deb
+
+sudo add-apt-repository -y ppa:videolan/stable-daily
+
+sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
+
+sudo add-apt-repository -y ppa:gnome3-team/gnome3
+
+sudo add-apt-repository -y ppa:webupd8team/java
+
+sudo add-apt-repository -y ppa:webupd8team/y-ppa-manager
+
+sudo add-apt-repository -y ppa:transmissionbt/ppa
+
+sudo add-apt-repository ppa:webupd8team/sublime-text-2
+
+sudo add-apt-repository -r ppa:nemh/systemback
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
+
+sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ utopic main" >> /etc/apt/sources.list.d/dropbox.list' 
+
+
+
+sudo apt-get install synaptic vlc gimp gimp-data gimp-plugin-registry gimp-data-extras y-ppa-manager bleachbit oracle-jdk7-installer oracle-java9-installer flashplugin-installer unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller libxine1-ffmpeg mencoder flac faac faad sox ffmpeg2theora libmpeg2-4 uudeview libmpeg3-1 mpeg3-utils mpegdemux liba52-dev mpeg2dec vorbis-tools id3v2 mpg321 mpg123 libflac++6 totem-mozilla icedax lame libmad0 libjpeg-progs libswscale-extra-2 ubuntu-restricted-extras ubuntu-wallpapers* google-chrome-stable terminator vlc git clang-3.5 banshee texlive-full r-base dropbox wireshark vim valgrind cscope exuberant-ctags doxygen openssh-server fail2ban x11vnc xvnc4viewer systemback
