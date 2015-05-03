@@ -1,0 +1,15 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CC	Makefile	/^CC = clang-3.5$/;"	m
+FLAGS	Makefile	/^FLAGS = -Wall -Werror -std=c99 -MD$/;"	m
+BUFSIZE	client-server.c	13;"	d	file:
+MAXQUEUE	client-server.c	14;"	d	file:
+PORT	client-server.c	15;"	d	file:
+__USE_MISC	client-server.c	1;"	d	file:
+client	client-server.c	/^int client(const char* path)$/;"	f
+main	client-server.c	/^int main(int argc, char const *argv[])$/;"	f
+server	client-server.c	/^int server()$/;"	f
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
