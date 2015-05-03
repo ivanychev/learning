@@ -1,5 +1,17 @@
 #define __USE_MISC
 
+/**
+ *      @brief          Exploring sockets and broadcasting
+ *      
+ *      @author         Ivanychev Sergey, DCAM MIPT
+ *      
+ *      @version        1.0
+ *      @mainpage
+ *      
+ *      @par            sergeyivanychev@gmail.com
+ *                      telegram::@ivanychev
+ */
+
 #include "stdio.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -75,14 +87,13 @@ fail:
 }
 
 
-int server()
-{
-        int sk = 0, cond = 0, client = 0;
-        unsigned size = 0;
-        long got = 0;
-        char buf[BUFSIZE] = {};
+int server() {         
+        int sk = 0, cond = 0, client = 0;         
+        unsigned size = 0;         
+        long got = 0;         
+        char buf[BUFSIZE] = {};         
         struct sockaddr_in addr = {
-                .sin_family = AF_INET,
+                .sin_family = AF_INET,         
         };
 
         addr.sin_addr.s_addr    = htonl(INADDR_ANY);
