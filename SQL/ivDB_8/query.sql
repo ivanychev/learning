@@ -12,6 +12,7 @@ where obj.uid = usr.uid
 and   usr.name = @user
 and   obj.type = 'U'
 
+
 -- table, column, is nullable, data type, data type size
 select	obj.name as 'table', 
 		col.name as 'column', 

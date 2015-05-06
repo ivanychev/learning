@@ -82,7 +82,7 @@ create table roles (
 				on update cascade 
 				not null,
 	team_id 	int references team(team_id)     
-				on delete cascade
+				on delete set null
 				on update cascade 
 				null,
 	primary key(person_id, season_id, league_id)
@@ -109,11 +109,11 @@ create table game (
 
 
 create table marks (
-	team_id	int not null references team(team_id)
-				on delete cascade
+	team_id	int references team(team_id)
+				on delete set null
 				on update cascade ,
 	game_id int not null references game(game_id)
-				on delete cascade
+				on delete no action
 				on update no action,   -- cascade 
 	comp_id int not null references competition(comp_id)
 				on delete no action
@@ -168,7 +168,7 @@ create table source (
 create table record (
 	rec_id 		int not null primary key  identity(1, 1),
 	game_id 	int not null references game(game_id)
-				on delete cascade
+				on delete no action
 				on update cascade ,
 	type_id 	int not null references record_type(type_id)
 				on delete no action

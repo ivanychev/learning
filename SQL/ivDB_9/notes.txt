@@ -1,0 +1,25 @@
+
+trigger invokation sequence
+
+The sp_settriggerorder procedure is the tool we use to set the trigger order. This procedure takes the trigger name, order value (FIRST, LAST, or NONE), and action (INSERT, UPDATE, or DELETE) as parameters.
+sp_settriggerorder tr_au_upd, FIRST, 'UPDATE'
+
+AFTER triggers can only be placed on tables, not on views.
+ 
+A single AFTER trigger cannot be placed on more than one table.
+
+The text, ntext, and image columns cannot be referenced in the AFTER trigger logic.
+
+
+Benefits of INSTEAD Triggers:
+We can define an INSTEAD OF trigger on a view (something that will not work with AFTER triggers) and this is the basis of the Distributed Partitioned Views that are used so split data across a cluster of SQL Servers.
+We can use INSTEAD OF triggers to simplify the process of updating multiple tables for application developers.
+Mixing Trigger Types.
+
+Первые и последние триггеры AFTER, которые будут выполнены в таблице, могут быть определены с использованием процедуры sp_settriggerorder. Для таблицы можно определить только один первый и один последний триггер для каждой из операций INSERT, UPDATE и DELETE. Если в таблице есть другие триггеры AFTER, они будут выполняться случайным образом.
+
+Триггер AFTER выполняется только после того, как вызывающая срабатывание триггера инструкция SQL была успешно выполнена. Успешное выполнение также подразумевает завершение всех ссылочных каскадных действий и проверки ограничений, связанных с измененными или удаленными объектами.
+
+Если триггер INSTEAD OF, определенный для таблицы, выполняет по отношению к таблице какую-либо инструкцию, которая бы снова вызвала срабатывание триггера INSTEAD OF, триггер рекурсивно не вызывается. Вместо этого инструкция обрабатывается так, как если бы у таблицы отсутствовал триггер INSTEAD OF, и начинается применение последовательности ограничений и выполнение триггера AFTER. Например, если триггер определен в виде триггера INSTEAD OF INSERT для таблицы и выполняет инструкцию INSERT для этой же таблицы, инструкция INSERT не вызывает нового срабатывания триггера. Команда INSERT, выполняемая триггером, начинает процесс действий применения ограничений и обработки всех триггеров AFTER INSERT, определенных для данной таблицы.
+Если триггер INSTEAD OF, определенный для представления, выполняет по отношению к представлению какую-либо инструкцию, которая бы снова вызвала срабатывание триггера INSTEAD OF, триггер рекурсивно не вызывается. Вместо этого инструкция выполняет изменение базовых таблиц, на которых основано представление. В данном случае определение представления должно удовлетворять всем ограничениям, установленным для обновляемых представлений. 
+

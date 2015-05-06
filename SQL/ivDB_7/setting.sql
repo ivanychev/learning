@@ -18,9 +18,15 @@ create login test1
 go
 
 -- creating user "test" with "guest" schema by default
+
+grant select on record_type to guest
 create user test
 	for login test1
 	with default_schema = guest
+
+grant select on record_type to test
+deny select on record_type to test
+revoke select on record_type to test
 
 -- granting SELECT, INSERT, UPDATE  #1
 grant SELECT, INSERT, UPDATE on city to test
@@ -46,9 +52,9 @@ alter role tester
 grant update on finalists(city) to tester
 grant select on finalists(city) to tester
 
-deny   select on source to test
-revoke select on source to test
-grant select on source to test
+
 
 select * from sys.database_role_members
 select * from sys.database_principals
+
+
