@@ -6,8 +6,9 @@
  * 			iv_allocbuffer_copy
  * 			iv_getlong
  * 			iv_printbinary
+ * 			iv_getmyip		// TODO
  * 			
- * 	@version 	0.1
+ * 	@version 	0.1.1
  * 	
  * 	@author 	Sergey Ivanychev
  * 	@par 		sergeyivanychev@gmail.com 
@@ -176,3 +177,22 @@ iv_printbinary_EXIT:
 
 
 //=========================================================================================
+
+
+int iv_getmyip(struct in_addr* to_save, const char* iface)
+{
+    int fd;
+    struct ifreq ifr;
+     
+    fd = socket(AF_INET, SOCK_DGRAM, 0);
+
+    if (fd == -1)
+        return -1;
+    ifr.ifr_addr.sa_family = AF_INET;
+    strncpy(ifr.ifr_name , iface , IFNAMSIZ - 1);
+    ioctl(fd, SIOCGIFADDR, &ifr);
+    close(fd);
+ 
+    *to_save = ( (struct sockaddr_in *)&ifr.ifr_addr )->sin_addr;
+    return 0;
+}

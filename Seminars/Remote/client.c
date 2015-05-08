@@ -3,32 +3,12 @@
 #define IP_ARR_STEP 10
 
 
-int getmyip(struct in_addr* to_save)
-{
-    int fd;
-    struct ifreq ifr;
-     
-    char iface[] = "eth0";
-     
-    fd = socket(AF_INET, SOCK_DGRAM, 0);
-
-    if (fd == -1)
-        return -1;
-    ifr.ifr_addr.sa_family = AF_INET;
-    strncpy(ifr.ifr_name , iface , IFNAMSIZ - 1);
-    ioctl(fd, SIOCGIFADDR, &ifr);
-    close(fd);
- 
-    *to_save = ( (struct sockaddr_in *)&ifr.ifr_addr )->sin_addr;
-    return 0;
-}
-
 int configure_broadcast() {
-        int sk = socket(AF_INET, SOCK_DGRAM, 0);
         int broadcast_enable = 1;
         int is_reuse = 1;
         int cond = 0;
-
+        int sk = socket(AF_INET, SOCK_DGRAM, 0);
+        
         if (sk == -1) {
                 print_error(CT_GETSOCK_FAIL);
                 return -1;
@@ -103,20 +83,7 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
             goto fail;
         }
 
-        request = (char*) calloc(16, sizeof(char));
-        if (request == NULL) {
-            print_error(CT_ALLOC_FAIL);
-            goto fail;
-        }
-
-        cond = getmyip(&my_ip);
-        if (cond == -1) {
-            print_error(CT_MYIP_FAIL);
-            goto fail;
-        }
-
-        strncpy(request, inet_ntoa(my_ip), 16);
-
+        request = "Hello World!"
         cond = sendto(sk, 
                       request, 
                       strlen(request), 
@@ -129,7 +96,8 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
         }
 
         close(sk);
-
+        
+//===============================================================
         sk_acc  = configure_accepting();
         if (sk_acc == -1) {
             print_error(CT_GETSOCK_FAIL);
@@ -183,7 +151,6 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
 
         close(sk);
         close(sk_acc);
-        free(request);
         return 0;
 
 fail:

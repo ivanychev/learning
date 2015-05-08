@@ -76,14 +76,12 @@ void* handshake(void* arg)
 {
         int sk = 0, cond = 0, got = 0;
         char buf[HND_BUFSIZE];
-        struct sockaddr_in addr = {
-                .sin_family = AF_INET
-        };
+        struct sockaddr_in addr = {}, clt_addr = {};
+        addr.sin_family         = AF_INET;
+        addr.sin_addr.s_addr    = htonl(INADDR_ANY);
+        addr.sin_port           = htons(HANDSHAKE_PORT);
 
-        struct sockaddr_in clt_addr = {};
         unsigned  clt_add_len = sizeof(struct sockaddr_in);
-        addr.sin_addr.s_addr = htonl(INADDR_ANY);
-        addr.sin_port        = htons(HANDSHAKE_PORT);
 
         sk = socket(PF_INET, SOCK_DGRAM, 0);
         if (sk == -1) {
@@ -113,11 +111,11 @@ void* handshake(void* arg)
                     goto fail;
             }
 
-            inet_aton(buf, &(clt_addr.sin_addr));
-            clt_addr.sin_port = htons(HANDSHAKE_PORT);
-            
             printf("port = %d, addr = %s\n", ntohs(clt_addr.sin_port),
                                         inet_ntoa(clt_addr.sin_addr));
+            // inet_aton(buf, &(clt_addr.sin_addr));
+            clt_addr.sin_port = htons(HANDSHAKE_PORT);
+            
 
             cond = sendto(sk,
                           buf,
