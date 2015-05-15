@@ -110,7 +110,7 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
             print_error(CT_BIND_FAIL);
             goto fail;
         }
-        sleep(5);
+        sleep(2);
 
         
         arr = (struct in_addr*) calloc(IP_ARR_STEP, sizeof(struct in_addr));
@@ -226,24 +226,15 @@ fail:
 
 int get_ips_semaphore(int ips) {
     union semun set;
-    key_t key;
-    int sem = 0, temp_fd = 0;
-    if ((temp_fd = creat(TEMP_FILE, O_RDWR)) == -1) {
-        print_error(CT_TEMP_CREAT_FAIL);
-        return -1;
-    }
+    int sem = 0;
 
-    if ((key = ftok(TEMP_FILE, 3)) == -1) {
-        print_error(CT_FTOK_FAIL);
-        goto fail;
-    }
-    if ((sem = semget(key, ips, IPC_CREAT & 0660)) == -1) {
+    if ((sem = semget(0, ips, IPC_PRIVATE | 0660)) == -1) {
         print_error(CT_SEM_FAIL); //~!!!!!!!!!!!!!!!!!!
         goto fail;
     }
 
-    set.val = 0;
-    semctl(sem, ips, SETVAL, set);
+    set.val = ips;
+    semctl(sem, 0, SETVAL, set);
 
     return sem;
 fail:
@@ -254,13 +245,8 @@ fail:
 
 
 int get_ips_msgqueue(int ips) {
-     key_t key;
      int msgqueue = 0;
-     if ((key = ftok(TEMP_FILE, 1)) == -1) {
-        print_error(CT_FTOK_FAIL);
-        return -1;
-    }
-    if ((msgqueue = msgget(key, IPC_CREAT & 0660)) == -1) {
+    if ((msgqueue = msgget(0, IPC_PRIVATE | 0660)) == -1) {
         print_error(CT_MSG_FAIL);
         return -1;
     }
@@ -268,40 +254,80 @@ int get_ips_msgqueue(int ips) {
 }
 
 
+ssize_t udp_sender(int sk, struct sockaddr_in* addr, const void* ptr, size_t size)
+{
+    int attempt  = 0;
+    ssize_t sent = 0;
+
+    while (attempt < SND_ATTEMPTS) {
+        sent = sendto(sk, ptr, size, 0, (struct sockaddr*)addr, sizeof(*addr));
+        if (sent == -1)
+            return -1;
+        if (rcv_acc(sk) == 0)
+            return sent;
+        attempt += 1;
+    }
+    return -1;
+}
+
+
 int talker_send_matrix(int sk, struct sockaddr_in* addr, const matrix* cur)
 {
-    ssize_t sent = 0;
+    ssize_t sent            = 0;
+    ssize_t data_size       = cur->size * cur->size * sizeof(double);
+    ssize_t package_size    = 0;
+    char*   ptr             = cur->data;
     assert(cur);
-    sent = sendto(sk, cur, sizeof(matrix), 0, (struct sockaddr*)addr, 
-                                                            sizeof(*addr));
-    if (sent == -1)
+    sent = udp_sender(sk, addr, cur, sizeof(matrix));
+    if (sent == -1) {
+        LABEL;
         return -1;
-    if (rcv_acc(sk) == -1)
+    }
+
+    sent = 0;
+    while (sent < data_size) {
+        package_size = (data_size - sent > MTU)? MTU: data_size - sent;
+        package_size = udp_sender(sk, addr, ptr, package_size);
+
+        if (package_size == -1) {
+            LABEL;
+            return -1;
+        }
+        printf("Package sent %zd bytes\n", package_size);
+        ptr  += package_size;
+        sent += package_size;
+        printf("Sent %zd\n, left %zd\n", sent, data_size - sent);
+    }
+
+    snd_acc(sk, addr);
+
+    if (rcv_acc(sk) == -1) {
+        LABEL;
         return -1;
-    sent = sendto(sk, cur->data, cur->size * 
-                                 cur->size * 
-                                 sizeof(double), 0, (struct sockaddr*)addr, 
-                                                            sizeof(*addr));
-    if (sent == -1)
-        return -1;
-    if (rcv_acc(sk) == -1)
-        return -1;
+    }
     return 0;
 }
 
 void* talker_routine(void* arg) 
 {
-    struct sockaddr_in addr= {};
+    struct sockaddr_in name = {}, addr = {};
     int sk = 0, is_reuse = 1;
     struct sembuf decr = {
         .sem_num = 0,
         .sem_op  = -1,
         .sem_flg = 0
     };
+    struct timeval timeout = {
+                .tv_sec  = RCV_TMOUT_SEC,
+                .tv_usec = 0
+        };
     ct_thread_meta* meta   = (ct_thread_meta*) arg;
-    addr.sin_port          = 0;
+    name.sin_port          = 0;
+    name.sin_addr.s_addr   = htonl(INADDR_ANY);
+    name.sin_family        = AF_INET;
     addr.sin_addr          = meta->server;
-    addr.sin_family        = SOCK_DGRAM;
+    addr.sin_family        = AF_INET;
+    addr.sin_port          = htons(PORT);
 
     if ((sk = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
         print_error(CT_THR_SOCK_CREATE_FAIL);
@@ -314,7 +340,12 @@ void* talker_routine(void* arg)
         print_error(CT_SETSOCK_FAIL);
         goto fail;
     }
-    if (bind(sk, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
+    if (setsockopt(sk, SOL_SOCKET, SO_RCVTIMEO, &timeout,sizeof(timeout))== -1){
+        print_error(CT_SETSOCK_FAIL);
+        goto fail;    
+    }
+
+    if (bind(sk, (struct sockaddr*)&name, sizeof(name)) == -1) {
         print_error(CT_THR_BIND_FAIL);
         goto fail;
     }
@@ -326,11 +357,12 @@ void* talker_routine(void* arg)
         goto fail;
     }
 
-
+    printf("Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
     semop(meta->sem, &decr, 1);
     meta->finish_cond = 0;
     return NULL;
 fail:
+    printf("Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
     semop(meta->sem, &decr, 1);
     meta->finish_cond = -1;
     return NULL;

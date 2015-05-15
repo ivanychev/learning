@@ -101,12 +101,15 @@ void   	print_matrix(const matrix* this);
 void  	search_below_nzero_swap(matrix* this, uint32_t i);
 
 /**
- * @brief 	annihilates column below [i, i]
- * @details 	the [i, i]-th element is supposed to be non-zero
+ * @brief Annihilates numbers below [i, i] to zero (current is 1)
+ * @details 	1  2  3			1  2  3
+ * 		0 [3] 7 	-> 	0 [3] 7
+ * 		0  4  5 		0  0 (5 - 4*7/3)
  * 
- * @param this 	current matrix
- * @param i 	diagonal element index
+ * @param this current matrix
+ * @param i position (1 in description)
  */
+
 void  	annihilate_below 	    (matrix* this, uint32_t i);
 
 /**
@@ -137,17 +140,6 @@ int gauss(matrix* this, double* result);
  * @param this current matrix
  */
 void 	matrix_kill 	    (matrix* this);
-
-/**
- * @brief Annihilates numbers below [i, i] to zero (current is 1)
- * @details 	1  2  3			1  2  3
- * 		0 [3] 7 	-> 	0 [3] 7
- * 		0  4  5 		0  0 (5 - 4*7/3)
- * 
- * @param this current matrix
- * @param i position (1 in description)
- */
-inline void annihilate_below(matrix* this, uint32_t i);
 
 int get_long(long* save, const char* str);
 

@@ -26,7 +26,8 @@ char const* errors_msgs[] = {
         "recvfrom() failed",
         "Server error:\n"
         "Got invalid matrix",
-
+        "Server error:\n"
+        "Failed to get matrix",
 
         "Client error:\n"
         "Failed to get socket",
@@ -99,24 +100,28 @@ void __print_error(int line, const char* filename, int errnum)
 }
 
 const uint64_t      ACC_PACK = 0xaccaccaccacc;
-const unsigned      MAXTIMEO = 32;
+const unsigned      MAXTIMEO = 16;
 
-int snd_acc(int sk, struct sockaddr_in* dest) {
+int __snd_acc(int sk, struct sockaddr_in* dest, int line) {
     int cond = 0;
     assert(sk > 0);
     assert(dest);
     cond = sendto(sk, &ACC_PACK, sizeof(ACC_PACK), 0, (struct sockaddr*)dest, 
                                                                 sizeof(*dest));
-    if (cond == -1)
+    if (cond == -1){
+        printf("%d: NOT sent ACC\n", line);
         return -1;
+    }
+    printf("%d: Sent ACC\n", line);
     return 0;
 }
 
-int rcv_acc(int sk) {
+int __rcv_acc(int sk, int line) {
     int cond = 0;
     unsigned timeout = 1;
     uint64_t buf = 0;
     assert(sk > 0);
+    printf("%d: Waiting for ACC\n", line);
 
     while ((cond = recv(sk, &buf, sizeof(buf), MSG_DONTWAIT)) == -1 && 
             (errno == EAGAIN || errno == EWOULDBLOCK) &&
@@ -125,7 +130,10 @@ int rcv_acc(int sk) {
         timeout *= 2;
     }
 
-    if (cond == sizeof(buf) && buf == ACC_PACK)
+    if (cond == sizeof(buf) && buf == ACC_PACK) {
+        printf("%d: Received ACC\n", line);
         return 0;
+    }
+    printf("%d: NOT received ACC\n", line);
     return -1;
 }

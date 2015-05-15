@@ -32,6 +32,7 @@ enum errors {
         SV_HNDSK_FAIL,
         SV_RECV_FAIL,
         SV_INVAL_MATRIX,
+        SV_MATRIX_GET_FAIL,
 
         CT_GETSOCK_FAIL,
         CT_SETSOCK_FAIL,
@@ -89,12 +90,20 @@ void __print_error(int line, const char* filename, int errnum);
 #define PORT            4201
 #define HANDSHAKE_PORT  4202
 #define HNDSK_TMOUT_SEC 600
+#define RCV_TMOUT_SEC   8
+#define SND_ATTEMPTS    4
+#define MTU             (63*1024)
 #define HND_BUFSIZE     (4*1024)
+
+#define LABEL           fprintf(stderr, "[%s: %d]\n", __FILE__, __LINE__)
 
 
 int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* ips_array);
 
-int rcv_acc(int sk);
+#define rcv_acc(sk)             __rcv_acc(sk, __LINE__)
+#define snd_acc(sk, dest)       __snd_acc(sk, dest, __LINE__)
 
-int snd_acc(int sk, struct sockaddr_in* dest);
+int __rcv_acc(int sk, int line);
+
+int __snd_acc(int sk, struct sockaddr_in* dest, int line);
 

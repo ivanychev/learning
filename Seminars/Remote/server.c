@@ -150,10 +150,13 @@ int get_socket(int* sk_tosave)
 {
     struct sockaddr_in addr = {};
     int sk = 0, cond = 0, is_reuse = 1;
-    addr.sin_port = htons(PORT);
+    addr.sin_port        = htons(PORT);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    addr.sin_family = AF_INET;
-
+    addr.sin_family      = AF_INET;
+    struct timeval timeout = {
+                .tv_sec  = RCV_TMOUT_SEC,
+                .tv_usec = 0
+        };
     sk = socket(AF_INET, SOCK_DGRAM, 0);
     if (sk == -1)
         return -1;
@@ -170,6 +173,13 @@ int get_socket(int* sk_tosave)
             return -1;
     }
 
+    if (setsockopt(sk, SOL_SOCKET, SO_RCVTIMEO, &timeout,sizeof(timeout))== -1){
+        print_error(CT_SETSOCK_FAIL);
+        return -1;   
+    }
+
+
+
     *sk_tosave = sk;
     return 0;
 }
@@ -180,29 +190,48 @@ int matrix_get(int sk, matrix* cur)             // add verifications
     matrix temp = {};
     struct sockaddr_in temp_addr = {};
     unsigned size_addr = sizeof(temp_addr);
-    ssize_t cond = 0, data_size = 0;
+    ssize_t cond = 0, data_size = 0, got = 0;
+    char* data = NULL;
+    char* ptr  = NULL;
 
     cond = recvfrom(sk, &temp, sizeof(matrix), 0, (struct sockaddr*)&temp_addr, 
                                                                     &size_addr);
+    printf("Received matrix struct of size %zd, dimention = %"PRIu32"\n", 
+                                                               cond, temp.size);
     if (cond != sizeof(matrix)) {
         print_error(SV_INVAL_MATRIX);
         return -1;
     }
 
     data_size = temp.size * temp.size * sizeof(double);
-    void* data = malloc(data_size);
+    printf("Waiting for %zd data size\n", data_size);
+    data = malloc(data_size);
     if (data == NULL) {
         return -1;
     }
+    ptr = data;
 
-    snd_acc(sk, &temp_addr);
+    if (snd_acc(sk, &temp_addr) == -1)
+            return -1;
 
-    cond = recvfrom(sk, &data, data_size, 0, (struct sockaddr*)&temp_addr, 
+    while (got != data_size) {
+        cond = recvfrom(sk, ptr, MTU, 0, (struct sockaddr*)&temp_addr, 
                                                    &size_addr);
-    if (cond != data_size) {
-        print_error(SV_INVAL_MATRIX);
-        return -1;
+        printf("Received %zd bytes\n", cond);
+        if (cond == -1)
+            return -1;
+        if (snd_acc(sk, &temp_addr) == -1)
+            return -1;
+        got += cond;
+        ptr += cond;
+        printf("got = %zd, left %zd\n", got, data_size - got);
     }
+
+    if (rcv_acc(sk) != 0)
+        return -1;
+    if (snd_acc(sk, &temp_addr) == -1)
+            return -1;
+
 
     snd_acc(sk, &temp_addr);
     temp.data = data;
@@ -224,6 +253,10 @@ int server(int argc, char const *argv[])
                 goto fail;
         cond = get_socket(&sk);
         cond = matrix_get(sk, &cur);
+        if (cond == -1) {
+            print_error(SV_MATRIX_GET_FAIL);
+            return -1;
+        }
 
         print_matrix(&cur);
         return 0;
