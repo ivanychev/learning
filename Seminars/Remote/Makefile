@@ -1,12 +1,12 @@
 CC     = gcc #clang-3.5
-FLAGS  = -Wall -Werror -MD -pthread
+FLAGS  = -Wall -g -Werror -MD -pthread
 TARGET = remoted 
 .PHONY: all clean
 
 all: $(TARGET)
 
 remoted: main.c client.o server.o iv_standard.o common.o
-	$(CC) $(FLAGS) client.o server.o common.o iv_standard.o main.c -o $@
+	$(CC) $(FLAGS) client.o server.o common.o iv_standard.o ../Determinant/ivmatrix.o main.c -o $@
 
 client.o: client.c
 	$(CC) $(FLAGS) -c $< -o $@

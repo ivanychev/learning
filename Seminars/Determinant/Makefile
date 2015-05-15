@@ -1,4 +1,4 @@
-CC 		=  gcc #clang-3.5
+CC 		=  gcc# clang-3.5
 WARNINGS 	= -Wall -Werror
 STANDARD 	= -std=c99
 GCOV 	 	= -fprofile-arcs -ftest-coverage -pg
@@ -11,8 +11,11 @@ VALGRIND_KEYS 	=
 
 all: determinant
 
-determinant: ivmatrix.c iv_standard.o
-	$(CC) $(CFLAGS) iv_standard.o $< -o $(TARGET)
+determinant: main.c ivmatrix.o iv_standard.o
+	$(CC) $(CFLAGS) iv_standard.o ivmatrix.o $< -o $(TARGET)
+
+ivmatrix.o: ivmatrix.c
+	$(CC) $(CFLAGS) $< -c -o $@
 
 iv_standard.o: iv_standard.c
 	$(CC) $(CFLAGS) $< -c -o $@

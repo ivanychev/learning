@@ -2,6 +2,20 @@
 
 typedef struct dict dict;
 typedef struct node node;
+typedef struct {
+        int errno;
+} error;
+
+enum ERRORS {
+        ERRORS_START,
+        OK,
+        ALLOC_FAIL,
+        INVAL_ARG,
+        LONG_STRING,
+        IN_DICT,
+        NOT_IN_DICT,
+        ERRORS_FINISH
+};
 
 #define MAXLEN 100
 
@@ -36,3 +50,7 @@ void remove_word (dict *mydict, char *str);
 node *parent (dict *mydict, node *child);
 
 void remove_tree (dict *mydict);
+
+void set_error(int errno_);
+
+void print_error();

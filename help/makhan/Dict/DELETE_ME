@@ -1,0 +1,189 @@
+6d5
+< #include <math.h>
+9,13c8,33
+< /*
+<     my_malloc function is aimed at assuming that memory allocation 
+<     function might fail. That case can't be easily reproduced on current 
+<     machine.
+< */
+---
+> enum ERRORS {
+>         ERRORS_START,
+>         OK,
+>         ALLOC_FAIL,
+>         INVAL_ARG,
+>         LONG_STRING,
+>         IN_DICT,
+>         NOT_IN_DICT,
+>         ERRORS_FINISH
+> };
+> 
+> const char* error_msgs[] = {
+>         "",
+>         "OK",
+>         "Memory allocation failed",
+>         "Invalid argument passed",
+>         "The string is too long",
+>         "The string is already in dictionary",
+>         "No such string in dictionary",
+>         ""
+> };
+> 
+> 
+> error LAST_ERROR = {
+>     .errno = OK
+> };
+15c35
+< void* my_malloc(size_t size)
+---
+> void seterror(int errno_)
+17,20c37,47
+<     int temp = rand()%10;
+<     if (temp == 0)
+<         return NULL;
+<     return malloc(size);
+---
+>     if (ERRORS_START < errno_ && errno_ < ERRORS_FINISH)
+>         LAST_ERROR.errno = errno_;
+> }
+> 
+> void print_error()
+> {
+>     if (ERRORS_START < LAST_ERROR.errno && LAST_ERROR.errno < ERRORS_FINISH) {
+>         printf("%s\n", error_msgs[LAST_ERROR.errno - ERRORS_START]);
+>         return;
+>     }
+>     printf("No such error number\n");
+25c52
+<         dict *mydict = (dict *)my_malloc(sizeof(dict));
+---
+>         dict* mydict = (dict*)malloc(sizeof(dict));
+27a55
+>                 set_error(ALLOC_FAIL);
+31a60,61
+> 
+>         set_error(OK);
+35c65
+< void add(dict *mydict, char *str1, char *str2) {
+---
+> void add(dict* mydict, char* str1, char* str2) {
+36a67
+>                 set_error(INVAL_ARG);
+40c71
+<         node* tmp = (node *)my_malloc(sizeof(node));
+---
+>         node* tmp = (node*)malloc(sizeof(node));
+41a73
+>                 set_error(ALLOC_FAIL);
+47c79
+<                 free(tmp);
+---
+>                 set_error(LONG_STRING);
+72a105
+>                                 set_error(IN_DICT);
+84c117
+< void show_node (node *tmp) {
+---
+> void show_node (node* tmp) {
+91c124
+< void show (dict *mydict) {
+---
+> void show (dict* mydict) {
+92a126
+>                 set_error(INVAL_ARG);
+99c133
+< int size (dict *mydict) {
+---
+> int size (dict* mydict) {
+100a135
+>                 set_error(INVAL_ARG);
+107c142
+< node *search (dict *mydict, char *str) {
+---
+> node* search (dict* mydict, char* str) {
+108a144
+>                 set_error(INVAL_ARG);
+112,117c148
+< 
+<         if (str == NULL) {
+<             fprintf(stderr, "Invalid pointer to the string\n");
+<             return NULL;
+<         }
+<         node *tmp;
+---
+>         node* tmp;
+121c152
+<                 if (strcmp(str, tmp->word) == 0) {
+---
+>                 if (str == tmp->word) {
+132,133c163,164
+< void print_meaning (dict *mydict, char *str) {
+<         node *tmp;
+---
+> void print_meaning (dict* mydict, char* str) {
+>         node* tmp;
+135a167
+>                 set_error(NOT_IN_DICT);
+141c173
+< node *parent (dict *mydict, node *child) {
+---
+> node* parent (dict* mydict, node* child) {
+142a175
+>                 set_error(INVAL_ARG);
+146a180
+>                 set_error(INVAL_ARG);
+150c184
+<         node *tmp;
+---
+>         node* tmp;
+168c202
+< node *next (dict *mydict, node *tmp) {
+---
+> node* next (dict* mydict, node* tmp) {
+171c205
+<         node *min = tmp;
+---
+>         node* min = tmp;
+183c217
+< void remove_word (dict *mydict, char *str) {
+---
+> void remove_word (dict* mydict, char* str) {
+184a219
+>                 set_error(INVAL_ARG);
+188a224
+>                 set_error(INVAL_ARG);
+192c228
+<         node *tmp, *pr;
+---
+>         node* tmp,* pr;
+194a231
+>                 set_error(NOT_IN_DICT);
+225c262
+<                 node *ch;
+---
+>                 node* ch;
+227c264
+<                 char *str1, *str2;
+---
+>                 char* str1,* str2;
+242,243c279,281
+< void remove_subtree (dict *mydict, node *root) {
+<         if (root == NULL) 
+---
+> void remove_subtree (dict* mydict, node* root) {
+>         if (root == NULL) {
+>                 set_error(INVAL_ARG);
+244a283,289
+>         }
+>         if (mydict == NULL) {
+>                 set_error(INVAL_ARG);
+>                 fprintf(stderr, "Invalid pointer\n");
+>                 return;
+>         }
+> 
+251c296
+< void remove_tree (dict *mydict) {
+---
+> void remove_tree (dict* mydict) {
+252a298
+>                 set_error(INVAL_ARG);

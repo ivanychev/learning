@@ -28,6 +28,11 @@
 #include "stdlib.h"
 #include "iv_standard.h"
 #include "stdio.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netinet/ip.h>
+#include <net/if.h>
+#include <sys/ioctl.h>
 
 #define BUFSIZE 4096
 #define IV_PRINTBIN_BUFSIZE 127

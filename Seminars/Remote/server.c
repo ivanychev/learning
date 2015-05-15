@@ -146,9 +146,74 @@ int handshaker_set()
         return 0;
 }
 
+int get_socket(int* sk_tosave) 
+{
+    struct sockaddr_in addr = {};
+    int sk = 0, cond = 0, is_reuse = 1;
+    addr.sin_port = htons(PORT);
+    addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    addr.sin_family = AF_INET;
+
+    sk = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sk == -1)
+        return -1;
+    cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
+    if (cond == -1) 
+        return -1;
+
+    cond = setsockopt(sk,
+                          SOL_SOCKET,
+                          SO_REUSEADDR,
+                          &is_reuse,
+                          sizeof(is_reuse));
+    if (cond == -1) {
+            return -1;
+    }
+
+    *sk_tosave = sk;
+    return 0;
+}
+
+
+int matrix_get(int sk, matrix* cur)             // add verifications
+{
+    matrix temp = {};
+    struct sockaddr_in temp_addr = {};
+    unsigned size_addr = sizeof(temp_addr);
+    ssize_t cond = 0, data_size = 0;
+
+    cond = recvfrom(sk, &temp, sizeof(matrix), 0, (struct sockaddr*)&temp_addr, 
+                                                                    &size_addr);
+    if (cond != sizeof(matrix)) {
+        print_error(SV_INVAL_MATRIX);
+        return -1;
+    }
+
+    data_size = temp.size * temp.size * sizeof(double);
+    void* data = malloc(data_size);
+    if (data == NULL) {
+        return -1;
+    }
+
+    snd_acc(sk, &temp_addr);
+
+    cond = recvfrom(sk, &data, data_size, 0, (struct sockaddr*)&temp_addr, 
+                                                   &size_addr);
+    if (cond != data_size) {
+        print_error(SV_INVAL_MATRIX);
+        return -1;
+    }
+
+    snd_acc(sk, &temp_addr);
+    temp.data = data;
+    *cur = temp;
+    return 0;
+}
+
 int server(int argc, char const *argv[])
 {
-        int nthread = 0, cond = 0;
+        int nthread = 0, cond = 0, sk = 0;
+        matrix cur;
         nthread = get_nthread(argc, argv);
         if (nthread == -1) {
             goto fail;
@@ -157,13 +222,12 @@ int server(int argc, char const *argv[])
         cond = handshaker_set();
         if (cond == -1)
                 goto fail;
+        cond = get_socket(&sk);
+        cond = matrix_get(sk, &cur);
 
-
-
-        sleep(30);
-
+        print_matrix(&cur);
         return 0;
-        fail:
+fail:
         fprintf(stderr, "Critical server error occured\n");
         return -1;
 }

@@ -1,0 +1,166 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CC	Makefile	/^CC     = gcc #clang-3.5$/;"	m
+FLAGS	Makefile	/^FLAGS  = -Wall -Werror -MD -pthread$/;"	m
+TARGET	Makefile	/^TARGET = remoted $/;"	m
+IP_ARR_STEP	client.c	4;"	d	file:
+client	client.c	/^int client(int argc, char const *argv[])$/;"	f
+configure_accepting	client.c	/^int configure_accepting()$/;"	f
+configure_broadcast	client.c	/^int configure_broadcast() {$/;"	f
+current	client.c	/^    matrix_kill(&current);$/;"	v
+discover	client.c	/^int discover(struct in_addr** array_tosave, int* num_tosave)$/;"	f
+ips_array	client.c	/^    free(ips_array);$/;"	v
+scan	client.c	/^int scan(int* ips_tosave, struct in_addr** ips_array_tosave) {$/;"	f
+ACC_PACK	common.c	/^const unsigned long ACC_PACK = 0xaccaccaccacc;$/;"	v
+MAXTIMEO	common.c	/^const unsigned      MAXTIMEO = 32;$/;"	v
+__print_error	common.c	/^void __print_error(int line, int errnum) $/;"	f
+errors_msgs	common.c	/^char const* errors_msgs[] = {$/;"	v
+rcv_acc	common.c	/^int rcv_acc(int sk) {$/;"	f
+snd_acc	common.c	/^int snd_acc(int sk, struct sockaddr_in* dest) {$/;"	f
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+BUFSIZE	iv_remote.h	87;"	d
+CT_ALLOC_FAIL	iv_remote.h	/^        CT_ALLOC_FAIL,$/;"	e	enum:errors
+CT_ALL_THREADS_FAILED	iv_remote.h	/^        CT_ALL_THREADS_FAILED,$/;"	e	enum:errors
+CT_BIND_FAIL	iv_remote.h	/^        CT_BIND_FAIL,$/;"	e	enum:errors
+CT_DET_CALC_FAIL	iv_remote.h	/^        CT_DET_CALC_FAIL,$/;"	e	enum:errors
+CT_EMPTY_NET	iv_remote.h	/^        CT_EMPTY_NET,$/;"	e	enum:errors
+CT_FTOK_FAIL	iv_remote.h	/^        CT_FTOK_FAIL,$/;"	e	enum:errors
+CT_GETSOCK_FAIL	iv_remote.h	/^        CT_GETSOCK_FAIL,$/;"	e	enum:errors
+CT_INVL_ARG	iv_remote.h	/^        CT_INVL_ARG,$/;"	e	enum:errors
+CT_MATR_READ_FAIL	iv_remote.h	/^        CT_MATR_READ_FAIL,$/;"	e	enum:errors
+CT_MSG_FAIL	iv_remote.h	/^        CT_MSG_FAIL,$/;"	e	enum:errors
+CT_MYIP_FAIL	iv_remote.h	/^        CT_MYIP_FAIL,$/;"	e	enum:errors
+CT_RECV_FAIL	iv_remote.h	/^        CT_RECV_FAIL,$/;"	e	enum:errors
+CT_SCAN_FAIL	iv_remote.h	/^        CT_SCAN_FAIL,$/;"	e	enum:errors
+CT_SEM_FAIL	iv_remote.h	/^        CT_SEM_FAIL,$/;"	e	enum:errors
+CT_SEND_FAIL	iv_remote.h	/^        CT_SEND_FAIL,$/;"	e	enum:errors
+CT_SETSOCK_FAIL	iv_remote.h	/^        CT_SETSOCK_FAIL,$/;"	e	enum:errors
+CT_TEMP_CREAT_FAIL	iv_remote.h	/^        CT_TEMP_CREAT_FAIL,$/;"	e	enum:errors
+CT_THR_BIND_FAIL	iv_remote.h	/^        CT_THR_BIND_FAIL,$/;"	e	enum:errors
+CT_THR_SOCK_CREATE_FAIL	iv_remote.h	/^        CT_THR_SOCK_CREATE_FAIL,$/;"	e	enum:errors
+FIRST_ERROR	iv_remote.h	/^        FIRST_ERROR      = -1000,$/;"	e	enum:errors
+HANDSHAKE_PORT	iv_remote.h	92;"	d
+HNDSK_TMOUT_SEC	iv_remote.h	93;"	d
+HND_BUFSIZE	iv_remote.h	94;"	d
+LAST_ERROR	iv_remote.h	/^        LAST_ERROR$/;"	e	enum:errors
+MAXNODE	iv_remote.h	89;"	d
+MAXPROC	iv_remote.h	88;"	d
+PORT	iv_remote.h	91;"	d
+RECV_TIMEOUT	iv_remote.h	90;"	d
+SV_ARGS_INVALARG	iv_remote.h	/^        SV_ARGS_INVALARG,$/;"	e	enum:errors
+SV_ARGS_INVALNUM	iv_remote.h	/^        SV_ARGS_INVALNUM,$/;"	e	enum:errors
+SV_ARGS_TOOBIG	iv_remote.h	/^        SV_ARGS_TOOBIG,$/;"	e	enum:errors
+SV_ARGS_TOOSMALL	iv_remote.h	/^        SV_ARGS_TOOSMALL,$/;"	e	enum:errors
+SV_BIND_FAIL	iv_remote.h	/^        SV_BIND_FAIL,$/;"	e	enum:errors
+SV_GETSOCK_FAIL	iv_remote.h	/^        SV_GETSOCK_FAIL,$/;"	e	enum:errors
+SV_HNDSK_FAIL	iv_remote.h	/^        SV_HNDSK_FAIL,$/;"	e	enum:errors
+SV_HND_CRTFAIL	iv_remote.h	/^        SV_HND_CRTFAIL,$/;"	e	enum:errors
+SV_RECV_FAIL	iv_remote.h	/^        SV_RECV_FAIL,$/;"	e	enum:errors
+SV_SETSOCK_FAIL	iv_remote.h	/^        SV_SETSOCK_FAIL,$/;"	e	enum:errors
+TEMP_FILE	iv_remote.h	95;"	d
+__buf	iv_remote.h	/^    struct seminfo *__buf;           \/\/ buffer for IPC_INFO$/;"	m	union:semun	typeref:struct:semun::seminfo
+array	iv_remote.h	/^    unsigned short int *array;       \/\/ array  for GETALL, SETALL$/;"	m	union:semun
+buf	iv_remote.h	/^    struct semid_ds *buf;            \/\/ buffer for IPC_STAT, IPC_SET$/;"	m	union:semun	typeref:struct:semun::semid_ds
+ct_task	iv_remote.h	/^} ct_task;$/;"	t	typeref:struct:__anon2
+ct_thread_meta	iv_remote.h	/^} ct_thread_meta;$/;"	t	typeref:struct:__anon1
+cur	iv_remote.h	/^        const matrix*   cur;$/;"	m	struct:__anon1
+errors	iv_remote.h	/^enum errors {$/;"	g
+finish_cond	iv_remote.h	/^        int             finish_cond;    \/\/ 0 if OK, -1 if failed$/;"	m	struct:__anon1
+id	iv_remote.h	/^        pthread_t       id;$/;"	m	struct:__anon1
+minor	iv_remote.h	/^        uint32_t        minor;$/;"	m	struct:__anon2
+msgid	iv_remote.h	/^        int             msgid;$/;"	m	struct:__anon1
+mtype	iv_remote.h	/^        long            mtype;$/;"	m	struct:__anon2
+print_error	iv_remote.h	81;"	d
+result	iv_remote.h	/^        double          result;$/;"	m	struct:__anon1
+sem	iv_remote.h	/^        int             sem;$/;"	m	struct:__anon1
+semun	iv_remote.h	/^union semun {$/;"	u
+server	iv_remote.h	/^        struct in_addr  server;$/;"	m	struct:__anon1	typeref:struct:__anon1::in_addr
+val	iv_remote.h	/^    int val;                         \/\/ value  for SETVAL$/;"	m	union:semun
+BITSPERBYTE	iv_standard.c	39;"	d	file:
+BUFSIZE	iv_standard.c	37;"	d	file:
+IV_PRINTBIN_BUFSIZE	iv_standard.c	38;"	d	file:
+ONEXIT	iv_standard.c	123;"	d	file:
+ONEXIT	iv_standard.c	124;"	d	file:
+ONEXIT	iv_standard.c	40;"	d	file:
+ONEXIT	iv_standard.c	82;"	d	file:
+ONEXIT	iv_standard.c	83;"	d	file:
+ONEXIT	iv_standard.c	93;"	d	file:
+ONEXIT	iv_standard.c	94;"	d	file:
+RETURN	iv_standard.c	41;"	d	file:
+iv_allocbuffer_copy	iv_standard.c	/^int iv_allocbuffer_copy(const char* path, char** copy, size_t* file_size)$/;"	f
+iv_getfilesize	iv_standard.c	/^int iv_getfilesize(const char* path, size_t* to_save)$/;"	f
+iv_getlong	iv_standard.c	/^int iv_getlong(long* save, const char* str)$/;"	f
+iv_getmyip	iv_standard.c	/^int iv_getmyip(struct in_addr* to_save, const char* iface)$/;"	f
+iv_msgs	iv_standard.c	/^char const* iv_msgs[] = {$/;"	v
+iv_printbinary	iv_standard.c	/^int iv_printbinary(void* ptr, unsigned int bits)$/;"	f
+CALL	iv_standard.h	133;"	d
+CALLN	iv_standard.h	141;"	d
+CHECK	iv_standard.h	142;"	d
+CHECKN	iv_standard.h	143;"	d
+DOUT	iv_standard.h	178;"	d
+ERROR_MESSAGES	iv_standard.h	/^enum ERROR_MESSAGES$/;"	g
+F_CHECK	iv_standard.h	102;"	d
+F_CHECK_EXIT_CODE	iv_standard.h	93;"	d
+F_LOCATION	iv_standard.h	29;"	d
+F_LOCATION	iv_standard.h	98;"	d
+F_LOCATION	iv_standard.h	99;"	d
+F_WARN	iv_standard.h	147;"	d
+F_WARN	iv_standard.h	163;"	d
+I32OUT	iv_standard.h	186;"	d
+I64OUT	iv_standard.h	187;"	d
+IOUT	iv_standard.h	175;"	d
+IV_ALLOCFAIL	iv_standard.h	/^	IV_ALLOCFAIL$/;"	e	enum:ERROR_MESSAGES
+IV_BUFALLOCFAIL	iv_standard.h	/^	IV_BUFALLOCFAIL		= -5,$/;"	e	enum:IV_ERRORCODES
+IV_COPYALLOCFAIL	iv_standard.h	/^	IV_COPYALLOCFAIL 	= -4,$/;"	e	enum:IV_ERRORCODES
+IV_COPYSIZEFAIL	iv_standard.h	/^	IV_COPYSIZEFAIL 	= -7,$/;"	e	enum:IV_ERRORCODES
+IV_ERRORCODES	iv_standard.h	/^enum IV_ERRORCODES$/;"	g
+IV_FOPENFAIL	iv_standard.h	/^	IV_FOPENFAIL,$/;"	e	enum:ERROR_MESSAGES
+IV_INVALARGNUM	iv_standard.h	/^	IV_INVALARGNUM,$/;"	e	enum:ERROR_MESSAGES
+IV_INVALARGS	iv_standard.h	/^	IV_INVALARGS 		= -1,$/;"	e	enum:IV_ERRORCODES
+IV_INVALPID	iv_standard.h	/^	IV_INVALPID,$/;"	e	enum:ERROR_MESSAGES
+IV_NEGSIZE	iv_standard.h	/^	IV_NEGSIZE,$/;"	e	enum:ERROR_MESSAGES
+IV_NONUMBER	iv_standard.h	/^	IV_NONUMBER 		= -8$/;"	e	enum:IV_ERRORCODES
+IV_OPENFAIL	iv_standard.h	/^	IV_OPENFAIL  		= -3,$/;"	e	enum:IV_ERRORCODES
+IV_PTRNULL	iv_standard.h	/^	IV_PTRNULL,$/;"	e	enum:ERROR_MESSAGES
+IV_READFAIL	iv_standard.h	/^	IV_READFAIL 		= -6,$/;"	e	enum:IV_ERRORCODES
+IV_STATFAIL	iv_standard.h	/^	IV_STATFAIL  		= -2,$/;"	e	enum:IV_ERRORCODES
+LOCATION	iv_standard.h	38;"	d
+LOC_OUT	iv_standard.h	48;"	d
+LOC_OUT	iv_standard.h	60;"	d
+LOC_OUT1	iv_standard.h	49;"	d
+LOC_OUT1	iv_standard.h	61;"	d
+LOC_OUT2	iv_standard.h	50;"	d
+LOC_OUT2	iv_standard.h	62;"	d
+LOUT	iv_standard.h	176;"	d
+LUOUT	iv_standard.h	177;"	d
+OUT	iv_standard.h	43;"	d
+OUT	iv_standard.h	55;"	d
+OUT1	iv_standard.h	44;"	d
+OUT1	iv_standard.h	56;"	d
+OUT2	iv_standard.h	45;"	d
+OUT2	iv_standard.h	57;"	d
+OUT3	iv_standard.h	46;"	d
+OUT3	iv_standard.h	58;"	d
+OUT4	iv_standard.h	47;"	d
+OUT4	iv_standard.h	59;"	d
+POUT	iv_standard.h	180;"	d
+SOUT	iv_standard.h	181;"	d
+TEMPLATE_OUT	iv_standard.h	169;"	d
+U32OUT	iv_standard.h	184;"	d
+U64OUT	iv_standard.h	185;"	d
+UOUT	iv_standard.h	179;"	d
+WARN	iv_standard.h	166;"	d
+__IV_STANDARD	iv_standard.h	2;"	d
+main	main.c	/^int main(int argc, char const *argv[])$/;"	f
+get_args	server.c	/^int get_args(int argc, char const *argv[])$/;"	f
+get_nthread	server.c	/^int get_nthread(int argc, char const *argv[])$/;"	f
+get_socket	server.c	/^int get_socket(int* sk_tosave) $/;"	f
+handshake	server.c	/^void* handshake(void* arg)$/;"	f
+handshake_setsocket	server.c	/^int handshake_setsocket(int sk)$/;"	f
+handshaker_set	server.c	/^int handshaker_set()$/;"	f
+server	server.c	/^int server(int argc, char const *argv[])$/;"	f
+getmyip	temp.c	/^int getmyip(struct in_addr* to_save)$/;"	f
+main	temp.c	/^int main(int argc, char const *argv[])$/;"	f

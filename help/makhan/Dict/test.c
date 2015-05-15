@@ -37,7 +37,7 @@ void test()
         add (NULL, "cat", "dog");
         add (a, "dog", "собака");
         add (a, "dog", "собака");
-        add (a, "dog", VERYLONGSTRING);4
+        add (a, "dog", VERYLONGSTRING);
         remove_word (a, "dog");
         remove_word (a, "hen");
         remove_word (a, NULL);

@@ -49,6 +49,18 @@ struct thread_meta {
 	int 		semid;
 };
 
+#define PAGESIZE (4096)
+#define MB (1024*1024)
+#define MAX_FILENAME 100
+#define TEMP_FILE ".temp"
+
+union semun {
+    int val;                         // value  for SETVAL
+    struct semid_ds *buf;            // buffer for IPC_STAT, IPC_SET
+    unsigned short int *array;       // array  for GETALL, SETALL
+    struct seminfo *__buf;           // buffer for IPC_INFO
+};
+
 
 /**
  * @brief Reads matrix from argumented file

@@ -12,6 +12,42 @@
     machine.
 */
 
+const char* error_msgs[] = {
+        "",
+        "OK",
+        "Memory allocation failed",
+        "Invalid argument passed",
+        "The string is too long",
+        "The string is already in dictionary",
+        "No such string in dictionary",
+        ""
+};
+
+//      Last error structure contains information about the last error
+//      Addition information might be printed via print_error()
+
+
+error LAST_ERROR = {
+    .errno = OK
+};
+
+void set_error(int errno_)
+{
+    if (ERRORS_START < errno_ && errno_ < ERRORS_FINISH)
+        LAST_ERROR.errno = errno_;
+}
+
+void print_error()
+{
+    if (ERRORS_START < LAST_ERROR.errno && LAST_ERROR.errno < ERRORS_FINISH) {
+        printf("%s\n", error_msgs[LAST_ERROR.errno - ERRORS_START]);
+        return;
+    }
+    printf("No such error number\n");
+}
+
+
+
 void* my_malloc(size_t size)
 {
     int temp = rand()%10;
@@ -24,6 +60,7 @@ void* my_malloc(size_t size)
 dict* create () {
         dict *mydict = (dict *)my_malloc(sizeof(dict));
         if (mydict == NULL) {
+                set_error(ALLOC_FAIL);
                 fprintf(stderr, "Not enough memory\n");
                 return NULL;
         }
@@ -34,17 +71,20 @@ dict* create () {
 
 void add(dict *mydict, char *str1, char *str2) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return;
         }
         node* tmp = (node *)my_malloc(sizeof(node));
         if (tmp == NULL) {
+                set_error(ALLOC_FAIL);
                 fprintf(stderr, "Not enough memory\n");
                 return;
         }
         if (strlen(str1) >= MAXLEN ||
             strlen(str2) >= MAXLEN) {
                 free(tmp);
+                set_error(LONG_STRING);
                 fprintf(stderr, "Some of strings might be too long\n");
                 return;
         }
@@ -70,6 +110,7 @@ void add(dict *mydict, char *str1, char *str2) {
                         } else if (strcmp(str1, pr->word) > 0) {
                                 ch=pr->right;
                         } else {
+                                set_error(IN_DICT);
                                 printf ("Can't add the word '%s'. It is in dictionary\n", str1);
                                 free(tmp);
                                 return;
@@ -90,6 +131,7 @@ void show_node (node *tmp) {
 
 void show (dict *mydict) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return;
         }
@@ -98,6 +140,7 @@ void show (dict *mydict) {
 
 int size (dict *mydict) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return INT_MAX;
         }
@@ -106,11 +149,13 @@ int size (dict *mydict) {
 
 node *search (dict *mydict, char *str) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return NULL;
         }
 
         if (str == NULL) {
+            set_error(INVAL_ARG);
             fprintf(stderr, "Invalid pointer to the string\n");
             return NULL;
         }
@@ -133,6 +178,7 @@ void print_meaning (dict *mydict, char *str) {
         node *tmp;
         tmp=search(mydict, str);
         if (tmp == NULL) {
+                set_error(NOT_IN_DICT);
                 printf ("There is no the word '%s' in the dictionary.\n", str);
         } else printf ("Meaning of the word '%s' is '%s'\n", str, tmp->meaning);
 
@@ -140,10 +186,12 @@ void print_meaning (dict *mydict, char *str) {
 
 node *parent (dict *mydict, node *child) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid first pointer\n");
                 return NULL;
         }
         if (child == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid second pointer\n");
                 return NULL;
         }
@@ -182,16 +230,19 @@ node *next (dict *mydict, node *tmp) {
 
 void remove_word (dict *mydict, char *str) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return;
         }
         if (str == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "NULL pointer to the string\n");
                 return;
         }
         node *tmp, *pr;
         tmp=search (mydict, str);
         if (tmp == NULL) {
+                set_error(IN_DICT);
                 fprintf (stderr, "There is no the word '%s' in the dictionary.\n", str);
                 return;
         }
@@ -250,6 +301,7 @@ void remove_subtree (dict *mydict, node *root) {
 
 void remove_tree (dict *mydict) {
         if (mydict == NULL) {
+                set_error(INVAL_ARG);
                 fprintf(stderr, "Invalid pointer\n");
                 return ;
         }
