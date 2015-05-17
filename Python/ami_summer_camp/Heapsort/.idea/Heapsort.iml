@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="qsort" />
+    <orderEntry type="module" module-name="Shellsort" />
+    <orderEntry type="module" module-name="Mergesort" />
+    <orderEntry type="module" module-name="Sorts" />
+    <orderEntry type="module" module-name="Classes" />
+    <orderEntry type="module" module-name="Files" />
+    <orderEntry type="module" module-name="math" />
+    <orderEntry type="module" module-name="Olymp" />
+    <orderEntry type="module" module-name="Information Security" />
+    <orderEntry type="module" module-name="Olymp_och" />
+  </component>
+</module>
+
