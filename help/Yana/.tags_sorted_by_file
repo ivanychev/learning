@@ -1,0 +1,20 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+Htable	main.c	/^} Htable;$/;"	t	typeref:struct:_hn	file:
+_hn	main.c	/^typedef struct _hn {$/;"	s	file:
+elements	main.c	/^int elements = 0;$/;"	v
+hash_create	main.c	/^Htable** hash_create() {$/;"	f
+hash_func	main.c	/^ unsigned int hash_func( char * str){$/;"	f
+hash_pop	main.c	/^int hash_pop (char* name) {$/;"	f
+hash_push	main.c	/^void hash_push (char* name, int value) {$/;"	f
+hkey	main.c	/^    int         hkey;$/;"	m	struct:_hn	file:
+ht	main.c	/^Htable** ht = NULL;$/;"	v
+htable_resize	main.c	/^int htable_resize() {$/;"	f
+main	main.c	/^int main() {$/;"	f
+name	main.c	/^    char*       name;$/;"	m	struct:_hn	file:
+size_hash	main.c	/^int size_hash = 0;$/;"	v
+val	main.c	/^    int         val;$/;"	m	struct:_hn	file:
