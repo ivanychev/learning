@@ -17,7 +17,7 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <assert.h>
-#include "../Determinant/ivmatrix.h"
+#include "../../Determinant/ivmatrix.h"
 
 enum errors {
         FIRST_ERROR      = -1000,

@@ -27,6 +27,11 @@
 ipch/
 obj/
 objects/
+
+CMakeFiles/
+CMakeCache*
+cmake_install*
+
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/

@@ -1,17 +1,22 @@
-cmake_minimum_required(VERSION 3.2)
-project(Remote)
+cmake_minimum_required(VERSION 2.8.4)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -g -Werror")
+project(remote_matrix)
+
+set(CMAKE_C_COMPILER             "/usr/bin/gcc")
+set(CMAKE_C_FLAGS                "${CMAKE_C_FLAGS} -Wall -Werror -g -pthread")
+
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
 set(SOURCE_FILES
-    client.c
-    common.c
-    iv_remote.h
-    iv_standard.c
-    iv_standard.h
-    main.c
-    server.c)
-add_library(../Determinant/ivmatrix.o)
+    include/iv_remote.h
+    include/iv_standard.h
+    sources/client.c
+    sources/common.c
+    sources/iv_standard.c
+    sources/main.c
+    sources/server.c
+    sources/ivmatrix.c)
 
-add_executable(remoted ${SOURCE_FILES})
-target_link_libraries(remoted pthread)
+link_directories(${PROJECT_SOURCE_DIR}/../Determinant)
+add_executable(remote_matrix ${SOURCE_FILES})
