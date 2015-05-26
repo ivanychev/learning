@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.4)
 
 project(remote_matrix)
 
-set(CMAKE_C_COMPILER             "/usr/bin/gcc")
+set(CMAKE_C_COMPILER             "/usr/bin/clang")
 set(CMAKE_C_FLAGS                "${CMAKE_C_FLAGS} -Wall -Werror -g -pthread")
 
 

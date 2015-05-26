@@ -2,6 +2,8 @@
 
 int iv_getlong(long* save, const char* str);
 
+int solver(int sk, int threads, matrix* cur, pthread_t beater);
+
 int get_args(int argc, char const *argv[])
 {
         long res = 0;
@@ -98,7 +100,7 @@ void* handshake(void* arg)
                 print_error(SV_BIND_FAIL);
                 goto fail;
         }
-        while (1) {
+//        while (1) {
             printf("Handshaker acting...\n");
             got = recvfrom (sk, 
                             buf, 
@@ -125,14 +127,15 @@ void* handshake(void* arg)
                           clt_add_len);
             printf("Sent %d bytes\n", cond);
             perror("");
-        }
+//        }
+        pthread_exit(NULL);
         fail:
         close(sk);
 
-        return (void*)-1;
+        pthread_exit((void*)-1);
 }
 
-int handshaker_set()
+int handshaker_set(pthread_t* to_save)
 {
         pthread_t handshaker;
         int cond = 0;
@@ -142,125 +145,248 @@ int handshaker_set()
                 print_error(SV_HND_CRTFAIL);
                 return -1;
         }
-
+        *to_save = handshaker;
         return 0;
+}
+
+int get_listen_socket(int* sk_tosave)
+{
+    struct sockaddr_in addr = {};
+    int sk = 0, cond = 0, is_reuse = 1;
+    addr.sin_family         = AF_INET;
+    addr.sin_port           = htons(PORT);
+    addr.sin_addr.s_addr    = htonl(INADDR_ANY);
+
+    sk = socket(PF_INET, SOCK_STREAM, 0);
+    if (sk == -1)
+            goto fail;
+    cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
+    if (cond == -1)
+            goto fail;
+    cond = setsockopt(sk,
+                      SOL_SOCKET,
+                      SO_REUSEADDR,
+                      &is_reuse,
+                      sizeof(is_reuse));
+    if (cond == -1) {
+                print_error(SV_SETSOCK_FAIL);
+                goto fail;
+        }
+    *sk_tosave = sk;
+    return 0;
+fail:
+    if (sk > 0)
+        close(sk);
+    return -1;
+}
+
+int get_client_socket(int sk_listen, struct sockaddr_in* addr)
+{
+    int client = 0, cond = 0, is_reuse = 1;
+    unsigned size = sizeof(addr);
+
+    client = accept(sk_listen, (struct sockaddr*)addr, &size);
+    if (client <= 0) {
+        print_error(SV_ACCEPT_FAIL);
+        goto fail;
+    }
+
+    cond = setsockopt(client,
+                      SOL_SOCKET,
+                      SO_REUSEADDR,
+                      &is_reuse,
+                      sizeof(is_reuse));
+    if (cond == -1)
+        goto fail;
+    if (set_default_timeouts(client) != 0)
+        goto fail;
+
+    return client;
+fail:
+    if (client > 0)
+    close(client);
+    return -1; 
 }
 
 int get_socket(int* sk_tosave) 
 {
     struct sockaddr_in addr = {};
-    int sk = 0, cond = 0, is_reuse = 1;
-    addr.sin_port        = htons(PORT);
-    addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    addr.sin_family      = AF_INET;
-    struct timeval timeout = {
-                .tv_sec  = RCV_TMOUT_SEC,
-                .tv_usec = 0
-        };
-    sk = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sk == -1)
-        return -1;
-    cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
-    if (cond == -1) 
-        return -1;
+    int sk = 0, cond = 0, client = 0;
 
-    cond = setsockopt(sk,
-                          SOL_SOCKET,
-                          SO_REUSEADDR,
-                          &is_reuse,
-                          sizeof(is_reuse));
+    cond = get_listen_socket(&sk);
     if (cond == -1) {
-            return -1;
+        print_error(SV_GETSOCK_FAIL);
+        goto fail;
+    }
+    cond = listen(sk, SOMAXCONN);
+    if (cond == -1) {
+        print_error(SV_SETSOCK_FAIL);
+        goto fail;
     }
 
-    if (setsockopt(sk, SOL_SOCKET, SO_RCVTIMEO, &timeout,sizeof(timeout))== -1){
-        print_error(CT_SETSOCK_FAIL);
-        return -1;   
+    client = get_client_socket(sk, &addr);
+    if (client == -1) {
+        print_error(SV_GETSOCK_FAIL);
+        goto fail;
     }
 
-
-
-    *sk_tosave = sk;
+    close(sk);
+    *sk_tosave = client;
     return 0;
+
+fail:
+    if (sk > 0)
+        close(sk);
+    if (client > 0)
+        close(client);
+    return -1;
 }
 
 
-int matrix_get(int sk, matrix* cur)             // add verifications
+int matrix_get(int sk, matrix* cur)
 {
-    matrix temp = {};
-    struct sockaddr_in temp_addr = {};
-    unsigned size_addr = sizeof(temp_addr);
-    ssize_t cond = 0, data_size = 0, got = 0;
-    char* data = NULL;
-    char* ptr  = NULL;
-
-    cond = recvfrom(sk, &temp, sizeof(matrix), 0, (struct sockaddr*)&temp_addr, 
-                                                                    &size_addr);
-    printf("Received matrix struct of size %zd, dimention = %"PRIu32"\n", 
-                                                               cond, temp.size);
-    if (cond != sizeof(matrix)) {
-        print_error(SV_INVAL_MATRIX);
-        return -1;
+    matrix this;
+    int cond = 0;
+    char* data = 0;
+    cond = tcp_srecv(sk, (char*)&this, sizeof(this));
+    if (cond != 0) {
+        print_error(0);
+        goto fail;
     }
 
-    data_size = temp.size * temp.size * sizeof(double);
-    printf("Waiting for %zd data size\n", data_size);
-    data = malloc(data_size);
+    data = (char*) malloc(this.size * this.size * sizeof(double));
     if (data == NULL) {
-        return -1;
-    }
-    ptr = data;
-
-    if (snd_acc(sk, &temp_addr) == -1)
-            return -1;
-
-    while (got != data_size) {
-        cond = recvfrom(sk, ptr, MTU, 0, (struct sockaddr*)&temp_addr, 
-                                                   &size_addr);
-        printf("Received %zd bytes\n", cond);
-        if (cond == -1)
-            return -1;
-        if (snd_acc(sk, &temp_addr) == -1)
-            return -1;
-        got += cond;
-        ptr += cond;
-        printf("got = %zd, left %zd\n", got, data_size - got);
+        print_error(SV_ALLOC_FAIL);
+        goto fail;
     }
 
-    if (rcv_acc(sk) != 0)
-        return -1;
-    if (snd_acc(sk, &temp_addr) == -1)
-            return -1;
+    cond = tcp_srecv(sk, data, this.size * this.size * sizeof(double));
+    if (cond != 0) {
+        print_error(0);
+        goto fail;
+    }
 
-
-    snd_acc(sk, &temp_addr);
-    temp.data = data;
-    *cur = temp;
+    this.data = data;
+    *cur = this;
     return 0;
+
+fail:
+    if (data)
+        free(data);
+    return -1;    
+}
+
+void* beater_routine(void* arg)
+{
+    sv_answer wait = {.status = SV_ANSWER_WAIT};
+    int sk  = *(int*)arg;
+    int ret = 0;
+    pause();
+    while (1) {
+        ret = tcp_ssend(sk, (char*)&wait, sizeof(wait));
+        if (ret == -1)
+            return (void*)-1;
+        sleep(BEAT_TIMEOUT);
+    }
 }
 
 int server(int argc, char const *argv[])
 {
         int nthread = 0, cond = 0, sk = 0;
         matrix cur;
+        pthread_t handshaker = {0}, beater = {0};
         nthread = get_nthread(argc, argv);
         if (nthread == -1) {
             goto fail;
         }
         printf("%d cores\n", nthread);
-        cond = handshaker_set();
+        cond = handshaker_set(&handshaker);
         if (cond == -1)
                 goto fail;
         cond = get_socket(&sk);
+        if (cond == -1) {
+            print_error(SV_GETSOCK_FAIL);
+            goto fail;
+        }
         cond = matrix_get(sk, &cur);
         if (cond == -1) {
             print_error(SV_MATRIX_GET_FAIL);
-            return -1;
+            goto fail;
         }
-
-        print_matrix(&cur);
+        cond = pthread_create(&beater, NULL, beater_routine, &sk);
+        if (cond == -1) {
+            print_error(0);
+            goto fail;
+        }
+///
+        cond = solver(sk, nthread, &cur, beater);
+        if (cond != 0) {
+            print_error(0);
+            goto fail;
+        }
+        
+        matrix_kill (&cur);
+        pthread_join(handshaker, NULL);
         return 0;
 fail:
+        if (sk > 0)
+            close(sk);
+        pthread_join(handshaker, NULL);
         fprintf(stderr, "Critical server error occured\n");
         return -1;
 }
+
+
+int solver(int sk, int threads, matrix* cur, pthread_t beater)
+{
+    uint32_t temp  = 0;
+    double  result = 0;
+    matrix* minor  = 0;
+    sv_answer answer = {};
+    int ret = 0;
+    if (tcp_srecv(sk, (char*)&temp, sizeof(temp)) == -1) {
+        print_error(0);
+        return -1;
+    }
+    while (temp != FIN) {
+        minor = get_minor(cur, 0, temp);
+        if (minor == NULL) {
+            print_error(0);
+            goto fail;
+        }
+        pthread_kill(beater, SIGCONT);
+        ret = get_matrix_determinant(minor, threads, &result);
+        pthread_kill(beater, SIGSTOP);
+        if (ret != 0) {
+            print_error(0);
+            goto fail;
+        }
+        answer.status = SV_ANSWER_VAL;
+        answer.val    = result;
+
+        if (tcp_ssend(sk, (char*)&answer, sizeof(answer)) != -1) {
+            print_error(0);
+            goto fail;
+        }
+        matrix_kill(minor);
+        free(minor);
+        minor = NULL;
+        if (tcp_srecv(sk, (char*)&temp, sizeof(temp)) == -1) {
+            print_error(0);
+            goto fail;
+        }
+    }
+
+    return 0;
+fail:
+    
+    if (minor) {
+        matrix_kill(minor);
+        free(minor);
+    }
+    answer.status = SV_ANSWER_ERR;
+    tcp_ssend(sk, (char*)&answer, sizeof(answer));
+    return -1;
+}
+
+

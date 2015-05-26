@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <sys/ipc.h>
 #include <sys/sem.h>
+#include <sys/syscall.h>
 #include "unistd.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -33,6 +34,8 @@ enum errors {
         SV_RECV_FAIL,
         SV_INVAL_MATRIX,
         SV_MATRIX_GET_FAIL,
+        SV_ALLOC_FAIL,
+        SV_ACCEPT_FAIL,
 
         CT_GETSOCK_FAIL,
         CT_SETSOCK_FAIL,
@@ -56,6 +59,8 @@ enum errors {
         CT_THR_SEND_MATR_FAIL,
         CT_FILL_FAIL,
         CT_THREAD_CREAT_FAIL,
+        CT_CONNECT_FAIL,
+        CT_MATR_SEND_FAIL,
 
         LAST_ERROR
 };
@@ -75,9 +80,17 @@ typedef struct {
         uint32_t        minor;
 } ct_task;
 
+typedef struct {
+        int             status;         // 0 - answer, 1 - wait, -1 - error
+        double          val;
+} sv_answer;
+#define SV_ANSWER_VAL   0
+#define SV_ANSWER_WAIT  1
+#define SV_ANSWER_ERR  -1
+
 void __print_error(int line, const char* filename, int errnum);
 
-#define print_error(num) __print_error(__LINE__, __FILE__, num);
+#define print_error(num) __print_error(__LINE__, __FILE__, num)
 
 
 
@@ -91,9 +104,16 @@ void __print_error(int line, const char* filename, int errnum);
 #define HANDSHAKE_PORT  4202
 #define HNDSK_TMOUT_SEC 600
 #define RCV_TMOUT_SEC   8
+#define SND_TMOUT_SEC   8
 #define SND_ATTEMPTS    4
+
+#define BEAT_TIMEOUT    4               // should be less than RCV_TMOUT
 #define MTU             (63*1024)
 #define HND_BUFSIZE     (4*1024)
+
+#define WAIT  ((uint64_t)0x010101010101)
+#define NOW   ((uint64_t)0x010101010111)
+#define FIN   ((uint32_t)0x111111111110)
 
 #define LABEL           fprintf(stderr, "[%s: %d]\n", __FILE__, __LINE__)
 
@@ -106,4 +126,18 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
 int __rcv_acc(int sk, int line);
 
 int __snd_acc(int sk, struct sockaddr_in* dest, int line);
+
+int __tcp_sreceiver(int sk, char* buf, size_t size, int line);
+
+int __tcp_ssender(  int sk, char* buf, size_t size, int line);
+
+#define tcp_ssend(sk, buf, size) __tcp_ssender  (sk, buf, size, __LINE__)
+#define tcp_srecv(sk, buf, size) __tcp_sreceiver(sk, buf, size, __LINE__)
+
+
+int tcp_sacc(int sk);
+
+int tcp_racc(int sk);
+
+int set_default_timeouts(int sk);
 

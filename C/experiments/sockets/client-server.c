@@ -96,8 +96,8 @@ int server() {
                 .sin_family = AF_INET,         
         };
 
-        addr.sin_addr.s_addr    = htonl(INADDR_ANY);
-        addr.sin_port           = htons(PORT);
+        addr.sin_addr.s_addr        = htonl(INADDR_ANY);
+        addr.sin_port               = htons(PORT);
         struct sockaddr_in clt_addr = {};
 
         sk = socket(PF_INET, SOCK_STREAM, 0);

@@ -49,6 +49,11 @@ struct thread_meta {
 	int 		semid;
 };
 
+typedef struct {
+        int struct_size;
+        int data_size;
+} matrix_size;
+
 #define PAGESIZE (4096)
 #define MB (1024*1024)
 #define MAX_FILENAME 100
@@ -148,6 +153,7 @@ matrix* get_minor(const matrix* this, uint32_t string, uint32_t column);
 void* thread_routine(void* info_ptr);
 
 void* thread_routine_debug(void* info_ptr);
+
 
 
 

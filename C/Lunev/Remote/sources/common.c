@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "../include/iv_remote.h"
 
+
 char const* errors_msgs[] = {
         "",
         "Server error:\n"
@@ -28,6 +29,10 @@ char const* errors_msgs[] = {
         "Got invalid matrix",
         "Server error:\n"
         "Failed to get matrix",
+        "Server error:\n"
+        "Failed to allocate memory",
+        "Server error:\n"
+        "Failed to accept()",
 
         "Client error:\n"
         "Failed to get socket",
@@ -73,6 +78,10 @@ char const* errors_msgs[] = {
         "Failed to fill message queue with tasks",
         "Client error:\n"
         "Failed to create thread",
+        "Client error:\n"
+        "Failed to connect",
+        "Client error:\n"
+        "Failed to send matrix"
 
         ""
         
@@ -137,3 +146,139 @@ int __rcv_acc(int sk, int line) {
     printf("%d: NOT received ACC\n", line);
     return -1;
 }
+
+
+// TCP 
+//
+//
+//
+//
+
+ssize_t tcp_sender(int sk, char* buf, size_t size)
+{
+    ssize_t ret = 0, try = 0;
+    if (buf == NULL) {
+        fprintf(stderr, "SENDER: Invalid argument\n");
+        return -1;
+    }
+    ret = send(sk, buf, size, 0);
+    if (ret != size && ret != -1) {
+        try = tcp_sender(sk, buf + ret, size - ret);
+        if (try == -1 || try + ret != size) {
+            fprintf(stderr, "SENDER: Failed to resend %zu bytes\n", 
+                                                                size - ret);
+            return -1;
+        }
+    }
+    fprintf(stderr, "SENDER: Sent %zu bytes\n", size);
+    return 0;
+}
+
+
+int tcp_receiver(int sk, char* buf, size_t size)
+{
+    ssize_t recd = 0, ret = 0;
+    do {
+        ret = recv(sk, buf + recd, size - recd, 0);
+        fprintf(stderr, "RECEIVER: got %zd on return\n", ret);
+        if (ret <= 0) {
+            perror("RECEIVER: strange return value");
+            break;
+        }
+        recd += ret;
+    } while (recd != size);
+
+    if (recd == size){
+        fprintf(stderr, "RECEIVER: got whole package\n");
+        return 0;
+    }
+    fprintf(stderr, "RECEIVER: got %zd, needed %zu\n", recd, size);
+    return -1;
+}
+
+int __tcp_ssender(int sk, char* buf, size_t size, int line)
+{
+    int ret = 0;
+    ssize_t sret = 0;
+    if ((sret = tcp_sender(sk, buf, size)) != 0) {
+        printf("SMART SENDER: got %zd return value, expected %zu\n", sret, size);
+        return -1;
+    }
+    ret = tcp_racc(sk);
+    if (ret != 0) {
+        printf("SMART SENDER: didn't get ACC\n");
+        return -1;
+    }
+    fprintf(stderr, "[%d]Sent %zu bytes\n", line, size);
+    return 0;
+}
+
+
+int __tcp_sreceiver(int sk, char* buf, size_t size, int line)
+{
+    int ret = 0;
+    if (tcp_receiver(sk, buf, size) != 0) {
+        fprintf(stderr, "SMART RECEIVER: failed to receive\n");
+        return -1;
+    }
+    ret = tcp_sacc(sk);
+    if (ret != 0) {
+        fprintf(stderr, "SMART RECEIVER: didn't get ACC\n");
+        return -1;
+    }
+    fprintf(stderr, "[%d]Received %zu bytes\n", line, size);
+    return 0;
+}
+
+
+int socket_snd_rcv_timeout(int sk, int rcv, int snd)
+{
+    struct timeval rcv_timeout = {
+                .tv_sec  = rcv,
+                .tv_usec = 0
+    };
+    struct timeval snd_timeout = {
+                .tv_sec  = snd,
+                .tv_usec = 0
+    };
+
+    if (rcv >= 0 && setsockopt(sk, SOL_SOCKET, SO_RCVTIMEO, &rcv_timeout,
+                                                    sizeof(rcv_timeout))== -1){
+        print_error(CT_SETSOCK_FAIL);
+        return -1;    
+    }
+    if (snd >= 0 && setsockopt(sk, SOL_SOCKET, SO_SNDTIMEO, &snd_timeout,
+                                                    sizeof(snd_timeout))== -1){
+        print_error(CT_SETSOCK_FAIL);
+        return -1;   
+    }
+
+    return 0;
+}
+
+int set_default_timeouts(int sk) {
+    return socket_snd_rcv_timeout(sk, RCV_TMOUT_SEC, SND_TMOUT_SEC);
+}
+
+
+int tcp_sacc(int sk)
+{
+    ssize_t  ret = 0;
+    ret = tcp_sender(sk, (char*)&ACC_PACK, sizeof(ACC_PACK));
+    if (ret != 0)
+        return -1;
+    fprintf(stderr, "Sent acc\n");
+    return 0;
+}
+
+int tcp_racc(int sk)
+{
+    uint64_t acc_buf = 0;
+    if (tcp_receiver(sk,   (char*)&acc_buf, sizeof(acc_buf)) != 0 
+        ||
+        acc_buf != ACC_PACK)
+        return -1;
+    fprintf(stderr, "Received acc\n");
+    return 0;
+}
+
