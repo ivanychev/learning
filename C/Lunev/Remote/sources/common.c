@@ -4,6 +4,7 @@
 
 char const* errors_msgs[] = {
         "",
+        "Error occured",
         "Server error:\n"
         "Too big number: argument must be \"auto\" or in [1..#MAXPROC]\n",
         "Server error:\n"
@@ -158,19 +159,19 @@ ssize_t tcp_sender(int sk, char* buf, size_t size)
 {
     ssize_t ret = 0, try = 0;
     if (buf == NULL) {
-        fprintf(stderr, "SENDER: Invalid argument\n");
+        // fprintf(stderr, "SENDER: Invalid argument\n");
         return -1;
     }
     ret = send(sk, buf, size, 0);
     if (ret != size && ret != -1) {
         try = tcp_sender(sk, buf + ret, size - ret);
         if (try == -1 || try + ret != size) {
-            fprintf(stderr, "SENDER: Failed to resend %zu bytes\n", 
-                                                                size - ret);
+            // fprintf(stderr, "SENDER: Failed to resend %zu bytes\n", 
+                                                                // size - ret);
             return -1;
         }
     }
-    fprintf(stderr, "SENDER: Sent %zu bytes\n", size);
+    // fprintf(stderr, "SENDER: Sent %zu bytes\n", size);
     return 0;
 }
 
@@ -180,19 +181,19 @@ int tcp_receiver(int sk, char* buf, size_t size)
     ssize_t recd = 0, ret = 0;
     do {
         ret = recv(sk, buf + recd, size - recd, 0);
-        fprintf(stderr, "RECEIVER: got %zd on return\n", ret);
+        // fprintf(stderr, "RECEIVER: got %zd on return\n", ret);
         if (ret <= 0) {
-            perror("RECEIVER: strange return value");
+            // perror("RECEIVER: strange return value");
             break;
         }
         recd += ret;
     } while (recd != size);
 
     if (recd == size){
-        fprintf(stderr, "RECEIVER: got whole package\n");
+        // fprintf(stderr, "RECEIVER: got whole package\n");
         return 0;
     }
-    fprintf(stderr, "RECEIVER: got %zd, needed %zu\n", recd, size);
+    // fprintf(stderr, "RECEIVER: got %zd, needed %zu\n", recd, size);
     return -1;
 }
 
@@ -201,12 +202,12 @@ int __tcp_ssender(int sk, char* buf, size_t size, int line)
     int ret = 0;
     ssize_t sret = 0;
     if ((sret = tcp_sender(sk, buf, size)) != 0) {
-        printf("SMART SENDER: got %zd return value, expected %zu\n", sret, size);
+        printf("[%d]SMART SENDER: got %zd return value, expected %zu\n", line, sret, size);
         return -1;
     }
     ret = tcp_racc(sk);
     if (ret != 0) {
-        printf("SMART SENDER: didn't get ACC\n");
+        printf("[%d]SMART SENDER: didn't get ACC\n", line);
         return -1;
     }
     fprintf(stderr, "[%d]Sent %zu bytes\n", line, size);
@@ -217,13 +218,14 @@ int __tcp_ssender(int sk, char* buf, size_t size, int line)
 int __tcp_sreceiver(int sk, char* buf, size_t size, int line)
 {
     int ret = 0;
+//    fprintf(stderr, "[%d]SMART RECEIVER: expecting %zu bytes\n", line, size);
     if (tcp_receiver(sk, buf, size) != 0) {
-        fprintf(stderr, "SMART RECEIVER: failed to receive\n");
+        fprintf(stderr, "[%d]SMART RECEIVER: failed to receive\n", line);
         return -1;
     }
     ret = tcp_sacc(sk);
     if (ret != 0) {
-        fprintf(stderr, "SMART RECEIVER: didn't get ACC\n");
+        fprintf(stderr, "[%d]SMART RECEIVER: didn't get ACC\n", line);
         return -1;
     }
     fprintf(stderr, "[%d]Received %zu bytes\n", line, size);
@@ -267,7 +269,7 @@ int tcp_sacc(int sk)
     ret = tcp_sender(sk, (char*)&ACC_PACK, sizeof(ACC_PACK));
     if (ret != 0)
         return -1;
-    fprintf(stderr, "Sent acc\n");
+ //   fprintf(stderr, "Sent acc\n");
     return 0;
 }
 
@@ -278,7 +280,7 @@ int tcp_racc(int sk)
         ||
         acc_buf != ACC_PACK)
         return -1;
-    fprintf(stderr, "Received acc\n");
+//    fprintf(stderr, "Received acc\n");
     return 0;
 }
 

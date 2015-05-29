@@ -7,8 +7,9 @@
  * 			iv_getlong
  * 			iv_printbinary
  * 			iv_getmyip		// TODO
+ * 			iv_getsemval
  * 			
- * 	@version 	0.1.1
+ * 	@version 	0.1.2
  * 	
  * 	@author 	Sergey Ivanychev
  * 	@par 		sergeyivanychev@gmail.com 
@@ -17,6 +18,8 @@
 #include "string.h"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/ipc.h>
+#include <sys/sem.h>
 #include <unistd.h>
 #include "errno.h"
 #include "stdint.h"
@@ -200,4 +203,9 @@ int iv_getmyip(struct in_addr* to_save, const char* iface)
  
     *to_save = ( (struct sockaddr_in *)&ifr.ifr_addr )->sin_addr;
     return 0;
+}
+
+int iv_getsemval(int sem, int index)
+{
+	return semctl(sem, index, GETVAL);
 }

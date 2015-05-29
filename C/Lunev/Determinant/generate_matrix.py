@@ -29,7 +29,7 @@ f.write(str(size) + "\n")
 for i in range(size):
 	wolfram.write("")
 	for j in range(size):
-		rand_num = random.randint(-1, 1)
+		rand_num = 2 * random.randint(0, 1) - 1
 		wolfram.write(str(rand_num))
 		f.write(str(rand_num))
 		if j < size - 1:

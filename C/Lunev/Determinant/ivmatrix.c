@@ -268,13 +268,18 @@ void* thread_routine(void* info_ptr)
 	{
 		minor = get_minor(&copy, 0, i);
 		CHECK(minor != NULL, "Failed to get minor");
-
+		// DELETE ME
+		// if (i == 5) {
+		// 	print_matrix(minor);
+		// }
+		//DELETE ME
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE matrix_kill(minor); matrix_kill(&copy); return (void*)-1;
 
 		cond = gauss(minor, &temp_result);
 		CHECK(cond == 0, "Failed to convert matrix");
 		double delta_result = ELEM(&copy, 0, i)*temp_result * ((i % 2 == 0)? 1.0 : -1.0);
+		// printf("%"PRIu32" minor: %lg elem: %lg det: %lg\n", i, delta_result, ELEM(&copy, 0, i), temp_result);
 		result += delta_result;
 		matrix_kill(minor);
 		free(minor);

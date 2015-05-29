@@ -1,8 +1,11 @@
 #include "../include/iv_remote.h"
+#include "../include/ivmatrix.h"
+#include "../include/iv_standard.h"
+
 
 int iv_getlong(long* save, const char* str);
 
-int solver(int sk, int threads, matrix* cur, pthread_t beater);
+int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater);
 
 int get_args(int argc, char const *argv[])
 {
@@ -32,7 +35,7 @@ int get_nthread(int argc, char const *argv[])
         nthread = get_args(argc, argv);
         if (nthread < 0) {
                 print_error(nthread);
-                printf("%d\n", nthread);
+                fprintf(stderr, "%d\n", nthread);
                 return -1;
         }
 
@@ -101,7 +104,7 @@ void* handshake(void* arg)
                 goto fail;
         }
 //        while (1) {
-            printf("Handshaker acting...\n");
+            fprintf(stderr, "Handshaker acting...\n");
             got = recvfrom (sk, 
                             buf, 
                             sizeof(buf), 
@@ -113,7 +116,7 @@ void* handshake(void* arg)
                     goto fail;
             }
 
-            printf("port = %d, addr = %s\n", ntohs(clt_addr.sin_port),
+            fprintf(stderr, "port = %d, addr = %s\n", ntohs(clt_addr.sin_port),
                                         inet_ntoa(clt_addr.sin_addr));
             // inet_aton(buf, &(clt_addr.sin_addr));
             clt_addr.sin_port = htons(HANDSHAKE_PORT);
@@ -125,7 +128,7 @@ void* handshake(void* arg)
                           0,
                           (struct sockaddr*)&clt_addr,
                           clt_add_len);
-            printf("Sent %d bytes\n", cond);
+            fprintf(stderr, "Sent %d bytes\n", cond);
             perror("");
 //        }
         pthread_exit(NULL);
@@ -160,14 +163,14 @@ int get_listen_socket(int* sk_tosave)
     sk = socket(PF_INET, SOCK_STREAM, 0);
     if (sk == -1)
             goto fail;
-    cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
-    if (cond == -1)
-            goto fail;
     cond = setsockopt(sk,
                       SOL_SOCKET,
                       SO_REUSEADDR,
                       &is_reuse,
                       sizeof(is_reuse));
+    cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
+    if (cond == -1)
+            goto fail;
     if (cond == -1) {
                 print_error(SV_SETSOCK_FAIL);
                 goto fail;
@@ -250,9 +253,10 @@ int matrix_get(int sk, matrix* cur)
     char* data = 0;
     cond = tcp_srecv(sk, (char*)&this, sizeof(this));
     if (cond != 0) {
-        print_error(0);
+        print_error(NEUTRAL_ERROR);
         goto fail;
     }
+    fprintf(stderr, "Received matrix structure\n");
 
     data = (char*) malloc(this.size * this.size * sizeof(double));
     if (data == NULL) {
@@ -262,45 +266,86 @@ int matrix_get(int sk, matrix* cur)
 
     cond = tcp_srecv(sk, data, this.size * this.size * sizeof(double));
     if (cond != 0) {
-        print_error(0);
+        print_error(NEUTRAL_ERROR);
         goto fail;
     }
+    fprintf(stderr, "Received matrix data\n");
 
     this.data = data;
     *cur = this;
     return 0;
 
 fail:
-    if (data)
+    if (data) {
         free(data);
+        data = NULL;
+    }
     return -1;    
 }
 
 void* beater_routine(void* arg)
 {
     sv_answer wait = {.status = SV_ANSWER_WAIT};
-    int sk  = *(int*)arg;
+    beater_meta meta  = *(beater_meta*)arg;
+    int sk  = meta.sk;
+    int sem = meta.sem; 
     int ret = 0;
-    pause();
+    struct sembuf zero = {0, 0, 0};
+    semop(sem, &zero, 1);
     while (1) {
         ret = tcp_ssend(sk, (char*)&wait, sizeof(wait));
+        fprintf(stderr, "Beat sent\n");
         if (ret == -1)
             return (void*)-1;
         sleep(BEAT_TIMEOUT);
+        semop(sem, &zero, 1);
     }
+}
+
+
+int beater_sem_get()
+{
+    int sem = semget(IPC_PRIVATE, 1, 0666);
+    union semun set;
+    if (sem == -1) {
+        print_error(NEUTRAL_ERROR);
+        return -1;
+    }
+    set.val = 1;
+    semctl(sem, 0, SETVAL, set);
+    return sem;
+}
+
+int beater_sem_manipulate(int sem, int val)
+{
+    struct sembuf s = {0, (short)val, 0};
+    semop(sem, &s, 1);
+    return sem;
+}
+
+int beater_block(int sem)
+{
+    return beater_sem_manipulate(sem, 1);
+}
+
+int beater_unblock(int sem)
+{
+    return beater_sem_manipulate(sem, -1);
 }
 
 int server(int argc, char const *argv[])
 {
-        int nthread = 0, cond = 0, sk = 0;
+        int nthread = 0, cond = 0, sk = 0, sem_blocker = 0;
         matrix cur;
         pthread_t handshaker = {0}, beater = {0};
         nthread = get_nthread(argc, argv);
+        beater_meta meta = {0};
         if (nthread == -1) {
             goto fail;
         }
-        printf("%d cores\n", nthread);
+        fprintf(stderr, "%d cores measured\n", nthread);
         cond = handshaker_set(&handshaker);
+        fprintf(stderr, "Handshaker activated\n");
         if (cond == -1)
                 goto fail;
         cond = get_socket(&sk);
@@ -308,73 +353,107 @@ int server(int argc, char const *argv[])
             print_error(SV_GETSOCK_FAIL);
             goto fail;
         }
+        fprintf(stderr, "Got main socket\n");
         cond = matrix_get(sk, &cur);
         if (cond == -1) {
             print_error(SV_MATRIX_GET_FAIL);
             goto fail;
         }
-        cond = pthread_create(&beater, NULL, beater_routine, &sk);
-        if (cond == -1) {
-            print_error(0);
+        fprintf(stderr, "Received matrix from client\n");
+        sem_blocker = beater_sem_get();
+        if (sem_blocker == -1) {
+            print_error(NEUTRAL_ERROR);
             goto fail;
         }
-///
-        cond = solver(sk, nthread, &cur, beater);
+        meta.sk  = sk;
+        meta.sem = sem_blocker;
+        
+        cond = pthread_create(&beater, NULL, beater_routine, &meta);
+        if (cond == -1) {
+            print_error(NEUTRAL_ERROR);
+            goto fail;
+        }
+        fprintf(stderr, "Beater created\n");
+        
+        cond = solver(sk, sem_blocker, nthread, &cur, beater);
         if (cond != 0) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
             goto fail;
         }
         
         matrix_kill (&cur);
         pthread_join(handshaker, NULL);
+        semctl(sem_blocker, 0, IPC_RMID);
         return 0;
 fail:
         if (sk > 0)
             close(sk);
+        if (sem_blocker > 0)
+            semctl(sem_blocker, 0, IPC_RMID);
         pthread_join(handshaker, NULL);
         fprintf(stderr, "Critical server error occured\n");
         return -1;
 }
 
 
-int solver(int sk, int threads, matrix* cur, pthread_t beater)
+int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater)
 {
     uint32_t temp  = 0;
     double  result = 0;
     matrix* minor  = 0;
     sv_answer answer = {};
     int ret = 0;
+    fprintf(stderr, "Solver began to execute\n");
     if (tcp_srecv(sk, (char*)&temp, sizeof(temp)) == -1) {
-        print_error(0);
+        print_error(NEUTRAL_ERROR);
+        DP(1);
         return -1;
     }
+    fprintf(stderr, "Got request from client\n");
+    beater_unblock(sem_blocker);
+    fprintf(stderr, "Beater unlocked\n");
     while (temp != FIN) {
+        fprintf(stderr, "Calculating task...\n");
         minor = get_minor(cur, 0, temp);
         if (minor == NULL) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
+            DP(1);
             goto fail;
         }
-        pthread_kill(beater, SIGCONT);
+// DELETE ME
+        // if (temp == 5) {
+        //     print_matrix(minor);
+        // }
+// DELETE ME
         ret = get_matrix_determinant(minor, threads, &result);
-        pthread_kill(beater, SIGSTOP);
+        beater_block(sem_blocker);
+        fprintf(stderr, "Beater locked\n");
         if (ret != 0) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
+            DP(1);
             goto fail;
         }
         answer.status = SV_ANSWER_VAL;
-        answer.val    = result;
-
-        if (tcp_ssend(sk, (char*)&answer, sizeof(answer)) != -1) {
-            print_error(0);
+        answer.val    = result * ELEM(cur, 0, temp) * ((temp % 2 == 0)? 
+                                                                    1.0: -1.0);
+        // fprintf(stderr, "%"PRIu32" minor: %lg elem: %lg det: %lg\n", temp, answer.val,
+        //                                                        ELEM(cur, 0, temp),
+        //                                                        result);
+        if (tcp_ssend(sk, (char*)&answer, sizeof(answer)) == -1) {
+            print_error(NEUTRAL_ERROR);
+            DP(1);
             goto fail;
         }
+        fprintf(stderr, "Sent result to client\n");
         matrix_kill(minor);
         free(minor);
         minor = NULL;
         if (tcp_srecv(sk, (char*)&temp, sizeof(temp)) == -1) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
+            DP(1);
             goto fail;
         }
+        fprintf(stderr, "Got request from client\n");
     }
 
     return 0;

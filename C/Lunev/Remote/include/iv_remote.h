@@ -22,6 +22,8 @@
 
 enum errors {
         FIRST_ERROR      = -1000,
+        NEUTRAL_ERROR,
+
         SV_ARGS_TOOBIG,
         SV_ARGS_TOOSMALL,
         SV_ARGS_INVALARG,
@@ -65,20 +67,30 @@ enum errors {
         LAST_ERROR
 };
 
-typedef struct {
+typedef struct ct_thread_meta_s {
         int             sem;
+        int             ips;
+        int             num;
         int             msgid;
         struct in_addr  server;
         const matrix*   cur;
         double          result;
         pthread_t       id;
+        int             sk;
         int             finish_cond;    // 0 if OK, -1 if failed
+        struct ct_thread_meta_s* meta_arr;
 } ct_thread_meta;
 
 typedef struct {
         long            mtype;
         uint32_t        minor;
 } ct_task;
+
+typedef struct 
+{
+        int sk;
+        int sem;
+} beater_meta;
 
 typedef struct {
         int             status;         // 0 - answer, 1 - wait, -1 - error
@@ -91,6 +103,8 @@ typedef struct {
 void __print_error(int line, const char* filename, int errnum);
 
 #define print_error(num) __print_error(__LINE__, __FILE__, num)
+#define DP(n) fprintf(stderr, "[%d]POINT "#n"\n", __LINE__);
+
 
 
 

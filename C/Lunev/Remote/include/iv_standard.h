@@ -248,4 +248,7 @@ int iv_getlong(long* save, const char* str);
  */
 int iv_printbinary(void* ptr, unsigned int bits);
 
+
+int iv_getsemval(int sem, int index);
+
 #endif

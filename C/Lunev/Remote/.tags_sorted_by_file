@@ -267,8 +267,8 @@ RM	Makefile	/^RM = \/usr\/bin\/cmake -E remove -f$/;"	m
 SHELL	Makefile	/^SHELL = \/bin\/sh$/;"	m
 SUFFIXES	Makefile	/^SUFFIXES =$/;"	m
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-BEAT_TIMEOUT	include/iv_remote.h	110;"	d
-BUFSIZE	include/iv_remote.h	99;"	d
+BEAT_TIMEOUT	include/iv_remote.h	124;"	d
+BUFSIZE	include/iv_remote.h	113;"	d
 CT_ALLOC_FAIL	include/iv_remote.h	/^        CT_ALLOC_FAIL,$/;"	e	enum:errors
 CT_ALL_THREADS_FAILED	include/iv_remote.h	/^        CT_ALL_THREADS_FAILED,$/;"	e	enum:errors
 CT_BIND_FAIL	include/iv_remote.h	/^        CT_BIND_FAIL,$/;"	e	enum:errors
@@ -293,27 +293,29 @@ CT_THREAD_CREAT_FAIL	include/iv_remote.h	/^        CT_THREAD_CREAT_FAIL,$/;"	e	e
 CT_THR_BIND_FAIL	include/iv_remote.h	/^        CT_THR_BIND_FAIL,$/;"	e	enum:errors
 CT_THR_SEND_MATR_FAIL	include/iv_remote.h	/^        CT_THR_SEND_MATR_FAIL,$/;"	e	enum:errors
 CT_THR_SOCK_CREATE_FAIL	include/iv_remote.h	/^        CT_THR_SOCK_CREATE_FAIL,$/;"	e	enum:errors
-FIN	include/iv_remote.h	116;"	d
+DP	include/iv_remote.h	106;"	d
+FIN	include/iv_remote.h	130;"	d
 FIRST_ERROR	include/iv_remote.h	/^        FIRST_ERROR      = -1000,$/;"	e	enum:errors
-HANDSHAKE_PORT	include/iv_remote.h	104;"	d
-HNDSK_TMOUT_SEC	include/iv_remote.h	105;"	d
-HND_BUFSIZE	include/iv_remote.h	112;"	d
-LABEL	include/iv_remote.h	118;"	d
+HANDSHAKE_PORT	include/iv_remote.h	118;"	d
+HNDSK_TMOUT_SEC	include/iv_remote.h	119;"	d
+HND_BUFSIZE	include/iv_remote.h	126;"	d
+LABEL	include/iv_remote.h	132;"	d
 LAST_ERROR	include/iv_remote.h	/^        LAST_ERROR$/;"	e	enum:errors
-MAXNODE	include/iv_remote.h	101;"	d
-MAXPROC	include/iv_remote.h	100;"	d
-MTU	include/iv_remote.h	111;"	d
-NOW	include/iv_remote.h	115;"	d
-PORT	include/iv_remote.h	103;"	d
-RCV_TMOUT_SEC	include/iv_remote.h	106;"	d
-RECV_TIMEOUT	include/iv_remote.h	102;"	d
-SND_ATTEMPTS	include/iv_remote.h	108;"	d
-SND_TMOUT_SEC	include/iv_remote.h	107;"	d
+MAXNODE	include/iv_remote.h	115;"	d
+MAXPROC	include/iv_remote.h	114;"	d
+MTU	include/iv_remote.h	125;"	d
+NEUTRAL_ERROR	include/iv_remote.h	/^        NEUTRAL_ERROR,$/;"	e	enum:errors
+NOW	include/iv_remote.h	129;"	d
+PORT	include/iv_remote.h	117;"	d
+RCV_TMOUT_SEC	include/iv_remote.h	120;"	d
+RECV_TIMEOUT	include/iv_remote.h	116;"	d
+SND_ATTEMPTS	include/iv_remote.h	122;"	d
+SND_TMOUT_SEC	include/iv_remote.h	121;"	d
 SV_ACCEPT_FAIL	include/iv_remote.h	/^        SV_ACCEPT_FAIL,$/;"	e	enum:errors
 SV_ALLOC_FAIL	include/iv_remote.h	/^        SV_ALLOC_FAIL,$/;"	e	enum:errors
-SV_ANSWER_ERR	include/iv_remote.h	89;"	d
-SV_ANSWER_VAL	include/iv_remote.h	87;"	d
-SV_ANSWER_WAIT	include/iv_remote.h	88;"	d
+SV_ANSWER_ERR	include/iv_remote.h	101;"	d
+SV_ANSWER_VAL	include/iv_remote.h	99;"	d
+SV_ANSWER_WAIT	include/iv_remote.h	100;"	d
 SV_ARGS_INVALARG	include/iv_remote.h	/^        SV_ARGS_INVALARG,$/;"	e	enum:errors
 SV_ARGS_INVALNUM	include/iv_remote.h	/^        SV_ARGS_INVALNUM,$/;"	e	enum:errors
 SV_ARGS_TOOBIG	include/iv_remote.h	/^        SV_ARGS_TOOBIG,$/;"	e	enum:errors
@@ -326,26 +328,34 @@ SV_INVAL_MATRIX	include/iv_remote.h	/^        SV_INVAL_MATRIX,$/;"	e	enum:errors
 SV_MATRIX_GET_FAIL	include/iv_remote.h	/^        SV_MATRIX_GET_FAIL,$/;"	e	enum:errors
 SV_RECV_FAIL	include/iv_remote.h	/^        SV_RECV_FAIL,$/;"	e	enum:errors
 SV_SETSOCK_FAIL	include/iv_remote.h	/^        SV_SETSOCK_FAIL,$/;"	e	enum:errors
-WAIT	include/iv_remote.h	114;"	d
-ct_task	include/iv_remote.h	/^} ct_task;$/;"	t	typeref:struct:__anon2
-ct_thread_meta	include/iv_remote.h	/^} ct_thread_meta;$/;"	t	typeref:struct:__anon1
-cur	include/iv_remote.h	/^        const matrix*   cur;$/;"	m	struct:__anon1
+WAIT	include/iv_remote.h	128;"	d
+beater_meta	include/iv_remote.h	/^} beater_meta;$/;"	t	typeref:struct:__anon2
+ct_task	include/iv_remote.h	/^} ct_task;$/;"	t	typeref:struct:__anon1
+ct_thread_meta	include/iv_remote.h	/^} ct_thread_meta;$/;"	t	typeref:struct:ct_thread_meta_s
+ct_thread_meta_s	include/iv_remote.h	/^typedef struct ct_thread_meta_s {$/;"	s
+cur	include/iv_remote.h	/^        const matrix*   cur;$/;"	m	struct:ct_thread_meta_s
 errors	include/iv_remote.h	/^enum errors {$/;"	g
-finish_cond	include/iv_remote.h	/^        int             finish_cond;    \/\/ 0 if OK, -1 if failed$/;"	m	struct:__anon1
-id	include/iv_remote.h	/^        pthread_t       id;$/;"	m	struct:__anon1
-minor	include/iv_remote.h	/^        uint32_t        minor;$/;"	m	struct:__anon2
-msgid	include/iv_remote.h	/^        int             msgid;$/;"	m	struct:__anon1
-mtype	include/iv_remote.h	/^        long            mtype;$/;"	m	struct:__anon2
-print_error	include/iv_remote.h	93;"	d
-rcv_acc	include/iv_remote.h	123;"	d
-result	include/iv_remote.h	/^        double          result;$/;"	m	struct:__anon1
-sem	include/iv_remote.h	/^        int             sem;$/;"	m	struct:__anon1
-server	include/iv_remote.h	/^        struct in_addr  server;$/;"	m	struct:__anon1	typeref:struct:__anon1::in_addr
-snd_acc	include/iv_remote.h	124;"	d
+finish_cond	include/iv_remote.h	/^        int             finish_cond;    \/\/ 0 if OK, -1 if failed$/;"	m	struct:ct_thread_meta_s
+id	include/iv_remote.h	/^        pthread_t       id;$/;"	m	struct:ct_thread_meta_s
+ips	include/iv_remote.h	/^        int             ips;$/;"	m	struct:ct_thread_meta_s
+meta_arr	include/iv_remote.h	/^        struct ct_thread_meta_s* meta_arr;$/;"	m	struct:ct_thread_meta_s	typeref:struct:ct_thread_meta_s::ct_thread_meta_s
+minor	include/iv_remote.h	/^        uint32_t        minor;$/;"	m	struct:__anon1
+msgid	include/iv_remote.h	/^        int             msgid;$/;"	m	struct:ct_thread_meta_s
+mtype	include/iv_remote.h	/^        long            mtype;$/;"	m	struct:__anon1
+num	include/iv_remote.h	/^        int             num;$/;"	m	struct:ct_thread_meta_s
+print_error	include/iv_remote.h	105;"	d
+rcv_acc	include/iv_remote.h	137;"	d
+result	include/iv_remote.h	/^        double          result;$/;"	m	struct:ct_thread_meta_s
+sem	include/iv_remote.h	/^        int             sem;$/;"	m	struct:ct_thread_meta_s
+sem	include/iv_remote.h	/^        int sem;$/;"	m	struct:__anon2
+server	include/iv_remote.h	/^        struct in_addr  server;$/;"	m	struct:ct_thread_meta_s	typeref:struct:ct_thread_meta_s::in_addr
+sk	include/iv_remote.h	/^        int             sk;$/;"	m	struct:ct_thread_meta_s
+sk	include/iv_remote.h	/^        int sk;$/;"	m	struct:__anon2
+snd_acc	include/iv_remote.h	138;"	d
 status	include/iv_remote.h	/^        int             status;         \/\/ 0 - answer, 1 - wait, -1 - error$/;"	m	struct:__anon3
 sv_answer	include/iv_remote.h	/^} sv_answer;$/;"	t	typeref:struct:__anon3
-tcp_srecv	include/iv_remote.h	135;"	d
-tcp_ssend	include/iv_remote.h	134;"	d
+tcp_srecv	include/iv_remote.h	149;"	d
+tcp_ssend	include/iv_remote.h	148;"	d
 val	include/iv_remote.h	/^        double          val;$/;"	m	struct:__anon3
 CALL	include/iv_standard.h	133;"	d
 CALLN	include/iv_standard.h	141;"	d
@@ -433,22 +443,24 @@ thread_meta	include/ivmatrix.h	/^struct thread_meta {$/;"	s
 threads_num	include/ivmatrix.h	/^	long 	 	threads_num;$/;"	m	struct:thread_meta
 to_save	include/ivmatrix.h	/^	double*  	to_save;$/;"	m	struct:thread_meta
 val	include/ivmatrix.h	/^    int val;                         \/\/ value  for SETVAL$/;"	m	union:semun
-IP_ARR_STEP	sources/client.c	3;"	d	file:
+IP_ARR_STEP	sources/client.c	4;"	d	file:
 client	sources/client.c	/^int client(int argc, char const *argv[])$/;"	f
 configure_accepting	sources/client.c	/^int configure_accepting()$/;"	f
 configure_broadcast	sources/client.c	/^int configure_broadcast() {$/;"	f
-connection_check	sources/client.c	/^int connection_check(int sk)$/;"	f
 discover	sources/client.c	/^int discover(struct in_addr** array_tosave, int* num_tosave)$/;"	f
-do_task	sources/client.c	/^int do_task(sk, uint32_t minor, double* res)$/;"	f
+do_task	sources/client.c	/^int do_task(int sk, uint32_t minor, double* res, int index)$/;"	f
 fill_tasks	sources/client.c	/^int fill_tasks(int msgid, const matrix* current) $/;"	f
 get_det	sources/client.c	/^int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* ips_array)$/;"	f
 get_ips_msgqueue	sources/client.c	/^int get_ips_msgqueue(int ips) {$/;"	f
 get_ips_semaphore	sources/client.c	/^int get_ips_semaphore(int ips, uint32_t size) {$/;"	f
+last_thread	sources/client.c	/^int last_thread(ct_thread_meta* meta)$/;"	f
 scan	sources/client.c	/^int scan(int* ips_tosave, struct in_addr** ips_array_tosave) {$/;"	f
+send_fin	sources/client.c	/^int send_fin(int sk)$/;"	f
 talker_get_socket	sources/client.c	/^int talker_get_socket() $/;"	f
-talker_routine	sources/client.c	/^void* talker_routine(void* arg) $/;"	f
 talker_send_matrix	sources/client.c	/^int talker_send_matrix(int sk, const matrix* cur)$/;"	f
 talker_tcp_routine	sources/client.c	/^void* talker_tcp_routine(void* arg)$/;"	f
+thread_sigusr1_handler	sources/client.c	/^void thread_sigusr1_handler(int sigid)$/;"	f
+thread_sigusr1_set	sources/client.c	/^int thread_sigusr1_set()$/;"	f
 udp_sender	sources/client.c	/^ssize_t udp_sender(int sk, struct sockaddr_in* addr, const void* ptr, size_t size)$/;"	f
 ACC_PACK	sources/common.c	/^const uint64_t      ACC_PACK = 0xaccaccaccacc;$/;"	v
 MAXTIMEO	sources/common.c	/^const unsigned      MAXTIMEO = 16;$/;"	v
@@ -464,21 +476,22 @@ tcp_racc	sources/common.c	/^int tcp_racc(int sk)$/;"	f
 tcp_receiver	sources/common.c	/^int tcp_receiver(int sk, char* buf, size_t size)$/;"	f
 tcp_sacc	sources/common.c	/^int tcp_sacc(int sk)$/;"	f
 tcp_sender	sources/common.c	/^ssize_t tcp_sender(int sk, char* buf, size_t size)$/;"	f
-BITSPERBYTE	sources/iv_standard.c	39;"	d	file:
-BUFSIZE	sources/iv_standard.c	37;"	d	file:
-IV_PRINTBIN_BUFSIZE	sources/iv_standard.c	38;"	d	file:
-ONEXIT	sources/iv_standard.c	123;"	d	file:
-ONEXIT	sources/iv_standard.c	124;"	d	file:
-ONEXIT	sources/iv_standard.c	40;"	d	file:
-ONEXIT	sources/iv_standard.c	82;"	d	file:
-ONEXIT	sources/iv_standard.c	83;"	d	file:
-ONEXIT	sources/iv_standard.c	93;"	d	file:
-ONEXIT	sources/iv_standard.c	94;"	d	file:
-RETURN	sources/iv_standard.c	41;"	d	file:
+BITSPERBYTE	sources/iv_standard.c	42;"	d	file:
+BUFSIZE	sources/iv_standard.c	40;"	d	file:
+IV_PRINTBIN_BUFSIZE	sources/iv_standard.c	41;"	d	file:
+ONEXIT	sources/iv_standard.c	126;"	d	file:
+ONEXIT	sources/iv_standard.c	127;"	d	file:
+ONEXIT	sources/iv_standard.c	43;"	d	file:
+ONEXIT	sources/iv_standard.c	85;"	d	file:
+ONEXIT	sources/iv_standard.c	86;"	d	file:
+ONEXIT	sources/iv_standard.c	96;"	d	file:
+ONEXIT	sources/iv_standard.c	97;"	d	file:
+RETURN	sources/iv_standard.c	44;"	d	file:
 iv_allocbuffer_copy	sources/iv_standard.c	/^int iv_allocbuffer_copy(const char* path, char** copy, size_t* file_size)$/;"	f
 iv_getfilesize	sources/iv_standard.c	/^int iv_getfilesize(const char* path, size_t* to_save)$/;"	f
 iv_getlong	sources/iv_standard.c	/^int iv_getlong(long* save, const char* str)$/;"	f
 iv_getmyip	sources/iv_standard.c	/^int iv_getmyip(struct in_addr* to_save, const char* iface)$/;"	f
+iv_getsemval	sources/iv_standard.c	/^int iv_getsemval(int sem, int index)$/;"	f
 iv_msgs	sources/iv_standard.c	/^char const* iv_msgs[] = {$/;"	v
 iv_printbinary	sources/iv_standard.c	/^int iv_printbinary(void* ptr, unsigned int bits)$/;"	f
 F_CHECK_EXIT_CODE	sources/ivmatrix.c	101;"	d	file:
@@ -529,7 +542,11 @@ swap_strings	sources/ivmatrix.c	/^inline void swap_strings(matrix* this, uint32_
 thread_routine	sources/ivmatrix.c	/^void* thread_routine(void* info_ptr)$/;"	f
 thread_routine_debug	sources/ivmatrix.c	/^void* thread_routine_debug(void* info_ptr)$/;"	f
 main	sources/main.c	/^int main(int argc, char const *argv[])$/;"	f
+beater_block	sources/server.c	/^int beater_block(int sem)$/;"	f
 beater_routine	sources/server.c	/^void* beater_routine(void* arg)$/;"	f
+beater_sem_get	sources/server.c	/^int beater_sem_get()$/;"	f
+beater_sem_manipulate	sources/server.c	/^int beater_sem_manipulate(int sem, int val)$/;"	f
+beater_unblock	sources/server.c	/^int beater_unblock(int sem)$/;"	f
 get_args	sources/server.c	/^int get_args(int argc, char const *argv[])$/;"	f
 get_client_socket	sources/server.c	/^int get_client_socket(int sk_listen, struct sockaddr_in* addr)$/;"	f
 get_listen_socket	sources/server.c	/^int get_listen_socket(int* sk_tosave)$/;"	f
@@ -540,4 +557,4 @@ handshake_setsocket	sources/server.c	/^int handshake_setsocket(int sk)$/;"	f
 handshaker_set	sources/server.c	/^int handshaker_set(pthread_t* to_save)$/;"	f
 matrix_get	sources/server.c	/^int matrix_get(int sk, matrix* cur)$/;"	f
 server	sources/server.c	/^int server(int argc, char const *argv[])$/;"	f
-solver	sources/server.c	/^int solver(int sk, int threads, matrix* cur, pthread_t beater)$/;"	f
+solver	sources/server.c	/^int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater)$/;"	f

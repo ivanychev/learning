@@ -1,4 +1,5 @@
 #include "../include/iv_remote.h"
+#include "../include/iv_standard.h"
 
 #define IP_ARR_STEP 10
 
@@ -57,6 +58,25 @@ int configure_accepting()
                 return -1;
         }
         return sk;
+}
+
+
+void thread_sigusr1_handler(int sigid)
+{
+    pthread_exit(NULL);
+}
+
+int thread_sigusr1_set()
+{
+    struct sigaction term_act;
+    int cond = 0;
+    sigset_t mask;
+    sigemptyset(&mask);
+    memset(&term_act, 0, sizeof(term_act));
+    term_act.sa_handler = thread_sigusr1_handler;
+    term_act.sa_mask    = mask;
+    cond = sigaction(SIGUSR1, &term_act, NULL);
+    return cond;
 }
 
 int discover(struct in_addr** array_tosave, int* num_tosave)
@@ -127,7 +147,7 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
                         (struct sockaddr*)&rcv_addr,
                         &rcv_addr_len)) != -1) 
         {
-                printf("Recvfrom invoked, cond = %d\n", cond);
+                fprintf(stderr, "Recvfrom invoked, cond = %d\n", cond);
                 if (ips_got > 0 && ips_got % IP_ARR_STEP == 0) {
                         arr = realloc(arr, sizeof(struct in_addr)*
                                                  (ips_got + IP_ARR_STEP));
@@ -136,7 +156,7 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
                                 goto fail;
                         }
                 }
-                printf("got %s\n", inet_ntoa(rcv_addr.sin_addr));
+                fprintf(stderr, "got %s\n", inet_ntoa(rcv_addr.sin_addr));
                 arr[ips_got] = rcv_addr.sin_addr;
                 ips_got++;
         }
@@ -146,7 +166,7 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
                 goto fail;
         }
 
-        printf("ips_got = %d\n", ips_got);
+        fprintf(stderr, "ips_got = %d\n", ips_got);
         *num_tosave = ips_got;
         *array_tosave = arr;
 
@@ -180,7 +200,7 @@ int scan(int* ips_tosave, struct in_addr** ips_array_tosave) {
             "Discover returned %d\n"
             "Printing connected IPs...\n\n", ips, cond);
     for (i = 0; i < ips; ++i)
-            printf("%s\n", inet_ntoa(ips_array[i]));
+            fprintf(stderr, "%s\n", inet_ntoa(ips_array[i]));
 //==============================================================================
 
     *ips_tosave = ips;
@@ -199,18 +219,20 @@ int client(int argc, char const *argv[])
         print_error(CT_SCAN_FAIL);
         goto fail;
     }
+    fprintf(stderr, "Network scan completed.\n");
 
     if (get_matrix(argv[2], &current) == -1) {
         print_error(CT_MATR_READ_FAIL);
         goto fail;
     }
+    fprintf(stderr, "Matrix has been read");
 
     if (get_det(&current, &result, ips, ips_array) == -1) {
         print_error(CT_DET_CALC_FAIL);
         goto fail;
     }   
 
-    printf("Determinant is %lg\n", result); 
+    fprintf(stderr, "Determinant is %lg\n", result); 
 
     free(ips_array);
     matrix_kill(&current);
@@ -228,7 +250,7 @@ int get_ips_semaphore(int ips, uint32_t size) {
     union semun set;
     int sem = 0;
 
-    if ((sem = semget(0, 2, IPC_PRIVATE | 0660)) == -1) {
+    if ((sem = semget(0, 3, IPC_PRIVATE | 0660)) == -1) {
         print_error(CT_SEM_FAIL); //~!!!!!!!!!!!!!!!!!!
         goto fail;
     }
@@ -237,6 +259,8 @@ int get_ips_semaphore(int ips, uint32_t size) {
     semctl(sem, 0, SETVAL, set);
     set.val = size;
     semctl(sem, 1, SETVAL, set);
+    set.val = 0;
+    semctl(sem, 2, SETVAL, set);
 
     return sem;
 fail:
@@ -288,69 +312,67 @@ int talker_send_matrix(int sk, const matrix* cur)
         print_error(CT_MATR_SEND_FAIL);
         return -1;
     }
+    DP(3);
     return 0;
 }
 
-// int talker_get_socket() 
+
+// void* talker_routine(void* arg) 
 // {
+//     struct sockaddr_in name = {}, addr = {};
+//     int sk = 0, is_reuse = 1;
+//     struct sembuf decr = {
+//         .sem_num = 0,
+//         .sem_op  = -1,
+//         .sem_flg = 0
+//     };
+//     ct_thread_meta* meta   = (ct_thread_meta*) arg;
+//     name.sin_port          = 0;
+//     name.sin_addr.s_addr   = htonl(INADDR_ANY);
+//     name.sin_family        = AF_INET;
+//     addr.sin_addr          = meta->server;
+//     addr.sin_family        = AF_INET;
+//     addr.sin_port          = htons(PORT);
 
+//     if ((sk = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+//         print_error(CT_THR_SOCK_CREATE_FAIL);
+//         goto fail;
+//     };
+//     if (setsockopt(sk, 
+//                    SOL_SOCKET, 
+//                    SO_REUSEADDR, 
+//                    &is_reuse, sizeof(is_reuse)) == -1) {
+//         print_error(CT_SETSOCK_FAIL);
+//         goto fail;
+//     }
+
+//     if (set_default_timeouts(sk) != 0) {
+//         print_error(CT_SETSOCK_FAIL);
+//         goto fail;        
+//     }
+//     if (bind(sk, (struct sockaddr*)&name, sizeof(name)) == -1) {
+//         print_error(CT_THR_BIND_FAIL);
+//         goto fail;
+//     }
+
+
+
+//     if (talker_send_matrix(sk, meta->cur) == -1) {
+//         print_error(CT_THR_SEND_MATR_FAIL);
+//         DP(1);
+//         goto fail;
+//     }
+//     DP(2);
+//     fprintf(stderr, "Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
+//     semop(meta->sem, &decr, 1);
+//     meta->finish_cond = 0;
+//     return NULL;
+// fail:
+//     fprintf(stderr, "Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
+//     semop(meta->sem, &decr, 1);
+//     meta->finish_cond = -1;
+//     return NULL;
 // }
-
-void* talker_routine(void* arg) 
-{
-    struct sockaddr_in name = {}, addr = {};
-    int sk = 0, is_reuse = 1;
-    struct sembuf decr = {
-        .sem_num = 0,
-        .sem_op  = -1,
-        .sem_flg = 0
-    };
-    ct_thread_meta* meta   = (ct_thread_meta*) arg;
-    name.sin_port          = 0;
-    name.sin_addr.s_addr   = htonl(INADDR_ANY);
-    name.sin_family        = AF_INET;
-    addr.sin_addr          = meta->server;
-    addr.sin_family        = AF_INET;
-    addr.sin_port          = htons(PORT);
-
-    if ((sk = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-        print_error(CT_THR_SOCK_CREATE_FAIL);
-        goto fail;
-    };
-    if (setsockopt(sk, 
-                   SOL_SOCKET, 
-                   SO_REUSEADDR, 
-                   &is_reuse, sizeof(is_reuse)) == -1) {
-        print_error(CT_SETSOCK_FAIL);
-        goto fail;
-    }
-
-    if (set_default_timeouts(sk) != 0) {
-        print_error(CT_SETSOCK_FAIL);
-        goto fail;        
-    }
-    if (bind(sk, (struct sockaddr*)&name, sizeof(name)) == -1) {
-        print_error(CT_THR_BIND_FAIL);
-        goto fail;
-    }
-
-
-
-    if (talker_send_matrix(sk, meta->cur) == -1) {
-        print_error(CT_THR_SEND_MATR_FAIL);
-        goto fail;
-    }
-
-    printf("Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
-    semop(meta->sem, &decr, 1);
-    meta->finish_cond = 0;
-    return NULL;
-fail:
-    printf("Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
-    semop(meta->sem, &decr, 1);
-    meta->finish_cond = -1;
-    return NULL;
-}
 
 int talker_get_socket() 
 {
@@ -393,26 +415,39 @@ fail:
 //     return 0;
 // }
 
-int do_task(int sk, uint32_t minor, double* res)
+int do_task(int sk, uint32_t minor, double* res, int index)
 {
     sv_answer temp = {.status = SV_ANSWER_WAIT};
     if (tcp_ssend(sk, (char*)&minor, sizeof(minor)) == -1){
         return -1;
     }
-    
+    fprintf(stderr, "{%d} Sent task to server\n", index);
     while (temp.status == SV_ANSWER_WAIT) {
         if (tcp_srecv(sk, (char*)&temp, sizeof(temp)) == -1) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
             return -1;
         }
+        fprintf(stderr, "{%d} Wait packet received\n", index);
         if (temp.status == SV_ANSWER_ERR) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
             return -1;
         }
     }
-
+    fprintf(stderr, "{%d} Result received\n", index);
     *res = temp.val;
     return 0;
+}
+
+int last_thread(ct_thread_meta* meta)
+{
+    short  ips = (short)meta->ips;
+    struct sembuf op   = {2, -ips + 1, IPC_NOWAIT};
+    struct sembuf unop = {2,  ips - 1, 0};
+    if (semop(meta->sem, &op, 1) == -1 && errno == EAGAIN) {
+        semop(meta->sem, &unop, 1);
+        return 0;
+    }
+    return 1;
 }
 
 void* talker_tcp_routine(void* arg)
@@ -426,23 +461,18 @@ void* talker_tcp_routine(void* arg)
         .sem_op  = -1,
         .sem_flg =  0
     };
-    struct sembuf incr = {
-        .sem_num =  0,
-        .sem_op  =  1,
-        .sem_flg =  0
-    };
-    struct sembuf done_task = {
-        .sem_num =  1,
-        .sem_op  = -1,
-        .sem_flg =  0
-    };
-    struct sembuf success[] = {incr, done_task};
+    struct sembuf success[] = {{0, 1, 0}, {1, -1, 0}};
     ct_task task            = {.mtype  = 1};
     ct_thread_meta* meta    = (ct_thread_meta*) arg;
     addr.sin_addr           = meta->server;
     addr.sin_family         = AF_INET;
     addr.sin_port           = htons(PORT);
     int msgid               = meta -> msgid;
+    if (thread_sigusr1_set() == -1) {
+        print_error(NEUTRAL_ERROR);
+        goto fail;
+    }
+
 //    int msgid = meta->msgid;
 
     sk = talker_get_socket();
@@ -450,53 +480,72 @@ void* talker_tcp_routine(void* arg)
         print_error(CT_GETSOCK_FAIL);
         goto fail;
     }
+    fprintf(stderr, "{%d} Created socket\n", meta->num);
 
     cond = connect(sk ,(struct sockaddr*)&addr, sizeof(addr));
     if (cond == -1) {
         print_error(CT_CONNECT_FAIL);
         goto fail;
     }
+    fprintf(stderr, "{%d} Connected to server\n", meta->num);
+    meta->sk = sk;
 
     cond = talker_send_matrix(sk, meta->cur);
     if (cond == -1) {
         print_error(CT_THR_SEND_MATR_FAIL);
         goto fail;
     }
-
+    fprintf(stderr, "{%d} Sent matrix to server\n", meta->num);
     while (1) {
         if (semop(meta->sem, &decr, 1) == -1) {
-            print_error(0);
+            print_error(NEUTRAL_ERROR);
             goto terrible_fail;
         };
-        ret = msgrcv(msgid, &task, sizeof(uint32_t), 1, 0);
-        if (ret != sizeof(uint32_t)) {
-            print_error(0);
+        fprintf(stderr, "{%d} Starting new task\n", meta->num);
+        ret = msgrcv(msgid, &task, sizeof(task.minor), 1, 0);
+        if (ret != sizeof(task.minor)) {
+            fprintf(stderr, 
+                    "{%d}! ret = %zd, expected = %zd\n",meta->num, ret, 
+                                                               sizeof(ct_task));
+            print_error(NEUTRAL_ERROR);
             goto fail;
         }
-        if (do_task(sk, task.minor, &res) == -1) {
-            print_error(0);
+        fprintf(stderr, "{%d} Received task %u\n", meta->num, task.minor);
+        if (do_task(sk, task.minor, &res, meta->num) == -1) {
+            print_error(NEUTRAL_ERROR);
             goto task_fail;
         }
+        fprintf(stderr, "{%d} Completed task %u\n", meta->num, task.minor);
         meta->result += res;
+        fprintf(stderr, "Before success semaphores: %d %d\n", iv_getsemval(meta->sem, 0),
+                                                     iv_getsemval(meta->sem, 1));
         if (semop(meta->sem, success, 2) == -1) {
-            print_error(0);
+            // DP(1);
+            print_error(NEUTRAL_ERROR);
             goto terrible_fail;
         }
+        // DP(1);
     }
 
     return NULL;
 fail:
-    cond = syscall(SYS_gettid);
+    if (last_thread(meta)) {
+        printf("LAST THREAD!");
+        goto terrible_fail;
+    }
     fprintf(stderr, 
-           "[TID: %d]Thread is terminating...\n"
-           "[TID: %d]Connection lost or not established\n"
-           "[TID: %d]Connected IP: %s\n"
-           "[TID: %d]No tasks lost\n", cond, cond, cond, 
-                                            inet_ntoa(addr.sin_addr), cond);
-    semop(meta->sem, &decr, 1);
+           "{%d} Thread is terminating...\n"
+           "{%d} Connection lost or not established\n"
+           "{%d} Connected IP: %s\n"
+           "{%d} No tasks lost\n", meta->num, meta->num, meta->num, 
+                                            inet_ntoa(addr.sin_addr), meta->num);
     meta->finish_cond = -1;
-    if (sk > 0)
+    if (sk > 0) {
         close(sk);
+        sk = 0;
+    }
+    
+    DP(2);  
     return NULL;
 task_fail:
     ret = msgsnd(msgid, &task, sizeof(uint32_t), 0);
@@ -504,14 +553,18 @@ task_fail:
         goto fail;
 terrible_fail:
     fprintf(stderr, 
-           "[TID: %d]Program is terminating...\n"
-           "[TID: %d]Unsolvable issue occured\n"
-           "[TID: %d]Connected IP: %s\n"
-           "[TID: %d]Semaphores broken or tasks are lost\n", cond, cond, cond, 
-                                            inet_ntoa(addr.sin_addr), cond);
+           "{%d} Program is terminating...\n"
+           "{%d} Unsolvable issue occured\n"
+           "{%d} Connected IP: %s\n"
+           "{%d} Semaphores broken or tasks are lost\n", meta->num, meta->num, meta->num, 
+                                            inet_ntoa(addr.sin_addr), meta->num);
     if (sk > 0)
         close(sk);
-    exit(EXIT_FAILURE);
+    for (cond = 0; cond < meta->ips; ++cond) 
+        meta->meta_arr[cond].finish_cond = -1;
+    semctl(meta->sem, 0, SETVAL, 0);
+    semctl(meta->sem, 1, SETVAL, 0);
+    return NULL;
 }
 
 int fill_tasks(int msgid, const matrix* current) 
@@ -522,11 +575,17 @@ int fill_tasks(int msgid, const matrix* current)
     ct_task task = {.mtype = 1};
     for (i = 0; i < current ->size; ++i) {
         task.minor = i;
-        cond = msgsnd(msgid, &task, sizeof(task), IPC_NOWAIT);
+        cond = msgsnd(msgid, &task, sizeof(task.minor), IPC_NOWAIT);
         if (cond == -1)
             return -1;
     }
     return 0;
+}
+
+int send_fin(int sk)
+{
+    uint32_t fin = FIN;
+    return tcp_ssend(sk, (char*)&fin, sizeof(fin));
 }
 
 int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* ips_array)
@@ -550,9 +609,10 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
 
     if ((sem = get_ips_semaphore(ips, current->size)) == -1) 
         return -1;              //! Error message printed
+    fprintf(stderr, "Received ips semaphores\n");
     if ((msgid = get_ips_msgqueue(ips)) == -1)
         goto fail;              //! Error message printed
-
+    fprintf(stderr, "Received thread shared message queue\n");
     meta_arr = (ct_thread_meta*)calloc(ips, sizeof(ct_thread_meta));
     if (meta_arr == NULL) {
         print_error(CT_ALLOC_FAIL);
@@ -563,31 +623,47 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
         print_error(CT_FILL_FAIL);
         goto fail;
     }
+    fprintf(stderr, "Tasks are loaded to the queue\n");
 
     for (i = 0; i < ips; ++i) {
         meta_arr[i].msgid  = msgid;
+        meta_arr[i].ips    = ips;
         meta_arr[i].sem    = sem;
         meta_arr[i].cur    = current;
         meta_arr[i].server = ips_array[i];
+        meta_arr[i].num    = i;
+        meta_arr[i].meta_arr = meta_arr;
         cond = pthread_create(&meta_arr[i].id, NULL, talker_tcp_routine, 
                                                                 &meta_arr[i]);
+        fprintf(stderr, "Created %d'th thread\n", i);
         if (cond == -1) {
             print_error(CT_THREAD_CREAT_FAIL);
             goto fail;
         }
     }
-    semop(sem, zero_wait, 1);
-
+    semop(sem, zero_wait, 2);
+    fprintf(stderr, "All threads finished their work\n");
     cond = 1;
     for (i = 0; i < ips; ++i) {
-        // pthread_join(meta_arr[i].id, NULL);
+        if (meta_arr[i].sk > 0) {
+            send_fin(meta_arr[i].sk);
+            close(meta_arr[i].sk);
+            fprintf(stderr, "%d'th thread has active socket. Closed now\n", i);
+        }
         failed += (meta_arr[i].finish_cond == -1)? 1: 0;
+        if (meta_arr[i].finish_cond == -1)
+            fprintf(stderr, "%d'th thread finished by error\n", i);
+        else {
+            pthread_kill(meta_arr[i].id, SIGUSR1);
+            pthread_join(meta_arr[i].id, NULL);
+            fprintf(stderr, "%d'th thread finished normally\n", i);
+        }
     }
     if (ips == failed) {
         print_error(CT_ALL_THREADS_FAILED);
         goto fail;
     }
-    printf("%d threads succeeded\n", ips - failed);
+    fprintf(stderr, "%d threads succeeded\n", ips - failed);
     for (i = 0; i < ips; ++i)
         *res_tosave += meta_arr[i].result;
 
@@ -600,7 +676,9 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
 fail:
     unlink(TEMP_FILE);
     free(meta_arr);
-    semctl(sem, 0, IPC_RMID);
-    msgctl(msgid, IPC_RMID, NULL);
+    if (sem > 0)
+        semctl(sem, 0, IPC_RMID);
+    if (msgid > 0)
+        msgctl(msgid, IPC_RMID, NULL);
     return -1;
 }
