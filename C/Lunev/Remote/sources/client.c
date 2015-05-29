@@ -3,6 +3,11 @@
 
 #define IP_ARR_STEP 10
 
+void thread_sigusr1_handler(int sigid);
+
+int thread_sigusr1_set();
+
+
 
 int configure_broadcast() {
         int broadcast_enable = 1;
@@ -61,30 +66,14 @@ int configure_accepting()
 }
 
 
-void thread_sigusr1_handler(int sigid)
-{
-    pthread_exit(NULL);
-}
-
-int thread_sigusr1_set()
-{
-    struct sigaction term_act;
-    int cond = 0;
-    sigset_t mask;
-    sigemptyset(&mask);
-    memset(&term_act, 0, sizeof(term_act));
-    term_act.sa_handler = thread_sigusr1_handler;
-    term_act.sa_mask    = mask;
-    cond = sigaction(SIGUSR1, &term_act, NULL);
-    return cond;
-}
 
 int discover(struct in_addr** array_tosave, int* num_tosave)
 {
         int cond = 0, ips_got = 0, sk = 0, sk_acc = 0;
         unsigned rcv_addr_len = 0; 
         char* request = NULL;
-        struct in_addr* arr = NULL;
+        struct in_addr* arr     = NULL;
+        struct in_addr* new_arr = NULL;
         struct sockaddr_in rcv_addr, addr;
 
         addr.sin_family = AF_INET;
@@ -149,12 +138,13 @@ int discover(struct in_addr** array_tosave, int* num_tosave)
         {
                 fprintf(stderr, "Recvfrom invoked, cond = %d\n", cond);
                 if (ips_got > 0 && ips_got % IP_ARR_STEP == 0) {
-                        arr = realloc(arr, sizeof(struct in_addr)*
+                        new_arr = realloc(arr, sizeof(struct in_addr)*
                                                  (ips_got + IP_ARR_STEP));
-                        if (arr == NULL) {
+                        if (new_arr == NULL) {
                                 print_error(CT_ALLOC_FAIL);
                                 goto fail;
                         }
+                        arr = new_arr;
                 }
                 fprintf(stderr, "got %s\n", inet_ntoa(rcv_addr.sin_addr));
                 arr[ips_got] = rcv_addr.sin_addr;
@@ -316,64 +306,6 @@ int talker_send_matrix(int sk, const matrix* cur)
     return 0;
 }
 
-
-// void* talker_routine(void* arg) 
-// {
-//     struct sockaddr_in name = {}, addr = {};
-//     int sk = 0, is_reuse = 1;
-//     struct sembuf decr = {
-//         .sem_num = 0,
-//         .sem_op  = -1,
-//         .sem_flg = 0
-//     };
-//     ct_thread_meta* meta   = (ct_thread_meta*) arg;
-//     name.sin_port          = 0;
-//     name.sin_addr.s_addr   = htonl(INADDR_ANY);
-//     name.sin_family        = AF_INET;
-//     addr.sin_addr          = meta->server;
-//     addr.sin_family        = AF_INET;
-//     addr.sin_port          = htons(PORT);
-
-//     if ((sk = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-//         print_error(CT_THR_SOCK_CREATE_FAIL);
-//         goto fail;
-//     };
-//     if (setsockopt(sk, 
-//                    SOL_SOCKET, 
-//                    SO_REUSEADDR, 
-//                    &is_reuse, sizeof(is_reuse)) == -1) {
-//         print_error(CT_SETSOCK_FAIL);
-//         goto fail;
-//     }
-
-//     if (set_default_timeouts(sk) != 0) {
-//         print_error(CT_SETSOCK_FAIL);
-//         goto fail;        
-//     }
-//     if (bind(sk, (struct sockaddr*)&name, sizeof(name)) == -1) {
-//         print_error(CT_THR_BIND_FAIL);
-//         goto fail;
-//     }
-
-
-
-//     if (talker_send_matrix(sk, meta->cur) == -1) {
-//         print_error(CT_THR_SEND_MATR_FAIL);
-//         DP(1);
-//         goto fail;
-//     }
-//     DP(2);
-//     fprintf(stderr, "Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
-//     semop(meta->sem, &decr, 1);
-//     meta->finish_cond = 0;
-//     return NULL;
-// fail:
-//     fprintf(stderr, "Semaphore is %d\n", semctl(meta->sem, 0, GETVAL));
-//     semop(meta->sem, &decr, 1);
-//     meta->finish_cond = -1;
-//     return NULL;
-// }
-
 int talker_get_socket() 
 {
     int sk = 0, is_reuse = 1;
@@ -403,17 +335,6 @@ fail:
     return -1;
 }
 
-// int connection_check(int sk)
-// {
-//     uint32_t temp = 0;
-//     int ret = 0;
-//     do {
-//         ret = tcp_srecv(sk, (char*)&temp, sizeof(temp));
-//         if (ret == -1)
-//             return -1;
-//     } while (temp != NOW);
-//     return 0;
-// }
 
 int do_task(int sk, uint32_t minor, double* res, int index)
 {
@@ -441,10 +362,9 @@ int do_task(int sk, uint32_t minor, double* res, int index)
 int last_thread(ct_thread_meta* meta)
 {
     short  ips = (short)meta->ips;
-    struct sembuf op   = {2, -ips + 1, IPC_NOWAIT};
-    struct sembuf unop = {2,  ips - 1, 0};
-    if (semop(meta->sem, &op, 1) == -1 && errno == EAGAIN) {
-        semop(meta->sem, &unop, 1);
+    struct sembuf op[2]   = {{2, -ips + 1, IPC_NOWAIT}, {2,  ips - 1, IPC_NOWAIT}};
+    printf("Last thread see semaphore %d\n", iv_getsemval(meta->sem, 2));
+    if (semop(meta->sem, op, 2) == -1 && errno == EAGAIN) {
         return 0;
     }
     return 1;
@@ -462,6 +382,7 @@ void* talker_tcp_routine(void* arg)
         .sem_flg =  0
     };
     struct sembuf success[] = {{0, 1, 0}, {1, -1, 0}};
+    struct sembuf if_fail = {2, 1, 0};
     ct_task task            = {.mtype  = 1};
     ct_thread_meta* meta    = (ct_thread_meta*) arg;
     addr.sin_addr           = meta->server;
@@ -544,7 +465,7 @@ fail:
         close(sk);
         sk = 0;
     }
-    
+    semop(meta->sem, &if_fail, 1);
     DP(2);  
     return NULL;
 task_fail:
@@ -635,6 +556,7 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
         meta_arr[i].meta_arr = meta_arr;
         cond = pthread_create(&meta_arr[i].id, NULL, talker_tcp_routine, 
                                                                 &meta_arr[i]);
+        pthread_detach(meta_arr[i].id);
         fprintf(stderr, "Created %d'th thread\n", i);
         if (cond == -1) {
             print_error(CT_THREAD_CREAT_FAIL);
@@ -654,8 +576,7 @@ int get_det(const matrix* current, double* res_tosave, int ips, struct in_addr* 
         if (meta_arr[i].finish_cond == -1)
             fprintf(stderr, "%d'th thread finished by error\n", i);
         else {
-            pthread_kill(meta_arr[i].id, SIGUSR1);
-            pthread_join(meta_arr[i].id, NULL);
+            pthread_cancel(meta_arr[i].id);
             fprintf(stderr, "%d'th thread finished normally\n", i);
         }
     }

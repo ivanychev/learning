@@ -3,6 +3,10 @@
 #include "../include/iv_standard.h"
 
 
+void thread_sigusr1_handler(int sigid);
+
+int thread_sigusr1_set();
+
 int iv_getlong(long* save, const char* str);
 
 int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater);
@@ -148,6 +152,7 @@ int handshaker_set(pthread_t* to_save)
                 print_error(SV_HND_CRTFAIL);
                 return -1;
         }
+        pthread_detach(handshaker);
         *to_save = handshaker;
         return 0;
 }
@@ -163,11 +168,12 @@ int get_listen_socket(int* sk_tosave)
     sk = socket(PF_INET, SOCK_STREAM, 0);
     if (sk == -1)
             goto fail;
-    cond = setsockopt(sk,
+    if (setsockopt(sk,
                       SOL_SOCKET,
                       SO_REUSEADDR,
                       &is_reuse,
-                      sizeof(is_reuse));
+                      sizeof(is_reuse)) == -1)
+        goto fail;
     cond = bind(sk, (struct sockaddr*)&addr, sizeof(addr));
     if (cond == -1)
             goto fail;
@@ -336,7 +342,7 @@ int beater_unblock(int sem)
 int server(int argc, char const *argv[])
 {
         int nthread = 0, cond = 0, sk = 0, sem_blocker = 0;
-        matrix cur;
+        matrix cur = {};
         pthread_t handshaker = {0}, beater = {0};
         nthread = get_nthread(argc, argv);
         beater_meta meta = {0};
@@ -373,6 +379,7 @@ int server(int argc, char const *argv[])
             print_error(NEUTRAL_ERROR);
             goto fail;
         }
+        pthread_detach(beater);
         fprintf(stderr, "Beater created\n");
         
         cond = solver(sk, sem_blocker, nthread, &cur, beater);
@@ -382,7 +389,9 @@ int server(int argc, char const *argv[])
         }
         
         matrix_kill (&cur);
-        pthread_join(handshaker, NULL);
+        
+        pthread_cancel(beater);
+        pthread_cancel(handshaker);
         semctl(sem_blocker, 0, IPC_RMID);
         return 0;
 fail:
@@ -390,7 +399,9 @@ fail:
             close(sk);
         if (sem_blocker > 0)
             semctl(sem_blocker, 0, IPC_RMID);
-        pthread_join(handshaker, NULL);
+        matrix_kill(&cur);
+        pthread_cancel(beater);
+        pthread_cancel(handshaker);
         fprintf(stderr, "Critical server error occured\n");
         return -1;
 }
@@ -410,21 +421,17 @@ int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater)
         return -1;
     }
     fprintf(stderr, "Got request from client\n");
-    beater_unblock(sem_blocker);
-    fprintf(stderr, "Beater unlocked\n");
     while (temp != FIN) {
         fprintf(stderr, "Calculating task...\n");
+        beater_unblock(sem_blocker);
+        fprintf(stderr, "Beater unlocked\n");
         minor = get_minor(cur, 0, temp);
         if (minor == NULL) {
             print_error(NEUTRAL_ERROR);
             DP(1);
             goto fail;
         }
-// DELETE ME
-        // if (temp == 5) {
-        //     print_matrix(minor);
-        // }
-// DELETE ME
+
         ret = get_matrix_determinant(minor, threads, &result);
         beater_block(sem_blocker);
         fprintf(stderr, "Beater locked\n");
@@ -436,9 +443,6 @@ int solver(int sk, int sem_blocker, int threads, matrix* cur, pthread_t beater)
         answer.status = SV_ANSWER_VAL;
         answer.val    = result * ELEM(cur, 0, temp) * ((temp % 2 == 0)? 
                                                                     1.0: -1.0);
-        // fprintf(stderr, "%"PRIu32" minor: %lg elem: %lg det: %lg\n", temp, answer.val,
-        //                                                        ELEM(cur, 0, temp),
-        //                                                        result);
         if (tcp_ssend(sk, (char*)&answer, sizeof(answer)) == -1) {
             print_error(NEUTRAL_ERROR);
             DP(1);

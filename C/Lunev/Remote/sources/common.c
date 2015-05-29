@@ -83,23 +83,15 @@ char const* errors_msgs[] = {
         "Failed to connect",
         "Client error:\n"
         "Failed to send matrix"
-
         ""
         
 };
 
-// int is_error(int errnum)
-// {
-//         if (FIRST_ERROR <= errnum && errnum <= LAST_ERROR){
-//                 return 1;
-//         }
-//         return 0;
-// }
 
 void __print_error(int line, const char* filename, int errnum) 
 {
        static char buf[1024];
-       if (FIRST_ERROR <= errnum && errnum<= LAST_ERROR){
+       if (FIRST_ERROR <= errnum && errnum< LAST_ERROR){
                 sprintf(buf, 
                         "%s: %d: %s\n", 
                         filename,
@@ -159,19 +151,16 @@ ssize_t tcp_sender(int sk, char* buf, size_t size)
 {
     ssize_t ret = 0, try = 0;
     if (buf == NULL) {
-        // fprintf(stderr, "SENDER: Invalid argument\n");
         return -1;
     }
     ret = send(sk, buf, size, 0);
     if (ret != size && ret != -1) {
         try = tcp_sender(sk, buf + ret, size - ret);
         if (try == -1 || try + ret != size) {
-            // fprintf(stderr, "SENDER: Failed to resend %zu bytes\n", 
-                                                                // size - ret);
             return -1;
         }
     }
-    // fprintf(stderr, "SENDER: Sent %zu bytes\n", size);
+
     return 0;
 }
 
@@ -284,3 +273,20 @@ int tcp_racc(int sk)
     return 0;
 }
 
+void thread_sigusr1_handler(int sigid)
+{
+    pthread_exit(NULL);
+}
+
+int thread_sigusr1_set()
+{
+    struct sigaction term_act;
+    int cond = 0;
+    sigset_t mask;
+    sigemptyset(&mask);
+    memset(&term_act, 0, sizeof(term_act));
+    term_act.sa_handler = thread_sigusr1_handler;
+    term_act.sa_mask    = mask;
+    cond = sigaction(SIGUSR1, &term_act, NULL);
+    return cond;
+}

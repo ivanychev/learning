@@ -94,12 +94,11 @@ pthread_t* get_threads( const matrix* this,
 	CHECK(amount > 0, "Invalid amount of expected threads");
 	pthread_t* array = (pthread_t*)calloc(amount, sizeof(pthread_t));
 	CHECKN(array, IV_ALLOCFAIL);
-	CHECKN(info_save, IV_PTRNULL);
-
-
 
 #undef  F_CHECK_EXIT_CODE
 #define F_CHECK_EXIT_CODE free(array); return NULL;
+
+	CHECKN(info_save, IV_PTRNULL);
 
 	int cond = 0;
 

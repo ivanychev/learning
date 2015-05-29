@@ -246,7 +246,7 @@ int iv_getlong(long* save, const char* str);
  * @return 	IV_INVALARGS	if arguments are corrupted
  * 		0 		if OK
  */
-int iv_printbinary(void* ptr, unsigned int bits);
+int iv_printbinary(char* ptr, unsigned int bits);
 
 
 int iv_getsemval(int sem, int index);

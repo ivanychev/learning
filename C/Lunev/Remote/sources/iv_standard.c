@@ -148,7 +148,7 @@ int iv_getlong(long* save, const char* str)
 	return 0; 
 }
 
-int iv_printbinary(void* ptr, unsigned int bits)
+int iv_printbinary(char* ptr, unsigned int bits)
 {
 	int i = 0, j = 0;
 	if (ptr == NULL || bits > IV_PRINTBIN_BUFSIZE)
