@@ -1,0 +1,83 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+CASE_TYPES	airport.c	/^enum CASE_TYPES {$/;"	g	file:
+Case	airport.c	/^} Case;$/;"	t	typeref:struct:__anon1	file:
+LANDING	airport.c	/^        LANDING = 2$/;"	e	enum:CASE_TYPES	file:
+TAKEOFF	airport.c	/^        TAKEOFF = 1,$/;"	e	enum:CASE_TYPES	file:
+case_compare	airport.c	/^int case_compare(const void* arg1, const void* arg2)$/;"	f
+day	airport.c	/^        unsigned day;$/;"	m	struct:__anon1	file:
+fill_tasks	airport.c	/^int fill_tasks(int msgid, Case* arr, int num) $/;"	f
+get_args	airport.c	/^Case* get_args(int argc, char const *argv[], int* num_tosave)$/;"	f
+get_case	airport.c	/^int get_case(FILE* fd, Case* to_save)$/;"	f
+get_cases	airport.c	/^Case* get_cases(FILE* fd, int* num_tosave) {$/;"	f
+get_ips_msgqueue	airport.c	/^int get_ips_msgqueue(int ips) {$/;"	f
+hour	airport.c	/^        unsigned hour;$/;"	m	struct:__anon1	file:
+main	airport.c	/^int main(int argc, char const *argv[])$/;"	f
+min	airport.c	/^        unsigned min;$/;"	m	struct:__anon1	file:
+print_case	airport.c	/^void print_case(Case* cur_case)$/;"	f
+print_cases	airport.c	/^void print_cases(Case* arr, int size)$/;"	f
+sort_tasks	airport.c	/^void sort_tasks(Case* arr, int num)$/;"	f
+task	airport.c	/^        Case task;$/;"	m	struct:__anon2	file:
+task	airport.c	/^} task;$/;"	t	typeref:struct:__anon2	file:
+type	airport.c	/^        long type;$/;"	m	struct:__anon2	file:
+type	airport.c	/^        unsigned type;  $/;"	m	struct:__anon1	file:
+add_mins	airport_client.c	/^void add_mins(int num, int* day, int* hour, int* min)$/;"	f
+calc_time	airport_client.c	/^void calc_time(Case* buf, int* day, int* hour, int* min)$/;"	f
+get_socket	airport_client.c	/^int get_socket() $/;"	f
+main	airport_client.c	/^int main(int argc, char const *argv[])$/;"	f
+set_default_timeouts	airport_client.c	/^int set_default_timeouts(int sk) {$/;"	f
+socket_snd_rcv_timeout	airport_client.c	/^int socket_snd_rcv_timeout(int sk, int rcv, int snd)$/;"	f
+CASE_TYPES	airport_header.h	/^enum CASE_TYPES {$/;"	g
+Case	airport_header.h	/^} Case;$/;"	t	typeref:struct:__anon3
+LANDING	airport_header.h	/^        LANDING = 2$/;"	e	enum:CASE_TYPES
+PORT	airport_header.h	22;"	d
+RCV_TMOUT_SEC	airport_header.h	23;"	d
+SND_TMOUT_SEC	airport_header.h	24;"	d
+TAKEOFF	airport_header.h	/^        TAKEOFF = 1,$/;"	e	enum:CASE_TYPES
+configure_meta	airport_header.h	/^} configure_meta;$/;"	t	typeref:struct:__anon5
+day	airport_header.h	/^        unsigned day;$/;"	m	struct:__anon3
+hour	airport_header.h	/^        unsigned hour;$/;"	m	struct:__anon3
+index	airport_header.h	/^        int index;  $/;"	m	struct:__anon3
+index	airport_header.h	/^        int index;$/;"	m	struct:__anon5
+min	airport_header.h	/^        unsigned min;$/;"	m	struct:__anon3
+msgid	airport_header.h	/^        int msgid;$/;"	m	struct:__anon5
+sk	airport_header.h	/^        int sk;$/;"	m	struct:__anon5
+task	airport_header.h	/^        Case task;$/;"	m	struct:__anon4
+task	airport_header.h	/^} task;$/;"	t	typeref:struct:__anon4
+type	airport_header.h	/^        long type;$/;"	m	struct:__anon4
+type	airport_header.h	/^        unsigned type;$/;"	m	struct:__anon3
+case_compare	airport_server.c	/^int case_compare(const void* arg1, const void* arg2)$/;"	f
+configure_routine	airport_server.c	/^void* configure_routine(void* arg)$/;"	f
+fill_tasks	airport_server.c	/^int fill_tasks(int msgid, Case* arr, int num) $/;"	f
+get_args	airport_server.c	/^Case* get_args(int argc, char const *argv[], int* num_tosave)$/;"	f
+get_case	airport_server.c	/^int get_case(FILE* fd, Case* to_save)$/;"	f
+get_cases	airport_server.c	/^Case* get_cases(FILE* fd, int* num_tosave) {$/;"	f
+get_client_socket	airport_server.c	/^int get_client_socket(int sk_listen, struct sockaddr_in* addr)$/;"	f
+get_listen_socket	airport_server.c	/^int get_listen_socket(int* sk_tosave)$/;"	f
+get_msgqueue	airport_server.c	/^int get_msgqueue(int ips) {$/;"	f
+main	airport_server.c	/^int main(int argc, char const *argv[])$/;"	f
+print_case	airport_server.c	/^void print_case(Case* cur_case)$/;"	f
+print_cases	airport_server.c	/^void print_cases(Case* arr, int size)$/;"	f
+set_default_timeouts	airport_server.c	/^int set_default_timeouts(int sk) {$/;"	f
+socket_snd_rcv_timeout	airport_server.c	/^int socket_snd_rcv_timeout(int sk, int rcv, int snd)$/;"	f
+sort_tasks	airport_server.c	/^void sort_tasks(Case* arr, int num)$/;"	f
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+PLANE_CASES	main.cpp	19;"	d	file:
+Plan	main.cpp	/^struct Plan$/;"	s	file:
+f_in	main.cpp	/^void* f_in(void* data)$/;"	f
+f_out	main.cpp	/^void* f_out(void* data)$/;"	f
+in	main.cpp	/^int in = 0, out =0;$/;"	v
+launch	main.cpp	/^void launch(int in, int out)$/;"	f
+main	main.cpp	/^int main()$/;"	f
+out	main.cpp	/^int in = 0, out =0;$/;"	v
+plans	main.cpp	/^struct Plan plans[PLANE_CASES];$/;"	v	typeref:struct:Plan
+plans_in	main.cpp	/^int plans_in[PLANE_CASES], plans_out[PLANE_CASES];$/;"	v
+plans_out	main.cpp	/^int plans_in[PLANE_CASES], plans_out[PLANE_CASES];$/;"	v
+save_time	main.cpp	/^void save_time(struct Plan* this, int hour, int min)$/;"	f
+strip	main.cpp	/^int strip[4], t_now[4] = {};$/;"	v
+t_now	main.cpp	/^int strip[4], t_now[4] = {};$/;"	v
+takeoff	main.cpp	/^    int takeoff;$/;"	m	struct:Plan	file:
+time	main.cpp	/^    int time;$/;"	m	struct:Plan	file:
