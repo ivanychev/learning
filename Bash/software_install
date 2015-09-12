@@ -1,4 +1,20 @@
 #!/bin/bash
+# 
+# This is initial script for creating initial software pack installed on 
+# Ubuntu laptop
+#
+# Sergey Ivanychev
+#
+# v 1.0
+
+sudo apt-get update
+sudo apt-get install git
+cd ~/
+mkdir code
+cd code
+git clone https://github.com/ruzovvo/Laundry.git
+git clone https://github.com/ivanychev/os-degradation.git
+git clone https://github.com/ivanychev/learning.git
 
 echo "Downloading GetDeb and PlayDeb" && wget http://archive.getdeb.net/install_deb/getdeb-repository_0.1-1~getdeb1_all.deb http://archive.getdeb.net/install_deb/playdeb_0.3-1~getdeb1_all.deb && echo "Installing GetDeb" && sudo dpkg -i getdeb-repository_0.1-1~getdeb1_all.deb && echo "Installing PlayDeb" && sudo dpkg -i playdeb_0.3-1~getdeb1_all.deb && echo "Deleting Downloads" && rm -f getdeb-repository_0.1-1~getdeb1_all.deb && rm -f playdeb_0.3-1~getdeb1_all.deb
 
@@ -30,7 +46,12 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
 
-sudo apt-get install synaptic vlc gimp gimp-data gimp-plugin-registry gimp-data-extras y-ppa-manager bleachbit oracle-jdk7-installer oracle-java9-installer flashplugin-installer unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller libxine1-ffmpeg mencoder flac faac faad sox ffmpeg2theora libmpeg2-4 uudeview libmpeg3-1 mpeg3-utils mpegdemux liba52-dev mpeg2dec vorbis-tools id3v2 mpg321 mpg123 libflac++6 totem-mozilla icedax lame libmad0 libjpeg-progs libswscale-extra-2 ubuntu-restricted-extras ubuntu-wallpapers* google-chrome-stable terminator vlc git clang-3.5 banshee texlive-full r-base dropbox wireshark vim valgrind cscope exuberant-ctags doxygen exuberant-ctags cmake biber openssh-server fail2ban x11vnc xvnc4viewer xzdec
+sudo apt-get install vlc sublime-text-installer google-chrome-stable
+
+sudo apt-get install synaptic gimp gimp-data gimp-plugin-registry gimp-data-extras y-ppa-manager bleachbit oracle-jdk7-installer oracle-java9-installer unace unrar p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract flac faac faad sox vorbis-tools id3v2 mpg321 mpg123 libflac++6 icedax lame libjpeg-progs ubuntu-restricted-extras terminator vlc git clang-3.5 banshee texlive-full r-base dropbox wireshark vim valgrind cscope exuberant-ctags doxygen exuberant-ctags cmake biber openssh-server fail2ban x11vnc xvnc4viewer xzdec
 
 sudo apt-get autoremove
 sudo apt-get clean
+
+git config user.name "Sergey Ivanychev"
+git config user.email "sergeyivanychev@gmail.com"
