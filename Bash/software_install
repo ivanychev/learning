@@ -9,6 +9,11 @@
 
 sudo apt-get update
 sudo apt-get install git
+git config --global push.default simple
+git config user.name "Sergey Ivanychev"
+git config user.email "sergeyivanychev@gmail.com"
+
+
 cd ~/
 mkdir code
 cd code
@@ -52,6 +57,3 @@ sudo apt-get install synaptic gimp gimp-data gimp-plugin-registry gimp-data-extr
 
 sudo apt-get autoremove
 sudo apt-get clean
-
-git config user.name "Sergey Ivanychev"
-git config user.email "sergeyivanychev@gmail.com"
