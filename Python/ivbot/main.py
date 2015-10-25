@@ -1,5 +1,6 @@
 __author__ = 'ivanychev'
 
-from numpy import *
+from bot import formula_bot
 
-a = arange(9).reshape(3, 3)
+bot = formula_bot(1)
+bot.run()
