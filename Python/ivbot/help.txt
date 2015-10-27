@@ -1,12 +1,12 @@
 Hello, this is @formula_bot.
-I can say \hello to you, or you can ask for \help.
+I can say /hello to you, or you can ask for /help.
 If you want me to compile formula for you just type:
 
-\latex <math>
+/latex <math>
 
 For example:
 
-\latex F(x) = \int_\infty^x f(x)dx
+/latex F(x) = \int_\infty^x f(x)dx
 
 You can contact my creator @ivanychev for support.
 See ya!

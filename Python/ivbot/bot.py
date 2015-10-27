@@ -7,14 +7,14 @@ import os
 import sys
 
 
-
-
 class formula_bot:
 
     __BOT_TOKEN = "155371517:AAFAdqcPrtj5Zf1w0bckV3usTKIJo7Eoz5E"
     __INTERVAL  = 3
     __ADMIN_ID  = 40271726
     __BOT_NAME  = "@formula_bot"
+    __LOG_NAME  = "log.txt"
+    __LOG_ID    = None
     __HELP_FILE = "help.txt"
     __PIC_FILE  = "pic.png"
     __URL       = "https://api.telegram.org/bot"
@@ -42,7 +42,12 @@ class formula_bot:
         self.__COMMANDS["latex"].append(self.__command_latex)
         return True
 
+    def __init_routine(self):
+        pass
+  #      self.__LOG_ID = open(self.__LOG_NAME, "a")
+
     def __init__(self):
+        self.__init_routine()
         self.__init_commands()
         pass
 
@@ -69,6 +74,7 @@ class formula_bot:
 
     def log_event(self, string):
         print("[%s] %s" % (time.ctime(), string))
+   #     self.__LOG_ID.write("[%s] %s" % (time.ctime(), string))
 
     def send_text(self, string, user_id):
         self.log_event('Sending to %s: %s' % (user_id, string))
@@ -109,13 +115,18 @@ class formula_bot:
         expr = data["text"].lstrip()
         expr = expr[len(self.__COMMANDS["latex"][0]):]
 
+        if expr.lstrip() == "":
+            self.send_text("You forgot to type formula after command", data["chat_id"])
+            return True
         subprocess.call(['latexit', expr])
         if not os.path.exists(self.__PIC_FILE):
             self.send_text("Failed to compile formula", data["chat_id"])
+            self.log_event("Error LaTeX code:\n" + expr)
             return False
         ret = self.send_pic(self.__PIC_FILE, data)
         if ret == False:
             self.send_text("Failed to send picture", data["chat_id"])
+            self.log_event("Error LaTeX code:\n" + expr)
             return False
         os.remove(self.__PIC_FILE)
         return True
