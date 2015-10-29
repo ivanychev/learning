@@ -1,11 +1,11 @@
+#!/bin/bash
+
 #	Converting input formula to .png format
 #
 #	Version 1.0
 
-#!/bin/bash
-# echo "\documentclass[20pt]{article} \begin{document} \pagestyle{empty} \[" $1 "\]\end{document}" > temp.tex
+
 echo "\documentclass{article} \pagestyle{empty} \usepackage[paperwidth=200.5in,paperheight=100in]{geometry} \usepackage{amsmath} \usepackage{graphicx} \newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}} \begin{document} \begin{equation} \LARGE \Scale[6]{ " $1 " }\nonumber \end{equation} \end{document}" > temp.tex
-# echo "\documentclass{article} \pagestyle{empty} \usepackage{amsmath} \usepackage{graphicx} \usepackage{breqn} \begin{document} \scalebox{3}{ \$\$   " $1 " \$\$} \end{document}" > temp.tex
 
 pdflatex -interaction nonstopmode -halt-on-error -file-line-error temp.tex
 pdfcrop --margins 30 temp.pdf temp.pdf.out
@@ -17,5 +17,3 @@ rm temp.log
 rm temp.pdf.out
 convert nofont-Myfile.ps pic.png
 rm nofont-Myfile.ps
-
-

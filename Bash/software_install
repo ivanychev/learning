@@ -53,60 +53,59 @@ sudo apt-get dist-upgrade
 
 sudo apt-get install vlc sublime-text-installer google-chrome-stable
 
-sudo apt-get install\
-synaptic\
-gimp\
-gimp-data\
-gimp-plugin-registry\
-gimp-data-extras\
-y-ppa-manager\
-bleachbit\
-oracle-jdk7-installer\
-oracle-java9-installer\
-unace\
-unrar\
-p7zip-full\
-p7zip-rar\
-sharutils\
-rar\
-uudeview\
-mpack\
-arj\
-cabextract\
-flac\
-faac\
-faad\
-sox\
-vorbis-tools\
-id3v2\
-mpg321\
-mpg123\
-libflac++6\
-icedax\
-lame\
-libjpeg-progs\
-ubuntu-restricted-extras\
-terminator\
-vlc\
-git\
-clang-3.5\
-banshee\
-texlive-full\
-r-base\
-dropbox\
-wireshark\
-vim\
-valgrind\
-cscope\
-exuberant-ctags\
-doxygen\
-exuberant-ctags\
-cmake\
-biber\
-openssh-server\
-fail2ban\
-x11vnc\
-xvnc4viewer\
+sudo apt-get install \
+synaptic \
+gimp \
+gimp-data \
+gimp-plugin-registry \
+gimp-data-extras \
+y-ppa-manager \
+bleachbit \
+oracle-jdk7-installer \
+oracle-java9-installer \
+unace \
+unrar \
+p7zip-full \
+p7zip-rar \
+sharutils \
+rar \
+uudeview \
+mpack \
+arj \
+cabextract \
+flac \
+faac \
+faad \
+sox \
+vorbis-tools \
+id3v2 \
+mpg321 \
+mpg123 \
+icedax \
+lame \
+libjpeg-progs \
+ubuntu-restricted-extras \
+terminator \
+vlc \
+git \
+clang-3.5 \
+banshee \
+texlive-full \
+r-base \
+dropbox \
+wireshark \
+vim \
+valgrind \
+cscope \
+exuberant-ctags \
+doxygen \
+exuberant-ctags \
+cmake \
+biber \
+openssh-server \
+fail2ban \
+x11vnc \
+xvnc4viewer \
 xzdec
 
 sudo apt-get autoremove
