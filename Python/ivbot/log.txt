@@ -1,0 +1,69 @@
+[Thu Oct 29 14:40:03 2015] Error getting updates[Thu Oct 29 14:40:14 2015] Message (id32596562) from ivanychev (id40271726): "/hello"[Thu Oct 29 14:40:14 2015] Sending to 40271726: Hello, ivanychev[Thu Oct 29 14:57:53 2015] Error getting updates[Thu Oct 29 15:09:43 2015] Interrupted by keyboardError getting updatesError getting updatesError getting updatesError getting updatesError getting updates[TIME Thu Oct 29 15:15:23 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596564
+[TEXT]  :
+/hello
+[TIME Thu Oct 29 15:15:23 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596564
+[TEXT]  :
+/hello
+[TIME Thu Oct 29 15:18:12 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596565
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Oct 29 15:18:12 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596565
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Oct 29 15:18:12 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596565
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Oct 29 15:18:21 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596566
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Oct 29 15:18:21 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596566
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Oct 29 15:18:21 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596566
+[TEXT]  :
+====
+/hello
+====
+Error getting updatesError getting updatesError getting updatesError getting updatesError getting updates

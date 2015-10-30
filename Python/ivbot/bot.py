@@ -1,5 +1,20 @@
 __author__ = 'ivanychev'
 
+"""
+        This is a Telegram bot that is capable of converting latex formulas to
+        .png via using pdflatex + pdfcrop + convert (by imagemagik)
+
+        Now these commands are supported:
+
+            /hello
+            /latex <formula>
+            /help
+
+        Version 1.0
+
+        Author: Sergey Ivanychev
+"""
+
 import requests
 import time
 import subprocess
@@ -14,6 +29,7 @@ class formula_bot:
     __ADMIN_ID  = 40271726
     __BOT_NAME  = "@formula_bot"
     __LOG_NAME  = "log.txt"
+    __REQUESTS_FILE = "requests.txt"
     __LOG_ID    = None
     __HELP_FILE = "help.txt"
     __PIC_FILE  = "pic.png"
@@ -32,10 +48,11 @@ class formula_bot:
                                         By default, updates starting with the earliest unconfirmed update are returned.
                                         An update is considered confirmed as soon as getUpdates is called with an offset
                                         higher than its update_id.
-    limit 	    Integer 	Optional 	Limits the number of updates to be retrieved. Values between 1—100 are accepted.
+    limit 	    Integer 	Optional 	Limits the number of updates to be retrieved values between 1—10
                                         Defaults to 100
     timeout 	Integer 	Optional 	Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling
     """
+
     def __init_commands(self):
         self.__COMMANDS["help"].append(self.__command_help)
         self.__COMMANDS["hello"].append(self.__command_hello)
@@ -44,15 +61,12 @@ class formula_bot:
 
     def __init_routine(self):
         pass
-  #      self.__LOG_ID = open(self.__LOG_NAME, "a")
+        self.__LOG_ID = open(self.__LOG_NAME, "a")
+        print(type(self.__LOG_ID))
 
-    def __init__(self):
+    def __init__(self, update_interval = 1):
+        self.__init_commands()
         self.__init_routine()
-        self.__init_commands()
-        pass
-
-    def __init__(self, update_interval):
-        self.__init_commands()
         self.__INTERVAL = update_interval
 
     def __get_info(self):
@@ -63,6 +77,7 @@ class formula_bot:
         ret += "Last update id: %s\n"        % self.__LAST_UPDATE
         ret += "Admin id:       %s\n"        % self.__ADMIN_ID
         return ret
+
     def __repr__(self):
         return self.__get_info()
 
@@ -72,22 +87,43 @@ class formula_bot:
     def __url_cmd(self, command):
         return self.__URL + self.__BOT_TOKEN + self.__URL_COMMANDS[command]
 
-    def log_event(self, string):
-        print("[%s] %s" % (time.ctime(), string))
-   #     self.__LOG_ID.write("[%s] %s" % (time.ctime(), string))
+    def log_event(self, string, data):
+        out = "[TIME %s] \n%s\n" % (time.ctime(), string)
+        out += self.__data2str(data)
+        self.log_text(out)
 
-    def send_text(self, string, user_id):
-        self.log_event('Sending to %s: %s' % (user_id, string))
-        data = {'chat_id': user_id, 'text': string}
-        response = requests.post(self.__url_cmd("send_message"), data=data)
+    def log_text(self, string):
+        print(string)
+        self.__log_to_file(string)
+
+    def __log_to_file(self, string):
+        self.__LOG_ID.write(string)
+        self.__LOG_ID.flush()
+        return True
+
+    def __data2str(self, data):
+        string = ""
+        string += "[USER  ]: %s\n"  % data["username"]
+        string += "[CHATID]: %s\n"  % data["chat_id"]
+        string += "[UPDTID]: %s\n"  % data["update_id"]
+        string += "[TEXT]  :\n====\n%s\n====\n" % data["text"]
+        return string
+
+
+
+    def send_text(self, string, in_data):
+        user_id = in_data["chat_id"]
+        self.log_event('Sending to %s: %s' % (user_id, string), in_data)
+        out_data = {'chat_id': user_id, 'text': string}
+        response = requests.post(self.__url_cmd("send_message"), data=out_data)
         if not response.status_code == 200:
             return False
         return response.json()["ok"]
 
     def send_pic(self, filename, data):
         files = {'photo': open(filename, 'rb')}
-        request = requests.post(self.__url_cmd('send_photo'), data=data, files=files) # Отправка фото
-        return request.json()['ok'] # Возврат True или False, полученного из ответа сервера, в зависимости от результата
+        request = requests.post(self.__url_cmd('send_photo'), data=data, files=files)
+        return request.json()['ok']
 
     def __get_command(self, string):
         token = string.lstrip().split()[0]
@@ -100,6 +136,7 @@ class formula_bot:
         return False
 
     def __command_help(self, data):
+        self.log_event("Help requested", data)
         try:
             f = open(self.__HELP_FILE)
             help_msg = f.read()
@@ -109,28 +146,31 @@ class formula_bot:
         return self.send_text(help_msg, data["chat_id"])
 
     def __command_hello(self, data):
-        return self.send_text("Hello, %s" % data["username"], data["chat_id"])
+        self.log_event("Handshake with %s" % data["username"], data)
+        return self.send_text("Hello, %s" % data["username"], data)
 
     def __command_latex(self, data):
+        self.log_event("LaTeX requested", data)
         expr = data["text"].lstrip()
         expr = expr[len(self.__COMMANDS["latex"][0]):]
 
         if expr.lstrip() == "":
             self.send_text("You forgot to type formula after command", data["chat_id"])
+            self.log_text("! User didn't type a formula\n")
             return True
         subprocess.call(['latexit', expr])
         if not os.path.exists(self.__PIC_FILE):
-            self.send_text("Failed to compile formula", data["chat_id"])
-            self.log_event("Error LaTeX code:\n" + expr)
+            self.send_text("Failed to compile formula. See example in /help", data["chat_id"])
+            self.log_text("! User mistyped formula:\n" + expr)
             return False
         ret = self.send_pic(self.__PIC_FILE, data)
         if ret == False:
             self.send_text("Failed to send picture", data["chat_id"])
-            self.log_event("Error LaTeX code:\n" + expr)
+            self.log_text("! Send pic failed\n")
             return False
         os.remove(self.__PIC_FILE)
+        self.log_text("Success\n")
         return True
-#        return self.send_text("Still developing...", data["chat_id"])
 
     def run_command(self, data):
         command = self.__get_command(data["text"])
@@ -156,7 +196,7 @@ class formula_bot:
         try:
             response = requests.post(self.__url_cmd("get_updates"), data = data)
         except:
-            self.log_event('Error getting updates')
+            self.log_text('Error getting updates')
             return False
 
         if not response.status_code == 200:
@@ -170,7 +210,7 @@ class formula_bot:
             self.__LAST_UPDATE = update['update_id']
 
             if 'message' not in update or 'text' not in update['message']:
-                self.log_event('Unknown update: %s' % update)
+                self.log_text('Unknown update: %s' % update)
                 continue
 
             user_id   = update['message']['chat']['id']
@@ -186,11 +226,7 @@ class formula_bot:
                           "username": user_name,\
                           "chat_id":  user_id,  \
                           "text":     message}
-            self.log_event('Message (id%s) from %s (id%s): "%s"' % \
-                (parameters["update_id"], \
-                 parameters["username"],  \
-                 parameters["chat_id"],   \
-                 parameters["text"]))
+            self.log_event("Message received", parameters)
             self.run_command(parameters)
 
     def run(self):
@@ -199,5 +235,5 @@ class formula_bot:
                 ret = self.check_updates()
                 time.sleep(self.__INTERVAL)
             except KeyboardInterrupt:
-                self.log_event("Interrupted by keyboard")
+                self.log_text("Interrupted by keyboard")
                 break
