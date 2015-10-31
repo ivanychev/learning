@@ -1,3 +1,4 @@
+
 __author__ = 'ivanychev'
 
 """
@@ -10,7 +11,13 @@ __author__ = 'ivanychev'
             /latex <formula>
             /help
 
-        Version 1.0
+        Version 1.1
+
+        Changelog v1.1
+
+        --  added logging to file
+        --  changed log message
+        --  improved png creation script
 
         Author: Sergey Ivanychev
 """
@@ -143,7 +150,7 @@ class formula_bot:
             f.close()
         except:
             help_msg = "Help is not working"
-        return self.send_text(help_msg, data["chat_id"])
+        return self.send_text(help_msg, data)
 
     def __command_hello(self, data):
         self.log_event("Handshake with %s" % data["username"], data)
@@ -155,17 +162,17 @@ class formula_bot:
         expr = expr[len(self.__COMMANDS["latex"][0]):]
 
         if expr.lstrip() == "":
-            self.send_text("You forgot to type formula after command", data["chat_id"])
+            self.send_text("You forgot to type formula after command", data)
             self.log_text("! User didn't type a formula\n")
             return True
         subprocess.call(['latexit', expr])
         if not os.path.exists(self.__PIC_FILE):
-            self.send_text("Failed to compile formula. See example in /help", data["chat_id"])
+            self.send_text("Failed to compile formula. See example in /help", data)
             self.log_text("! User mistyped formula:\n" + expr)
             return False
         ret = self.send_pic(self.__PIC_FILE, data)
         if ret == False:
-            self.send_text("Failed to send picture", data["chat_id"])
+            self.send_text("Failed to send picture", data)
             self.log_text("! Send pic failed\n")
             return False
         os.remove(self.__PIC_FILE)

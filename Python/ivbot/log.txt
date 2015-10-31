@@ -66,4 +66,191 @@ Sending to 40271726: Hello, ivanychev
 ====
 /hello
 ====
-Error getting updatesError getting updatesError getting updatesError getting updatesError getting updates
+Error getting updatesError getting updatesError getting updatesError getting updatesError getting updates[TIME Sat Oct 31 20:02:37 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596570
+[TEXT]  :
+====
+/hello
+====
+[TIME Sat Oct 31 20:02:37 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596570
+[TEXT]  :
+====
+/hello
+====
+[TIME Sat Oct 31 20:02:37 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596570
+[TEXT]  :
+====
+/hello
+====
+[TIME Sat Oct 31 20:02:43 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596571
+[TEXT]  :
+====
+/help
+====
+[TIME Sat Oct 31 20:02:43 2015] 
+Help requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596571
+[TEXT]  :
+====
+/help
+====
+[TIME Sat Oct 31 20:06:54 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596571
+[TEXT]  :
+====
+/help
+====
+[TIME Sat Oct 31 20:06:54 2015] 
+Help requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596571
+[TEXT]  :
+====
+/help
+====
+[TIME Sat Oct 31 20:06:54 2015] 
+Sending to 40271726: Hello, this is @formula_bot.
+I can say /hello to you, or you can ask for /help.
+If you want me to compile formula for you just type:
+
+/latex <math>
+
+For example:
+
+/latex F(x) = \int_\infty^x f(x)dx
+
+You can contact my creator @ivanychev for support.
+See ya!
+
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596571
+[TEXT]  :
+====
+/help
+====
+[TIME Sat Oct 31 20:07:03 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596572
+[TEXT]  :
+====
+/latex
+====
+[TIME Sat Oct 31 20:07:03 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596572
+[TEXT]  :
+====
+/latex
+====
+[TIME Sat Oct 31 20:08:26 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596572
+[TEXT]  :
+====
+/latex
+====
+[TIME Sat Oct 31 20:08:26 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596572
+[TEXT]  :
+====
+/latex
+====
+[TIME Sat Oct 31 20:08:26 2015] 
+Sending to 40271726: You forgot to type formula after command
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596572
+[TEXT]  :
+====
+/latex
+====
+! User didn't type a formula
+[TIME Sat Oct 31 20:09:00 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596573
+[TEXT]  :
+====
+/latex x^2
+====
+[TIME Sat Oct 31 20:09:00 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596573
+[TEXT]  :
+====
+/latex x^2
+====
+Success
+[TIME Sat Oct 31 20:09:29 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596574
+[TEXT]  :
+====
+/latex $x$
+====
+[TIME Sat Oct 31 20:09:29 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596574
+[TEXT]  :
+====
+/latex $x$
+====
+Success
+[TIME Sat Oct 31 20:09:55 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596575
+[TEXT]  :
+====
+/latex \int f(x)dx
+====
+[TIME Sat Oct 31 20:09:55 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32596575
+[TEXT]  :
+====
+/latex \int f(x)dx
+====
+Success
+Interrupted by keyboard
