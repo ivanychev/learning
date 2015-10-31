@@ -1,6 +1,6 @@
 #!/bin/bash
-# 
-# This is initial script for creating initial software pack installed on 
+#
+# This is initial script for creating initial software pack installed on
 # Ubuntu laptop
 #
 # Sergey Ivanychev
@@ -37,13 +37,13 @@ sudo add-apt-repository -y ppa:transmissionbt/ppa
 
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 
 sudo apt-key adv --keyserver pgp.mit.edu --recv-keys 5044912E
 
-sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ utopic main" >> /etc/apt/sources.list.d/dropbox.list' 
+sudo sh -c 'echo "deb http://linux.dropbox.com/ubuntu/ utopic main" >> /etc/apt/sources.list.d/dropbox.list'
 
 sudo add-apt-repository ppa:linrunner/tlp
 
