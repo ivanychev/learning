@@ -1,0 +1,18 @@
+"*":
+  "exception-reporting":
+    userId: "e3eb7613-2cde-1be0-4698-ecfb89451ad8"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "one-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    invisibles: {}
+    fontSize: 19
+    fontFamily: "Inconsolata LGC"
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "git-diff": true
