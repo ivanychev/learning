@@ -5,19 +5,19 @@
 #
 # Sergey Ivanychev
 #
-# v 1.1 Beta
+# v 1.1
 
 CLANG_COMPILER="clang-3.6"
 
 # Upgrading system
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
+sudo apt-get  update
+sudo apt-get  upgrade
+sudo apt-get  dist-upgrade
 
 # Configuring git
 
-sudo apt-get -y install git
+sudo apt-get  install git
 git config --global push.default simple
 git config user.name "Sergey Ivanychev"
 git config user.email "sergeyivanychev@gmail.com"
@@ -48,17 +48,19 @@ sudo add-apt-repository -y ppa:gnome3-team/gnome3
 
 sudo add-apt-repository -y ppa:webupd8team/java
 
-sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 
 sudo add-apt-repository -y ppa:webupd8team/y-ppa-manager
 
 sudo add-apt-repository -y ppa:transmissionbt/ppa
 
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 
-sudo add-apt-repository ppa:numix/ppa
+sudo add-apt-repository -y ppa:numix/ppa
 
-sudo add-apt-repository ppa:webupd8team/atom
+sudo add-apt-repository ppa:atareao/telegram
+
+sudo add-apt-repository -y ppa:webupd8team/atom
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
@@ -72,11 +74,11 @@ wget -q -O - http://archive.getdeb.net/getdeb-archive.key
 
 sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
 
-sudo add-apt-repository ppa:linrunner/tlp
+sudo add-apt-repository -y ppa:linrunner/tlp
 
 sudo apt-get update
 
-sudo apt-get -y install vlc sublime-text-installer google-chrome-stable atom \
+sudo apt-get  install vlc telegram sublime-text-installer google-chrome-stable atom \
 numix-gtk-theme
 
 # Setting default theme
@@ -96,7 +98,7 @@ cp ~/code/learning/Bash/install/config.cson \
    ~/.atom
 
 
-sudo apt-get -y install \
+sudo apt-get  install \
 synaptic \
 gnome-tweak-tool \
 unity-tweak-tool \
@@ -134,7 +136,6 @@ icedax \
 lame \
 libjpeg-progs \
 ubuntu-restricted-extras \
-terminator \
 vlc \
 git \
 $CLANG_COMPILER \
@@ -156,28 +157,26 @@ fail2ban \
 x11vnc \
 xvnc4viewer \
 xzdec \
-linter \
 pylint \
-nodejs \
-pycharm
+nodejs
 
 # configuring some packages
 # clang
 sudo ln -s /usr/bin/$CLANG_COMPILER /usr/local/bin/clang
 
-sudo apt-get -y autoremove
-sudo apt-get -y clean
+sudo apt-get  autoremove
+sudo apt-get  clean
 
 # Configuring python and additional libs
 
-sudo apt-get -y install htop gcc vim git gfortran python-pip
+sudo apt-get  install htop gcc vim git gfortran python-pip
 
-sudo apt-get -y install python3-matplotlib python3-pandas python3-scipy \
+sudo apt-get  install python3-matplotlib python3-pandas python3-scipy \
 python3-simpy python3-numpy python3-dev python3-pip python-setuptools
 sudo pip3 install seaborn cython jupyter scikit-learn
 
 
-sudo apt-get -y install build-essential python-dev python-setuptools \
+sudo apt-get  install build-essential python-dev python-setuptools \
                      python-numpy python-scipy \
                      libatlas-dev libatlas3gf-base
 
@@ -186,12 +185,12 @@ sudo update-alternatives --set libblas.so.3 \
 sudo update-alternatives --set liblapack.so.3 \
     /usr/lib/atlas-base/atlas/liblapack.so.3
 
-sudo apt-get -y install python-matplotlib
-sudo apt-get -y install pkg-config
+sudo apt-get  install python-matplotlib
+sudo apt-get  install pkg-config
 
-sudo apt-get -y install libblas3gf libblas-doc libblas-dev \
+sudo apt-get  install libblas3gf libblas-doc libblas-dev \
 liblapack3gf liblapack-doc liblapack-dev
-sudo apt-get -y install libpng-dev libjpeg8-dev libfreetype6-dev
+sudo apt-get  install libpng-dev libjpeg8-dev libfreetype6-dev
 
 pip install --user --install-option="--prefix=" -U numpy scipy pandas cython
 pip install --user --install-option="--prefix=" -U matplotlib
