@@ -73,7 +73,6 @@ wget -q -O - http://archive.getdeb.net/getdeb-archive.key
 sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu trusty-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
 
 sudo add-apt-repository ppa:linrunner/tlp
-
 sudo apt-get update
 
 sudo apt-get -y install vlc sublime-text-installer google-chrome-stable atom \
