@@ -10,7 +10,7 @@
     ]
   editor:
     invisibles: {}
-    fontSize: 19
+    fontSize: 21
     fontFamily: "Inconsolata LGC"
   minimap:
     plugins:
