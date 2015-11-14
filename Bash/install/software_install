@@ -5,7 +5,7 @@
 #
 # Sergey Ivanychev
 #
-# v 1.1.1
+# v 1.1.2
 
 CLANG_COMPILER="clang-3.6"
 
@@ -47,6 +47,8 @@ sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
 sudo add-apt-repository -y ppa:gnome3-team/gnome3
 
 sudo add-apt-repository -y ppa:webupd8team/java
+
+sudo add-apt-repository ppa:blackmage/f.lux
 
 sudo add-apt-repository -y ppa:ubuntu-desktop/ubuntu-make
 
@@ -102,12 +104,20 @@ cp ~/code/learning/Bash/install/config.cson \
    ~/code/learning/Bash/install/styles.less \
    ~/.atom
 
+#
+# Djvu converter:
+# ddjvu -format=pdf азбука.{djvu,pdf}
+#
+
+
 
 sudo apt-get -y  install \
+pepperflashplugin-nonfree \
 synaptic \
 gnome-tweak-tool \
 unity-tweak-tool \
 conky conky-all \
+djvulibre-bin \
 numix-icon-theme-* \
 curl \
 compiz compizconfig-settings-manager compiz-plugins \
@@ -120,6 +130,7 @@ bleachbit \
 oracle-java8-installer \
 oracle-java8-set-default \
 unace \
+fluxgui \
 unrar \
 p7zip-full \
 p7zip-rar \
@@ -164,6 +175,8 @@ xvnc4viewer \
 xzdec \
 pylint \
 nodejs
+
+sudo update-pepperflashplugin-nonfree --install
 
 # configuring some packages
 # clang
