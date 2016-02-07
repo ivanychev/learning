@@ -253,4 +253,1493 @@ LaTeX requested
 /latex \int f(x)dx
 ====
 Success
-Interrupted by keyboard
+Interrupted by keyboard[TIME Thu Dec 24 00:56:42 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+[TIME Thu Dec 24 00:56:42 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+[TIME Thu Dec 24 00:57:44 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+[TIME Thu Dec 24 00:57:44 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+[TIME Thu Dec 24 00:58:07 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+[TIME Thu Dec 24 00:58:07 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597040
+[TEXT]  :
+====
+/latex \forall phi_i(x) f(x) > \phi_i(x)
+====
+Success
+[TIME Thu Dec 24 00:58:25 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597041
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:25 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597041
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:25 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597041
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:27 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597042
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:27 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597042
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:27 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597042
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597043
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597043
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597043
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597044
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597044
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:29 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597044
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:30 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597045
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:30 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597045
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:30 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597045
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597046
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597046
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597046
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597047
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597047
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597047
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597048
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597048
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597048
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597049
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597049
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:31 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597049
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597050
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597050
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597050
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597051
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597051
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597051
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597052
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597052
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:58:33 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597052
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 00:59:16 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597053
+[TEXT]  :
+====
+/latex
+====
+[TIME Thu Dec 24 00:59:16 2015] 
+LaTeX requested
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597053
+[TEXT]  :
+====
+/latex
+====
+[TIME Thu Dec 24 00:59:16 2015] 
+Sending to -93265454: You forgot to type formula after command
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597053
+[TEXT]  :
+====
+/latex
+====
+! User didn't type a formula
+[TIME Thu Dec 24 00:59:47 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597054
+[TEXT]  :
+====
+/latex x \xrightarrow{}[n \rightarrow \infty] 0
+====
+[TIME Thu Dec 24 00:59:47 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597054
+[TEXT]  :
+====
+/latex x \xrightarrow{}[n \rightarrow \infty] 0
+====
+Success
+[TIME Thu Dec 24 01:00:02 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597055
+[TEXT]  :
+====
+/latex x \xrightarrow[n \rightarrow \infty]{} 0
+====
+[TIME Thu Dec 24 01:00:02 2015] 
+LaTeX requested
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597055
+[TEXT]  :
+====
+/latex x \xrightarrow[n \rightarrow \infty]{} 0
+====
+Success
+[TIME Thu Dec 24 01:00:39 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597056
+[TEXT]  :
+====
+/latex x \xrightarrow[n \rightarrow \infty]{} 0
+====
+[TIME Thu Dec 24 01:00:39 2015] 
+LaTeX requested
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597056
+[TEXT]  :
+====
+/latex x \xrightarrow[n \rightarrow \infty]{} 0
+====
+Success
+[TIME Thu Dec 24 01:01:53 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597057
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:53 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597057
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:53 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597057
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:53 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597058
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:53 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597058
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:53 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597058
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597059
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597059
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597059
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597060
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597060
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597060
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597061
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597061
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:54 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597061
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:55 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597062
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:55 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597062
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:55 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597062
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597063
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597063
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597063
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Message received
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597064
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Handshake with ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597064
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:01:56 2015] 
+Sending to 40271726: Hello, ivanychev
+[USER  ]: ivanychev
+[CHATID]: 40271726
+[UPDTID]: 32597064
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597065
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597065
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597065
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597066
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597066
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597066
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597067
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597067
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597067
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597068
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597068
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:50 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597068
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:51 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597069
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:51 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597069
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:51 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597069
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:52 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597070
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:52 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597070
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:52 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597070
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597071
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597071
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597071
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597072
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597072
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:55 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597072
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597073
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597073
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597073
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597074
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597074
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:56 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597074
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:57 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597075
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:57 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597075
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:02:57 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597075
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597076
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597076
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597076
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597077
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597077
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597077
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597078
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597078
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597078
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597079
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597079
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:01 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597079
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:03 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597080
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:03 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597080
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:03 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597080
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597081
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597081
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597081
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597082
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597082
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597082
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597083
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597083
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:06 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597083
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:07 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597084
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:07 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597084
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:07 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597084
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:08 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597085
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:08 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597085
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:08 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597085
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:50 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597086
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:50 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597086
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:50 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597086
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597087
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597087
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597087
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597088
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597088
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597088
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597089
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597089
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:51 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597089
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:53 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597090
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:53 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597090
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:53 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597090
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597091
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597091
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597091
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597092
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597092
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597092
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597093
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597093
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:56 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597093
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:57 2015] 
+Message received
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597094
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:57 2015] 
+Handshake with Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597094
+[TEXT]  :
+====
+/hello
+====
+[TIME Thu Dec 24 01:03:57 2015] 
+Sending to -93265454: Hello, Stranger without @username and both names
+[USER  ]: Stranger without @username and both names
+[CHATID]: -93265454
+[UPDTID]: 32597094
+[TEXT]  :
+====
+/hello
+====
