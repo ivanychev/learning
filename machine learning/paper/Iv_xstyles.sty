@@ -3,7 +3,7 @@
 %%
 %%      Sergey Ivanychev
 %%
-%%      v2.6
+%%      v2.7
 %%
 %%
 %%      Changelog v2.2
@@ -29,6 +29,11 @@
 %%      Changelog v2.6
 %%      -- added more efficient \newcommands
 %%      -- added FAQ section
+%%
+%%      Changelob v2.7
+%%      -- moved commands and theorem definitions to separate file
+%%      -- minor improvements
+%%
 %%
 %%      (CC)
 %%
@@ -147,8 +152,6 @@
 \parindent = 0em
 
 
-%%=== Theorems, definitions, remarks============================================
-
 
 \newtheoremstyle{ivthm_style} % name
   {.5\baselineskip\@plus.2\baselineskip\@minus.2\baselineskip}% Space above
@@ -199,108 +202,6 @@
 \renewcommand{\colon}{\nobreak\mskip2mu\mathpunct{}\nonscript
   \mkern-\thinmuskip{:}\mskip6muplus1mu\relax}
 
-%%%=== Custom math symbols =====================================================
-
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\renewcommand{\C}{\mathbb{C}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\diam}{\mathrm{diam}\;}
-\newcommand{\conv}{\mathrm{conv}\;}
-\newcommand{\cl}{\mathrm{cl}\;}
-\newcommand{\dist}{\mathbf{dist}}
-\newcommand{\dom}{\mathbf{dom}\;}
-\newcommand{\sign}{\mathbf{sign}\;}
-\renewcommand{\T}{\intercal}
-\newcommand{\eps}{\varepsilon}
-
-\let \oldcmdforall \forall
-\renewcommand{\forall}{\;\oldcmdforall\:}
-\let \oldcmdexists \exists
-\renewcommand{\exists}{\;\oldcmdexists\:}
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\geq}{\geqslant}
-
-% Optimization
-\newcommand{\epi}{\mathbf{epi}}
-\newcommand{\aff}{\mathrm{aff}\;}
-\newcommand{\cone}{\mathrm{cone}\;}
-\newcommand{\cov}{\mathrm{cov}\;}
-\newcommand{\X}{\mathbb{X}}
-
-% Probability
-\newcommand{\expv}{\mathsf{E}\;}
-\newcommand{\disp}{\mathsf{D}\;}
-
-\newcommand{\vold}{\v}
-\renewcommand{\v}[1]{\mathbf{#1}}
-
-\renewcommand{\d}[2]{\frac{d #1}{d #2}}
-\newcommand{\nd}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\dd}[2]{\nd{#1}{#2}{2}}
-
-\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\npd}[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
-\newcommand{\pdd}[2]{\npd{#1}{#2}{2}}
-\newcommand{\divsymb}{\div}
-\renewcommand{\div}{\mathrm{div}\:}
-\newcommand{\grad}{\mathrm{grad}\:}
-\newcommand{\rot}{\mathrm{rot}\:}
-\newcommand{\const}{\,const\,}
-
-% Circled text
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
-
-% Circled math
-\newcommand{\mcirc}[1]{\circled{$#1$}}
-
-% Fitting braces
-\newcommand{\brs}[1]{\left(#1\right)}
-\newcommand{\sbrs}[1]{\left[#1\right]}
-\newcommand{\fbrs}[1]{\left\{#1\right\}}
-\newcommand{\rbrs}[1]{\left\langle #1 \right\rangle}
-
-
-%%=== Additional custom commands ===============================================
-\newcommand{\litspace}{\vspace{0.7cm}}
-
-\newcommand{\ivsign}[1]{
-\begin{flushright}
-\sffamily
-{\bf{}\large{}Сергей Иванычев}\\
-%\vspace{0.1cm}
-Группа 376 \\
-ФУПМ МФТИ\\
-sergeyivanychev@gmail.com \\
-Telegram: @ivanychev\\
-+79104577995\\
-Версия #1\\
-\end{flushright}
-}
-
-
-\newcommand{\ivtitle}[1]{
-\ivsign{#1}
-\medskip
-\medskip
-\medskip
-{\let\newpage\relax\maketitle}
-}
-
-\newcommand{\ivensign}[1]{
-        \begin{flushright}
-        \sffamily
-        {\sffamily\bf{}\large{}Sergey Ivanychev}\\
-        376 group\\
-        DCAM MIPT\\
-        sergeyivanychev@gmail.com\\
-        Telegram: @ivanychev\\
-        +79104577995\\
-        Version #1\\
-        \end{flushright}
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fixes a bug in the most recent TeX Live 2015
