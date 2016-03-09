@@ -4,7 +4,12 @@ This module loads a set of models used in classification. Supported kernels are
  - RBF
  - INK-spline
  - Polynomial
+
+ Author:    Sergey Ivanychev
+ Revision:  1
 """
+
+RANDOM_STATE = 42
 
 import ink
 from sklearn.svm import SVC
@@ -43,7 +48,7 @@ def _get_kernel(spec):
     return KERNELS[spec[0]](spec)
 
 
-def get(kernels : list, C: int = 1.0) -> list:
+def get(kernel_specs : list, C: int = 1.0) -> list:
     """
 
     :param kernels: list of lists or tupels with format
@@ -57,7 +62,7 @@ def get(kernels : list, C: int = 1.0) -> list:
     :return:        List of initialized classifiers
     """
     cls_list = []
-    for kernel_spec in kernels:
-        cls = SVC(C=C, **_get_kernel(kernel_spec))
+    for kernel_spec in kernel_specs:
+        cls = SVC(C=C, random_state=RANDOM_STATE, **_get_kernel(kernel_spec))
         cls_list.append(cls)
     return cls_list
