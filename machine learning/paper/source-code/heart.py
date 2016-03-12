@@ -10,6 +10,7 @@ Revision:   1
 
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import normalize
 
 
 def load(path: str ="../data/heart-disease", mode: str = "classification") \
@@ -39,4 +40,4 @@ def load(path: str ="../data/heart-disease", mode: str = "classification") \
     features.remove(target)
     X = df[features].as_matrix()
     Y = df[target].as_matrix()
-    return X, Y
+    return normalize(X), Y, "heart"

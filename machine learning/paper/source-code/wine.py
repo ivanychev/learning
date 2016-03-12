@@ -9,6 +9,7 @@ Revision:   1
 
 import numpy as np
 import pandas as pd
+from sklearn.preprocessing import normalize
 
 def load(path: str ="../data/wine", mode: str = "classification") \
 -> (np.ndarray, np.ndarray):
@@ -20,4 +21,4 @@ def load(path: str ="../data/wine", mode: str = "classification") \
     Y = df[target].as_matrix()
     if mode == "classification":
         Y = np.int32(Y >= 6)
-    return X, Y
+    return normalize(X), Y, "wine"

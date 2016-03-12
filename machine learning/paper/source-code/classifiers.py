@@ -35,7 +35,7 @@ def _poly_args(spec):
 
 def _ink_args(spec):
     assert len(spec) == 3 and _is_number(spec[1]) and _is_number(spec[2]), KERINVAL
-    return {"kernel":ink.ink_svc_get(degree=spec[0], a = spec[2])}
+    return {"kernel":ink.ink_svc_get(degree=spec[1], a = spec[2])}
 
 KERNELS = {
     "linear":_linear_args,
@@ -48,7 +48,7 @@ def _get_kernel(spec):
     return KERNELS[spec[0]](spec)
 
 
-def get(kernel_specs : list, C: int = 1.0) -> list:
+def get(kernel_specs : list, C: int = 0.1) -> list:
     """
 
     :param kernels: list of lists or tupels with format
