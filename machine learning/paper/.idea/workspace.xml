@@ -4,15 +4,7 @@
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/.ipynb_checkpoints/stuff-checkpoint.ipynb" afterPath="$PROJECT_DIR$/source-code/.ipynb_checkpoints/stuff-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/INK-spline.ipynb" afterPath="$PROJECT_DIR$/source-code/INK-spline.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/classifiers.py" afterPath="$PROJECT_DIR$/source-code/classifiers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/german.py" afterPath="$PROJECT_DIR$/source-code/german.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/heart.py" afterPath="$PROJECT_DIR$/source-code/heart.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/ink.py" afterPath="$PROJECT_DIR$/source-code/ink.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/main.py" afterPath="$PROJECT_DIR$/source-code/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/stuff.ipynb" afterPath="$PROJECT_DIR$/source-code/stuff.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/wine.py" afterPath="$PROJECT_DIR$/source-code/wine.py" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,10 +38,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="classifiers.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="classifiers.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.20689656">
               <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
               <folding>
                 <element signature="e#197#207#0" expanded="true" />
@@ -94,10 +86,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ink.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ink.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source-code/ink.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1724138">
+            <state vertical-scroll-proportion="0.0">
               <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding>
                 <element signature="e#144#173#0" expanded="true" />
@@ -232,6 +224,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,8 +260,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -521,6 +513,17 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor vertical-scroll-proportion="0.0">
+            <caret line="19" column="31" selection-start-line="19" selection-start-column="31" selection-end-line="19" selection-end-column="31" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source-code/german.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1000,22 +1003,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
+    <entry file="file://$PROJECT_DIR$/source-code/ink.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding>
-            <element signature="e#197#207#0" expanded="true" />
+            <element signature="e#144#173#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source-code/ink.py">
+    <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1724138">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.20689656">
+          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
           <folding>
-            <element signature="e#144#173#0" expanded="true" />
+            <element signature="e#197#207#0" expanded="true" />
           </folding>
         </state>
       </provider>
