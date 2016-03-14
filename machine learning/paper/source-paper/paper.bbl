@@ -1,0 +1,95 @@
+\begin{thebibliography}{10}
+
+\bibitem{Cortes1995}
+Corinna Cortes and Vladimir Vapnik.
+\newblock {Support-Vector Networks}.
+\newblock {\em Machine Learning}, 20(3):273--297, 1995.
+
+\bibitem{Boser1992}
+Bernhard~E. Boser, Isabelle~M. Guyon, and Vladimir~N. Vapnik.
+\newblock {A Training Algorithm for Optimal Margin Classifiers}.
+\newblock {\em Proceedings of the Fifth Annual ACM Workshop on Computational
+  Learning Theory}, pages 144--152, 1992.
+
+\bibitem{Voron}
+Konstantin~Vyacheslavovich Vorontsov.
+\newblock {Mathematical methods of learning from examples (machine lerning
+  theory)}.
+
+\bibitem{Smola2004}
+Alex~J Smola, Bernhard Sch, and B~Sch{\"{o}}lkopf.
+\newblock {A Tutorial on Support Vector Regression}.
+\newblock {\em Statistics and Computing}, 14(3):199--222, 2004.
+
+\bibitem{Breiman1996}
+Leo Breiman.
+\newblock {Bagging Predictors}.
+\newblock {\em Machine Learning}, 24(421):123--140, 1996.
+
+\bibitem{Freund1995}
+Y.~Freund.
+\newblock {Boosting a Weak Learning Algorithm by Majority}, 1995.
+
+\bibitem{Franke1992}
+J.~Franke and E.~Mandler.
+\newblock {A comparison of two approaches for combining the votes
+  of$\backslash$ncooperating classifiers}.
+\newblock {\em Proceedings., 11th IAPR International Conference on Pattern
+  Recognition. Vol.II. Conference B: Pattern Recognition Methodology and
+  Systems}, pages 1--4, 1992.
+
+\bibitem{Ho1994}
+Tin Kam~T.K. Ho, JJ~Hull, Sargur N~SN Srihari, and Senior Member.
+\newblock {Decision combination in multiple classifier systems}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  16(1):66--75, 1994.
+
+\bibitem{Kittler1996}
+J.~Kittler, M.~Hater, and R.~P~W Duin.
+\newblock {Combining classifiers}.
+\newblock {\em Proceedings - International Conference on Pattern Recognition},
+  2(3):897--901, 1996.
+
+\bibitem{Martin-merino2007}
+Manuel Martin-merino and Manuel Mart.
+\newblock {Combibing SVM Classifiers for Email Anti-spam Filtering}.
+\newblock 4507(February), 2007.
+
+\bibitem{Gorgevik2005}
+D.~Gorgevik and D.~Cakmakov.
+\newblock {Handwritten Digit Recognition by Combining SVM Classifiers}.
+\newblock {\em EUROCON 2005 - The International Conference on Computer as a
+  Tool""}, 2(February):1393--1396, 2005.
+
+\bibitem{Dyrba2015}
+Martin Dyrba, Michel Grothe, Thomas Kirste, and Stefan~J. Teipel.
+\newblock {Multimodal analysis of functional and structural disconnection in
+  Alzheimer's disease using multiple kernel SVM}.
+\newblock {\em Human Brain Mapping}, 36(6):2118--2131, 2015.
+
+\bibitem{Bucak2014}
+S.S. Bucak, R.~Jin, and Ak. Jain.
+\newblock {Multiple Kernel Learning for Visual Object Recognition: A Review}.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  36(7):1354--1369, 2014.
+
+\bibitem{Althloothi2014}
+Salah Althloothi, Mohammad~H. Mahoor, Xiao Zhang, and Richard~M. Voyles.
+\newblock {Human activity recognition using multi-features and multiple kernel
+  learning}.
+\newblock {\em Pattern Recognition}, 47(5):1800--1812, 2014.
+
+\bibitem{UCI:Wine}
+Stefan Aeberhard.
+\newblock Wine data set, 1991.
+
+\bibitem{UCI:German}
+Dr.~Hans Hofmann.
+\newblock Statlog (german credit data) data set, 1994.
+
+\bibitem{UCI:Heart}
+Andras~Janosi M.D, M.D William~Steinbrunn, M.D Matthias~Pfisterer, and Ph.D
+  Robert~Detrano, M.D.
+\newblock Heart disease data set, 1988.
+
+\end{thebibliography}
