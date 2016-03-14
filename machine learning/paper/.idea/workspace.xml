@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source-code/metric.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source-code/stuff.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source-code/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-paper/paper.pdf" afterPath="$PROJECT_DIR$/source-paper/paper.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/.ipynb_checkpoints/stuff-checkpoint.ipynb" afterPath="$PROJECT_DIR$/source-code/.ipynb_checkpoints/stuff-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/stuff.ipynb" afterPath="$PROJECT_DIR$/source-code/stuff.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-paper/paper.tex" afterPath="$PROJECT_DIR$/source-paper/paper.tex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-paper/papers.bib" afterPath="$PROJECT_DIR$/source-paper/papers.bib" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
