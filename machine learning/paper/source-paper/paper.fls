@@ -416,12 +416,18 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/euler/eurb7.t
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/german.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/german.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/german.pdf
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/german.tex_table
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/german.tex_table
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/wine.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/wine.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/wine.pdf
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/wine.tex_table
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/wine.tex_table
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/heart.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/heart.pdf
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/heart.pdf
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/heart.tex_table
+INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/heart.tex_table
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.bbl
 INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.bbl
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
@@ -439,10 +445,13 @@ INPUT /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/p
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t2a.enc
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
