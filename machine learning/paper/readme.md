@@ -1,6 +1,6 @@
 # SVM Multimodelling
 
-_Last updated: 03.08.2016_
+_Last updated: 17.08.2016_
 
 ## TODO
 
@@ -15,10 +15,11 @@ Downloaded resources are contained in `./data` subdirectory
 The paper is written in LaTeX and its sources are contained
 in `source-paper`. There are
 
-- `paper.tex` – the main source file
-- `paper.pdf` – the target paper (must be compiled via `latex + bibtex + latex + latex`)
+- `Ivanychev2016SVM_Multimodelling.tex` – the main source file
+- `Ivanychev2016SVM_Multimodelling.pdf` – the target paper (must be compiled via `latex + bibtex + latex + latex`)
 - `Iv_commands.sty` – styles file containing some useful LaTeX commands
 - `jmlda.sty` – standard template for Machine Learning Journal papers
+- `stuff.ipynb` – Jupyter Notebook containing the experiment
 
 ## Source code
 
