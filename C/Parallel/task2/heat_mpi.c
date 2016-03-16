@@ -7,40 +7,52 @@
 #define T1 1.0
 #define T2 2.0
 
-void send_left(double** u, int requested_left, int rank) {
-	MPI_Ssend(&(u[0][requested_left + 1]), rank - 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+void send_left(double** u, int requested_left, int rank, int level) {
+	MPI_Ssend(&(u[level][requested_left + 1]), 1,
+				MPI_DOUBLE, rank - 1, 0, MPI_COMM_WORLD);
 }
 
-void recv_left(double** u, int requested_left, int rank) {
-	MPI_Recv(&(u[0][requested_left]), 1, MPI_DOUBLE, rank - 1, MPI_ANY_TAG,
+void recv_left(double** u, int requested_left, int rank, int level) {
+	MPI_Recv(&(u[level][requested_left]), 1, MPI_DOUBLE, rank - 1, MPI_ANY_TAG,
 		   MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 }
 
-void send_right(double** u, int requested_right, int rank) {
-	MPI_Ssend(&(u[0][requested_right - 1]), rank + 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
+void send_right(double** u, int requested_right, int rank, int level) {
+	MPI_Ssend(&(u[level][requested_right - 1]), 1,
+				MPI_DOUBLE, rank + 1, 0, MPI_COMM_WORLD);
 }
-void recv_right(double** u, int requested_right, int rank) {
-	MPI_Recv(&(u[0][requested_right]), 1, MPI_DOUBLE, rank + 1, MPI_ANY_TAG,
+void recv_right(double** u, int requested_right, int rank, int level) {
+	MPI_Recv(&(u[level][requested_right]), 1, MPI_DOUBLE, rank + 1, MPI_ANY_TAG,
 		   MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 }
 
 
-int exchange(double** u, int N, int rank, int get_left, int get_right) {
+int exchange(double** u, int N, int rank, int get_left, int get_right, int level) {
+	printf("Exchanging, rank = %d, N = %d\n", rank, N);
 	if (rank % 2 == 0) {
 		if (rank != 0) {
-			recv_left(u, get_left, rank);
-			send_left(u, get_left, rank);
+			fprintf(stderr, "rank %d: recv_left\n", rank);
+			recv_left(u, get_left, rank, level);
+			fprintf(stderr, "rank %d: send_left\n", rank);
+			send_left(u, get_left, rank, level);
 		}
-		send_right(u, get_right, rank);
-		recv_right(u, get_right, rank);
+		fprintf(stderr, "rank %d: send_right\n", rank);
+		send_right(u, get_right, rank, level);
+		fprintf(stderr, "rank %d: recv_right\n", rank);
+		recv_right(u, get_right, rank, level);
 	} else {
 		if (rank != N - 1) {
-			send_right(u, get_right, rank);
-			recv_right(u, get_right, rank);
+			fprintf(stderr, "rank %d: send_right\n", rank);
+			send_right(u, get_right, rank, level);
+			fprintf(stderr, "rank %d: recv_right\n", rank);
+			recv_right(u, get_right, rank, level);
 		}
-		recv_left(u, get_left, rank);
-		send_left(u, get_left, rank);
+		fprintf(stderr, "rank %d: recv_left\n", rank);
+		recv_left(u, get_left, rank, level);
+		fprintf(stderr, "rank %d: send_left\n", rank);
+		send_left(u, get_left, rank, level);
 	}
+	printf("Return\n");
 	return 0;
 }
 
@@ -61,7 +73,6 @@ int main(int argc, char **argv)
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &size);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
 	/* Выделение памяти. */
 	u[0] = (double*)calloc(N, sizeof(double));
 	u[1] = (double*)calloc(N, sizeof(double));
@@ -82,7 +93,7 @@ int main(int argc, char **argv)
 	/* Цикл интегрирования. */
 	for (i = 0; i < steps; i++) {
 		/* Начало обмена. */
-		exchange(u, N, rank, st - 1, fn);
+		exchange(u, size, rank, st - 1, fn, un);
 		/* Конец обмена. */
 		for (j = st; j < fn; j++) {
 			u[!un][j] = u[un][j] + 0.3 * (u[un][j-1] - 2.0 * u[un][j] + u[un][j+1]);
