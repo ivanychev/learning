@@ -27,32 +27,34 @@ void recv_right(double** u, int requested_right, int rank, int level) {
 }
 
 
-int exchange(double** u, int N, int rank, int get_left, int get_right, int level) {
-	printf("Exchanging, rank = %d, N = %d\n", rank, N);
+int exchange(double** u, int size, int rank, int get_left, int get_right, int level) {
+	// printf("Exchanging, rank = %d, N = %d\n", rank, N);
 	if (rank % 2 == 0) {
 		if (rank != 0) {
-			fprintf(stderr, "rank %d: recv_left\n", rank);
+			// fprintf(stderr, "rank %d: recv_left\n", rank);
 			recv_left(u, get_left, rank, level);
-			fprintf(stderr, "rank %d: send_left\n", rank);
+			// fprintf(stderr, "rank %d: send_left\n", rank);
 			send_left(u, get_left, rank, level);
 		}
-		fprintf(stderr, "rank %d: send_right\n", rank);
+		// fprintf(stderr, "rank %d: send_right\n", rank);
+		if (rank != size - 1) {
 		send_right(u, get_right, rank, level);
-		fprintf(stderr, "rank %d: recv_right\n", rank);
+		// fprintf(stderr, "rank %d: recv_right\n", rank);
 		recv_right(u, get_right, rank, level);
+	}
 	} else {
-		if (rank != N - 1) {
-			fprintf(stderr, "rank %d: send_right\n", rank);
+		if (rank != size - 1) {
+			// fprintf(stderr, "rank %d: send_right\n", rank);
 			send_right(u, get_right, rank, level);
-			fprintf(stderr, "rank %d: recv_right\n", rank);
+			// fprintf(stderr, "rank %d: recv_right\n", rank);
 			recv_right(u, get_right, rank, level);
 		}
-		fprintf(stderr, "rank %d: recv_left\n", rank);
+		// fprintf(stderr, "rank %d: recv_left\n", rank);
 		recv_left(u, get_left, rank, level);
-		fprintf(stderr, "rank %d: send_left\n", rank);
+		// fprintf(stderr, "rank %d: send_left\n", rank);
 		send_left(u, get_left, rank, level);
 	}
-	printf("Return\n");
+	// printf("Return\n");
 	return 0;
 }
 
