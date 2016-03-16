@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex paper"] 1458060485 "paper.aux" "paper.bbl" "paper" 1458060487
+["bibtex paper"] 1458060485 "paper.aux" "paper.bbl" "paper" 1458073228
   "/usr/local/texlive/2015/texmf-dist/bibtex/bst/base/unsrt.bst" 1292289607 18030 1376b4b231b50c66211e47e42eda2875 ""
   "paper.aux" 1458060486 3559 e9fa1a763178b7800f63f05d2a113408 ""
   "paper.bcf" 0 -1 0 ""
   "papers.bib" 1457960892 27444 5b67b3903956c06c8bc9a1f9f8fd7254 ""
   (generated)
-  "paper.blg"
   "paper.bbl"
-["pdflatex"] 1458060485 "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.tex" "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.pdf" "paper" 1458060487
+  "paper.blg"
+["pdflatex"] 1458060485 "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.tex" "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.pdf" "paper" 1458073228
   "/Users/sergeyivanychev/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labi1200.tfm" 1455574566 3592 9415307df98650ffeddaa22e262436dc ""
   "/Users/sergeyivanychev/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/labx1095.tfm" 1455574596 3336 216c27338cb0f11f0d2908d69ce3de23 ""
   "/Users/sergeyivanychev/Library/texlive/2015/texmf-var/fonts/tfm/lh/lh-t2a/larm0800.tfm" 1455574573 3240 04766e423166ba63b7fbbf132b8618cb ""
@@ -317,9 +317,9 @@
   "wine.pdf" 1458059781 194782 8fe9692c69625296a3e21700f2ec12b7 ""
   "wine.tex_table" 1458059780 642 40742e866a642da1d0666db29629b397 ""
   (generated)
-  "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.pdf"
-  "paper.aux"
-  "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.log"
-  "paper.out"
   "paper.pdf"
+  "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.log"
+  "paper.aux"
   "paper.log"
+  "paper.out"
+  "/Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/paper.pdf"
