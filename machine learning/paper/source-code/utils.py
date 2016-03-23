@@ -1,6 +1,8 @@
 import heart
 import wine
 import german
+import spam
+import housing
 import numpy as np
 
 def get_classifier_specs():
@@ -30,7 +32,8 @@ def get_data():
     data.append(german.load())
     data.append(heart.load())
     data.append(wine.load())
-
+    data.append(spam.load())
+    data.append(housing.load())
     data_dict = {}
     for dataset in data:
         data_dict[dataset[2]] = (dataset[0], dataset[1])

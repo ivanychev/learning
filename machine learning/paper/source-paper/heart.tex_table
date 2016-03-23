@@ -5,7 +5,7 @@
 \label{my-label}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
-         & $\langle\#\mathrf{SV}\rangle$ & $\langle\rho(M_i, M_j)\rangle$ & $\langle\rho(K_i, K_j)\rangle$ & Correlation \\ \hline
+         & $\mathrm{mean}(\#\mathrm{SV})$ & $\mathrm{mean}(1 - \mathrm{corr}(M_i, M_j))$ & $\mathrm{mean}(\rho_{X^l}(K_i, K_j))$ & Correlation \\ \hline
 
 $C=1.0$ & $272.0$ & $0.003$ & $0.027$ & $0.608$\\ \hline
 $C=10.0$ & $260.8$ & $0.020$ & $0.088$ & $0.929$\\ \hline
