@@ -3,14 +3,14 @@ Module imports sample-feature matrix of housing, UCI
 
 Type:       classification
 Author:     Sergey Ivanychev
-Revision:   1
+Revision:   2
 """
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import normalize
+from sklearn.preprocessing import scale
 
-def load(path: str ="../data/housing") \
+def load(path: str ="../data/housing", raw=False) \
 -> (np.ndarray, np.ndarray):
     """
     :param path:    relative path to the folder that contains files such as
@@ -28,4 +28,6 @@ def load(path: str ="../data/housing") \
 
     X = df[features_names].as_matrix()
     Y = df[target].as_matrix()
-    return normalize(X), Y, "housing"
+    if raw==False:
+        X = scale(X)
+    return np.asfarray(X), Y, "housing"

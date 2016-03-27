@@ -6,7 +6,7 @@ This module loads a set of models used in classification. Supported kernels are
  - Polynomial
 
  Author:    Sergey Ivanychev
- Revision:  1
+ Revision:  2
 """
 
 RANDOM_STATE = 42
@@ -16,6 +16,17 @@ from sklearn.svm import SVC
 import numbers
 
 KERINVAL = "Invalid specification of kernel"
+
+def spec_repr(spec):
+    ret = "Kernel type: "
+    if spec[0] == "linear":
+        return ret + "linear"
+    if spec[0] == "rbf":
+        return ret + "rbf, gamma = %f" % spec[1]
+    if spec[0] == "poly":
+        return ret + "poly, degree = %d" % spec[1]
+    if spec[0] == "ink":
+        return ret + "ink, degree = %d, downer limit (a) = %f" % (spec[1], spec[2])
 
 def _is_number(val):
     return isinstance(val, numbers.Number)
@@ -35,7 +46,7 @@ def _poly_args(spec):
 
 def _ink_args(spec):
     assert len(spec) == 3 and _is_number(spec[1]) and _is_number(spec[2]), KERINVAL
-    return {"kernel":ink.ink_svc_get(degree=spec[1], a = spec[2])}
+    return {"kernel":ink.get_sklearn_ink(degree=spec[1], a = spec[2])}
 
 KERNELS = {
     "linear":_linear_args,
@@ -51,7 +62,7 @@ def _get_kernel(spec):
 def get(kernel_specs : list, C: int = 0.1) -> list:
     """
 
-    :param kernels: list of lists or tupels with format
+    :param kernels: list of lists or tuples with format
                     [[kernel_name, *optional_kernel_args], [...], ...]
                     Kernel names(n_args):
                         "linear"(0):   no additional args

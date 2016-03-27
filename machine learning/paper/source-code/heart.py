@@ -5,15 +5,16 @@ This module uses only data collected in Cleveland, so the file
 
 Type:       classification, regression
 Author:     Sergey Ivanychev
-Revision:   1
+Revision:   2
 """
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import normalize
+from sklearn.preprocessing import scale
 
 
-def load(path: str ="../data/heart-disease", mode: str = "classification") \
+def load(path: str ="../data/heart-disease", mode: str = "classification", 
+    raw=False) \
 -> (np.ndarray, np.ndarray):
     """
     :param path:    string
@@ -40,4 +41,6 @@ def load(path: str ="../data/heart-disease", mode: str = "classification") \
     features.remove(target)
     X = df[features].as_matrix()
     Y = df[target].as_matrix()
-    return normalize(X), Y, "heart"
+    if raw==False:
+        X = scale(X)
+    return np.asfarray(X), Y, "heart"

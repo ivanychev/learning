@@ -8,9 +8,9 @@ Revision:   1
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import normalize
+from sklearn.preprocessing import scale
 
-def load(path: str ="../data/spambase") \
+def load(path: str ="../data/spambase", raw=False) \
 -> (np.ndarray, np.ndarray):
     """
     :param path:    relative path to the folder that contains files such as
@@ -27,4 +27,6 @@ def load(path: str ="../data/spambase") \
 
     X = df[features_names].as_matrix()
     Y = df[target].as_matrix()
-    return normalize(X), Y, "spambase"
+    if raw==False:
+        X = scale(X)
+    return np.asfarray(X), Y, "spambase"

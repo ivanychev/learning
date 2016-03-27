@@ -9,9 +9,9 @@ Revision:   1
 
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import normalize
+from sklearn.preprocessing import scale
 
-def load(path: str ="../data/wine", mode: str = "classification") \
+def load(path: str ="../data/wine", mode: str = "classification", raw=False) \
 -> (np.ndarray, np.ndarray):
     df = pd.read_csv(path + "/winequality-white.csv", sep=";")
     cols = list(df.columns.values)
@@ -21,4 +21,6 @@ def load(path: str ="../data/wine", mode: str = "classification") \
     Y = df[target].as_matrix()
     if mode == "classification":
         Y = np.int32(Y >= 6)
-    return normalize(X), Y, "wine"
+    if raw==False:
+        X = scale(X)
+    return np.asfarray(X), Y, "wine"

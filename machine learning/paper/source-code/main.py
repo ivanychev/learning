@@ -2,82 +2,15 @@
 The major routines implemented here
 
 Author:     Sergey Ivanychev
-Revision:   2
+Revision:   3
 """
 
+import utils
+from utils import test_classifier
+from utils import test_classifiers
 import sys
-import german
-import heart
-import wine
-from sklearn.cross_validation import KFold
-# import random
-import classifiers
-from itertools import combinations
-
-
-def get_data():
-    """
-    Loads data from processed sources
-    :return: list of (X, y) tuples
-    """
-    data = []
-    data.append(german.load())
-    data.append(heart.load())
-    data.append(wine.load())
-
-    data_dict = {}
-    for dataset in data:
-        data_dict[dataset[2]] = (dataset[0], dataset[1])
-    return data_dict
-
-# def subsets(n):
-#     nums = list(range(n))
-#     subsets = []
-#     for i in range(1, n):
-#         subsets += list(combinations(nums, i))
-#     return subsets
-
-def get_classifier_specs():
-    """
-    Procedure specifies interesting kernels that are observed in the project.
-    If you want to change the set of classifiers, you are welcome to edit this function.
-    Specs format available in docs and classifiers.py module
-    :return: list of kernel specs, that are processed in get_classifiers()
-    """
-    specs = []
-    specs.append(["linear"])
-    specs.append(["poly", 2])
-    specs.append(["poly", 3])
-    specs.append(["ink", 1, -3])
-    specs.append(["ink", 2, -3])
-    for i in [0.0001, 0.001, 0.01, 0.1, 1]:
-        specs.append((["rbf", i]))
-    return specs
-
-
-# def classifiers_subset_generator():
-#     specs = get_classifier_specs()
-#     sets = subsets(len(specs))
-#     random.shuffle(sets)
-#     for index_set in sets:
-#         current_specs = [specs[i] for i in index_set]
-#         clfs = classifiers.get(current_specs)
-#         yield clfs
-
-def get_margins(clfs, X_train):
-    ...
-
-def analyse(dataset, folds):
-    specs = get_classifier_specs()
-    clfs = classifiers.get(specs)
-    scores = [[] for i in range(len(clfs))]
-    for train, test in folds:
-        X_train, X_test = dataset[0][train], dataset[0][test]
-        Y_train, Y_test = dataset[1][train], dataset[1][test]
-        for idx, clf in enumerate(clfs):
-            clf.fit(X_train, Y_train)
-            scores[idx].append(clf.score(X_test, Y_test))
-        aggregator_data = get_margins(clfs, X_train)
+import ink
+import numpy as np
 
 
 
@@ -85,11 +18,22 @@ def dataset_size(dataset):
     return dataset[0].shape[0]
 
 def main(argv):
-    databank = get_data()
-    for dataset in databank:
-        folds = KFold(dataset_size(dataset), n_folds=5, shuffle=True, random_state=42)
-        analyse(dataset, folds)
+    clfs = utils.get_all_classifiers(spec_verbose=False)
+    clf = clfs[4]
 
+    X, y, _ = utils.get_dataset("housing")
+    train_idx = list(range(405))
+    test_idx = list(range(405, 506))
+    X_train, X_test = utils.scale(X, train_idx, test_idx)
+    print(np.min(X_train, axis=0))
+    clf.fit(X_train, y[train_idx])
+    clf.predict(X_test)
+
+    # X, y = test_classifier("housing", clf)
+    # print(np.minimum(X, axis=0))
+    # K = ink.get_sklearn_ink(degree=1, a=-3)
+    # print(K(X, X))
+    return 0
 
 
 
