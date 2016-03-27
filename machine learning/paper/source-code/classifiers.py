@@ -6,10 +6,11 @@ This module loads a set of models used in classification. Supported kernels are
  - Polynomial
 
  Author:    Sergey Ivanychev
- Revision:  2
+ Revision:  3
 """
 
 RANDOM_STATE = 42
+MAX_ITER = 1000000
 
 import ink
 from sklearn.svm import SVC
@@ -59,7 +60,7 @@ def _get_kernel(spec):
     return KERNELS[spec[0]](spec)
 
 
-def get(kernel_specs : list, C: int = 0.1) -> list:
+def get(kernel_specs : list, C = 0.1) -> list:
     """
 
     :param kernels: list of lists or tuples with format
@@ -69,11 +70,13 @@ def get(kernel_specs : list, C: int = 0.1) -> list:
                         "rbf"(1):      gamma (float)
                         "ink"(2):      degree, a
                         "poly"(1):     degree
-    :param C:       regularization factor
+    :param C:       regularization factor (int or list)
     :return:        List of initialized classifiers
     """
     cls_list = []
-    for kernel_spec in kernel_specs:
-        cls = SVC(C=C, random_state=RANDOM_STATE, **_get_kernel(kernel_spec))
+    if _is_number(C):
+        C = [C] * len(kernel_specs)
+    for idx, kernel_spec in enumerate(kernel_specs):
+        cls = SVC(C=C[idx], random_state=RANDOM_STATE,max_iter=MAX_ITER, **_get_kernel(kernel_spec))
         cls_list.append(cls)
     return cls_list

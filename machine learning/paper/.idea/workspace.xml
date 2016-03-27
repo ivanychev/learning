@@ -2,34 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week1/.ipynb_checkpoints/Untitled-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week1/Untitled.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week2/.ipynb_checkpoints/linalg-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week2/ans1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week2/ans2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week2/linalg.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week2/sentences.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/.ipynb_checkpoints/optimization-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/ans11.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/ans11_temp.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/ans12.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/ans13.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week3/optimization.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week4/.ipynb_checkpoints/CLT-checkpoint.ipynb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../coursera_mipt/Math and Python/week4/CLT.ipynb" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source-code/supermodel.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Parallel/task2/heat_mpi.c" afterPath="$PROJECT_DIR$/../../C/Parallel/task2/heat_mpi.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/INK-spline.ipynb" afterPath="$PROJECT_DIR$/source-code/INK-spline.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/classifiers.py" afterPath="$PROJECT_DIR$/source-code/classifiers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/german.py" afterPath="$PROJECT_DIR$/source-code/german.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/heart.py" afterPath="$PROJECT_DIR$/source-code/heart.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/housing.py" afterPath="$PROJECT_DIR$/source-code/housing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/ink.py" afterPath="$PROJECT_DIR$/source-code/ink.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/main.py" afterPath="$PROJECT_DIR$/source-code/main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/spam.py" afterPath="$PROJECT_DIR$/source-code/spam.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/stuff.ipynb" afterPath="$PROJECT_DIR$/source-code/stuff.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/testing_classifiers.ipynb" afterPath="$PROJECT_DIR$/source-code/testing_classifiers.ipynb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/utils.py" afterPath="$PROJECT_DIR$/source-code/utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source-code/wine.py" afterPath="$PROJECT_DIR$/source-code/wine.py" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,11 +47,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source-code/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+            <state relative-caret-position="177">
+              <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="supermodel.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source-code/supermodel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-173">
+              <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#55#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classifiers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1900">
+              <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -79,8 +84,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source-code/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="29" selection-end-column="23" />
+            <state relative-caret-position="750">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="e#89#101#0" expanded="true" />
               </folding>
@@ -94,30 +99,6 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="heart.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source-code/heart.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
-              <folding>
-                <element signature="e#267#285#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="german.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source-code/german.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="25" />
-              <folding>
-                <element signature="e#153#171#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -137,8 +118,8 @@
       <file leaf-file-name="ink.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source-code/ink.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            <state relative-caret-position="325">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="29" selection-end-column="47" />
               <folding>
                 <element signature="e#145#174#0" expanded="true" />
               </folding>
@@ -190,15 +171,16 @@
         <option value="$PROJECT_DIR$/source-code/stuff.py" />
         <option value="$PROJECT_DIR$/source-code/clf-metric.py" />
         <option value="$PROJECT_DIR$/source-code/core.py" />
-        <option value="$PROJECT_DIR$/source-code/classifiers.py" />
-        <option value="$PROJECT_DIR$/source-code/utils.py" />
         <option value="$PROJECT_DIR$/source-code/german.py" />
         <option value="$PROJECT_DIR$/source-code/heart.py" />
         <option value="$PROJECT_DIR$/source-code/housing.py" />
         <option value="$PROJECT_DIR$/source-code/spam.py" />
         <option value="$PROJECT_DIR$/source-code/wine.py" />
-        <option value="$PROJECT_DIR$/source-code/ink.py" />
         <option value="$PROJECT_DIR$/source-code/main.py" />
+        <option value="$PROJECT_DIR$/source-code/classifiers.py" />
+        <option value="$PROJECT_DIR$/source-code/ink.py" />
+        <option value="$PROJECT_DIR$/source-code/utils.py" />
+        <option value="$PROJECT_DIR$/source-code/supermodel.py" />
       </list>
     </option>
   </component>
@@ -651,23 +633,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/source-code/ink.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="76" column="18" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
-          <folding>
-            <element signature="e#145#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/source-code/INK-spline.ipynb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source-code/wine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -878,14 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="58" column="19" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source-code/german.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
@@ -944,31 +901,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source-code/ink.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-          <folding>
-            <element signature="e#145#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source-code/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="29" selection-end-column="23" />
+        <state relative-caret-position="750">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="e#89#101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source-code/classifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1900">
+          <caret line="78" column="8" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source-code/ink.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="29" selection-end-column="47" />
+          <folding>
+            <element signature="e#145#174#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source-code/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        <state relative-caret-position="177">
+          <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/sklearn/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2959">
+          <caret line="284" column="5" selection-start-line="284" selection-start-column="5" selection-end-line="284" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source-code/supermodel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-173">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
