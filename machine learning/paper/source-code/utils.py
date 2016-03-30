@@ -18,6 +18,12 @@ DATA_MODULES = {
     "housing": housing,
 }
 
+def datasetsGenerator():
+    for key, val in DATA_MODULES.items():
+        yield key
+
+datasets = datasetsGenerator()
+
 def get_classifier_specs():
     """
     Procedure specifies interesting kernels that are observed in the project.
@@ -80,7 +86,8 @@ def scale(X, train_idx, test_idx):
     return scaler.transform(X[train_idx]), scaler.transform(X[test_idx])
 
 SCORERS = {
-    "accuracy": sklearn.metrics.accuracy_score
+    "accuracy": sklearn.metrics.accuracy_score,
+    "roc": sklearn.metrics.roc_auc_score
 }
 
 def _get_data(dataset):
@@ -102,7 +109,7 @@ def _get_cv(folds_type, folds, X, y, random_state=None):
         raise ValueError("Invalid folds type received")
     return cv
 
-def test_classifier(dataset, clf, scoring_type="accuracy", folds=5, folds_type="simple"):
+def test_classifier(dataset, clf, scoring_type="roc", folds=5, folds_type="stratified"):
     X, y = _get_data(dataset)
     cv = _get_cv(folds_type, 5, X, y)
     scores = []
@@ -110,7 +117,9 @@ def test_classifier(dataset, clf, scoring_type="accuracy", folds=5, folds_type="
     for train_idx, test_idx in cv:
         X_train, X_test = scale(X, train_idx, test_idx)
         clf.fit(X_train, y[train_idx])
-        scores.append(scorer(clf.predict(X_test), y[test_idx]))
+        probs = clf.decision_function(X_test)
+        score = scorer(y[test_idx], probs)
+        scores.append(score)
     scores = np.array(scores)
     return np.mean(scores), np.std(scores), scores
 
@@ -125,7 +134,7 @@ def _get_dataset_name(dataset):
     return dataset_name
 
 
-def test_classifiers(dataset, scoring_type="accuracy", folds=5, folds_type="simple"):
+def test_classifiers(dataset, scoring_type="accuracy", folds=5, folds_type="stratified"):
     dataset_name = _get_dataset_name(dataset)
     print("Testing %s dataset...\nFolds = %d, Folds type = %s" % (dataset_name, folds, folds_type))
     clfs = get_all_classifiers(spec_verbose=True)

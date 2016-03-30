@@ -26,7 +26,7 @@ def load(path: str ="../data/statlog-german", raw=False) \
     features_names.remove(target)
 
     X = df[features_names].as_matrix()
-    Y = df[target].as_matrix()
+    Y = df[target].as_matrix() - 1
     if raw==False:
         X = scale(X)
     return np.asfarray(X), Y, "german"

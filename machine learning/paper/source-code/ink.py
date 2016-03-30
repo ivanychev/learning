@@ -3,7 +3,7 @@ Implementing INK-spline kernel and related function-argument for SVC
 See DOCs for more info
 
 Author:     Sergey Ivanychev
-Revision:   3
+Revision:   4
 """
 
 from functools import partial
@@ -68,11 +68,12 @@ def K_norm(X: np.ndarray, Y:np.ndarray, degree: int, a: int, axis: str) -> np.nd
 def ink(x: np.ndarray, y: np.ndarray, degree: int, a: int = -3) -> np.ndarray:
     assert _is_integer(degree) and degree > 0, "Degree must be positive integer"
     assert isinstance(x, np.ndarray) and isinstance(y, np.ndarray), "X and Y must be numpy arrays"
-
     if len(x.shape) == 1:
         x = x.reshape(1, x.shape[0])
     if len(y.shape) == 1:
         y = y.reshape(1, y.shape[0])
+    x[x < a] = a
+    y[y < a] = a
     return K(x, y, degree, a) / np.sqrt(K_norm(x, y, degree, a, "x") * K_norm(x, y, degree, a, "y"))
 
 def get_sklearn_ink(degree: int, a: int):
