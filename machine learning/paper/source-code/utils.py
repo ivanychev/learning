@@ -38,7 +38,7 @@ def get_classifier_specs():
     specs.append(["poly", 4])
     specs.append(["ink", 1, -3])
     specs.append(["ink", 2, -3])
-    for i in [0.001, 0.001, 0.01, 0.1, 1, 10]:
+    for i in [0.0001, 0.001, 0.001, 0.01, 0.1, 1]:
         specs.append((["rbf", i]))
     return specs
 
