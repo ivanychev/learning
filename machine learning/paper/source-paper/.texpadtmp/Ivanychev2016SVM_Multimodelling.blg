@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/.texpadtmp/Ivanychev2016SVM_Multimodelling.aux
+The style file: unsrt.bst
+Database file #1: ../papers.bib
+Warning--empty journal in Martin-merino2007
+You've used 16 entries,
+            1791 wiz_defined-function locations,
+            558 strings with 6529 characters,
+and the built_in function-call counts, 3605 in all, are:
+= -- 328
+> -- 148
+< -- 2
++ -- 56
+- -- 40
+* -- 252
+:= -- 561
+add.period$ -- 44
+call.type$ -- 16
+change.case$ -- 16
+chr.to.int$ -- 0
+cite$ -- 17
+duplicate$ -- 141
+empty$ -- 362
+format.name$ -- 40
+if$ -- 792
+int.to.chr$ -- 0
+int.to.str$ -- 16
+missing$ -- 12
+newline$ -- 79
+num.names$ -- 16
+pop$ -- 46
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 74
+stack$ -- 0
+substring$ -- 291
+swap$ -- 29
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 40
+width$ -- 18
+write$ -- 165
+(There was 1 warning)
