@@ -1,11 +1,11 @@
 # SVM Multimodelling
 
-_Last updated: 07.08.2016_
+_Last updated: 04.08.2016_
 
 ## Data
 
 For the algorithm evaluation, we use data collected from the
-[UCI repositary](https://archive.ics.uci.edu/ml/index.html).
+[UCI repository](https://archive.ics.uci.edu/ml/index.html).
 Downloaded resources are contained in `./data` subdirectory
 
 ## Paper source code
