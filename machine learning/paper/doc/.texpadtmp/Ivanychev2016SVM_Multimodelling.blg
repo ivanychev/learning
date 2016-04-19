@@ -1,12 +1,12 @@
 This is BibTeX, Version 0.99d (TeX Live 2015)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: /Users/sergeyivanychev/code/learning/machine learning/paper/source-paper/.texpadtmp/Ivanychev2016SVM_Multimodelling.aux
+The top-level auxiliary file: /Users/iv/code/learning/machine learning/paper/doc/.texpadtmp/Ivanychev2016SVM_Multimodelling.aux
 The style file: unsrt.bst
 Database file #1: ../papers.bib
 Warning--empty journal in Martin-merino2007
 You've used 16 entries,
             1791 wiz_defined-function locations,
-            558 strings with 6529 characters,
+            558 strings with 6485 characters,
 and the built_in function-call counts, 3605 in all, are:
 = -- 328
 > -- 148
