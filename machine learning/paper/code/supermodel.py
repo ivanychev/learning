@@ -9,6 +9,7 @@ from classifiers import spec_repr
 from sklearn.cross_validation import StratifiedKFold
 from sklearn.cross_validation import KFold
 from sklearn.cross_validation import train_test_split
+from robust_logregr import RobustLogregr
 
 
 def to_csv(superm, X, y, margins=None, ending="", subfolder="csvs/"):
@@ -41,7 +42,8 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
                  algo="l2",
                  auc_window=None,
                  refit_after=False,
-                 csv_export=False):
+                 csv_export=False,
+                 superclassfier="simple"):
         """
         specs                            kernel specifications (see utils.py)
         C           list (len(specs),)   regularization parameters for each
@@ -79,7 +81,10 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
             penalty = "l1"
         else:
             penalty = "l2"
-        self.superclassifier = LogisticRegression(penalty=penalty)
+        if superclassfier == "simple":
+            self.superclassifier = LogisticRegression(penalty=penalty)
+        elif superclassfier == "robust":
+            self.superclassifier = RobustLogregr(penalty=penalty)
 
     def scale_train_margins(self, margins):
         abs_margins = np.abs(margins)
