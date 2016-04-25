@@ -10,9 +10,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 from scipy.optimize import minimize
 from numpy.linalg import norm
-
-def _sigmoid(x):
-    return 1 / (1 + np.exp(-x))
+from utils import sigmoid as _sigmoid
 
 class RobustLogregr(BaseEstimator, ClassifierMixin):
     def __init__(self,

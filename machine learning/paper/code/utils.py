@@ -143,3 +143,6 @@ def test_classifiers(dataset, scoring_type="accuracy", folds=5, folds_type="stra
         print(clf[1])
         print("Score = %f, std = %f" % (score, std_score))
     print("Testing %s dataset finished\n" % dataset_name)
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))

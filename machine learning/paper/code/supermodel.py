@@ -43,7 +43,7 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
                  auc_window=None,
                  refit_after=False,
                  csv_export=False,
-                 superclassfier="simple"):
+                 superclassifier="simple"):
         """
         specs                            kernel specifications (see utils.py)
         C           list (len(specs),)   regularization parameters for each
@@ -81,9 +81,9 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
             penalty = "l1"
         else:
             penalty = "l2"
-        if superclassfier == "simple":
+        if superclassifier == "simple":
             self.superclassifier = LogisticRegression(penalty=penalty)
-        elif superclassfier == "robust":
+        elif superclassifier == "robust":
             self.superclassifier = RobustLogregr(penalty=penalty)
 
     def scale_train_margins(self, margins):
@@ -209,12 +209,18 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
 def mean_scores(scores):
     num = len(scores)
     classifiers_num = len(scores[0][0])
-    super_score = 0
-    class_scores = np.zeros(classifiers_num)
-    for that_class_scores, that_super_score in scores:
-        class_scores += np.array(that_class_scores)
-        super_score += that_super_score
-    return super_score / num, class_scores / num
+    # super_score = 0
+    scores_matrix = np.zeros((classifiers_num + 1, num))
+    # for that_class_scores, that_super_score in scores:
+    #     class_scores += np.array(that_class_scores)
+    #     super_score += that_super_score
+    for idx, score in enumerate(scores):
+        that_class_scores, that_super_score = score
+        scores_matrix[0, idx] = that_super_score
+        scores_matrix[1:, idx] = that_class_scores
+    super_stats = (np.mean(scores_matrix[0]), np.std(scores_matrix[0]))
+    classifiers_stats = (np.mean(scores_matrix[1:], axis=1), np.std(scores_matrix[1:], axis=1))
+    return super_stats, classifiers_stats
 
 def scores_stats(X, y,
                  cv_type="stratified",
@@ -242,3 +248,27 @@ def scores_stats(X, y,
             scores.append((clfs_scores, super_score))
     print("Result samples = %d" % len(scores))
     return mean_scores(scores)
+
+def test_supermodel(datasets, args, n_folds=5, times=20, verbose=False):
+    for item in datasets:
+        print(type(item))
+        if isinstance(item, tuple):
+            X, y = item[0], item[1]
+        else:
+            X, y, _ = utils.get_dataset(item)
+            print("TESTING %s" % item.upper())
+        print("Dataset shape: %s, %s" % (X.shape, y.shape))
+        args["dataset_name"] = item
+        super_res, classifiers_res = scores_stats(X, y, cv_type="stratified", n_folds=5, times=times, verbose=False, args=args)
+        print("Classifiers results:")
+        max_mean = 0
+        max_std = 0
+        for idx, val in enumerate(classifiers_res[0]):
+            mean, std = (classifiers_res[0][idx], classifiers_res[1][idx])
+            if mean > max_mean:
+                max_mean = mean
+                max_std = std
+            print("Mean = %.4f, std = %.4f" % (mean, std))
+        print("Max classifier mean:\nMean = %.4f, std = %.4f" % (max_mean, max_std))
+        print("Superclassifier score")
+        print("Mean = %.4f, std = %.4f" % (super_res[0], super_res[1]))
