@@ -4,45 +4,47 @@ The top-level auxiliary file: /Users/iv/code/learning/machine learning/paper/doc
 The style file: unsrt.bst
 Database file #1: ../papers.bib
 Warning--empty journal in Martin-merino2007
-You've used 16 entries,
+Warning--empty journal in Wolpert
+Warning--empty year in Wolpert
+You've used 20 entries,
             1791 wiz_defined-function locations,
-            558 strings with 6485 characters,
-and the built_in function-call counts, 3605 in all, are:
-= -- 328
-> -- 148
+            582 strings with 7239 characters,
+and the built_in function-call counts, 4478 in all, are:
+= -- 386
+> -- 221
 < -- 2
-+ -- 56
-- -- 40
-* -- 252
-:= -- 561
-add.period$ -- 44
-call.type$ -- 16
-change.case$ -- 16
++ -- 82
+- -- 62
+* -- 320
+:= -- 716
+add.period$ -- 55
+call.type$ -- 20
+change.case$ -- 20
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 141
-empty$ -- 362
-format.name$ -- 40
-if$ -- 792
+cite$ -- 23
+duplicate$ -- 171
+empty$ -- 434
+format.name$ -- 62
+if$ -- 970
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 12
-newline$ -- 79
-num.names$ -- 16
-pop$ -- 46
+int.to.str$ -- 20
+missing$ -- 15
+newline$ -- 98
+num.names$ -- 20
+pop$ -- 59
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 74
+skip$ -- 90
 stack$ -- 0
-substring$ -- 291
-swap$ -- 29
+substring$ -- 322
+swap$ -- 32
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 40
-width$ -- 18
-write$ -- 165
-(There was 1 warning)
+warning$ -- 3
+while$ -- 46
+width$ -- 22
+write$ -- 204
+(There were 3 warnings)

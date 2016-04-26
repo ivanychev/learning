@@ -87,4 +87,27 @@ Andras~Janosi M.D, M.D William~Steinbrunn, M.D Matthias~Pfisterer, and Ph.D
   Robert~Detrano, M.D.
 \newblock Heart disease data set, 1988.
 
+\bibitem{Izmailov2013}
+Rauf Izmailov, Vladimir Vapnik, and Akshay Vashist.
+\newblock {Multidimensional splines with infinite number of knots as SVM
+  kernels}.
+\newblock {\em Proceedings of the International Joint Conference on Neural
+  Networks}, 2, 2013.
+
+\bibitem{Wolpert}
+David~H Wolpert.
+\newblock {Stacked Generalization}.
+\newblock 87545(505).
+
+\bibitem{UCI:Housing}
+D.~Harrison and D.L Rubinfeld.
+\newblock Concerns housing values in suburbs of boston, 1993.
+
+\bibitem{scikit-learn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
+
 \end{thebibliography}
