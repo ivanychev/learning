@@ -1,9 +1,18 @@
 \documentclass[12pt,twoside]{article}
-%\usepackage{jmlda}
+\usepackage{jmlda}
+\usepackage{hyperref}       % clickable links
 \usepackage{Iv_commands}    % you can delete this
-\usepackage{Iv_xstyles}
 \usepackage{tikz}
+\usepackage{verbatim}
 \usepackage{rotating}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{%
+  colorlinks=true,% hyperlinks will be coloured
+  linkcolor=red,% hyperlink text will be green
+  linkbordercolor=red,% hyperlink border will be red
+}
+
 \usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
     decorations.pathreplacing,decorations.pathmorphing,shapes,%
     matrix,shapes.symbols}
@@ -37,39 +46,43 @@
 }
 
 \newcommand{\hdir}{.}
+\renewcommand{\L}{\mathcal{L}}
 \newcommand{\lto}{\leftarrow}
-\addbibresource[datatype=bibtex]{papers.bib}
-\title{Мультимоделирование SVM}
+
+
+
+\theoremstyle{plain}
+\newtheorem{thm}{Теорема}[section]
+\newtheorem{lem}{Лемма}[section]
+
+\theoremstyle{remark}
+\newtheorem{rem}{Ремарка}[section]
+
+\theoremstyle{definition}
+\newtheorem{df}{Определение}[section]
 
 % version 0.5
 
-%\title
-%    {Синергия алгоритмов классификации (SVM Multimodelling)}
-%\author
-%    {С.\,~Иванычев, А.\,~Адуенко}
-%\email
-%    {\href{mailto:sergeyivanychev@gmail.com}{sergeyivanychev@gmail.com},  \href{mailto:aduenko1@gmail.com}{aduenko1@gmail.com}}
-%\organization
-%    {Московский физико-технический институт}
-%\abstract
-%    {Рассматривается проблема агрегирования небольшого количества сильных классификаторов с целью улучшения решений задач классификации и регрессии.  Рассматривается комбинация SVM  алгоритмов использующая kernel-trick с различными ядрами. Для комбинации решений и улучшения качества прогнозирования в задачах классификации авторы предлагают способ формирования новых признаков на основе сгенерированных отступов каждым классификатором, приводят алгоритм обучения на полученных объектах и анализируют отличия множеств опорных объектов для различных ядер. В качестве практической проверки были проведены эксперименты на различных реальных данных из репозитория UCI.
-%
-%    \bigskip
-%\noindent
-%\textbf{Ключевые слова}: \emph {двухклассовая классификация, композиция алгоритмов, SVM, SVR, бэггинг}
-%}
+\title
+    {Синергия алгоритмов классификации (SVM Multimodelling)}
+\author
+    {С.\,~Иванычев, А.\,~Адуенко}
+\email
+    {\href{mailto:sergeyivanychev@gmail.com}{sergeyivanychev@gmail.com},  \href{mailto:aduenko1@gmail.com}{aduenko1@gmail.com}}
+\organization
+    {Московский физико-технический институт}
+\abstract
+    {Рассматривается проблема агрегирования небольшого количества сильных классификаторов с целью улучшения решений задач классификации и регрессии.  Рассматривается комбинация SVM  алгоритмов использующая kernel-trick с различными ядрами. Для комбинации решений и улучшения качества прогнозирования в задачах классификации авторы предлагают способ формирования новых признаков на основе сгенерированных отступов каждым классификатором, приводят алгоритм обучения на полученных объектах и анализируют отличия множеств опорных объектов для различных ядер. В качестве практической проверки были проведены эксперименты на различных реальных данных из репозитория UCI.
+
+    \bigskip
+\noindent
+\textbf{Ключевые слова}: \emph {двухклассовая классификация, композиция алгоритмов, SVM, SVR, бэггинг}
+}
+
+\bibliographystyle{unsrt}
 
 \begin{document}
-{\begin{center}
-	{\huge \textsc{Мультимоделирование SVM}}
-	
-	{\textit{Иванычев С, Адуенко А.}}
-	
-	{\href{mailto:sergeyivanychev@gmail.com}{\texttt{sergeyivanychev@gmail.com}},
-	\href{mailto:aduenko1@gmail.com}{\texttt{aduenko1@gmail.com}}
-	}
-\end{center}
-}
+\maketitle
 
 \section{Введение}
 Работа посвящена комбинированию небольшого количества SVM, использующих kernel-trick с различными ядрами и получению комбинированного классификатора для улучшения решений задач классификации и регрессии.
@@ -208,7 +221,7 @@ Heart disease\cite{UCI:Heart}. Варьируя коэффициент L2-рег
 
 \subsection{German credit dataset}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
       \center{\includegraphics[width=\textwidth]{german.pdf}}
       \caption{German credit}
 \end{figure}
@@ -223,7 +236,7 @@ Heart disease\cite{UCI:Heart}. Варьируя коэффициент L2-рег
 \subsection{Wine dataset}
 
 
-\begin{figure}[!ht]
+\begin{figure}[H]
       \center{\includegraphics[width=\textwidth]{wine.pdf}}
       \caption{Wine quality}
 \end{figure}
@@ -235,7 +248,7 @@ Heart disease\cite{UCI:Heart}. Варьируя коэффициент L2-рег
 
 \subsection{Heart dataset}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
       \center{\includegraphics[width=\textwidth]{heart.pdf}}
       \caption{Heart disease}
 \end{figure}
@@ -513,5 +526,8 @@ $$
 %	\end{algorithm}
 
 \newpage
-\printbibliography
+
+
+\bibliography{papers}
+
 \end{document}

@@ -207,6 +207,11 @@ class SVNSupermodel(BaseEstimator, ClassifierMixin):
         return self.score_stats(X_test, y_test, verbose=verbose)
 
 def mean_scores(scores):
+    """
+    returns mean score and its standard deviation for every model and for supermodel
+    :param scores:  list of tuples,
+    :return:
+    """
     num = len(scores)
     classifiers_num = len(scores[0][0])
     # super_score = 0

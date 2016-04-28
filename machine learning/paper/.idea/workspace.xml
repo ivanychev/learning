@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/synthetic.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/code/supermodel_spam.ipynb" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.texpadtmp/Ivanychev2016SVM_Multimodelling.synctex.gz" afterPath="$PROJECT_DIR$/doc/.texpadtmp/Ivanychev2016SVM_Multimodelling.synctex.gz" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.pdf" afterPath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_german-checkpoint.ipynb" afterPath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_german-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_heart-checkpoint.ipynb" afterPath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_heart-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_housing-checkpoint.ipynb" afterPath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_housing-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_wine-checkpoint.ipynb" afterPath="$PROJECT_DIR$/code/.ipynb_checkpoints/supermodel_wine-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/robust_logregr.py" afterPath="$PROJECT_DIR$/code/robust_logregr.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel.py" afterPath="$PROJECT_DIR$/code/supermodel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel_german.ipynb" afterPath="$PROJECT_DIR$/code/supermodel_german.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel_heart.ipynb" afterPath="$PROJECT_DIR$/code/supermodel_heart.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel_housing.ipynb" afterPath="$PROJECT_DIR$/code/supermodel_housing.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel_wine.ipynb" afterPath="$PROJECT_DIR$/code/supermodel_wine.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/utils.py" afterPath="$PROJECT_DIR$/code/utils.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.tex" afterPath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.tex" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,7 +49,7 @@
       <file leaf-file-name="robust_logregr.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/robust_logregr.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357">
+            <state relative-caret-position="240">
               <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
               <folding>
                 <element signature="e#116#134#0" expanded="true" />
@@ -68,7 +61,7 @@
       <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="623">
+            <state relative-caret-position="2720">
               <caret line="146" column="4" selection-start-line="146" selection-start-column="4" selection-end-line="146" selection-end-column="4" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -90,8 +83,8 @@
       <file leaf-file-name="supermodel.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/supermodel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="563">
-              <caret line="272" column="37" selection-start-line="272" selection-start-column="37" selection-end-line="272" selection-end-column="37" />
+            <state relative-caret-position="20">
+              <caret line="211" column="35" selection-start-line="211" selection-start-column="35" selection-end-line="211" selection-end-column="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -204,6 +197,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -252,7 +246,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -578,9 +571,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="0" width="1276" height="800" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19749217" sideWeight="0.4183267" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19749217" sideWeight="0.4183267" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -792,7 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-457">
           <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -832,7 +824,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
+        <state relative-caret-position="2720">
           <caret line="146" column="4" selection-start-line="146" selection-start-column="4" selection-end-line="146" selection-end-column="4" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -842,7 +834,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/robust_logregr.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
+        <state relative-caret-position="240">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
           <folding>
             <element signature="e#116#134#0" expanded="true" />
@@ -852,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/supermodel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="272" column="37" selection-start-line="272" selection-start-column="37" selection-end-line="272" selection-end-column="37" />
+        <state relative-caret-position="20">
+          <caret line="211" column="35" selection-start-line="211" selection-start-column="35" selection-end-line="211" selection-end-column="35" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
