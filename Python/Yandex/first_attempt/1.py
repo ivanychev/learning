@@ -14,8 +14,10 @@ def main(argv):
         numerator = num_list[0]
         gcd_val = gcd(denominator, numerator)
     else:
-        denominator = reduce(lambda x, y: x*y, num_list) * (num + 1)
-        numerator = (min(num_list)**(num + 1))
+        t_min = min(num_list)
+        t_prod = reduce(lambda x, y: x*y, num_list)
+        denominator = t_prod * (num + 1)
+        numerator = t_min**(num + 1) + (num + 1) * t_min * (t_prod - t_min**(num))
         gcd_val = gcd(denominator, numerator)
     sys.stdout.write("%d/%d" % (numerator // gcd_val, denominator // gcd_val))
     inp.close()
