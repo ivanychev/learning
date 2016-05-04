@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/.texpadtmp/Ivanychev2016SVM_Multimodelling.synctex.gz" afterPath="$PROJECT_DIR$/doc/.texpadtmp/Ivanychev2016SVM_Multimodelling.synctex.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.pdf" afterPath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/supermodel.py" afterPath="$PROJECT_DIR$/code/supermodel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.tex" afterPath="$PROJECT_DIR$/doc/Ivanychev2016SVM_Multimodelling.tex" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -196,8 +192,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
