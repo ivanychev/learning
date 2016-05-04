@@ -5,7 +5,7 @@ Hello. My name is Sergey Ivanychev. I'm studying at [Moscow Institute of Physics
 My specialization is data analysis and machine learning. I love programming, maths and solving interesting
 tasks. This repository contains my learning projects.
 
-There are some that might be interesting:
+I am good at C/C++, Python and LaTeX. There are some projects that might be interesting:
 
 * `./machine learning/paper` --- Writing "SVM Supermodelling paper". Project description, the data and the source code (Python) are available in the project folder.
 
