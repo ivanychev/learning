@@ -9,6 +9,8 @@ I am good at C/C++, Python and LaTeX. There are some projects that might be inte
 
 * `./machine learning/paper` --- Writing "SVM Supermodelling paper". Project description, the data and the source code (Python) are available in the project folder.
 
+* `./machine learning/ivcern` --- Higgs boson contest solution provided for Yandex+CERN apllication.
+
 * `./C++/CPU V4.1` --- Virtual CPU called **Ganymede** with its own bytecode and assembly compiler
 * `./C++/Ganymede-x86 translator` --- Ganymede → x86 binary translator. That thing enables us running Ganymede assembly programs on x86 machines natively.
 * `./C/Colibri Compiler` --- Simple high-level programming definition that compiles to Ganymede assembly. These three projects combined turn to simple high-level language compiler.
