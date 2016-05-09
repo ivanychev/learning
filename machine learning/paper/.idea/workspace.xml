@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e36906c8-c76c-4f59-9787-95253df7161e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../C/Lunev/Vector/MAKEFILE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" afterPath="$PROJECT_DIR$/../../Python/Yandex/first_attempt/input.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="paper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -249,7 +246,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Dropbox/ivcern" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">

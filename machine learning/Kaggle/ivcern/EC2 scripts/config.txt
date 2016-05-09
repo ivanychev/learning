@@ -1,0 +1,4 @@
+pemfile='ip_kp_frankfurt.pem'
+host='ec2-52-59-252-182.eu-central-1.compute.amazonaws.com'
+jupyter_password='2810'
+
