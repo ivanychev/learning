@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import User
+from .models import *
+
 
 
 class UserAdmin(BaseUserAdmin):
@@ -18,4 +19,13 @@ class UserAdmin(BaseUserAdmin):
     admin_avatar.short_description = u'Аватар'
 
 
-admin.site.register(User, UserAdmin)
+MODELS = [Genre,
+          Author,
+          Book,
+          User,
+          BookStatus,
+          ReviewLike,
+          ReviewSpoilerReport,
+          Review]
+for cls in MODELS:
+    admin.site.register(cls)
