@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0fdd1c29-f8af-4a51-a0e5-185b9582192a" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/base.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/base.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/changelists.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/changelists.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/dashboard.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/dashboard.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/fonts.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/fonts.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/forms.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/forms.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/login.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/login.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/rtl.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/rtl.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/css/widgets.css" afterPath="$PROJECT_DIR$/collected_static/admin/css/widgets.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/fonts/LICENSE.txt" afterPath="$PROJECT_DIR$/collected_static/admin/fonts/LICENSE.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/fonts/README.txt" afterPath="$PROJECT_DIR$/collected_static/admin/fonts/README.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/fonts/Roboto-Bold-webfont.woff" afterPath="$PROJECT_DIR$/collected_static/admin/fonts/Roboto-Bold-webfont.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/fonts/Roboto-Light-webfont.woff" afterPath="$PROJECT_DIR$/collected_static/admin/fonts/Roboto-Light-webfont.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/fonts/Roboto-Regular-webfont.woff" afterPath="$PROJECT_DIR$/collected_static/admin/fonts/Roboto-Regular-webfont.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/LICENSE" afterPath="$PROJECT_DIR$/collected_static/admin/img/LICENSE" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/README.txt" afterPath="$PROJECT_DIR$/collected_static/admin/img/README.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/calendar-icons.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/calendar-icons.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/gis/move_vertex_off.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/gis/move_vertex_off.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/gis/move_vertex_on.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/gis/move_vertex_on.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-addlink.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-addlink.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-alert.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-alert.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-calendar.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-calendar.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-changelink.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-changelink.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-clock.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-clock.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-deletelink.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-deletelink.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-no.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-no.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-unknown-alt.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-unknown-alt.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-unknown.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-unknown.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/icon-yes.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/icon-yes.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/inline-delete.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/inline-delete.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/search.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/search.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/selector-icons.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/selector-icons.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/sorting-icons.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/sorting-icons.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/tooltag-add.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/tooltag-add.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/img/tooltag-arrowright.svg" afterPath="$PROJECT_DIR$/collected_static/admin/img/tooltag-arrowright.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/SelectBox.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/SelectBox.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/SelectFilter2.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/SelectFilter2.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/actions.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/actions.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/actions.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/actions.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/admin/DateTimeShortcuts.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/admin/DateTimeShortcuts.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/admin/RelatedObjectLookups.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/admin/RelatedObjectLookups.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/calendar.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/calendar.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/cancel.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/cancel.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/change_form.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/change_form.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/collapse.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/collapse.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/collapse.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/collapse.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/core.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/core.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/inlines.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/inlines.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/inlines.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/inlines.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/jquery.init.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/jquery.init.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/popup_response.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/popup_response.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/prepopulate.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/prepopulate.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/prepopulate.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/prepopulate.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/prepopulate_init.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/prepopulate_init.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/timeparse.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/timeparse.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/urlify.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/urlify.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/jquery/LICENSE-JQUERY.txt" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/jquery/LICENSE-JQUERY.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/jquery/jquery.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/jquery/jquery.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/jquery/jquery.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/jquery/jquery.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/xregexp/LICENSE-XREGEXP.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/xregexp/xregexp.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/xregexp/xregexp.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/admin/js/vendor/xregexp/xregexp.min.js" afterPath="$PROJECT_DIR$/collected_static/admin/js/vendor/xregexp/xregexp.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/collected_static/cat.jpg" afterPath="$PROJECT_DIR$/collected_static/cat.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/db.sqlite3" afterPath="$PROJECT_DIR$/src/db.sqlite3" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/manage.py" afterPath="$PROJECT_DIR$/src/manage.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/requirements.txt" afterPath="$PROJECT_DIR$/src/requirements.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/static/cat.jpg" afterPath="$PROJECT_DIR$/src/static/cat.jpg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/try/__init__.py" afterPath="$PROJECT_DIR$/src/try/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/try/settings.py" afterPath="$PROJECT_DIR$/src/try/settings.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/try/urls.py" afterPath="$PROJECT_DIR$/src/try/urls.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/../task1/src/try/wsgi.py" afterPath="$PROJECT_DIR$/src/try/wsgi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../C/Lunev/Vector/MAKEFILE" afterPath="$PROJECT_DIR$/../../../C/Lunev/Vector/MAKEFILE" />
+    </list>
+    <ignored path="paperly.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="paperly" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="4" />
+    <option name="width" value="1276" />
+    <option name="height" value="800" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="paperly" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../githubers" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0fdd1c29-f8af-4a51-a0e5-185b9582192a" name="Default" comment="" />
+      <created>1476704578088</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1476704578088</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="4" y="0" width="1276" height="800" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>
