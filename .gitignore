@@ -83,6 +83,9 @@ _ReSharper*/
 # IntelliJ
 /out/
 
+# virtualenv
+env/
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
