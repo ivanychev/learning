@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+{{ block.super }} – {{ book.title }}
+{% endblock %}
+{% block content %}
+
+<h1>{{ book.title }}</h1>
+    <h2>By
+        {% for author in authors %}
+        {{ author.first_name }} {{ author.last_name }},
+        {% endfor %}
+    </h2>
+    <img src="{{ book.cover }}">
+<p>
+{{ book.description }}
+</p>
+
+    <h2>Reviews:</h2>
+    {% for review in reviews %}
+    <h3>{{ review.title }} by
+        <a href="/user/{{ review.author.id }}">{{ review.author.first_name }} {{ review.author.last_name }}</a></h3>
+        <p>{{ review.body}}</p>
+        <p>{{ review.stars }} out of 5</p>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+{{ block.super }} – {{ username.first_name }}'s books
+{% endblock %}
+{% block content %}
+    <h1>Read</h1>
+    {% for book in read_books %}
+    <a href="/book/{{ book.id }}" alt="{{ book.title }}"><img src="{{ book.cover }}"> </a>
+    {% endfor %}
+    <h1>Reading</h1>
+    <a href="/book/{{ book.id }}" alt="{{ book.title }}"><img src="{{ book.cover }}"> </a>
+    <h1>Want to read</h1>
+    <a href="/book/{{ book.id }}" alt="{{ book.title }}"><img src="{{ book.cover }}"> </a>
+{% endblock %}

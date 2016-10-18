@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{% block title %}Paperly{% endblock %}</title>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+<a href="/"> <img src="logo.jpg" alt="Logo"> </a>
+<ul>
+    <li><a href="/user/books"> My books </a></li>
+    <li><a href="/user/updates"> Updates </a></li>
+    <li><a href="/explore"> Explore </a> </li>
+    <li> <a href="/create"> Create </a> </li>
+</ul>
+<p>
+    {{ user.first_name }} {{ user.last_name }}
+</p>
+<img src="{{ user.avatar }}"></img>
+
+{% block content %}{% endblock %}
+</body>
+</html>

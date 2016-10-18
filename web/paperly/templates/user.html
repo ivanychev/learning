@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+{{ block.super }} – {{ username.first_name }} {{ username.last_name }}
+{% endblock %}
+{% block content %}
+<img href="{{ user_now.avatar }}"><img>
+<h2>{{ user_now.first_name }} {{ username.lastname }}</h2>
+{#<h3> @{{username.nickname}}</h3>#}
+<p>
+    {{ user_now.interests }}
+</p>
+
+<a href="/user/{{ user_now.id }}/books">See {{ user_now.first_name }}'s books</a>
+
+{% endblock %}

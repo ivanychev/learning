@@ -17,11 +17,11 @@ READING = 2
 WANT_TO_READ = 3
 
 # book ratings
-AWFUL = 4
-BAD = 5
-SOSO = 6
-GOOD = 7
-EXCELLENT = 8
+AWFUL = 1
+BAD = 2
+SOSO = 3
+GOOD = 4
+EXCELLENT = 5
 
 
 class Genre(models.Model):
@@ -98,7 +98,7 @@ class BookStatus(models.Model):
         return self.user.first_name + \
                " " + self.user.first_name + \
                " " + self.book.title + \
-               " " + self.status
+               " " + str(self.status)
 
 
 class Review(models.Model):
@@ -126,9 +126,8 @@ class Review(models.Model):
     class Meta:
         ordering = ('-created_at',)
 
-
     def __str__(self):
-        return "AuthorID:" + self.author.id + "|" + self.book.title
+        return "AuthorID:" + str(self.author.id) + "|" + self.book.title
 
 
 class ReviewLike(models.Model):
@@ -149,4 +148,3 @@ class ReviewSpoilerReport(models.Model):
 
     def __str__(self):
         return "UserID:" + self.user.id + "|SpoiledReviewId:" + self.liked_review.id
-
