@@ -1,19 +1,18 @@
 import java.util.*;
+import java.lang.Math;
+import java.math.BigInteger;
 
 public class LCM {
-  private static long lcm_naive(int a, int b) {
-    for (long l = 1; l <= (long) a * b; ++l)
-      if (l % a == 0 && l % b == 0)
-        return l;
-
-    return (long) a * b;
-  }
+    private static long gcd(long a, long b) {
+      return b == 0 ? a : gcd(b, a % b);
+    }
 
   public static void main(String args[]) {
     Scanner scanner = new Scanner(System.in);
-    int a = scanner.nextInt();
-    int b = scanner.nextInt();
-
-    System.out.println(lcm_naive(a, b));
+    long a = scanner.nextInt();
+    long b = scanner.nextInt();
+    BigInteger biga = BigInteger.valueOf(a);
+    BigInteger bigb = BigInteger.valueOf(b);
+    System.out.println((biga.multiply(bigb)).divide(BigInteger.valueOf(gcd(a, b))));
   }
 }

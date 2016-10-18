@@ -1,25 +1,24 @@
 import java.util.*;
 
 public class FibonacciLastDigit {
-    private static int getFibonacciLastDigitNaive(int n) {
-        if (n <= 1)
-            return n;
-
-        int previous = 0;
-        int current  = 1;
-
-        for (int i = 0; i < n - 1; ++i) {
-            int tmp_previous = previous;
-            previous = current;
-            current = tmp_previous + current;
+    private static int getFibonacciLastDigitNaive(long n) {
+            if (n <= 1) {
+                return (int)n;
+            }
+            long num1 = 0;
+            long num2 = 1;
+            long temp = 0;
+            for (long i = 1; i < n; i++) {
+                temp = (num1 + num2) % 10;
+                num1 = num2;
+                num2 = temp;
+            }
+            return (int)num2;
         }
-
-        return current % 10;
-    }
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
+        long n = scanner.nextInt();
         int c = getFibonacciLastDigitNaive(n);
         System.out.println(c);
     }

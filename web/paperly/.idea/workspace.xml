@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5934228d-efa5-4b0a-83bf-2a0e3e85cca5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/book.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/read_books.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/user.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/user_panel.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/list.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci/Fibonacci.java" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci/Fibonacci.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci_huge/FibonacciHuge.java" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci_huge/FibonacciHuge.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci_last_digit/FibonacciLastDigit.java" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/fibonacci_last_digit/FibonacciLastDigit.java" />
@@ -17,10 +9,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/lcm/LCM.java" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/Introduction/lcm/LCM.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Algorithms/SanDiego/SumAB/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../Algorithms/SanDiego/SumAB/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperly_site/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/paperly_site/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperly_site/models.py" afterPath="$PROJECT_DIR$/paperly_site/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperly_site/urls.py" afterPath="$PROJECT_DIR$/paperly_site/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperly_site/views.py" afterPath="$PROJECT_DIR$/paperly_site/views.py" />
     </list>
     <ignored path="paperly.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,7 +44,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="read_books.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="read_books.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/read_books.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
@@ -66,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paperly_site/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
@@ -910,16 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperly_site/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/paperly_site/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -935,6 +913,16 @@
         <state relative-caret-position="198">
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperly_site/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
