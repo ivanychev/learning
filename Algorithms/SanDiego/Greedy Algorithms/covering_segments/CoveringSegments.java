@@ -1,23 +1,35 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class CoveringSegments {
 
-    private static int[] optimalPoints(Segment[] segments) {
+    private static ArrayList<Integer> optimalPoints(Segment[] segments) {
         //write your code here
-        int[] points = new int[2 * segments.length];
+        ArrayList<Integer> points = new ArrayList<>();
+        Arrays.sort(segments);
+        int end = segments[0].end;
         for (int i = 0; i < segments.length; i++) {
-            points[2 * i] = segments[i].start;
-            points[2 * i + 1] = segments[i].end;
+            if (segments[i].start > end) {
+                points.add(end);
+                end = segments[i].end;
+            }
+            end = (segments[i].end < end)? segments[i].end: end;
         }
+        points.add(end);
         return points;
     }
 
-    private static class Segment {
+    private static class Segment implements Comparable<Segment>{
         int start, end;
 
         Segment(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+
+        @Override
+        public int compareTo(Segment other) {
+            return start - other.start;
         }
     }
     public static void main(String[] args) {
@@ -30,8 +42,8 @@ public class CoveringSegments {
             end = scanner.nextInt();
             segments[i] = new Segment(start, end);
         }
-        int[] points = optimalPoints(segments);
-        System.out.println(points.length);
+        ArrayList<Integer> points = optimalPoints(segments);
+        System.out.println(points.size());
         for (int point : points) {
             System.out.print(point + " ");
         }
