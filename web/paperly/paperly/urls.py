@@ -19,5 +19,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include("paperly_site.urls"))
+    url(r'^user/', include("user.urls")),
+    url(r'book/', include("book.urls")),
+    url(r'author/', include("book.urls"))
 ]
