@@ -9,7 +9,24 @@ public class MajorityElement {
         if (left + 1 == right) {
             return a[left];
         }
-        //write your code here
+        int mid = (left + right) / 2;
+        int maj1 = getMajorityElement(a, left, mid);
+        int maj2 = getMajorityElement(a, mid, right);
+        int len = right - left;
+        int occurs1 = 0;
+        int occurs2 = 0;
+        for (int i = left; i < right; i++) {
+            if (a[i] == maj1)
+                occurs1++;
+            if (a[i] == maj2)
+                occurs2++;
+        }
+        if (occurs1*2 > len) {
+            return maj1;
+        }
+        if (occurs2*2 > len) {
+            return maj2;
+        }
         return -1;
     }
 

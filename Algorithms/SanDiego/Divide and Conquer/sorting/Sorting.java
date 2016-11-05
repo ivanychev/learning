@@ -5,16 +5,21 @@ public class Sorting {
     private static Random random = new Random();
 
     private static int[] partition3(int[] a, int l, int r) {
-      //write your code here
-
-
-      int m1 = l;
-      int m2 = r;
-      int[] m = {m1, m2};
-      return m;
+        int j = partition2WithVal(a, l, r);
+        int placeToMoveEqual = j - 1;
+        int val = a[placeToMoveEqual + 1];
+        for (int i = 0; i <= placeToMoveEqual; i++) {
+            if (a[i] == val) {
+                int t = a[i];
+                a[i] = a[placeToMoveEqual];
+                a[placeToMoveEqual] = t;
+                placeToMoveEqual--;
+            }
+        }
+        return new int[]{placeToMoveEqual + 1, j};
     }
 
-    private static int partition2(int[] a, int l, int r) {
+    private static int partition2WithVal(int[] a, int l, int r) {
         int x = a[l];
         int j = l;
         for (int i = l + 1; i <= r; i++) {
@@ -39,10 +44,9 @@ public class Sorting {
         int t = a[l];
         a[l] = a[k];
         a[k] = t;
-        //use partition3
-        int m = partition2(a, l, r);
-        randomizedQuickSort(a, l, m - 1);
-        randomizedQuickSort(a, m + 1, r);
+        int[] m = partition3(a, l, r);
+        randomizedQuickSort(a, l, m[0] - 1);
+        randomizedQuickSort(a, m[1] + 1, r);
     }
 
     public static void main(String[] args) {
