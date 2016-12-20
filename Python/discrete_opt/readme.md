@@ -1,8 +1,11 @@
 ## Production problem
 
-Pyomo script for solving production task. Formulation is contained
-in `formulation.JPG` and `Production.ipynb`. Data is provided in `prod.dat`. Output
-is provided in `results.yml`.
+Pyomo script for solving production task.
+
+* Formulation is contained in `formulation.JPG` and `Production.ipynb`.
+* Data is provided in `prod.dat`.
+* Output is provided in `results.yml`.
+* The script is contained in `sol.py`
 
 To launch it via glpk solver:
 
