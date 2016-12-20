@@ -1,45 +1,14 @@
+"""
+Pyomo script for solving production task. Formulation is contained
+in formulation.JPG and Production.ipynb. Data is provided in prod.dat
 
-# coding: utf-8
+To launch it via glpk solver:
 
-# # Задача
-#
-# Для $t=1\ldots T$, $d_t$ – спрос на продукцию в период $t$; $c_t$, $p_t$ и $h_t$ – заданные предельные расходы на подготовку, производство и хранение продукции соответственно в период $t$.
-#
-# Цель: минимизация суммарных расходов на подготовку, производство и хранение продукции при условии удовлетворения спроса $d_t$ в каждый из $T$ периодов. Введем непрерывные переменные:
-#
-# * $y_t$ – запас продукции в период $t$
-# * $s_t$ – остаток продукции в период $t$
-#
-# и бинарные решающие переменные $x_t$
-#
-# $$
-# x_t = \begin{cases}
-#     1, & \text{ if } y_t > 0 \\
-#     0, & \text{ otherwise }
-# \end{cases}
-# $$
-#
-# $$
-# \min \sum_{t=1}^{T} (p_ty_t+h_ts_t+c_tx_t)
-# $$
-# при ограничениях
-# $$
-# \begin{align*}
-#     & y_1 = d_1 + s_1 & \\
-#     & s_{t-1} + y_t = d_t + s_t & t=1\ldots T\\
-#     & s_t, y_t \geq 0 & \\
-#     & x_t \in \{0, 1\} & t=1\ldots T\\
-#     & s_T = 0 & \\
-#     & y_t \leq \omega x_t & t=1\ldots T \\
-# \end{align*}
-# $$
-# Где $\omega = \sum_{t=1}^T d_t$
-#
+pyomo solve --solver=glpk sol.py prod.dat
 
-# # Решаем задачу
-
-# In[1]:
-
+Author: Sergey Ivanychev
+Revision: 1
+"""
 import pyomo.environ as po
 EPS = 10e-5
 
@@ -58,31 +27,11 @@ model.X = po.Var(model.I, within=po.IntegerSet(0, 1), initialize=1)
 model.Y = po.Var(model.I, within=po.NonNegativeIntegers, initialize=1)
 model.S = po.Var(model.I, within=po.NonNegativeIntegers)
 
-
-# ## Определяем целевую функцию
-
-# In[3]:
-
 def objective(model):
     return po.summation(model.P, model.Y) + po.summation(model.H, model.S) + po.summation(model.C, model.X)
 
 model.OBJ = po.Objective(rule=objective, sense=po.minimize)
 
-
-# ## Определяем ограничения
-
-# $$
-# \begin{align*}
-#     & y_1 = d_1 + s_1 & \\
-#     & s_{t-1} + y_t = d_t + s_t & t=1\ldots T\\
-#     & s_t, y_t \geq 0 & \\
-#     & x_t \in \{0, 1\} & t=1\ldots T\\
-#     & s_T = 0 & \\
-#     & y_t \leq \omega x_t & t=1\ldots T \\
-# \end{align*}
-# $$
-
-# In[4]:
 
 def constraint1(model):
     return model.Y[1] == model.D[1] + model.S[1]
