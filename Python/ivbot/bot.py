@@ -31,7 +31,6 @@ import sys
 
 class formula_bot:
 
-    __BOT_TOKEN = "155371517:AAFAdqcPrtj5Zf1w0bckV3usTKIJo7Eoz5E"
     __INTERVAL  = 3
     __ADMIN_ID  = 40271726
     __BOT_NAME  = "@formula_bot"
