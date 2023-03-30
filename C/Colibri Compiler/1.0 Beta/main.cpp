@@ -15,8 +15,8 @@ IfOp		::= "if" (Cmp) Op|B
 AssnOp		::= V [+-/*]?' =' E
 WhileOp		::= "while" (Cmp) Op|B
 DoOp		::= "do" B "until" (Cmp)
-Print		::= "print(" Str ")" 
-Print_val	::= "print_val(" E ")" 
+Print		::= "print(" Str ")"
+Print_val	::= "print_val(" E ")"
 V			::= [A-Za-z_]
 F			::=	[A-Za-z_] '('E|F {,E|F}+ ')'
 E			::= T{[+-]T}*
@@ -35,7 +35,7 @@ TR_ASSN
 TR_WHILE
 TR_DO
 TR_PRINT
-TR_PRVAL				
+TR_PRVAL
 TR_V					//contain string
 TR_F					//contain string
 TR_E
@@ -50,7 +50,8 @@ Types of tokens
 
 TKN_OP					// + - / *
 TKN_COMP				// < > <= >= == !=
-TKN_ID					// various names, check whether it is key word or built in function
+TKN_ID					// various names, check whether it is
+key word or built in function
 TKN_NUM					// 25.936, -9.0
 TKN_SEP					// { } ( ) ; ,
 TKN_ASSGN				// += -= *= /=
@@ -58,120 +59,108 @@ TKN_STR					// "aASDasdfasdfaSDFa"
 TKN_END					// \0
 */
 
-FILE* strlog = NULL;
-FILE* strerr = NULL;
+FILE *strlog = NULL;
+FILE *strerr = NULL;
 
-#define VERIFY_RET(str)																		\
-	if (ret != CPLR_OK)																		\
-	{																						\
-		fprintf(strerr, str);																\
-		fputc('\n', strerr);																\
-		if (token_stream != NULL)															\
-		{																					\
-			free(*token_stream);															\
-			free(token_stream);																\
-		}																					\
-		if (syntax_tree != NULL) head_destr(syntax_tree, TREE_DESTR_ALL);					\
-		return -1;																			\
-	}
+#define VERIFY_RET(str)                                                        \
+  if (ret != CPLR_OK) {                                                        \
+    fprintf(strerr, str);                                                      \
+    fputc('\n', strerr);                                                       \
+    if (token_stream != NULL) {                                                \
+      free(*token_stream);                                                     \
+      free(token_stream);                                                      \
+    }                                                                          \
+    if (syntax_tree != NULL)                                                   \
+      head_destr(syntax_tree, TREE_DESTR_ALL);                                 \
+    return -1;                                                                 \
+  }
 
-int tree_optimize(FILE* strout, tree_head* syntax_tree);
+int tree_optimize(FILE *strout, tree_head *syntax_tree);
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-void save_library(FILE* strcode, FILE* lib)
-{
-	assert(lib);
-	assert(strcode);
-	int c = 0;
-	c = fgetc(lib);
-	while (c != EOF) 
-	{
-		fputc(c, strcode);
-		c = fgetc(lib);
-	}
-	fputc('\n', strcode);
-	fputc('\n', strcode);
+void save_library(FILE *strcode, FILE *lib) {
+  assert(lib);
+  assert(strcode);
+  int c = 0;
+  c = fgetc(lib);
+  while (c != EOF) {
+    fputc(c, strcode);
+    c = fgetc(lib);
+  }
+  fputc('\n', strcode);
+  fputc('\n', strcode);
 }
 
-int main()
-{
-	FILE* strin		= fopen("input.txt", "r");
-	FILE* strout	= stdout;
-		  strlog	= fopen("compiler_log.txt", "w");
-		  strerr	= strout;
-	FILE* strcode	= fopen("code.txt", "w");
-	FILE* start_lib = fopen("START_LIB.txt", "r");
+int main() {
+  FILE *strin = fopen("input.txt", "r");
+  FILE *strout = stdout;
+  strlog = fopen("compiler_log.txt", "w");
+  strerr = strout;
+  FILE *strcode = fopen("code.txt", "w");
+  FILE *start_lib = fopen("START_LIB.txt", "r");
 
-	save_library(strcode, start_lib);
-	
-	token** token_stream = (token**) calloc(1, sizeof(token*));
-	
-	VERIFY(token_stream == NULL,	-1,			"MAIN(): Calloc fail, token_stream hasn't been initialized");
-	int stream_size = 0;
-	int ret = tokenize_stream(strin, token_stream, &stream_size);
-	tree_head* syntax_tree = NULL;
-	VERIFY_RET("MAIN(): Tokenize fail");
+  save_library(strcode, start_lib);
 
+  token **token_stream = (token **)calloc(1, sizeof(token *));
 
-	fprintf(strlog, "Size = %d\n", stream_size);
-	
-	ret = get_pgm(*token_stream, &syntax_tree);
+  VERIFY(token_stream == NULL, -1,
+         "MAIN(): Calloc fail, token_stream hasn't been initialized");
+  int stream_size = 0;
+  int ret = tokenize_stream(strin, token_stream, &stream_size);
+  tree_head *syntax_tree = NULL;
+  VERIFY_RET("MAIN(): Tokenize fail");
 
-	VERIFY_RET("MAIN(): Tree build fail");
-	//tree_dump(strout, syntax_tree);
+  fprintf(strlog, "Size = %d\n", stream_size);
 
+  ret = get_pgm(*token_stream, &syntax_tree);
 
-	ret = tree_optimize(strout, syntax_tree);
-	VERIFY_RET("MAIN(): Optimization fail");
+  VERIFY_RET("MAIN(): Tree build fail");
+  // tree_dump(strout, syntax_tree);
 
-	ret = build_pgm(syntax_tree -> root, strcode);
-	VERIFY_RET("MAIN(): Build fail");
+  ret = tree_optimize(strout, syntax_tree);
+  VERIFY_RET("MAIN(): Optimization fail");
 
-	printf(">>>[%08x]\n", *token_stream);
-	printf("%c\n", *(int*)((*token_stream + 1) -> value));
-	
-	free(*token_stream);
-	free(token_stream);
-	head_destr(syntax_tree, TREE_DESTR_ALL);
+  ret = build_pgm(syntax_tree->root, strcode);
+  VERIFY_RET("MAIN(): Build fail");
 
-	fclose(strin);
-	fclose(strout);
-	fclose(strerr);
-	fclose(strlog);
+  printf(">>>[%08x]\n", *token_stream);
+  printf("%c\n", *(int *)((*token_stream + 1)->value));
 
-	system("CPUV4.exe \"code.txt\"");
+  free(*token_stream);
+  free(token_stream);
+  head_destr(syntax_tree, TREE_DESTR_ALL);
 
-	return 0;
+  fclose(strin);
+  fclose(strout);
+  fclose(strerr);
+  fclose(strlog);
 
+  system("CPUV4.exe \"code.txt\"");
+
+  return 0;
 }
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+int tree_optimize(FILE *strout, tree_head *syntax_tree) {
+  fprintf(strout, "\n\nOptimizing...........\n");
+  bool is_optimized = false;
+  int ret = tree_optimize(syntax_tree->root, &is_optimized);
+  int _size = 0;
+  ret = tree_check(syntax_tree->root, &_size);
 
+  VERIFY(ret == SNTX_DIV_BY_ZERO, 0, "MAIN: There's division by zero");
 
-int tree_optimize(FILE* strout, tree_head* syntax_tree)
-{
-	fprintf(strout, "\n\nOptimizing...........\n");
-	bool is_optimized = false;
-	int ret = tree_optimize(syntax_tree -> root, &is_optimized);
-	int _size = 0;
-	ret = tree_check(syntax_tree -> root, &_size);
-	
-	VERIFY(ret == SNTX_DIV_BY_ZERO, 0, "MAIN: There's division by zero");
-	
+  while (is_optimized == true) {
+    is_optimized = false;
+    ret = tree_optimize(syntax_tree->root, &is_optimized);
+    VERIFY(ret == SNTX_DIV_BY_ZERO, 0, "MAIN: There's division by zero");
+  }
+  fprintf(strout, "\n\nDONE!\n");
 
-	while (is_optimized == true)
-	{
-		is_optimized = false;
-		ret = tree_optimize(syntax_tree -> root, &is_optimized);
-		VERIFY(ret == SNTX_DIV_BY_ZERO, 0, "MAIN: There's division by zero");
+  tree_dump(strout, syntax_tree);
 
-	}
-	fprintf(strout, "\n\nDONE!\n");
-	
-	tree_dump(strout, syntax_tree);
-
-	return CPLR_OK;
+  return CPLR_OK;
 }

@@ -1,51 +1,41 @@
 #include "iv_signals.h"
 
-char logic_shift_left(unsigned char arg, int count)
-{
-	count %= 8;
-	arg = (arg << count) | (arg >> (sizeof(char)*8 - count));
-	return arg;
+char logic_shift_left(unsigned char arg, int count) {
+  count %= 8;
+  arg = (arg << count) | (arg >> (sizeof(char) * 8 - count));
+  return arg;
 }
 
-char logic_shift_right(unsigned char arg, int count)
-{
-	count %= 8;
-	return logic_shift_left(arg, 8 - count);
+char logic_shift_right(unsigned char arg, int count) {
+  count %= 8;
+  return logic_shift_left(arg, 8 - count);
 }
 
-int base2(int ex)
-{
-	int ret = 1;
-	for (int i = 0; i < ex; ++i)
-		ret *= 2;
-	return ret;
+int base2(int ex) {
+  int ret = 1;
+  for (int i = 0; i < ex; ++i)
+    ret *= 2;
+  return ret;
 }
 
-void print_binary(char arg)
-{
-	printf("%x ", arg);
-	printf("0b");
-	unsigned char a = 1;
-	
-	for (int i = 7; i >= 0; --i)
-	{
-		if (base2(i) - arg >= 0)
-		{
-			putchar('1');
-			arg -= base2(i);
-		}
-		else
-			putchar('0');
-	}
+void print_binary(char arg) {
+  printf("%x ", arg);
+  printf("0b");
+  unsigned char a = 1;
 
-	printf(" %x", arg);
-	putchar('\n');
+  for (int i = 7; i >= 0; --i) {
+    if (base2(i) - arg >= 0) {
+      putchar('1');
+      arg -= base2(i);
+    } else
+      putchar('0');
+  }
+
+  printf(" %x", arg);
+  putchar('\n');
 }
 
-void dad_handler(int signal)
-{
-	printf("Signal %d caught\n", signal);
-}
+void dad_handler(int signal) { printf("Signal %d caught\n", signal); }
 
 // void parent(pid_t child)
 // {
@@ -82,23 +72,20 @@ void dad_handler(int signal)
 // 	exit(EXIT_SUCCESS);
 // }
 
-
-int main(int argc, char const *argv[])
-{
-	pid_t pid = fork();
-	CHECK(pid != -1, "Failed to fork");
-	char a = 1;
-	while (a != 0)
-	{
-		unsigned short aa = 0;
-		scanf("%hhu", &a);
-		printf("%hhx ", a);
-		a = logic_shift_left(a, 4);
-		printf("%hhx\n", a);
-	}
-	// if (pid != 0)
-	// 	parent(pid);
-	// else
-	// 	child();
-	return 0;
+int main(int argc, char const *argv[]) {
+  pid_t pid = fork();
+  CHECK(pid != -1, "Failed to fork");
+  char a = 1;
+  while (a != 0) {
+    unsigned short aa = 0;
+    scanf("%hhu", &a);
+    printf("%hhx ", a);
+    a = logic_shift_left(a, 4);
+    printf("%hhx\n", a);
+  }
+  // if (pid != 0)
+  // 	parent(pid);
+  // else
+  // 	child();
+  return 0;
 }
