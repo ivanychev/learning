@@ -496,7 +496,7 @@ int cpu_out(FILE *fo, FILE *strerr, cpu *my_cpu, int out_arg, ...) {
     va_start(args, out_arg);
     chr = va_arg(args, int);
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! HOW TO CHECK WHETHER THERE IS EXTRA
-    //!ARGUMENT OR NOT
+    //! ARGUMENT OR NOT
     va_end(args);
     if (!((0 <= chr) && (chr <= 255))) {
       fprintf(strerr, "CPU_OUT: ERROR: invalid number of character");
