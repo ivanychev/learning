@@ -167,7 +167,7 @@ int main() {
     @param          d   discriminant, which turns at the square root of
 discriminant of ax*x+bx+c=0
 
-    @return         squaresolve: The number of roots: 0, 1 или 2.
+    @return         squaresolve: The number of roots: 0, 1 пїЅпїЅпїЅ 2.
                     If the number is infinite - returns 3.
                     The roots are stored in *x1 and *x2 if they exist
 

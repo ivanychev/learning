@@ -1,7 +1,7 @@
 #include "cpu.h"
 #include "command_codes.h"
 
-// #define IS_ZERO(x) (fabs(x) < 0.000000000001) //DBL_EPSILON õðåíîâî ðàáîòàåò
+// #define IS_ZERO(x) (fabs(x) < 0.000000000001) //DBL_EPSILON ÃµÃ°Ã¥Ã­Ã®Ã¢Ã® Ã°Ã Ã¡Ã®Ã²Ã Ã¥Ã²
 
 /**
                 cpu_construct				constructs cpu struct
